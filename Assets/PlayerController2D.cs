@@ -8,6 +8,10 @@ public class PlayerController2D : MonoBehaviour{
     public enum Controller { NONE, PLAYER1, PLAYER2, PLAYER3, PLAYER4 };
     public Controller controller = Controller.NONE;
 
+    public GameObject Head;
+    public GameObject Arm1;
+    public GameObject Arm2;
+
     private enum ImpactDirection { NONE, UP, DOWN, RIGHT, LEFT };
     private ImpactDirection impactDirection = ImpactDirection.NONE;
 
@@ -135,7 +139,8 @@ public class PlayerController2D : MonoBehaviour{
         //ATTACK NORMAL
         if(Input.GetKeyDown(attackButton) && Stunned == false){
             Attacking = true;
-            animator.Play(HitID);
+            //animator.Play(HitID);
+            HeadON();
             StartCoroutine(ExecuteAfterTime(0.45f, () => {
                 Attacking = false;
             }));
@@ -173,7 +178,8 @@ public class PlayerController2D : MonoBehaviour{
         //DAMAGED
         if(Damaged == true && Inmune == false && IndividualWait == false){
             Stunned = true;
-            animator.Play(HurtID);
+            //animator.Play(HurtID);
+            HeadOFF();
             StartCoroutine(ExecuteAfterTime(MAX_DamageStun, () => {
                 Stunned = false;
                 Inmune = true;
@@ -195,7 +201,7 @@ public class PlayerController2D : MonoBehaviour{
         }   
     }
 
-    private void OnCollisionStay2D(Collision2D collision){
+    private void OnCollisionStay2D(Collision2D collision){ //ON STAY SOLO CON EL SUELO, Q ES MUY PESADO EN CPU
 
         Vector3 hit = collision.contacts[0].normal;
         float angle = Vector3.Angle(hit, Vector3.up);
@@ -243,5 +249,18 @@ public class PlayerController2D : MonoBehaviour{
         if (collision.gameObject.tag == "Damage")   {
             Damaged = false;
         }
+    }
+
+    private void HeadOFF()
+    {
+        Head.transform.parent = null;
+        Head.AddComponent<Rigidbody2D>();
+        Head.AddComponent<BoxCollider2D>();
+    }
+
+    private void HeadON() {
+        Head.transform.parent = transform;
+        //Destroy(Head<Rigidbody2D>());
+        //Destroy(Head<BoxCollider2D>());
     }
 }
