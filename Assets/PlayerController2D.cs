@@ -68,8 +68,8 @@ public class PlayerController2D : MonoBehaviour{
             jumpButton = KeyCode.Space;
             attackButton = KeyCode.Q;
             chargeButton = KeyCode.Mouse1;
-            IdleID = Animator.StringToHash("Player_Idle");
-            RunID = Animator.StringToHash("Player_Run");
+            IdleID = Animator.StringToHash("placeholder_Idle");
+            RunID = Animator.StringToHash("placeholder_Move");
             //JumpID = Animator.StringToHash("");
             HitID = Animator.StringToHash("Player_Hit");
             HurtID = Animator.StringToHash("Player_Hurt");
@@ -144,13 +144,17 @@ public class PlayerController2D : MonoBehaviour{
         //ATTACK CHARGED
         if (Input.GetKey(chargeButton) && Stunned == false){
             Attacking = true;
-            animator.Play("Player_HitCharge1");
-            if (charge < 10f){
-                charge += Time.deltaTime*10f;
+            //animator.Play("charge1Anim");
+            if (charge < 3f){
+                charge += Time.deltaTime*1f;
+                Debug.Log(charge);
+            }
+            else if (charge == 3f){
+                Debug.Log("MaxCharge");
             }
         }
         else if (charge > 0){{
-            animator.Play("Player_HitCharge2");
+            //animator.Play("charge2Anim");
             StartCoroutine(ExecuteAfterTime(1, () => { Attacking = false; }));
             charge = 0;
             }
