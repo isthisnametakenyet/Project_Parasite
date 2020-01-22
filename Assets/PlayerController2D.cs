@@ -9,8 +9,7 @@ public class PlayerController2D : MonoBehaviour{
     public Controller controller = Controller.NONE;
 
     public GameObject Head;
-    public GameObject Arm1;
-    public GameObject Arm2;
+    public GameObject Body;
 
     private enum ImpactDirection { NONE, UP, DOWN, RIGHT, LEFT };
     private ImpactDirection impactDirection = ImpactDirection.NONE;
@@ -140,7 +139,6 @@ public class PlayerController2D : MonoBehaviour{
         if(Input.GetKeyDown(attackButton) && Stunned == false){
             Attacking = true;
             //animator.Play(HitID);
-            HeadON();
             StartCoroutine(ExecuteAfterTime(0.45f, () => {
                 Attacking = false;
             }));
@@ -253,14 +251,8 @@ public class PlayerController2D : MonoBehaviour{
 
     private void HeadOFF()
     {
-        Head.transform.parent = null;
-        Head.AddComponent<Rigidbody2D>();
-        Head.AddComponent<BoxCollider2D>();
+        Instantiate(Head, new Vector3(1, 1, 0), Quaternion.identity);
+        Instantiate(Body, new Vector3(1, 1, 0), Quaternion.identity);
     }
 
-    private void HeadON() {
-        Head.transform.parent = transform;
-        //Destroy(Head<Rigidbody2D>());
-        //Destroy(Head<BoxCollider2D>());
-    }
 }
