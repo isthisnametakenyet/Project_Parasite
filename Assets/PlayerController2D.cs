@@ -251,8 +251,9 @@ public class PlayerController2D : MonoBehaviour{
 
     private void HeadOFF()
     {
-        Instantiate(Head, new Vector3(1, 1, 0), Quaternion.identity);
-        Instantiate(Body, new Vector3(1, 1, 0), Quaternion.identity);
+        Instantiate(Head, new Vector3(transform.position.x, transform.position.y + 0.3f, 0), Quaternion.identity);
+        Instantiate(Body, new Vector3(transform.position.x, transform.position.y - 0.22f, 0), Quaternion.identity);
+        Destroy(gameObject);
     }
 
 }
