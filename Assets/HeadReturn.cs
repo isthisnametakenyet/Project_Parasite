@@ -21,7 +21,6 @@ public class HeadReturn : MonoBehaviour
 
     void Start()
     {
-        Body = GameObject.Find("placeholder_Body(Clone)");
         animator = GetComponent<Animator>();
         body2D = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -30,7 +29,7 @@ public class HeadReturn : MonoBehaviour
 
         if (controller == Controller.PLAYER1)
         {
-            backButton = KeyCode.A;
+            backButton = KeyCode.Q;
             BackID = Animator.StringToHash("");
         }
         if (controller == Controller.PLAYER2)
@@ -55,9 +54,14 @@ public class HeadReturn : MonoBehaviour
     {
         if (Input.GetKey(backButton) && Stunned == false)
         {
-            transform.position = Body.transform.position;
+            //transform.position.y = Body.transform.position.y;
             animator.Play(BackID);
-            spriteRenderer.flipX = true;
+            //spriteRenderer.flipX = true;
+
+            GameObject all = Instantiate(All, new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
+
+            Destroy(Body);
+            Destroy(gameObject);
         }
     }
 }

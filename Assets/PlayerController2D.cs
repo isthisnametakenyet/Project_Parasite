@@ -10,7 +10,7 @@ public class PlayerController2D : MonoBehaviour{
 
     public GameObject Head;
     public GameObject Body;
-    public HeadReturn headReturn;
+    private HeadReturn headReturn;
 
     private enum ImpactDirection { NONE, UP, DOWN, RIGHT, LEFT };
     private ImpactDirection impactDirection = ImpactDirection.NONE;
@@ -263,6 +263,7 @@ public class PlayerController2D : MonoBehaviour{
 
         headReturn = head.GetComponent <HeadReturn>();
 
+        headReturn.Body = body;
         //headReturn.Controller = controller; ERROR
 
         Destroy(gameObject);
