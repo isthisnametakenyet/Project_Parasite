@@ -10,6 +10,7 @@ public class PlayerController2D : MonoBehaviour{
 
     public GameObject Head;
     public GameObject Body;
+    public HeadReturn headReturn;
 
     private enum ImpactDirection { NONE, UP, DOWN, RIGHT, LEFT };
     private ImpactDirection impactDirection = ImpactDirection.NONE;
@@ -251,8 +252,11 @@ public class PlayerController2D : MonoBehaviour{
 
     private void HeadOFF()
     {
-        Instantiate(Head, new Vector3(transform.position.x, transform.position.y + 0.3f, 0), Quaternion.identity);
-        Instantiate(Body, new Vector3(transform.position.x, transform.position.y - 0.22f, 0), Quaternion.identity);
+        GameObject head = Instantiate(Head, new Vector3(transform.position.x, transform.position.y + 0.3f, 0), Quaternion.identity);
+        GameObject body = Instantiate(Body, new Vector3(transform.position.x, transform.position.y - 0.22f, 0), Quaternion.identity);
+
+        headReturn = head.GetComponent <HeadReturn>();
+
         Destroy(gameObject);
     }
 
