@@ -263,7 +263,7 @@ public class PlayerController2D : MonoBehaviour{
 
         headReturn = head.GetComponent <HeadReturn>();
 
-        headReturn.Controller = controller;
+        //headReturn.Controller = controller; ERROR
 
         Destroy(gameObject);
     }
