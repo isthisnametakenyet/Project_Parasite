@@ -200,14 +200,16 @@ public class PlayerController2D : MonoBehaviour{
         }   
     }
 
-    private void OnCollisionStay2D(Collision2D collision){ //ON STAY SOLO CON EL SUELO, Q ES MUY PESADO EN CPU
+    private void OnCollisionStay2D(Collision2D collision)
+    { //ON STAY SOLO CON EL SUELO, Q ES MUY PESADO EN CPU
 
         Vector3 hit = collision.contacts[0].normal;
         float angle = Vector3.Angle(hit, Vector3.up);
 
 
-        if (collision.gameObject.tag == "Floor") {
-            
+        if (collision.gameObject.tag == "Floor")
+        {
+
             if (Mathf.Approximately(angle, 0))
             {
                 //Down
@@ -234,7 +236,11 @@ public class PlayerController2D : MonoBehaviour{
             //    }
             //}
         }
-        
+
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
         if (collision.gameObject.tag == "Damage" && Stunned == false && Inmune == false)   {
             Damaged = true;
         }
@@ -256,6 +262,8 @@ public class PlayerController2D : MonoBehaviour{
         GameObject body = Instantiate(Body, new Vector3(transform.position.x, transform.position.y - 0.22f, 0), Quaternion.identity);
 
         headReturn = head.GetComponent <HeadReturn>();
+
+        headReturn.Controller = controller;
 
         Destroy(gameObject);
     }

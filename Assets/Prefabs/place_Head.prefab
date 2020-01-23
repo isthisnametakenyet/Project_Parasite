@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5986196403168786573}
   - component: {fileID: 1174655351719683790}
   - component: {fileID: 4186316995545151478}
+  - component: {fileID: 7157084568611248033}
   m_Layer: 0
   m_Name: place_Head
   m_TagString: Untagged
@@ -143,4 +144,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: 0
   Body: {fileID: 0}
-  All: {fileID: 0}
+  All: {fileID: 2741911751103152782, guid: 4024a1b0451196f4391612bc284b5795, type: 3}
+--- !u!95 &7157084568611248033
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 410505914479801519}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
