@@ -57,17 +57,24 @@ public class PlayerController2D : MonoBehaviour{
         body2D = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
 
-        //switch (controller) {
-        //    case Controller.PLAYER1:    //ERROR
+        //switch (controller)
+        //{
+        //    case Controller.PLAYER1:    //error
         //        {
         //            leftButton = KeyCode.A;
+        //        }
+        //    case Controller.PLAYER2:    //error
+        //        {
+        //            leftButton = KeyCode.LeftArrow;
         //        }
 
         //    default: break;
         //}
+
+        //https://docs.unity3d.com/ScriptReference/KeyCode.html
         if (controller == Controller.PLAYER1)
         {
-            leftButton = KeyCode.A;
+            //leftButton = KeyCode.A;
             rightButton = KeyCode.D;
             jumpButton = KeyCode.Space;
             attackButton = KeyCode.Q;
@@ -76,7 +83,7 @@ public class PlayerController2D : MonoBehaviour{
             RunID = Animator.StringToHash("placeholder_Move");
             //JumpID = Animator.StringToHash("");
             HitID = Animator.StringToHash("Player_Hit");
-            HurtID = Animator.StringToHash("Player_Hurt");
+            HurtID = Animator.StringToHash("");
             // charge1Anim = animator.Play("Player_Charge1");
             // charge2Anim = animator.Play("Player_Charge2");
         }
@@ -87,8 +94,8 @@ public class PlayerController2D : MonoBehaviour{
             jumpButton = KeyCode.UpArrow;
             attackButton = KeyCode.None;
             chargeButton = KeyCode.None;
-            IdleID = Animator.StringToHash("Player2_Idle");
-            RunID = Animator.StringToHash("Player2_Run");
+            IdleID = Animator.StringToHash("");
+            RunID = Animator.StringToHash("");
         }
         else if (controller == Controller.PLAYER3)
         {
@@ -111,7 +118,6 @@ public class PlayerController2D : MonoBehaviour{
     private void FixedUpdate ()
     {
     //GetKey: repite cada segundo q se presiona | GetKeyDown: solo one vez al presionar | GetKeyUp: solo one vez al soltar
-    //https://docs.unity3d.com/ScriptReference/KeyCode.html
         
         //MOVEMENT
         if(Input.GetKey(rightButton) && Stunned == false && Attacking == false){
