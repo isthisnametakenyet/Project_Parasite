@@ -7,6 +7,7 @@ TagManager:
   - Floor
   - Damage
   - PickUp
+  - EmptyBody
   layers:
   - Default
   - TransparentFX

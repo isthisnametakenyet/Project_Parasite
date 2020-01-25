@@ -22,7 +22,9 @@ public class PlayerController2D : MonoBehaviour{
 
 
     //GROUND
-    public bool Grounded; 
+    public bool Grounded;
+    public bool StuckR;
+    public bool StuckL;
 
     //ATTACK
     bool Attacking; 
@@ -30,9 +32,14 @@ public class PlayerController2D : MonoBehaviour{
     //DAMAGE
     bool Damaged;   
     bool Stunned;   
-    bool Inmune; 
-    
+    bool Inmune;
+
+    //WEAPONS
+    bool Weaponed;
+
     float charge = 0f;
+
+
 
     bool IndividualWait = false;
 
@@ -41,12 +48,14 @@ public class PlayerController2D : MonoBehaviour{
     KeyCode jumpButton = KeyCode.None;
     KeyCode attackButton = KeyCode.None;
     KeyCode chargeButton = KeyCode.None;
+    KeyCode headButton = KeyCode.None;
 
     private int IdleID;
     private int RunID;
     private int JumpID;
     private int HitID;
     private int HurtID;
+    private int HeadID;
 
     Animator animator;
     Rigidbody2D body2D;
@@ -56,6 +65,8 @@ public class PlayerController2D : MonoBehaviour{
         animator = GetComponent<Animator>();
         body2D = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+
+        StuckR = false;
 
         //switch (controller)
         //{
@@ -74,11 +85,13 @@ public class PlayerController2D : MonoBehaviour{
         //https://docs.unity3d.com/ScriptReference/KeyCode.html
         if (controller == Controller.PLAYER1)
         {
-            //leftButton = KeyCode.A;
+            leftButton = KeyCode.A;
             rightButton = KeyCode.D;
             jumpButton = KeyCode.Space;
-            attackButton = KeyCode.Q;
+            attackButton = KeyCode.E;
             chargeButton = KeyCode.Mouse1;
+            headButton = KeyCode.Q;
+
             IdleID = Animator.StringToHash("placeholder_Idle");
             RunID = Animator.StringToHash("placeholder_Move");
             //JumpID = Animator.StringToHash("");
@@ -86,6 +99,7 @@ public class PlayerController2D : MonoBehaviour{
             HurtID = Animator.StringToHash("");
             // charge1Anim = animator.Play("Player_Charge1");
             // charge2Anim = animator.Play("Player_Charge2");
+            HeadID = Animator.StringToHash("");
         }
         else if (controller == Controller.PLAYER2)
         {
@@ -120,12 +134,12 @@ public class PlayerController2D : MonoBehaviour{
     //GetKey: repite cada segundo q se presiona | GetKeyDown: solo one vez al presionar | GetKeyUp: solo one vez al soltar
         
         //MOVEMENT
-        if(Input.GetKey(rightButton) && Stunned == false && Attacking == false){
+        if(Input.GetKey(rightButton) && Stunned == false && Attacking == false && StuckR == false){
             body2D.velocity = new Vector2(runSpeed, body2D.velocity.y); //(new x, velocidad actual y)
             animator.Play(RunID);
             spriteRenderer.flipX = true;
         }
-        else if(Input.GetKey(leftButton) && Stunned == false && Attacking == false){
+        else if(Input.GetKey(leftButton) && Stunned == false && Attacking == false && StuckL == false){
             body2D.velocity = new Vector2(-runSpeed, body2D.velocity.y);
             animator.Play(RunID);
             spriteRenderer.flipX = false;
@@ -170,7 +184,6 @@ public class PlayerController2D : MonoBehaviour{
             }
         }
 
-        //CHARGED MOVEMENT
         if(Input.GetKey(rightButton) && Attacking == true){
             body2D.velocity = new Vector2(runSpeed * 50 / 100, body2D.velocity.y); //(50% de max speed, velocidad actual y)
             spriteRenderer.flipX = true;
@@ -194,20 +207,26 @@ public class PlayerController2D : MonoBehaviour{
             } ));
         }
 
-        IEnumerator ExecuteAfterTime(float seconds, Action task) { //WAIT TIME
-            if (IndividualWait == false || Inmune == true){
-                IndividualWait = true;
+        //HEAD THROW
+        if (Input.GetKey(headButton) && Stunned == false && Attacking == false)
+        {
 
-                yield return new WaitForSeconds(seconds);
-                task();
+        }
 
-                IndividualWait = false;
+
+            IEnumerator ExecuteAfterTime(float seconds, Action task) { //WAIT TIME
+        if (IndividualWait == false || Inmune == true){
+            IndividualWait = true;
+
+            yield return new WaitForSeconds(seconds);
+            task();
+
+            IndividualWait = false;
             }
         }   
     }
 
-    private void OnCollisionStay2D(Collision2D collision)
-    { //ON STAY SOLO CON EL SUELO, Q ES MUY PESADO EN CPU
+    private void OnCollisionStay2D(Collision2D collision) { //ON STAY SOLO CON EL SUELO, Q ES MUY PESADO EN CPU
 
         Vector3 hit = collision.contacts[0].normal;
         float angle = Vector3.Angle(hit, Vector3.up);
@@ -218,37 +237,37 @@ public class PlayerController2D : MonoBehaviour{
 
             if (Mathf.Approximately(angle, 0))
             {
-                //Down
-                Grounded = true;
-                Debug.Log("Down");
+                Grounded = true; //Down
+                StuckR = false;
+                StuckL = false;
             }
             //if (Mathf.Approximately(angle, 180))
             //{
-            //    //Up
             //    Debug.Log("Up");
             //}
 
-            //if (Mathf.Approximately(angle, 90))
-            //{
-            //    // Sides
-            //    Vector3 cross = Vector3.Cross(Vector3.up, hit);
-            //    if (cross.y > 0)
-            //    { // left side of the player
-            //        Debug.Log("Left");
-            //    }
-            //    else
-            //    { // right side of the player
-            //        Debug.Log("Right");
-            //    }
-            //}
+            if (Mathf.Approximately(angle, 90) && Grounded == false)
+            {
+                Vector3 cross = Vector3.Cross(Vector3.up, hit);
+                if (cross.y > 0) {
+                    StuckR = true; //Left
+                }
+            }
+            else
+            {
+                //Right
+            }
         }
-
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
+    private void OnCollisionEnter2D(Collision2D collision) {
         if (collision.gameObject.tag == "Damage" && Stunned == false && Inmune == false)   {
             Damaged = true;
+        }
+
+        if (collision.gameObject.tag == "Pickup" && Stunned == false && Inmune == false)
+        {
+            Weaponed = true;
         }
     }
 
@@ -262,8 +281,7 @@ public class PlayerController2D : MonoBehaviour{
         }
     }
 
-    private void HeadOFF()
-    {
+    private void HeadOFF() {
         GameObject head = Instantiate(Head, new Vector3(transform.position.x, transform.position.y + 0.3f, 0), Quaternion.identity);
         GameObject body = Instantiate(Body, new Vector3(transform.position.x, transform.position.y - 0.22f, 0), Quaternion.identity);
 
