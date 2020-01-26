@@ -8,6 +8,7 @@ TagManager:
   - Damage
   - PickUp
   - EmptyBody
+  - FlyingHead
   layers:
   - Default
   - TransparentFX
