@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 2145802316629285469}
   - component: {fileID: 9144914561572531147}
   m_Layer: 0
-  m_Name: white_triagle
-  m_TagString: Untagged
+  m_Name: place_throw
+  m_TagString: FlyingHead
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

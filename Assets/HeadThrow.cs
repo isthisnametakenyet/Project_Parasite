@@ -5,13 +5,13 @@ using UnityEngine;
 public class HeadThrow : MonoBehaviour
 {
 
+    bool BadThrow;
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "EmptyBody")
+        if (collision.gameObject.tag == "Floor")
         {
-            
+            BadThrow = false;
         }
-
-       
     }
 }

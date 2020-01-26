@@ -8,6 +8,9 @@ public class PlayerController2D : MonoBehaviour{
     public enum Controller { NONE, PLAYER1, PLAYER2, PLAYER3, PLAYER4 };
     public Controller controller = Controller.NONE;
 
+    public enum Skin { NONE, SKIN1, SKIN2 };
+    public Skin skin = Skin.NONE;
+
     public GameObject Head;
     public GameObject Body;
     private HeadReturn headReturn;
