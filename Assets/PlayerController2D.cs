@@ -13,6 +13,7 @@ public class PlayerController2D : MonoBehaviour{
 
     public GameObject Head;
     public GameObject Body;
+    public GameObject HeadThrow;
     private HeadReturn headReturn;
 
     private enum ImpactDirection { NONE, UP, DOWN, RIGHT, LEFT };
@@ -213,12 +214,14 @@ public class PlayerController2D : MonoBehaviour{
         //HEAD THROW
         if (Input.GetKey(headButton) && Stunned == false && Attacking == false)
         {
+            GameObject headthrow = Instantiate(HeadThrow, new Vector3(transform.position.x, transform.position.y + 0.3f, 0), Quaternion.identity);
 
         }
 
 
-            IEnumerator ExecuteAfterTime(float seconds, Action task) { //WAIT TIME
-        if (IndividualWait == false || Inmune == true){
+        IEnumerator ExecuteAfterTime(float seconds, Action task) { //WAIT TIME
+        if (IndividualWait == false || Inmune == true)
+            {
             IndividualWait = true;
 
             yield return new WaitForSeconds(seconds);
