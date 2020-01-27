@@ -5,8 +5,8 @@ using System;
 
 public class HeadReturn : MonoBehaviour
 {
-    public enum Controller { NONE, PLAYER1, PLAYER2, PLAYER3, PLAYER4 };
     public Controller controller = Controller.NONE;
+    public Skin skin = Skin.NONE;
 
     public GameObject Body;
     public GameObject All;

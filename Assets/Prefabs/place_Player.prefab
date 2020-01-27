@@ -100,14 +100,13 @@ MonoBehaviour:
   skin: 0
   Head: {fileID: 410505914479801519, guid: dad8e66d2b28c7342897aa140478f827, type: 3}
   Body: {fileID: 4959081448858527720, guid: fe1dbb5e0e1ec9d46ba6c06ed0cbb8f3, type: 3}
-  HeadThrow: {fileID: 0}
+  HeadThrow: {fileID: 5981173689443074100, guid: c00b395c80993ab4d851b9a5e14a5c65,
+    type: 3}
   runSpeed: 2
   jumpStrengh: 6.5
   MAX_Inuminity: 2
   MAX_DamageStun: 1
   Grounded: 0
-  StuckR: 0
-  StuckL: 0
 --- !u!50 &2741911751103152776
 Rigidbody2D:
   serializedVersion: 4
@@ -127,7 +126,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!61 &2741911751103152777
 BoxCollider2D:

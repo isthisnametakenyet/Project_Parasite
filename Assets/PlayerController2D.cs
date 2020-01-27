@@ -3,32 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+public enum Controller { NONE, PLAYER1, PLAYER2, PLAYER3, PLAYER4 };
+public enum Skin { NONE, SKIN1, SKIN2 };
+
 public class PlayerController2D : MonoBehaviour{
 
-    public enum Controller { NONE, PLAYER1, PLAYER2, PLAYER3, PLAYER4 };
     public Controller controller = Controller.NONE;
-
-    public enum Skin { NONE, SKIN1, SKIN2 };
     public Skin skin = Skin.NONE;
 
     public GameObject Head;
     public GameObject Body;
     public GameObject HeadThrow;
+    private HeadThrow headThrow;
     private HeadReturn headReturn;
-
-    private enum ImpactDirection { NONE, UP, DOWN, RIGHT, LEFT };
-    private ImpactDirection impactDirection = ImpactDirection.NONE;
+    private HeadReceive bodyReceive;
 
     public float runSpeed = 2f; 
     public float jumpStrengh = 6.5f; 
     public float MAX_Inuminity = 2f;
     public float MAX_DamageStun = 1f;
 
-
     //GROUND
     public bool Grounded;
-    public bool StuckR;
-    public bool StuckL;
 
     //ATTACK
     bool Attacking; 
@@ -70,8 +66,6 @@ public class PlayerController2D : MonoBehaviour{
         body2D = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
 
-        StuckR = false;
-
         //switch (controller)
         //{
         //    case Controller.PLAYER1:    //error
@@ -94,7 +88,7 @@ public class PlayerController2D : MonoBehaviour{
             jumpButton = KeyCode.Space;
             attackButton = KeyCode.E;
             chargeButton = KeyCode.Mouse1;
-            headButton = KeyCode.Q;
+            headButton = KeyCode.Z;
 
             IdleID = Animator.StringToHash("placeholder_Idle");
             RunID = Animator.StringToHash("placeholder_Move");
@@ -138,12 +132,12 @@ public class PlayerController2D : MonoBehaviour{
     //GetKey: repite cada segundo q se presiona | GetKeyDown: solo one vez al presionar | GetKeyUp: solo one vez al soltar
         
         //MOVEMENT
-        if(Input.GetKey(rightButton) && Stunned == false && Attacking == false && StuckR == false){
+        if(Input.GetKey(rightButton) && Stunned == false && Attacking == false){
             body2D.velocity = new Vector2(runSpeed, body2D.velocity.y); //(new x, velocidad actual y)
             animator.Play(RunID);
             spriteRenderer.flipX = true;
         }
-        else if(Input.GetKey(leftButton) && Stunned == false && Attacking == false && StuckL == false){
+        else if(Input.GetKey(leftButton) && Stunned == false && Attacking == false){
             body2D.velocity = new Vector2(-runSpeed, body2D.velocity.y);
             animator.Play(RunID);
             spriteRenderer.flipX = false;
@@ -214,8 +208,18 @@ public class PlayerController2D : MonoBehaviour{
         //HEAD THROW
         if (Input.GetKey(headButton) && Stunned == false && Attacking == false)
         {
-            GameObject headthrow = Instantiate(HeadThrow, new Vector3(transform.position.x, transform.position.y + 0.3f, 0), Quaternion.identity);
+            GameObject head = Instantiate(HeadThrow, new Vector3(transform.position.x, transform.position.y + 0.3f, 0), Quaternion.identity);
+            GameObject body = Instantiate(Body, new Vector3(transform.position.x, transform.position.y - 0.22f, 0), Quaternion.identity);
 
+            headThrow = head.GetComponent<HeadThrow>();
+            headThrow.controller = this.controller;
+            headThrow.skin = this.skin;
+
+            bodyReceive = body.GetComponent<HeadReceive>();
+            bodyReceive.controller = this.controller;
+            bodyReceive.skin = this.skin;
+
+            Destroy(gameObject); //AUTODESTRUCCION
         }
 
 
@@ -243,28 +247,7 @@ public class PlayerController2D : MonoBehaviour{
 
             if (Mathf.Approximately(angle, 0))
             {
-                Grounded = true; //Down
-                StuckR = false;
-                StuckL = false;
-                Debug.Log("D");
-            }
-            //if (Mathf.Approximately(angle, 180))
-            //{
-            //    Debug.Log("Up");
-            //}
-
-            if (Mathf.Approximately(angle, 90) && Grounded == false)
-            {
-                Vector3 cross = Vector3.Cross(Vector3.up, hit);
-                if (cross.y > 0) {
-                    StuckR = true; //Left
-                    Debug.Log("L");
-                }
-
-                else if (cross.y < 0){
-                    //Right
-                    Debug.Log("R");
-                }
+                Grounded = true; //Collision Down
             }
         }
     }
@@ -295,11 +278,14 @@ public class PlayerController2D : MonoBehaviour{
         GameObject body = Instantiate(Body, new Vector3(transform.position.x, transform.position.y - 0.22f, 0), Quaternion.identity);
 
         headReturn = head.GetComponent <HeadReturn>();
-
+        headReturn.controller = this.controller;
+        headReturn.skin = this.skin;
         headReturn.Body = body;
-        //headReturn.Controller = controller; ERROR
 
-        Destroy(gameObject);
+        bodyReceive = body.GetComponent <HeadReceive>();
+        bodyReceive.controller = this.controller;
+        bodyReceive.skin = this.skin;
+
+        Destroy(gameObject); //AUTODESTRUCCION
     }
-
 }
