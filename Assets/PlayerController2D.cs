@@ -246,6 +246,7 @@ public class PlayerController2D : MonoBehaviour{
                 Grounded = true; //Down
                 StuckR = false;
                 StuckL = false;
+                Debug.Log("D");
             }
             //if (Mathf.Approximately(angle, 180))
             //{
@@ -257,11 +258,13 @@ public class PlayerController2D : MonoBehaviour{
                 Vector3 cross = Vector3.Cross(Vector3.up, hit);
                 if (cross.y > 0) {
                     StuckR = true; //Left
+                    Debug.Log("L");
                 }
-            }
-            else
-            {
-                //Right
+
+                else if (cross.y < 0){
+                    //Right
+                    Debug.Log("R");
+                }
             }
         }
     }
