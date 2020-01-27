@@ -5,11 +5,13 @@ using System;
 
 public enum Controller { NONE, PLAYER1, PLAYER2, PLAYER3, PLAYER4 };
 public enum Skin { NONE, SKIN1, SKIN2 };
+public enum Weaponed { NONE, SWORD, AXE, LANCE, BOW, CROSSBOW, BOOMERANG };
 
 public class PlayerController2D : MonoBehaviour{
 
     public Controller controller = Controller.NONE;
     public Skin skin = Skin.NONE;
+    public Weaponed weaponed = global::Weaponed.NONE;
 
     public GameObject Head;
     public GameObject Body;
@@ -20,7 +22,6 @@ public class PlayerController2D : MonoBehaviour{
 
     public float runSpeed = 2f; 
     public float jumpStrengh = 6.5f; 
-    public float MAX_Inuminity = 2f;
     public float MAX_DamageStun = 1f;
 
     //GROUND
@@ -31,8 +32,6 @@ public class PlayerController2D : MonoBehaviour{
 
     //DAMAGE
     bool Damaged;   
-    bool Stunned;   
-    bool Inmune;
 
     //WEAPONS
     bool Weaponed;
@@ -132,30 +131,30 @@ public class PlayerController2D : MonoBehaviour{
     //GetKey: repite cada segundo q se presiona | GetKeyDown: solo one vez al presionar | GetKeyUp: solo one vez al soltar
         
         //MOVEMENT
-        if(Input.GetKey(rightButton) && Stunned == false && Attacking == false){
+        if(Input.GetKey(rightButton) && Attacking == false){
             body2D.velocity = new Vector2(runSpeed, body2D.velocity.y); //(new x, velocidad actual y)
             animator.Play(RunID);
             spriteRenderer.flipX = true;
         }
-        else if(Input.GetKey(leftButton) && Stunned == false && Attacking == false){
+        else if(Input.GetKey(leftButton) && Attacking == false){
             body2D.velocity = new Vector2(-runSpeed, body2D.velocity.y);
             animator.Play(RunID);
             spriteRenderer.flipX = false;
         }
 
         //IDLE
-        else if(Stunned == false && Attacking == false){
+        else if(Attacking == false){
             body2D.velocity = new Vector2(0, body2D.velocity.y); //Si no se pulsa nada = Idle
             animator.Play(IdleID);
         }
 
         //JUMP
-        if(Input.GetKey(jumpButton) && Grounded == true && Stunned == false && Attacking == false){
+        if(Input.GetKey(jumpButton) && Grounded == true && Attacking == false){
             body2D.velocity = new Vector2(body2D.velocity.x, jumpStrengh); //(velocidad actual x, new y)
         }
 
         //ATTACK NORMAL
-        if(Input.GetKeyDown(attackButton) && Stunned == false){
+        if(Input.GetKeyDown(attackButton)){
             Attacking = true;
             //animator.Play(HitID);
             StartCoroutine(ExecuteAfterTime(0.45f, () => {
@@ -164,7 +163,7 @@ public class PlayerController2D : MonoBehaviour{
         }
 
         //ATTACK CHARGED
-        if (Input.GetKey(chargeButton) && Stunned == false){
+        if (Input.GetKey(chargeButton)){
             Attacking = true;
             //animator.Play("charge1Anim");
             if (charge < 3f){
@@ -192,21 +191,13 @@ public class PlayerController2D : MonoBehaviour{
         }
 
         //DAMAGED
-        if(Damaged == true && Inmune == false && IndividualWait == false){
-            Stunned = true;
+        if(Damaged == true && IndividualWait == false){
             //animator.Play(HurtID);
             HeadOFF();
-            StartCoroutine(ExecuteAfterTime(MAX_DamageStun, () => {
-                Stunned = false;
-                Inmune = true;
-
-                StartCoroutine(ExecuteAfterTime(MAX_Inuminity, () => { Inmune = false; } ));
-
-            } ));
         }
 
         //HEAD THROW
-        if (Input.GetKey(headButton) && Stunned == false && Attacking == false)
+        if (Input.GetKey(headButton) && Attacking == false)
         {
             GameObject head = Instantiate(HeadThrow, new Vector3(transform.position.x, transform.position.y + 0.3f, 0), Quaternion.identity);
             GameObject body = Instantiate(Body, new Vector3(transform.position.x, transform.position.y - 0.22f, 0), Quaternion.identity);
@@ -224,7 +215,7 @@ public class PlayerController2D : MonoBehaviour{
 
 
         IEnumerator ExecuteAfterTime(float seconds, Action task) { //WAIT TIME
-        if (IndividualWait == false || Inmune == true)
+        if (IndividualWait == false)
             {
             IndividualWait = true;
 
@@ -253,11 +244,11 @@ public class PlayerController2D : MonoBehaviour{
     }
 
     private void OnCollisionEnter2D(Collision2D collision) {
-        if (collision.gameObject.tag == "Damage" && Stunned == false && Inmune == false)   {
+        if (collision.gameObject.tag == "Damage")   {
             Damaged = true;
         }
 
-        if (collision.gameObject.tag == "Pickup" && Stunned == false && Inmune == false)
+        if (collision.gameObject.tag == "Pickup")
         {
             Weaponed = true;
         }
