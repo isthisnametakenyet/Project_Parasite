@@ -112,6 +112,31 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &163803994 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6836665188398105239, guid: 176aa6afda06d3446b87efd614733c04,
+    type: 3}
+  m_PrefabInstance: {fileID: 8713775824399781444}
+  m_PrefabAsset: {fileID: 0}
+--- !u!251 &163804001
+PlatformEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 163803994}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RotationalOffset: 0
+  m_UseOneWay: 0
+  m_UseOneWayGrouping: 0
+  m_SurfaceArc: 180
+  m_UseSideFriction: 0
+  m_UseSideBounce: 0
+  m_SideArc: 1
 --- !u!1 &535177073
 GameObject:
   m_ObjectHideFlags: 0
@@ -292,7 +317,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 1.8
+  orthographic size: 2
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -863,5 +888,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5981173689443074100, guid: c00b395c80993ab4d851b9a5e14a5c65,
         type: 3}
+    - target: {fileID: 6836665188398105232, guid: 176aa6afda06d3446b87efd614733c04,
+        type: 3}
+      propertyPath: m_UsedByEffector
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 176aa6afda06d3446b87efd614733c04, type: 3}
