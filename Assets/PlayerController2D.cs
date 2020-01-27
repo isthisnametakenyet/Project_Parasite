@@ -24,39 +24,33 @@ public class PlayerController2D : MonoBehaviour{
     public float jumpStrengh = 6.5f; 
     public float MAX_DamageStun = 1f;
 
-    //GROUND
     public bool Grounded;
-
-    //ATTACK
     bool Attacking; 
-
-    //DAMAGE
     bool Damaged;   
-
-    //WEAPONS
     bool Weaponed;
 
     float charge = 0f;
 
 
-
-    bool IndividualWait = false;
+    bool IndividualWait = false; //TO DELETE
 
     KeyCode leftButton = KeyCode.None;
     KeyCode rightButton = KeyCode.None;
     KeyCode jumpButton = KeyCode.None;
+    KeyCode pickupButton = KeyCode.None;
     KeyCode attackButton = KeyCode.None;
     KeyCode chargeButton = KeyCode.None;
     KeyCode headButton = KeyCode.None;
 
     private int IdleID;
-    private int RunID;
+    private int MoveID;
     private int JumpID;
-    private int HitID;
+    private int AttackID;
+    private int ChargeID;
     private int HurtID;
-    private int HeadID;
+    private int HeadID; 
 
-    Animator animator;
+     Animator animator;
     Rigidbody2D body2D;
     SpriteRenderer spriteRenderer; //Debug.Log("" + Time.time);
 
@@ -85,17 +79,18 @@ public class PlayerController2D : MonoBehaviour{
             leftButton = KeyCode.A;
             rightButton = KeyCode.D;
             jumpButton = KeyCode.Space;
-            attackButton = KeyCode.E;
-            chargeButton = KeyCode.Mouse1;
+            pickupButton = KeyCode.E;
+            attackButton = KeyCode.R;
+            chargeButton = KeyCode.F;
             headButton = KeyCode.Z;
 
             IdleID = Animator.StringToHash("placeholder_Idle");
-            RunID = Animator.StringToHash("placeholder_Move");
-            //JumpID = Animator.StringToHash("");
-            HitID = Animator.StringToHash("Player_Hit");
-            HurtID = Animator.StringToHash("");
-            // charge1Anim = animator.Play("Player_Charge1");
+            MoveID = Animator.StringToHash("placeholder_Move");
+            JumpID = Animator.StringToHash("placeholder_Jump");
+            //AttackID = Animator.StringToHash("placeholder_Attack_Sword");
+            //ChargeID = Animator.StringToHash("placeholder_Charge_Sword");
             // charge2Anim = animator.Play("Player_Charge2");
+            HurtID = Animator.StringToHash("placeholder_Hurt");
             HeadID = Animator.StringToHash("");
         }
         else if (controller == Controller.PLAYER2)
@@ -106,7 +101,7 @@ public class PlayerController2D : MonoBehaviour{
             attackButton = KeyCode.None;
             chargeButton = KeyCode.None;
             IdleID = Animator.StringToHash("");
-            RunID = Animator.StringToHash("");
+            MoveID = Animator.StringToHash("");
         }
         else if (controller == Controller.PLAYER3)
         {
@@ -133,12 +128,12 @@ public class PlayerController2D : MonoBehaviour{
         //MOVEMENT
         if(Input.GetKey(rightButton) && Attacking == false){
             body2D.velocity = new Vector2(runSpeed, body2D.velocity.y); //(new x, velocidad actual y)
-            animator.Play(RunID);
+            animator.Play(MoveID);
             spriteRenderer.flipX = true;
         }
         else if(Input.GetKey(leftButton) && Attacking == false){
             body2D.velocity = new Vector2(-runSpeed, body2D.velocity.y);
-            animator.Play(RunID);
+            animator.Play(MoveID);
             spriteRenderer.flipX = false;
         }
 
@@ -153,16 +148,20 @@ public class PlayerController2D : MonoBehaviour{
             body2D.velocity = new Vector2(body2D.velocity.x, jumpStrengh); //(velocidad actual x, new y)
         }
 
-        //ATTACK NORMAL
-        if(Input.GetKeyDown(attackButton)){
-            Attacking = true;
-            //animator.Play(HitID);
-            StartCoroutine(ExecuteAfterTime(0.45f, () => {
-                Attacking = false;
-            }));
+        //PICKUP
+        if (Input.GetKey(pickupButton))
+        {
+            
         }
 
-        //ATTACK CHARGED
+        //ATTACK
+        if (Input.GetKeyDown(attackButton)){
+            Attacking = true;
+            //animator.Play(AttackID);
+            Attacking = false;
+        }
+
+        //CHARGED
         if (Input.GetKey(chargeButton)){
             Attacking = true;
             //animator.Play("charge1Anim");
@@ -176,7 +175,7 @@ public class PlayerController2D : MonoBehaviour{
         }
         else if (charge > 0){{
             //animator.Play("charge2Anim");
-            StartCoroutine(ExecuteAfterTime(1, () => { Attacking = false; }));
+            Attacking = false;
             charge = 0;
             }
         }
@@ -190,7 +189,7 @@ public class PlayerController2D : MonoBehaviour{
             spriteRenderer.flipX = false;
         }
 
-        //DAMAGED
+        //HURT
         if(Damaged == true && IndividualWait == false){
             //animator.Play(HurtID);
             HeadOFF();
@@ -212,19 +211,6 @@ public class PlayerController2D : MonoBehaviour{
 
             Destroy(gameObject); //AUTODESTRUCCION
         }
-
-
-        IEnumerator ExecuteAfterTime(float seconds, Action task) { //WAIT TIME
-        if (IndividualWait == false)
-            {
-            IndividualWait = true;
-
-            yield return new WaitForSeconds(seconds);
-            task();
-
-            IndividualWait = false;
-            }
-        }   
     }
 
     private void OnCollisionStay2D(Collision2D collision) { //ON STAY SOLO CON EL SUELO, Q ES MUY PESADO EN CPU
