@@ -359,6 +359,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: place_Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 6836665188398105239, guid: 176aa6afda06d3446b87efd614733c04,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 6836665188398105228, guid: 176aa6afda06d3446b87efd614733c04,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -837,6 +842,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: place_Player
       objectReference: {fileID: 0}
+    - target: {fileID: 6836665188398105239, guid: 176aa6afda06d3446b87efd614733c04,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 6836665188398105228, guid: 176aa6afda06d3446b87efd614733c04,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -913,5 +923,10 @@ PrefabInstance:
       propertyPath: m_UsedByEffector
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6836665188398105229, guid: 176aa6afda06d3446b87efd614733c04,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 35d8a5dbe26fc1b44a0141e7e4644d00, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 176aa6afda06d3446b87efd614733c04, type: 3}

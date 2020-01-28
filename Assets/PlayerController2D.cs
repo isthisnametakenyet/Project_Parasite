@@ -25,7 +25,7 @@ public class PlayerController2D : MonoBehaviour{
 
     float charge = 0f;
 
-
+    //KEYS
     KeyCode leftButton = KeyCode.None;
     KeyCode rightButton = KeyCode.None;
     KeyCode jumpButton = KeyCode.None;
@@ -33,7 +33,6 @@ public class PlayerController2D : MonoBehaviour{
     KeyCode attackButton = KeyCode.None;
     KeyCode chargeButton = KeyCode.None;
     KeyCode headButton = KeyCode.None;
-
     private int IdleID;
     private int MoveID;
     private int JumpID;
@@ -42,36 +41,36 @@ public class PlayerController2D : MonoBehaviour{
     private int HurtID;
     private int HeadID;
 
-
-    public bool Grounded; //bool isDead = animator.GetBool(DeadID); //animator.SetBool(DeadID, true);
-    bool Attacking;
-    bool Damaged;
-    bool Weaponed;
-
-
+    //CONDITIONS
+    private int GroundID;
+    private int MovingID;
+    private int WeaponedID;
+    private int whichWeaponID;
+    private int AttackingID;
+    private int ChargingID;
+    private int DamagedID;
 
     Animator animator;
     Rigidbody2D body2D;
     SpriteRenderer spriteRenderer; //Debug.Log("" + Time.time);
 
     void Start(){
+
         animator = GetComponent<Animator>();
         body2D = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
 
-        //switch (controller)
+        //SKIN
+        //if (skin == Skin.SKIN1)
         //{
-        //    case Controller.PLAYER1:    //error
-        //        {
-        //            leftButton = KeyCode.A;
-        //        }
-        //    case Controller.PLAYER2:    //error
-        //        {
-        //            leftButton = KeyCode.LeftArrow;
-        //        }
-
-        //    default: break;
+        //    animator.runtimeAnimatorController = Resources.Load("Assets/Animations/Skin1.controller") as RuntimeAnimatorController; 
         //}
+        //else if (skin == Skin.SKIN2)
+        //{
+        //    animator.runtimeAnimatorController = Resources.Load("Assets/Animations/Skin2.controller") as RuntimeAnimatorController;
+        //}
+
+        //KEYS
 
         //https://docs.unity3d.com/ScriptReference/KeyCode.html
         if (controller == Controller.PLAYER1)
@@ -83,15 +82,6 @@ public class PlayerController2D : MonoBehaviour{
             attackButton = KeyCode.R;
             chargeButton = KeyCode.F;
             headButton = KeyCode.Z;
-
-            IdleID = Animator.StringToHash("placeholder_Idle");
-            MoveID = Animator.StringToHash("placeholder_Move");
-            JumpID = Animator.StringToHash("placeholder_Jump");
-            //AttackID = Animator.StringToHash("placeholder_Attack_Sword");
-            //ChargeID = Animator.StringToHash("placeholder_Charge_Sword");
-            // charge2Anim = animator.Play("Player_Charge2");
-            HurtID = Animator.StringToHash("placeholder_Hurt");
-            HeadID = Animator.StringToHash("");
         }
         else if (controller == Controller.PLAYER2)
         {
@@ -100,8 +90,7 @@ public class PlayerController2D : MonoBehaviour{
             jumpButton = KeyCode.UpArrow;
             attackButton = KeyCode.None;
             chargeButton = KeyCode.None;
-            IdleID = Animator.StringToHash("");
-            MoveID = Animator.StringToHash("");
+            
         }
         else if (controller == Controller.PLAYER3)
         {
@@ -119,33 +108,52 @@ public class PlayerController2D : MonoBehaviour{
             attackButton = KeyCode.None;
             chargeButton = KeyCode.None;
         }
+
+        //CONDITIONS
+        GroundID = Animator.StringToHash("Grounded");
+        MovingID = Animator.StringToHash("Moving");
+        WeaponedID = Animator.StringToHash("Weaponed");
+        whichWeaponID = Animator.StringToHash("whichWeapon");
+        AttackingID = Animator.StringToHash("Attacking");
+        ChargingID = Animator.StringToHash("Charging");
+        DamagedID = Animator.StringToHash("Damaged");
     }
 
-    private void FixedUpdate ()
-    {
-    //GetKey: repite cada segundo q se presiona | GetKeyDown: solo one vez al presionar | GetKeyUp: solo one vez al soltar
-        
-        //MOVEMENT
-        if(Input.GetKey(rightButton) && Attacking == false){
-            body2D.velocity = new Vector2(runSpeed, body2D.velocity.y); //(new x, velocidad actual y)
-            animator.Play(MoveID);
-            spriteRenderer.flipX = true;
-        }
-        else if(Input.GetKey(leftButton) && Attacking == false){
-            body2D.velocity = new Vector2(-runSpeed, body2D.velocity.y);
-            animator.Play(MoveID);
-            spriteRenderer.flipX = false;
-        }
+    private void FixedUpdate(){
+        //bool isCondition = animator.GetBool(ConditionID); //animator.SetBool(ConditionID, true);
+        bool isGrounded = animator.GetBool(GroundID);
+        bool isMoving = animator.GetBool(MovingID);
+        bool isWeaponed = animator.GetBool(WeaponedID);
+        int whichWeapon = animator.GetInteger(whichWeaponID);
+        bool isCharging = animator.GetBool(ChargingID);
 
-        //IDLE
-        else if(Attacking == false){
-            body2D.velocity = new Vector2(0, body2D.velocity.y); //Si no se pulsa nada = Idle
-            animator.Play(IdleID);
+        //GetKey: repite cada segundo q se presiona | GetKeyDown: solo one vez al presionar | GetKeyUp: solo one vez al soltar
+
+        //IDLE IS AUTOMATIC
+        body2D.velocity = new Vector2(0, body2D.velocity.y);
+
+        //MOVEMENT
+        if (Input.GetKey(rightButton) && isCharging == false)
+        {
+            body2D.velocity = new Vector2(runSpeed, body2D.velocity.y);
+            spriteRenderer.flipX = true;
+            animator.SetBool(MovingID, true);
+        }
+        else if(Input.GetKey(leftButton) && isCharging == false)
+        {
+            body2D.velocity = new Vector2(-runSpeed, body2D.velocity.y);
+            spriteRenderer.flipX = false;
+            animator.SetBool(MovingID, true);
+        }
+        else
+        {
+            animator.SetBool(MovingID, false);
         }
 
         //JUMP
-        if(Input.GetKey(jumpButton) && Grounded == true && Attacking == false){
-            body2D.velocity = new Vector2(body2D.velocity.x, jumpStrengh); //(velocidad actual x, new y)
+        if (Input.GetKey(jumpButton) && isGrounded == true && isCharging == false)
+        {
+            body2D.velocity = new Vector2(body2D.velocity.x, jumpStrengh);
         }
 
         //PICKUP
@@ -155,48 +163,45 @@ public class PlayerController2D : MonoBehaviour{
         }
 
         //ATTACK
-        if (Input.GetKeyDown(attackButton)){
-            Attacking = true;
-            //animator.Play(AttackID);
-            Attacking = false;
+        if (Input.GetKeyDown(attackButton))
+        {
+            animator.SetBool(AttackingID, true);
         }
 
         //CHARGED
-        if (Input.GetKey(chargeButton)){
-            Attacking = true;
-            //animator.Play("charge1Anim");
+        if (Input.GetKey(chargeButton))
+        {
+            animator.SetBool(ChargingID, true);
             if (charge < 3f){
                 charge += Time.deltaTime*1f;
                 Debug.Log(charge);
             }
-            else if (charge == 3f){
+            else if (charge == 3f)
+            {
                 Debug.Log("MaxCharge");
             }
         }
-        else if (charge > 0){{
-            //animator.Play("charge2Anim");
-            Attacking = false;
+        else if (charge > 0)
+        {
+            {
+            animator.SetBool(ChargingID, false);
             charge = 0;
             }
         }
 
-        if(Input.GetKey(rightButton) && Attacking == true){
+        if(Input.GetKey(rightButton) && isCharging == true)
+        {
             body2D.velocity = new Vector2(runSpeed * 50 / 100, body2D.velocity.y); //(50% de max speed, velocidad actual y)
             spriteRenderer.flipX = true;
         }
-        else if(Input.GetKey(leftButton) && Attacking == true){
+        else if(Input.GetKey(leftButton) && isCharging == true)
+        {
             body2D.velocity = new Vector2(-runSpeed * 50 / 100, body2D.velocity.y);
             spriteRenderer.flipX = false;
         }
 
-        //HURT
-        if(Damaged == true && IndividualWait == false){
-            //animator.Play(HurtID);
-            HeadOFF();
-        }
-
         //HEAD THROW
-        if (Input.GetKey(headButton) && Attacking == false)
+        if (Input.GetKey(headButton) && isCharging == false)
         {
             GameObject head = Instantiate(HeadThrow, new Vector3(transform.position.x, transform.position.y + 0.3f, 0), Quaternion.identity);
             GameObject body = Instantiate(Body, new Vector3(transform.position.x, transform.position.y - 0.22f, 0), Quaternion.identity);
@@ -213,44 +218,44 @@ public class PlayerController2D : MonoBehaviour{
         }
     }
 
-    private void OnCollisionStay2D(Collision2D collision) { //ON STAY SOLO CON EL SUELO, Q ES MUY PESADO EN CPU
+    private void OnCollisionStay2D(Collision2D collision){ //ON STAY SOLO CON EL SUELO, Q ES MUY PESADO EN CPU
 
         Vector3 hit = collision.contacts[0].normal;
         float angle = Vector3.Angle(hit, Vector3.up);
 
-
         if (collision.gameObject.tag == "Floor")
         {
-
             if (Mathf.Approximately(angle, 0))
             {
-                Grounded = true; //Collision Down
+                animator.SetBool(GroundID, true);
             }
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision) {
-        if (collision.gameObject.tag == "Damage")   {
-            Damaged = true;
-        }
-
+    private void OnCollisionEnter2D(Collision2D collision){
+   
         if (collision.gameObject.tag == "Pickup")
         {
-            Weaponed = true;
+            animator.SetBool(WeaponedID, true);
+            //animator.SetBool(whichWeapon, 0);
+        }
+
+        if (collision.gameObject.tag == "Damage")
+        {
+            animator.SetBool(DamagedID, true);
+            HeadOFF();
         }
     }
 
     private void OnCollisionExit2D(Collision2D collision){
-        if (collision.gameObject.tag == "Floor") {
-            Grounded = false;
-        }
 
-        if (collision.gameObject.tag == "Damage")   {
-            Damaged = false;
+        if (collision.gameObject.tag == "Floor")
+        {
+            animator.SetBool(GroundID, false);
         }
     }
 
-    private void HeadOFF() {
+    private void HeadOFF(){
         GameObject head = Instantiate(Head, new Vector3(transform.position.x, transform.position.y + 0.3f, 0), Quaternion.identity);
         GameObject body = Instantiate(Body, new Vector3(transform.position.x, transform.position.y - 0.22f, 0), Quaternion.identity);
 
