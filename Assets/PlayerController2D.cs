@@ -22,12 +22,6 @@ public class PlayerController2D : MonoBehaviour{
 
     public float runSpeed = 2f; 
     public float jumpStrengh = 6.5f; 
-    public float MAX_DamageStun = 1f;
-
-    public bool Grounded;
-    bool Attacking; 
-    bool Damaged;   
-    bool Weaponed;
 
     float charge = 0f;
 
@@ -46,9 +40,17 @@ public class PlayerController2D : MonoBehaviour{
     private int AttackID;
     private int ChargeID;
     private int HurtID;
-    private int HeadID; 
+    private int HeadID;
 
-     Animator animator;
+
+    public bool Grounded; //bool isDead = animator.GetBool(DeadID); //animator.SetBool(DeadID, true);
+    bool Attacking;
+    bool Damaged;
+    bool Weaponed;
+
+
+
+    Animator animator;
     Rigidbody2D body2D;
     SpriteRenderer spriteRenderer; //Debug.Log("" + Time.time);
 
