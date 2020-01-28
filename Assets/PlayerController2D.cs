@@ -32,8 +32,6 @@ public class PlayerController2D : MonoBehaviour{
     float charge = 0f;
 
 
-    bool IndividualWait = false; //TO DELETE
-
     KeyCode leftButton = KeyCode.None;
     KeyCode rightButton = KeyCode.None;
     KeyCode jumpButton = KeyCode.None;
