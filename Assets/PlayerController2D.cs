@@ -33,7 +33,6 @@ public class PlayerController2D : MonoBehaviour{
     KeyCode attackButton = KeyCode.None;
     KeyCode chargeButton = KeyCode.None;
     KeyCode headButton = KeyCode.None;
-    private int IdleID;
     private int MoveID;
     private int JumpID;
     private int AttackID;
@@ -42,14 +41,15 @@ public class PlayerController2D : MonoBehaviour{
     private int HeadID;
 
     //CONDITIONS
-    private int GroundID;
+    private int GroundingID;
     private int MovingID;
-    private int WeaponedID;
+    private int JumpedID;
+    private int WeaponingID;
     private int whichWeaponID;
-    private int AttackingID;
+    private int AttackedID;
     private int ChargingID;
     private int DamagedID;
-
+    
     Animator animator;
     Rigidbody2D body2D;
     SpriteRenderer spriteRenderer; //Debug.Log("" + Time.time);
@@ -110,20 +110,21 @@ public class PlayerController2D : MonoBehaviour{
         }
 
         //CONDITIONS
-        GroundID = Animator.StringToHash("Grounded");
+        GroundingID = Animator.StringToHash("Grounding");
         MovingID = Animator.StringToHash("Moving");
-        WeaponedID = Animator.StringToHash("Weaponed");
+        JumpedID = Animator.StringToHash("Jumped");
+        WeaponingID = Animator.StringToHash("Weaponing");
         whichWeaponID = Animator.StringToHash("whichWeapon");
-        AttackingID = Animator.StringToHash("Attacking");
+        AttackedID = Animator.StringToHash("Attacked");
         ChargingID = Animator.StringToHash("Charging");
         DamagedID = Animator.StringToHash("Damaged");
     }
 
     private void FixedUpdate(){
         //bool isCondition = animator.GetBool(ConditionID); //animator.SetBool(ConditionID, true);
-        bool isGrounded = animator.GetBool(GroundID);
+        bool isGrounded = animator.GetBool(GroundingID);
         bool isMoving = animator.GetBool(MovingID);
-        bool isWeaponed = animator.GetBool(WeaponedID);
+        bool isWeaponed = animator.GetBool(WeaponingID);
         int whichWeapon = animator.GetInteger(whichWeaponID);
         bool isCharging = animator.GetBool(ChargingID);
 
@@ -153,19 +154,14 @@ public class PlayerController2D : MonoBehaviour{
         //JUMP
         if (Input.GetKey(jumpButton) && isGrounded == true && isCharging == false)
         {
+            animator.SetTrigger(JumpedID);
             body2D.velocity = new Vector2(body2D.velocity.x, jumpStrengh);
-        }
-
-        //PICKUP
-        if (Input.GetKey(pickupButton))
-        {
-            
         }
 
         //ATTACK
         if (Input.GetKeyDown(attackButton))
         {
-            animator.SetBool(AttackingID, true);
+            animator.SetBool(AttackedID, true);
         }
 
         //CHARGED
@@ -227,31 +223,36 @@ public class PlayerController2D : MonoBehaviour{
         {
             if (Mathf.Approximately(angle, 0))
             {
-                animator.SetBool(GroundID, true);
+                animator.SetBool(GroundingID, true);
             }
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision){
-   
-        if (collision.gameObject.tag == "Pickup")
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+
+        if (collision.gameObject.tag == "Pickup" && Input.GetKeyDown(pickupButton))
         {
-            animator.SetBool(WeaponedID, true);
+            animator.SetBool(WeaponingID, true);
             //animator.SetBool(whichWeapon, 0);
         }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision){
 
         if (collision.gameObject.tag == "Damage")
         {
-            animator.SetBool(DamagedID, true);
+            animator.SetTrigger(DamagedID);
             HeadOFF();
         }
     }
+
 
     private void OnCollisionExit2D(Collision2D collision){
 
         if (collision.gameObject.tag == "Floor")
         {
-            animator.SetBool(GroundID, false);
+            animator.SetBool(GroundingID, false);
         }
     }
 
