@@ -5,13 +5,11 @@ using System;
 
 public enum Controller { NONE, PLAYER1, PLAYER2, PLAYER3, PLAYER4 };
 public enum Skin { NONE, SKIN1, SKIN2 };
-public enum Weaponed { NONE, SWORD, AXE, LANCE, BOW, CROSSBOW, BOOMERANG };
 
 public class PlayerController2D : MonoBehaviour{
 
     public Controller controller = Controller.NONE;
     public Skin skin = Skin.NONE;
-    public Weaponed weaponed = global::Weaponed.NONE;
 
     public GameObject Head;
     public GameObject Body;
@@ -52,7 +50,9 @@ public class PlayerController2D : MonoBehaviour{
     
     Animator animator;
     Rigidbody2D body2D;
-    SpriteRenderer spriteRenderer; //Debug.Log("" + Time.time);
+    SpriteRenderer spriteRenderer;
+
+    public RuntimeAnimatorController animator1;
 
     void Start(){
 
@@ -61,17 +61,17 @@ public class PlayerController2D : MonoBehaviour{
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         //SKIN
-        //if (skin == Skin.SKIN1)
-        //{
-        //    animator.runtimeAnimatorController = Resources.Load("Assets/Animations/Skin1.controller") as RuntimeAnimatorController; 
-        //}
-        //else if (skin == Skin.SKIN2)
-        //{
-        //    animator.runtimeAnimatorController = Resources.Load("Assets/Animations/Skin2.controller") as RuntimeAnimatorController;
-        //}
+        if (skin == Skin.SKIN1)
+        {
+            animator.runtimeAnimatorController = Resources.Load("Assets/Animations/Skin1.controller") as RuntimeAnimatorController;
+            animator.runtimeAnimatorController = animator1 as RuntimeAnimatorController;
+        }
+        else if (skin == Skin.SKIN2)
+        {
+            animator.runtimeAnimatorController = Resources.Load("Assets/Animations/Skin2.controller") as RuntimeAnimatorController;
+        }
 
         //KEYS
-
         //https://docs.unity3d.com/ScriptReference/KeyCode.html
         if (controller == Controller.PLAYER1)
         {
@@ -230,11 +230,36 @@ public class PlayerController2D : MonoBehaviour{
 
     private void OnTriggerStay2D(Collider2D collision)
     {
+        bool isWeaponed = animator.GetBool(WeaponingID);
 
-        if (collision.gameObject.tag == "Pickup" && Input.GetKeyDown(pickupButton))
+        if (collision.gameObject.tag == "PickUp" && Input.GetKeyDown(pickupButton) && isWeaponed == false)
         {
             animator.SetBool(WeaponingID, true);
-            //animator.SetBool(whichWeapon, 0);
+
+            if (collision.gameObject.name == "Sword")
+            {
+                animator.SetInteger(whichWeaponID, 1);
+            }
+            else if (collision.gameObject.name == "Axe")
+            {
+                animator.SetInteger(whichWeaponID, 2);
+            }
+            else if (collision.gameObject.name == "Lance")
+            {
+                animator.SetInteger(whichWeaponID, 3);
+            }
+            else if (collision.gameObject.name == "Bow")
+            {
+                animator.SetInteger(whichWeaponID, 4);
+            }
+            else if (collision.gameObject.name == "CrossBow")
+            {
+                animator.SetInteger(whichWeaponID, 5);
+            }
+            else if (collision.gameObject.name == "Boomerang")
+            {
+                animator.SetInteger(whichWeaponID, 6);
+            }
         }
     }
 
