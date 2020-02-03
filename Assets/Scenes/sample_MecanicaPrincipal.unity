@@ -310,13 +310,18 @@ PrefabInstance:
     - target: {fileID: 2741911751103152779, guid: 4024a1b0451196f4391612bc284b5795,
         type: 3}
       propertyPath: skin
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2741911751103152779, guid: 4024a1b0451196f4391612bc284b5795,
         type: 3}
       propertyPath: animator1
       value: 
       objectReference: {fileID: 9100000, guid: 35d8a5dbe26fc1b44a0141e7e4644d00, type: 2}
+    - target: {fileID: 2741911751103152779, guid: 4024a1b0451196f4391612bc284b5795,
+        type: 3}
+      propertyPath: controller
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1100851624699573882, guid: 4024a1b0451196f4391612bc284b5795,
         type: 3}
       propertyPath: m_ColliderMask.m_Bits
@@ -876,6 +881,11 @@ PrefabInstance:
         type: 3}
       propertyPath: controller
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2741911751103152779, guid: 4024a1b0451196f4391612bc284b5795,
+        type: 3}
+      propertyPath: skin
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4024a1b0451196f4391612bc284b5795, type: 3}

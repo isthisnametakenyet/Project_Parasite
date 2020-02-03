@@ -52,8 +52,6 @@ public class PlayerController2D : MonoBehaviour{
     Rigidbody2D body2D;
     SpriteRenderer spriteRenderer;
 
-    public RuntimeAnimatorController animator1;
-
     void Start(){
 
         animator = GetComponent<Animator>();
@@ -61,52 +59,59 @@ public class PlayerController2D : MonoBehaviour{
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         //SKIN
+        if (skin == Skin.NONE)
+        {
+            animator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Animations/SkinPlaceholder");
+        }
         if (skin == Skin.SKIN1)
         {
-            animator.runtimeAnimatorController = Resources.Load("Assets/Animations/Skin1.controller") as RuntimeAnimatorController;
-            animator.runtimeAnimatorController = animator1 as RuntimeAnimatorController;
+            animator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Animations/Skin1");
         }
         else if (skin == Skin.SKIN2)
         {
-            animator.runtimeAnimatorController = Resources.Load("Assets/Animations/Skin2.controller") as RuntimeAnimatorController;
+            animator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Animations/Skin2");
         }
 
         //KEYS
         //https://docs.unity3d.com/ScriptReference/KeyCode.html
-        if (controller == Controller.PLAYER1)
+        switch (controller)
         {
-            leftButton = KeyCode.A;
-            rightButton = KeyCode.D;
-            jumpButton = KeyCode.Space;
-            pickupButton = KeyCode.E;
-            attackButton = KeyCode.R;
-            chargeButton = KeyCode.F;
-            headButton = KeyCode.Z;
-        }
-        else if (controller == Controller.PLAYER2)
-        {
-            leftButton = KeyCode.LeftArrow;
-            rightButton = KeyCode.RightArrow;
-            jumpButton = KeyCode.UpArrow;
-            attackButton = KeyCode.None;
-            chargeButton = KeyCode.None;
-            
-        }
-        else if (controller == Controller.PLAYER3)
-        {
-            leftButton = KeyCode.None;
-            rightButton = KeyCode.None;
-            jumpButton = KeyCode.None;
-            attackButton = KeyCode.None;
-            chargeButton = KeyCode.None;
-        }
-        else if (controller == Controller.PLAYER4)
-        {
-            leftButton = KeyCode.None;
-            rightButton = KeyCode.None;
-            jumpButton = KeyCode.None;
-            attackButton = KeyCode.None;
-            chargeButton = KeyCode.None;
+            case Controller.PLAYER1:
+                leftButton = KeyCode.A;
+                rightButton = KeyCode.D;
+                jumpButton = KeyCode.Space;
+                pickupButton = KeyCode.E;
+                attackButton = KeyCode.R;
+                chargeButton = KeyCode.F;
+                headButton = KeyCode.Z;
+                break;
+            case Controller.PLAYER2:
+                leftButton = KeyCode.LeftArrow;
+                rightButton = KeyCode.RightArrow;
+                jumpButton = KeyCode.Space;
+                pickupButton = KeyCode.E;
+                attackButton = KeyCode.R;
+                chargeButton = KeyCode.F;
+                headButton = KeyCode.Z;
+                break;
+            case Controller.PLAYER3:
+                leftButton = KeyCode.A;
+                rightButton = KeyCode.D;
+                jumpButton = KeyCode.Space;
+                pickupButton = KeyCode.E;
+                attackButton = KeyCode.R;
+                chargeButton = KeyCode.F;
+                headButton = KeyCode.Z;
+                break;
+            case Controller.PLAYER4:
+                leftButton = KeyCode.A;
+                rightButton = KeyCode.D;
+                jumpButton = KeyCode.Space;
+                pickupButton = KeyCode.E;
+                attackButton = KeyCode.R;
+                chargeButton = KeyCode.F;
+                headButton = KeyCode.Z;
+                break;
         }
 
         //CONDITIONS
