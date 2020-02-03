@@ -59,17 +59,17 @@ public class PlayerController2D : MonoBehaviour{
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         //SKIN
-        if (skin == Skin.NONE)
+        switch (skin)
         {
-            animator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Animations/SkinPlaceholder");
-        }
-        if (skin == Skin.SKIN1)
-        {
-            animator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Animations/Skin1");
-        }
-        else if (skin == Skin.SKIN2)
-        {
-            animator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Animations/Skin2");
+            case Skin.NONE:
+                animator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Animations/SkinPlaceholder");
+                break;
+            case Skin.SKIN1:
+                animator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Animations/Skin1");
+                break;
+            case Skin.SKIN2:
+                animator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Animations/Skin2");
+                break;
         }
 
         //KEYS
