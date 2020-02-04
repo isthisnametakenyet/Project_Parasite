@@ -329,11 +329,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6836665188398105239, guid: 176aa6afda06d3446b87efd614733c04,
-        type: 3}
-      propertyPath: m_Name
-      value: place_Enemy
-      objectReference: {fileID: 0}
     - target: {fileID: 6836665188398105228, guid: 176aa6afda06d3446b87efd614733c04,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -393,6 +388,11 @@ PrefabInstance:
         type: 3}
       propertyPath: skin
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6836665188398105239, guid: 176aa6afda06d3446b87efd614733c04,
+        type: 3}
+      propertyPath: m_Name
+      value: place_Enemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 176aa6afda06d3446b87efd614733c04, type: 3}
@@ -787,11 +787,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6836665188398105239, guid: 176aa6afda06d3446b87efd614733c04,
-        type: 3}
-      propertyPath: m_Name
-      value: place_Player
-      objectReference: {fileID: 0}
     - target: {fileID: 6836665188398105228, guid: 176aa6afda06d3446b87efd614733c04,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -863,5 +858,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5981173689443074100, guid: c00b395c80993ab4d851b9a5e14a5c65,
         type: 3}
+    - target: {fileID: 6836665188398105239, guid: 176aa6afda06d3446b87efd614733c04,
+        type: 3}
+      propertyPath: m_Name
+      value: place_Player
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 176aa6afda06d3446b87efd614733c04, type: 3}
