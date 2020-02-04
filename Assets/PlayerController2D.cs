@@ -273,11 +273,6 @@ public class PlayerController2D : MonoBehaviour{
                 animator.SetBool(GroundingID, true);
             }
         }
-
-        if (collision.gameObject.tag == "PickUp")
-        {
-            Debug.Log("Collided w/ pickup COLLISION");
-        }
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -287,7 +282,16 @@ public class PlayerController2D : MonoBehaviour{
         if (collision.gameObject.tag == "PickUp")
         {
             Debug.Log("Collided w/ pickup TRIGERER");
+            Debug.Log(isWeaponed);
+
         }
+
+        if (Input.GetKeyDown(pickupButton))
+        {
+            Debug.Log("FK U");
+
+        }
+
 
         if (collision.gameObject.tag == "PickUp" && Input.GetKeyDown(pickupButton) && isWeaponed == false)
         {
