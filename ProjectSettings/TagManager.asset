@@ -9,6 +9,8 @@ TagManager:
   - PickUp
   - EmptyBody
   - FlyingHead
+  - Platform
+  - Grass
   layers:
   - Default
   - TransparentFX
