@@ -142,13 +142,13 @@ public class PlayerController2D : MonoBehaviour{
         body2D.velocity = new Vector2(0, body2D.velocity.y);
 
         //MOVEMENT
-        if (Input.GetKey(rightButton) && isCharging == false)
+        if (Input.GetKey(rightButton) && isCharging == false && isHeading == false)
         {
             body2D.velocity = new Vector2(runSpeed, body2D.velocity.y);
             spriteRenderer.flipX = true;
             animator.SetBool(MovingID, true);
         }
-        else if(Input.GetKey(leftButton) && isCharging == false)
+        else if(Input.GetKey(leftButton) && isCharging == false && isHeading == false)
         {
             body2D.velocity = new Vector2(-runSpeed, body2D.velocity.y);
             spriteRenderer.flipX = false;
@@ -180,7 +180,7 @@ public class PlayerController2D : MonoBehaviour{
                 charge += Time.deltaTime*1f;
                 Debug.Log(charge);
             }
-            else if (charge == 3f)
+            else if (charge >= 3f)
             {
                 Debug.Log("MaxCharge");
             }
@@ -190,6 +190,7 @@ public class PlayerController2D : MonoBehaviour{
             {
             animator.SetBool(ChargingID, false);
             charge = 0;
+                //THROW
             }
         }
 
@@ -203,7 +204,7 @@ public class PlayerController2D : MonoBehaviour{
                     charge += Time.deltaTime * 1f;
                     Debug.Log(charge);
                 }
-                else if (charge == 3f)
+                else if (charge >= 3f)
                 {
                     Debug.Log("MaxCharge");
                 }
@@ -211,17 +212,19 @@ public class PlayerController2D : MonoBehaviour{
         }
         else if (charge > 0)
         {
+            animator.SetBool(HeadingID, false);
             GameObject head = Instantiate(HeadThrow, new Vector3(transform.position.x, transform.position.y + 0.3f, 0), Quaternion.identity);
             GameObject body = Instantiate(Body, new Vector3(transform.position.x, transform.position.y - 0.22f, 0), Quaternion.identity);
 
             headThrow = head.GetComponent<HeadThrow>();
             headThrow.controller = this.controller;
             headThrow.skin = this.skin;
+            //HEAD THROW
 
             bodyReceive = body.GetComponent<HeadReceive>();
             bodyReceive.controller = this.controller;
             bodyReceive.skin = this.skin;
-
+            
             animator.SetBool(HeadingID, false);
             charge = 0;
 
@@ -234,7 +237,7 @@ public class PlayerController2D : MonoBehaviour{
             body2D.velocity = new Vector2(runSpeed * 50 / 100, body2D.velocity.y); //(50% de max speed, velocidad actual y)
             spriteRenderer.flipX = true;
         }
-        else if (Input.GetKey(rightButton) && isCharging == true || Input.GetKey(rightButton) && isHeading == true)
+        else if (Input.GetKey(leftButton) && isCharging == true || Input.GetKey(leftButton) && isHeading == true)
         {
             body2D.velocity = new Vector2(-runSpeed * 50 / 100, body2D.velocity.y);
             spriteRenderer.flipX = false;
