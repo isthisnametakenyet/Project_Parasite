@@ -21,7 +21,8 @@ public class PlayerController2D : MonoBehaviour{
     public float runSpeed = 2f; 
     public float jumpStrengh = 6.5f; 
 
-    float charge = 0f;
+    float headCharge = 0f;
+    float weaponCharge = 0f;
 
     //KEYS
     KeyCode leftButton = KeyCode.None;
@@ -176,20 +177,20 @@ public class PlayerController2D : MonoBehaviour{
         if (Input.GetKey(chargeButton) && isHeading == false)
         {
             animator.SetBool(ChargingID, true);
-            if (charge < 3f){
-                charge += Time.deltaTime*1f;
-                Debug.Log(charge);
+            if (weaponCharge < 3f){
+                weaponCharge += Time.deltaTime*1f; 
+                Debug.Log(weaponCharge);
             }
-            else if (charge >= 3f)
+            else if (weaponCharge >= 3f)
             {
                 Debug.Log("MaxCharge");
             }
         }
-        else if (charge > 0)
+        else if (weaponCharge > 0)
         {
             {
             animator.SetBool(ChargingID, false);
-            charge = 0;
+            weaponCharge = 0;
                 //THROW
             }
         }
@@ -199,20 +200,22 @@ public class PlayerController2D : MonoBehaviour{
         {
             {
                 animator.SetBool(HeadingID, true);
-                if (charge < 3f)
+                if (headCharge <= 3f)
                 {
-                    charge += Time.deltaTime * 1f;
-                    Debug.Log(charge);
+                    headCharge += Time.deltaTime * 1f;
+                    Debug.Log(headCharge);
                 }
-                else if (charge >= 3f)
+                else if (headCharge >= 3f)
                 {
                     Debug.Log("MaxCharge");
                 }
             }
         }
-        else if (charge > 0)
+        else if (headCharge > 0)
         {
             animator.SetBool(HeadingID, false);
+            headCharge = 0;
+
             GameObject head = Instantiate(HeadThrow, new Vector3(transform.position.x, transform.position.y + 0.3f, 0), Quaternion.identity);
             GameObject body = Instantiate(Body, new Vector3(transform.position.x, transform.position.y - 0.22f, 0), Quaternion.identity);
 
@@ -225,9 +228,6 @@ public class PlayerController2D : MonoBehaviour{
             bodyReceive.controller = this.controller;
             bodyReceive.skin = this.skin;
             
-            animator.SetBool(HeadingID, false);
-            charge = 0;
-
             Destroy(gameObject); //AUTODESTRUCCION
         }
 
