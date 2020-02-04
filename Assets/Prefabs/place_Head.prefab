@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2738711749266460419}
   - component: {fileID: 5428097151582833360}
+  - component: {fileID: 4186316995545151478}
   - component: {fileID: 5986196403168786573}
   - component: {fileID: 1174655351719683790}
-  - component: {fileID: 4186316995545151478}
   - component: {fileID: 7157084568611248033}
   m_Layer: 9
   m_Name: place_Head
@@ -83,6 +83,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &4186316995545151478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 410505914479801519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24c93eb9d571bc94ab18b7ae0f8e9253, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controller: 0
+  skin: 0
+  Body: {fileID: 4959081448858527720, guid: fe1dbb5e0e1ec9d46ba6c06ed0cbb8f3, type: 3}
+  All: {fileID: 2741911751103152782, guid: 4024a1b0451196f4391612bc284b5795, type: 3}
 --- !u!50 &5986196403168786573
 Rigidbody2D:
   serializedVersion: 4
@@ -130,22 +146,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.4945858, y: 2.1889706}
   m_EdgeRadius: 0
---- !u!114 &4186316995545151478
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 410505914479801519}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24c93eb9d571bc94ab18b7ae0f8e9253, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  controller: 0
-  skin: 0
-  Body: {fileID: 0}
-  All: {fileID: 2741911751103152782, guid: 4024a1b0451196f4391612bc284b5795, type: 3}
 --- !u!95 &7157084568611248033
 Animator:
   serializedVersion: 3
