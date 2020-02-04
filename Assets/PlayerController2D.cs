@@ -279,20 +279,6 @@ public class PlayerController2D : MonoBehaviour{
     {
         bool isWeaponed = animator.GetBool(WeaponingID);
 
-        if (collision.gameObject.tag == "PickUp")
-        {
-            Debug.Log("Collided w/ pickup TRIGERER");
-            Debug.Log(isWeaponed);
-
-        }
-
-        if (Input.GetKeyDown(pickupButton))
-        {
-            Debug.Log("FK U");
-
-        }
-
-
         if (collision.gameObject.tag == "PickUp" && Input.GetKeyDown(pickupButton) && isWeaponed == false)
         {
             
