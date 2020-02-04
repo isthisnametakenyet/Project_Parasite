@@ -282,8 +282,14 @@ public class PlayerController2D : MonoBehaviour{
     {
         bool isWeaponed = animator.GetBool(WeaponingID);
 
+        if (collision.gameObject.tag == "PickUp")
+        {
+            Debug.Log("Collided w/ pickup");
+        }
+
         if (collision.gameObject.tag == "PickUp" && Input.GetKeyDown(pickupButton) && isWeaponed == false)
         {
+            
             animator.SetBool(WeaponingID, true);
 
             if (collision.gameObject.name == "Sword")
