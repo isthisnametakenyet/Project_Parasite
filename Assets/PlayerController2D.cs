@@ -203,12 +203,12 @@ public class PlayerController2D : MonoBehaviour{
         {
             {
                 animator.SetBool(HeadingID, true);
-                if (headCharge <= 8f)
+                if (headCharge <= 2f)
                 {
                     headCharge += Time.deltaTime * 1f;
                     Debug.Log(headCharge);
                 }
-                else if (headCharge >= 8f)
+                else if (headCharge >= 2f)
                 {
                     Debug.Log("MaxCharge");
                 }
@@ -229,11 +229,11 @@ public class PlayerController2D : MonoBehaviour{
 
             if (facingright == true) //THROW HEAD with headCharge as force
             {
-             headRigid.velocity = new Vector2(headCharge * 2, 0);
+             headRigid.velocity = new Vector2(headCharge * 1.8f, 2f);
             }
             else if (facingright == false)
             {
-            headRigid.velocity = new Vector2(-headCharge * 2, 0);
+            headRigid.velocity = new Vector2(-headCharge * 1.8f, 2f);
             }
 
 
@@ -263,15 +263,9 @@ public class PlayerController2D : MonoBehaviour{
 
     private void OnCollisionStay2D(Collision2D collision){ //ES MUY PESADO EN CPU
 
-        Vector3 hit = collision.contacts[0].normal;
-        float angle = Vector3.Angle(hit, Vector3.up);
-
         if (collision.gameObject.tag == "Floor")
         {
-            if (Mathf.Approximately(angle, 0))
-            {
-                animator.SetBool(GroundingID, true);
-            }
+            animator.SetBool(GroundingID, true);
         }
     }
 
@@ -312,10 +306,30 @@ public class PlayerController2D : MonoBehaviour{
     }
 
     private void OnCollisionEnter2D(Collision2D collision){
+        Vector3 hit = collision.contacts[0].normal;
+        float angle = Vector3.Angle(hit, Vector3.up);
 
         if (collision.gameObject.tag == "Damage")
         {
             animator.SetTrigger(DamagedID);
+
+            if (Mathf.Approximately(angle, 90))
+            {
+                Vector3 cross = Vector3.Cross(Vector3.forward, hit);
+                if (cross.y == 1f) //RIGHT
+                {
+                    Debug.Log("Right"); 
+                }
+                else if (cross.y > 90) //LEFT
+                {
+                    Debug.Log("Left"); 
+                }
+                else
+                {
+                    Debug.Log("WTF GENTE");
+                }
+            }
+
             HeadOFF();
         }
     }
@@ -336,6 +350,7 @@ public class PlayerController2D : MonoBehaviour{
         headReturn.controller = this.controller;
         headReturn.skin = this.skin;
         headReturn.Body = body;
+
 
         bodyReceive = body.GetComponent <HeadReceive>();
         bodyReceive.controller = this.controller;
