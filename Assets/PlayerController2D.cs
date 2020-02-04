@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Rewired;
 
 public enum Controller { NONE, PLAYER1, PLAYER2, PLAYER3, PLAYER4 };
 public enum Skin { NONE, SKIN1, SKIN2 };
@@ -11,6 +12,8 @@ public class PlayerController2D : MonoBehaviour{
     public Controller controller = Controller.NONE;
     public Skin skin = Skin.NONE;
 
+    private Player player;
+
     public GameObject Head;
     public GameObject Body;
     public GameObject HeadThrow;
@@ -18,9 +21,11 @@ public class PlayerController2D : MonoBehaviour{
     private HeadReturn headReturn;
     private HeadReceive bodyReceive;
 
+    //CAMBIABLE
     public float runSpeed = 2f; 
     public float jumpStrengh = 6.5f;
 
+    //TEMPORALES
     bool facingright = true;
     float headCharge = 0f;
     float weaponCharge = 0f;
@@ -80,6 +85,8 @@ public class PlayerController2D : MonoBehaviour{
         switch (controller)
         {
             case Controller.PLAYER1:
+                player = ReInput.players.GetPlayer(0);
+
                 leftButton = KeyCode.A;
                 rightButton = KeyCode.D;
                 jumpButton = KeyCode.Space;
@@ -89,6 +96,8 @@ public class PlayerController2D : MonoBehaviour{
                 headButton = KeyCode.Z;
                 break;
             case Controller.PLAYER2:
+                player = ReInput.players.GetPlayer(1);
+
                 leftButton = KeyCode.LeftArrow;
                 rightButton = KeyCode.RightArrow;
                 jumpButton = KeyCode.Space;
@@ -138,12 +147,15 @@ public class PlayerController2D : MonoBehaviour{
         bool isCharging = animator.GetBool(ChargingID);
         bool isHeading = animator.GetBool(HeadingID);
 
-        //GetKey: repite cada segundo q se presiona | GetKeyDown: solo one vez al presionar | GetKeyUp: solo one vez al soltar
+        //float MoveSticks = player.GetAxis("Move Joysticks");
+        //float MoveSticks = player.GetAxis("Move Keys");
+
 
         //IDLE IS AUTOMATIC
         body2D.velocity = new Vector2(0, body2D.velocity.y);
 
         //MOVEMENT
+        //if (player.GetAxis(" ");
         if (Input.GetKey(rightButton) && isCharging == false && isHeading == false)
         {
             body2D.velocity = new Vector2(runSpeed, body2D.velocity.y);
