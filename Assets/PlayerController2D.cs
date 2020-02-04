@@ -276,7 +276,7 @@ public class PlayerController2D : MonoBehaviour{
 
         if (collision.gameObject.tag == "PickUp")
         {
-            Debug.Log("Collided w/ pickup");
+            Debug.Log("Collided w/ pickup COLLISION");
         }
     }
 
@@ -286,7 +286,7 @@ public class PlayerController2D : MonoBehaviour{
 
         if (collision.gameObject.tag == "PickUp")
         {
-            Debug.Log("Collided w/ pickup");
+            Debug.Log("Collided w/ pickup TRIGERER");
         }
 
         if (collision.gameObject.tag == "PickUp" && Input.GetKeyDown(pickupButton) && isWeaponed == false)
