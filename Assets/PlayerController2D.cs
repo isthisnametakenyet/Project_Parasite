@@ -203,12 +203,12 @@ public class PlayerController2D : MonoBehaviour{
         {
             {
                 animator.SetBool(HeadingID, true);
-                if (headCharge <= 3f)
+                if (headCharge <= 8f)
                 {
                     headCharge += Time.deltaTime * 1f;
                     Debug.Log(headCharge);
                 }
-                else if (headCharge >= 3f)
+                else if (headCharge >= 8f)
                 {
                     Debug.Log("MaxCharge");
                 }
@@ -261,7 +261,7 @@ public class PlayerController2D : MonoBehaviour{
         }
     }
 
-    private void OnCollisionStay2D(Collision2D collision){ //ON STAY SOLO CON EL SUELO, Q ES MUY PESADO EN CPU
+    private void OnCollisionStay2D(Collision2D collision){ //ES MUY PESADO EN CPU
 
         Vector3 hit = collision.contacts[0].normal;
         float angle = Vector3.Angle(hit, Vector3.up);
@@ -272,6 +272,11 @@ public class PlayerController2D : MonoBehaviour{
             {
                 animator.SetBool(GroundingID, true);
             }
+        }
+
+        if (collision.gameObject.tag == "PickUp")
+        {
+            Debug.Log("Collided w/ pickup");
         }
     }
 
