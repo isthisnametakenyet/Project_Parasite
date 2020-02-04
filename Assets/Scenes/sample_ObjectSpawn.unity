@@ -522,6 +522,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2741911751103152789, guid: 4024a1b0451196f4391612bc284b5795,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2741911751103152779, guid: 4024a1b0451196f4391612bc284b5795,
+        type: 3}
+      propertyPath: controller
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1100851624699573882, guid: 4024a1b0451196f4391612bc284b5795,
+        type: 3}
+      propertyPath: m_ColliderMask.m_Bits
+      value: 1281
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4024a1b0451196f4391612bc284b5795, type: 3}
 --- !u!1 &1680949663
@@ -722,7 +737,13 @@ PrefabInstance:
     - target: {fileID: 2532107623028046300, guid: 70bbde0f10c3a5d42abc73c107474b3b,
         type: 3}
       propertyPath: maps
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2532107623028046300, guid: 70bbde0f10c3a5d42abc73c107474b3b,
+        type: 3}
+      propertyPath: PickUp
+      value: 
+      objectReference: {fileID: 2503348166692240421, guid: c0ebb2942ef3a574bb401d5c06434664,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 70bbde0f10c3a5d42abc73c107474b3b, type: 3}

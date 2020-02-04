@@ -3,18 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // maps enum
-public enum Maps {NONE, Map1, Map2, Map3 };
+public enum Maps { Map1, Map2, Map3 };
+
+public enum PickTypes { Sword, Axe, Lance, Bow, CrossBow, Boomerang };
+
 
 public class RandomSpawnScript : MonoBehaviour
 {
-    public Maps maps = Maps.NONE;
+    public Maps maps;
 
     // prefabs to instantiate
-    public GameObject prefab1, prefab2, prefab3, prefab4, prefab5;
+    public GameObject PickUp;
+
+    private PickUpScript PickObject;
 
     // spawn prefabs once per 2 secs
-    public float spawnMaxRate = 20f;
-    public float spawnMinRate = 10f;
+    public float spawnMaxRate = 15f;
+    public float spawnMinRate = 7f;
 
     // positions to spawn the prefabs
     Vector3[] positionsMap1 = new[] { new Vector3(0f, 0f, 0f), new Vector3(1f, 1f, 1f), new Vector3(2f, 2f, 2f), new Vector3(3f, 3f, 3f), new Vector3(4f, 4f, 4f) };
@@ -66,7 +71,7 @@ public class RandomSpawnScript : MonoBehaviour
     {
         if(Time.time > nextSpawn) // if time has come
         {
-            whatToSpawn = Random.Range(1, 6); //define random value between 1 and 5 (6 is exclusive)
+            whatToSpawn = Random.Range(1, 7); //define random value between 1 and 6 (7 is exclusive)
             Debug.Log(whatToSpawn);
 
             whereToSpawn = Random.Range(0, 5); // define random value between 0 and 4 (5 is exclusive)
@@ -76,30 +81,46 @@ public class RandomSpawnScript : MonoBehaviour
             
             while(whatToSpawn == lastSpawned)
             {
-                whatToSpawn = Random.Range(1, 6);
+                whatToSpawn = Random.Range(1, 7);
             }
             lastSpawned = whatToSpawn;
             Debug.Log(whatToSpawn);
 
             if (whatToSpawn == 1)
             {
-                Instantiate(prefab1, actualMap[whereToSpawn], Quaternion.identity);
+                GameObject pick = Instantiate(PickUp, actualMap[whereToSpawn], Quaternion.identity);
+                PickObject = pick.GetComponent<PickUpScript>();
+                PickObject.picktype = PickTypes.Sword;
             }
            else if(whatToSpawn == 2)
             {
-                Instantiate(prefab2, actualMap[whereToSpawn], Quaternion.identity);
+                GameObject pick = Instantiate(PickUp, actualMap[whereToSpawn], Quaternion.identity);
+                PickObject = pick.GetComponent<PickUpScript>();
+                PickObject.picktype = PickTypes.Axe;
             }
            else if(whatToSpawn == 3)
             {
-                Instantiate(prefab3, actualMap[whereToSpawn], Quaternion.identity);
+                GameObject pick = Instantiate(PickUp, actualMap[whereToSpawn], Quaternion.identity);
+                PickObject = pick.GetComponent<PickUpScript>();
+                PickObject.picktype = PickTypes.Lance;
             }
            else if(whatToSpawn == 4)
             {
-                Instantiate(prefab4, actualMap[whereToSpawn], Quaternion.identity);
+                GameObject pick = Instantiate(PickUp, actualMap[whereToSpawn], Quaternion.identity);
+                PickObject = pick.GetComponent<PickUpScript>();
+                PickObject.picktype = PickTypes.Bow;
             }
            else if( whereToSpawn == 5)
             {
-                Instantiate(prefab5, actualMap[whereToSpawn], Quaternion.identity);
+                GameObject pick = Instantiate(PickUp, actualMap[whereToSpawn], Quaternion.identity);
+                PickObject = pick.GetComponent<PickUpScript>();
+                PickObject.picktype = PickTypes.CrossBow;
+            }
+            else if (whatToSpawn == 6)
+            {
+                GameObject pick = Instantiate(PickUp, actualMap[whereToSpawn], Quaternion.identity);
+                PickObject = pick.GetComponent<PickUpScript>();
+                PickObject.picktype = PickTypes.Boomerang;
             }
 
             // set next spawn time
