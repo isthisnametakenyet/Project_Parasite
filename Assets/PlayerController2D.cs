@@ -19,9 +19,11 @@ public class PlayerController2D : MonoBehaviour{
     private HeadReceive bodyReceive;
 
     public float runSpeed = 2f; 
-    public float jumpStrengh = 6.5f; 
+    public float jumpStrengh = 6.5f;
 
-    float charge = 0f;
+    bool facingright = true;
+    float headCharge = 0f;
+    float weaponCharge = 0f;
 
     //KEYS
     KeyCode leftButton = KeyCode.None;
@@ -142,17 +144,19 @@ public class PlayerController2D : MonoBehaviour{
         body2D.velocity = new Vector2(0, body2D.velocity.y);
 
         //MOVEMENT
-        if (Input.GetKey(rightButton) && isCharging == false)
+        if (Input.GetKey(rightButton) && isCharging == false && isHeading == false)
         {
             body2D.velocity = new Vector2(runSpeed, body2D.velocity.y);
             spriteRenderer.flipX = true;
             animator.SetBool(MovingID, true);
+            facingright = true;
         }
-        else if(Input.GetKey(leftButton) && isCharging == false)
+        else if(Input.GetKey(leftButton) && isCharging == false && isHeading == false)
         {
             body2D.velocity = new Vector2(-runSpeed, body2D.velocity.y);
             spriteRenderer.flipX = false;
             animator.SetBool(MovingID, true);
+            facingright = false;
         }
         else
         {
@@ -176,20 +180,21 @@ public class PlayerController2D : MonoBehaviour{
         if (Input.GetKey(chargeButton) && isHeading == false)
         {
             animator.SetBool(ChargingID, true);
-            if (charge < 3f){
-                charge += Time.deltaTime*1f;
-                Debug.Log(charge);
+            if (weaponCharge < 3f){
+                weaponCharge += Time.deltaTime*1f; 
+                Debug.Log(weaponCharge);
             }
-            else if (charge == 3f)
+            else if (weaponCharge >= 3f)
             {
                 Debug.Log("MaxCharge");
             }
         }
-        else if (charge > 0)
+        else if (weaponCharge > 0)
         {
             {
             animator.SetBool(ChargingID, false);
-            charge = 0;
+            weaponCharge = 0;
+                //THROW
             }
         }
 
@@ -198,33 +203,46 @@ public class PlayerController2D : MonoBehaviour{
         {
             {
                 animator.SetBool(HeadingID, true);
-                if (charge < 3f)
+                if (headCharge <= 8f)
                 {
-                    charge += Time.deltaTime * 1f;
-                    Debug.Log(charge);
+                    headCharge += Time.deltaTime * 1f;
+                    Debug.Log(headCharge);
                 }
-                else if (charge == 3f)
+                else if (headCharge >= 8f)
                 {
                     Debug.Log("MaxCharge");
                 }
             }
         }
-        else if (charge > 0)
+        else if (headCharge > 0)
         {
+            animator.SetBool(HeadingID, false);
+
             GameObject head = Instantiate(HeadThrow, new Vector3(transform.position.x, transform.position.y + 0.3f, 0), Quaternion.identity);
             GameObject body = Instantiate(Body, new Vector3(transform.position.x, transform.position.y - 0.22f, 0), Quaternion.identity);
 
             headThrow = head.GetComponent<HeadThrow>();
             headThrow.controller = this.controller;
             headThrow.skin = this.skin;
+            Rigidbody2D headRigid;
+            headRigid = head.GetComponent<Rigidbody2D>(); //ASIGN ITS RIGID
+
+            if (facingright == true) //THROW HEAD with headCharge as force
+            {
+             headRigid.velocity = new Vector2(headCharge * 2, 0);
+            }
+            else if (facingright == false)
+            {
+            headRigid.velocity = new Vector2(-headCharge * 2, 0);
+            }
+
+
+            headCharge = 0;
 
             bodyReceive = body.GetComponent<HeadReceive>();
             bodyReceive.controller = this.controller;
             bodyReceive.skin = this.skin;
-
-            animator.SetBool(HeadingID, false);
-            charge = 0;
-
+            
             Destroy(gameObject); //AUTODESTRUCCION
         }
 
@@ -233,15 +251,17 @@ public class PlayerController2D : MonoBehaviour{
         {
             body2D.velocity = new Vector2(runSpeed * 50 / 100, body2D.velocity.y); //(50% de max speed, velocidad actual y)
             spriteRenderer.flipX = true;
+            facingright = true;
         }
-        else if (Input.GetKey(rightButton) && isCharging == true || Input.GetKey(rightButton) && isHeading == true)
+        else if (Input.GetKey(leftButton) && isCharging == true || Input.GetKey(leftButton) && isHeading == true)
         {
             body2D.velocity = new Vector2(-runSpeed * 50 / 100, body2D.velocity.y);
             spriteRenderer.flipX = false;
+            facingright = false;
         }
     }
 
-    private void OnCollisionStay2D(Collision2D collision){ //ON STAY SOLO CON EL SUELO, Q ES MUY PESADO EN CPU
+    private void OnCollisionStay2D(Collision2D collision){ //ES MUY PESADO EN CPU
 
         Vector3 hit = collision.contacts[0].normal;
         float angle = Vector3.Angle(hit, Vector3.up);
@@ -261,6 +281,7 @@ public class PlayerController2D : MonoBehaviour{
 
         if (collision.gameObject.tag == "PickUp" && Input.GetKeyDown(pickupButton) && isWeaponed == false)
         {
+            
             animator.SetBool(WeaponingID, true);
 
             if (collision.gameObject.name == "Sword")
