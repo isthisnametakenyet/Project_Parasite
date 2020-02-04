@@ -130,9 +130,6 @@ public class PlayerController2D : MonoBehaviour{
     }
 
     private void FixedUpdate(){
-        Debug.Log("facingright: ");
-        Debug.Log(facingright);
-
         //bool isCondition = animator.GetBool(ConditionID); //animator.SetBool(ConditionID, true);
         bool isGrounded = animator.GetBool(GroundingID);
         bool isMoving = animator.GetBool(MovingID);
