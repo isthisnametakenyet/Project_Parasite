@@ -3,7 +3,13 @@ guid: daa3a9a9ccd92c54a8c746805f23e2d6
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - HeadFall: {fileID: 410505914479801519, guid: dad8e66d2b28c7342897aa140478f827,
+      type: 3}
+  - BodyEmpty: {fileID: 4959081448858527720, guid: fe1dbb5e0e1ec9d46ba6c06ed0cbb8f3,
+      type: 3}
+  - HeadThrow: {fileID: 5981173689443074100, guid: c00b395c80993ab4d851b9a5e14a5c65,
+      type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

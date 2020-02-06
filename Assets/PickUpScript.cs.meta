@@ -3,7 +3,13 @@ guid: ab1586f01a9081048a75fdd30eb93096
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - swordSprite: {fileID: 21300000, guid: b61af1c011cf4b24d91d7b5786976d69, type: 3}
+  - axeSprite: {fileID: 21300000, guid: 9af6f35fa913dfa40a207c3c3d509a79, type: 3}
+  - lanceSprite: {fileID: 21300000, guid: 8b5d166df27d93a438d023f1aa31f19e, type: 3}
+  - bowSprite: {fileID: 21300000, guid: 8cf2ed2bc07b49d449c2726b1a2fcd42, type: 3}
+  - crossbowSprite: {fileID: 21300000, guid: de8225342f0d79444909d67f8a0788e1, type: 3}
+  - boomerangSprite: {fileID: 21300000, guid: 0479df66668190f4594b3d071079935b, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

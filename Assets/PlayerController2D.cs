@@ -24,9 +24,12 @@ public class PlayerController2D : MonoBehaviour{
     //CAMBIABLE
     public float runSpeed = 2f; 
     public float jumpStrengh = 6.5f;
+    public float headReturnDelay = 2f;
 
     //TEMPORALES
     bool facingright = true;
+    float headReturnedCount = 0f;
+    bool canThrow = false;
     float headCharge = 0f;
     float weaponCharge = 0f;
 
@@ -66,7 +69,6 @@ public class PlayerController2D : MonoBehaviour{
         }
 
         //KEYS
-        //https://docs.unity3d.com/ScriptReference/KeyCode.html
         switch (controller)
         {
             case Controller.PLAYER1:
@@ -99,6 +101,9 @@ public class PlayerController2D : MonoBehaviour{
     }
 
     private void FixedUpdate(){
+        if (headReturnedCount < headReturnDelay) { headReturnedCount += Time.deltaTime * 1f; }
+        else { canThrow = true; }
+
         //bool isCondition = animator.GetBool(ConditionID); //animator.SetBool(ConditionID, true);
         bool isGrounded = animator.GetBool(GroundingID);
         bool isMoving = animator.GetBool(MovingID);
@@ -145,9 +150,10 @@ public class PlayerController2D : MonoBehaviour{
         }
 
         //DUCK
-        if (player.GetButtonDown("Duck") && isGrounded == true && isCharging == false)
+        if (player.GetButton("Duck") && isGrounded == true && isCharging == false)
         {
             isDucking = true;
+            Debug.Log("Quack");
         }
         else
         {
@@ -161,7 +167,7 @@ public class PlayerController2D : MonoBehaviour{
         }
 
         //CHARGED
-        if (player.GetButton("Charge") && isHeading == false)
+        if (player.GetButton("Charge") && isHeading == false && isDucking == false)
         {
             animator.SetBool(ChargingID, true);
             if (weaponCharge < 3f){
@@ -183,7 +189,7 @@ public class PlayerController2D : MonoBehaviour{
         }
 
         //HEAD THROW
-        if (player.GetButton("Head Throw") && isCharging == false)
+        if (player.GetButton("Head Throw") && canThrow == true && isCharging == false && isDucking == false)
         {
             {
                 animator.SetBool(HeadingID, true);
@@ -205,11 +211,17 @@ public class PlayerController2D : MonoBehaviour{
             GameObject head = Instantiate(HeadThrow, new Vector3(transform.position.x, transform.position.y + 0.3f, 0), Quaternion.identity);
             GameObject body = Instantiate(BodyEmpty, new Vector3(transform.position.x, transform.position.y - 0.22f, 0), Quaternion.identity);
 
+            bodyReceive = body.GetComponent<HeadReceive>();
+            bodyReceive.controller = this.controller;
+            bodyReceive.skin = this.skin;
+
             headThrow = head.GetComponent<HeadThrow>();
             headThrow.controller = this.controller;
             headThrow.skin = this.skin;
+            headThrow.BodyEmpty = body; //REFERENCE EMPTYBODY IN HEAD THROW TO KNOW ORIGIN
+
             Rigidbody2D headRigid;
-            headRigid = head.GetComponent<Rigidbody2D>(); //ASIGN ITS RIGID
+            headRigid = head.GetComponent<Rigidbody2D>(); //ASIGN HEAD RIGIDBODY
 
             if (facingright == true) //THROW HEAD with headCharge as force
             {
@@ -223,9 +235,7 @@ public class PlayerController2D : MonoBehaviour{
 
             headCharge = 0;
 
-            bodyReceive = body.GetComponent<HeadReceive>();
-            bodyReceive.controller = this.controller;
-            bodyReceive.skin = this.skin;
+           
             
             Destroy(gameObject); //AUTODESTRUCCION
         }

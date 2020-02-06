@@ -96,6 +96,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: 0
   skin: 0
+  BodyEmpty: {fileID: 0}
+  PlayerAll: {fileID: 2741911751103152782, guid: 4024a1b0451196f4391612bc284b5795,
+    type: 3}
 --- !u!50 &6884082196387458093
 Rigidbody2D:
   serializedVersion: 4

@@ -44,11 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maps: 0
-  prefab1: {fileID: 3445236537842944865, guid: 9225b12fcd7f460438d03a5e580eec85, type: 3}
-  prefab2: {fileID: 6445382849807371699, guid: a2a64ce72c24e584f9c219e377082e71, type: 3}
-  prefab3: {fileID: 2190413515455896688, guid: 59a2b7effbe8b0d4d83977b86e30a33f, type: 3}
-  prefab4: {fileID: 7661239171399042227, guid: 61b97c6e55e73064f91b102925199e19, type: 3}
-  prefab5: {fileID: 4996197353395147975, guid: 836a452ad93d90040ba874f4b42de578, type: 3}
+  PickUp: {fileID: 2503348166692240421, guid: c0ebb2942ef3a574bb401d5c06434664, type: 3}
   spawnMaxRate: 20
   spawnMinRate: 10
   nextSpawn: 0
