@@ -30,21 +30,6 @@ public class PlayerController2D : MonoBehaviour{
     float headCharge = 0f;
     float weaponCharge = 0f;
 
-    //KEYS
-    KeyCode leftButton = KeyCode.None;
-    KeyCode rightButton = KeyCode.None;
-    KeyCode jumpButton = KeyCode.None;
-    KeyCode pickupButton = KeyCode.None;
-    KeyCode attackButton = KeyCode.None;
-    KeyCode chargeButton = KeyCode.None;
-    KeyCode headButton = KeyCode.None;
-    private int MoveID;
-    private int JumpID;
-    private int AttackID;
-    private int ChargeID;
-    private int HurtID;
-    private int HeadID;
-
     //CONDITIONS
     private int GroundingID;
     private int MovingID;
@@ -86,43 +71,18 @@ public class PlayerController2D : MonoBehaviour{
         {
             case Controller.PLAYER1:
                 player = ReInput.players.GetPlayer(0);
-
-                leftButton = KeyCode.A;
-                rightButton = KeyCode.D;
-                jumpButton = KeyCode.Space;
-                pickupButton = KeyCode.E;
-                attackButton = KeyCode.R;
-                chargeButton = KeyCode.F;
-                headButton = KeyCode.Z;
                 break;
+
             case Controller.PLAYER2:
                 player = ReInput.players.GetPlayer(1);
+                break;
 
-                leftButton = KeyCode.LeftArrow;
-                rightButton = KeyCode.RightArrow;
-                jumpButton = KeyCode.Space;
-                pickupButton = KeyCode.E;
-                attackButton = KeyCode.R;
-                chargeButton = KeyCode.F;
-                headButton = KeyCode.Z;
-                break;
             case Controller.PLAYER3:
-                leftButton = KeyCode.A;
-                rightButton = KeyCode.D;
-                jumpButton = KeyCode.Space;
-                pickupButton = KeyCode.E;
-                attackButton = KeyCode.R;
-                chargeButton = KeyCode.F;
-                headButton = KeyCode.Z;
+                player = ReInput.players.GetPlayer(2);
                 break;
+
             case Controller.PLAYER4:
-                leftButton = KeyCode.A;
-                rightButton = KeyCode.D;
-                jumpButton = KeyCode.Space;
-                pickupButton = KeyCode.E;
-                attackButton = KeyCode.R;
-                chargeButton = KeyCode.F;
-                headButton = KeyCode.Z;
+                player = ReInput.players.GetPlayer(3);
                 break;
         }
 
@@ -146,29 +106,31 @@ public class PlayerController2D : MonoBehaviour{
         int whichWeapon = animator.GetInteger(whichWeaponID);
         bool isCharging = animator.GetBool(ChargingID);
         bool isHeading = animator.GetBool(HeadingID);
-
-        //float MoveSticks = player.GetAxis("Move Joysticks");
-        //float MoveSticks = player.GetAxis("Move Keys");
-
+        bool isDucking = false;
 
         //IDLE IS AUTOMATIC
         body2D.velocity = new Vector2(0, body2D.velocity.y);
 
         //MOVEMENT
-        //if (player.GetAxis(" ");
-        if (Input.GetKey(rightButton) && isCharging == false && isHeading == false)
+        if (player.GetAxis("Move Joystick") > 0 || player.GetButton("Move Right Keys"))
         {
-            body2D.velocity = new Vector2(runSpeed, body2D.velocity.y);
-            spriteRenderer.flipX = true;
-            animator.SetBool(MovingID, true);
-            facingright = true;
+            if (isCharging == false && isHeading == false && isDucking == false)
+            {
+                body2D.velocity = new Vector2(runSpeed, body2D.velocity.y);
+                spriteRenderer.flipX = true;
+                animator.SetBool(MovingID, true);
+                facingright = true;
+            }
         }
-        else if(Input.GetKey(leftButton) && isCharging == false && isHeading == false)
+        else if (player.GetAxis("Move Joystick") < 0 || player.GetButton("Move Left Keys"))
         {
-            body2D.velocity = new Vector2(-runSpeed, body2D.velocity.y);
-            spriteRenderer.flipX = false;
-            animator.SetBool(MovingID, true);
-            facingright = false;
+            if (isCharging == false && isHeading == false && isDucking == false)
+            {
+                body2D.velocity = new Vector2(-runSpeed, body2D.velocity.y);
+                spriteRenderer.flipX = false;
+                animator.SetBool(MovingID, true);
+                facingright = false;
+            }
         }
         else
         {
@@ -176,20 +138,30 @@ public class PlayerController2D : MonoBehaviour{
         }
 
         //JUMP
-        if (Input.GetKey(jumpButton) && isGrounded == true && isCharging == false)
+        if (player.GetButtonDown("Jump") && isGrounded == true && isCharging == false && isDucking == false)
         {
             animator.SetTrigger(JumpedID);
             body2D.velocity = new Vector2(body2D.velocity.x, jumpStrengh);
         }
 
+        //DUCK
+        if (player.GetButtonDown("Duck") && isGrounded == true && isCharging == false)
+        {
+            isDucking = true;
+        }
+        else
+        {
+            isDucking = false;
+        }
+
         //ATTACK
-        if (Input.GetKeyDown(attackButton))
+        if (player.GetButtonDown("Attack"))
         {
             animator.SetBool(AttackedID, true);
         }
 
         //CHARGED
-        if (Input.GetKey(chargeButton) && isHeading == false)
+        if (player.GetButton("Charge") && isHeading == false)
         {
             animator.SetBool(ChargingID, true);
             if (weaponCharge < 3f){
@@ -211,7 +183,7 @@ public class PlayerController2D : MonoBehaviour{
         }
 
         //HEAD THROW
-        if (Input.GetKey(headButton) && isCharging == false)
+        if (player.GetButton("Head Throw") && isCharging == false)
         {
             {
                 animator.SetBool(HeadingID, true);
@@ -226,7 +198,7 @@ public class PlayerController2D : MonoBehaviour{
                 }
             }
         }
-        else if (headCharge > 0)
+        else if (headCharge > 0) //THROW
         {
             animator.SetBool(HeadingID, false);
 
@@ -259,17 +231,23 @@ public class PlayerController2D : MonoBehaviour{
         }
 
         //50% MOVEMENT
-        if (Input.GetKey(rightButton) && isCharging == true || Input.GetKey(rightButton) && isHeading == true)
+        if (player.GetAxis("Move Joystick") > 0 || player.GetButton("Move Right Keys"))
         {
-            body2D.velocity = new Vector2(runSpeed * 50 / 100, body2D.velocity.y); //(50% de max speed, velocidad actual y)
-            spriteRenderer.flipX = true;
-            facingright = true;
+            if (isCharging == true || isHeading == true)
+            {
+                body2D.velocity = new Vector2(runSpeed * 50 / 100, body2D.velocity.y); //(50% de max speed, velocidad actual y)
+                spriteRenderer.flipX = true;
+                facingright = true;
+            }
         }
-        else if (Input.GetKey(leftButton) && isCharging == true || Input.GetKey(leftButton) && isHeading == true)
+        else if (player.GetAxis("Move Joystick") < 0 || player.GetButton("Move Left Keys"))
         {
-            body2D.velocity = new Vector2(-runSpeed * 50 / 100, body2D.velocity.y);
-            spriteRenderer.flipX = false;
-            facingright = false;
+            if (isCharging == true || isHeading == true)
+            {
+                body2D.velocity = new Vector2(-runSpeed * 50 / 100, body2D.velocity.y);
+                spriteRenderer.flipX = false;
+                facingright = false;
+            }
         }
     }
 
@@ -285,7 +263,7 @@ public class PlayerController2D : MonoBehaviour{
     {
         bool isWeaponed = animator.GetBool(WeaponingID);
 
-        if (collision.gameObject.tag == "PickUp" && Input.GetKeyDown(pickupButton) && isWeaponed == false)
+        if (collision.gameObject.tag == "PickUp" && player.GetButtonDown("PickUp") && isWeaponed == false)
         {
             
             animator.SetBool(WeaponingID, true);
