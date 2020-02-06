@@ -190,7 +190,7 @@ public class PlayerController2D : MonoBehaviour{
 
         //HEAD THROW
         if (player.GetButton("Head Throw") && canThrow == true && isCharging == false && isDucking == false)
-        {
+        { //TODO: AUNQ HAY DELAY PARA Q NO SE LANZA NADA MAS VOVLER, UNA VEZ SE TERMINA EL DELAY YA EMPIEZA A CARGAR, Y EN CAMBIO EL JUGADOR DEBERIA DE TENER Q PULSAR EL BOTON DEPUES DEL DELAY PARA EMEPZAR A LANZAR
             {
                 animator.SetBool(HeadingID, true);
                 if (headCharge <= 2f)
