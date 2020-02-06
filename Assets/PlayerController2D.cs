@@ -14,8 +14,8 @@ public class PlayerController2D : MonoBehaviour{
 
     private Player player;
 
-    public GameObject Head;
-    public GameObject Body;
+    public GameObject HeadFall;
+    public GameObject BodyEmpty;
     public GameObject HeadThrow;
     private HeadThrow headThrow;
     private HeadReturn headReturn;
@@ -203,7 +203,7 @@ public class PlayerController2D : MonoBehaviour{
             animator.SetBool(HeadingID, false);
 
             GameObject head = Instantiate(HeadThrow, new Vector3(transform.position.x, transform.position.y + 0.3f, 0), Quaternion.identity);
-            GameObject body = Instantiate(Body, new Vector3(transform.position.x, transform.position.y - 0.22f, 0), Quaternion.identity);
+            GameObject body = Instantiate(BodyEmpty, new Vector3(transform.position.x, transform.position.y - 0.22f, 0), Quaternion.identity);
 
             headThrow = head.GetComponent<HeadThrow>();
             headThrow.controller = this.controller;
@@ -251,11 +251,20 @@ public class PlayerController2D : MonoBehaviour{
         }
     }
 
-    private void OnCollisionStay2D(Collision2D collision){ //ES MUY PESADO EN CPU
+    private void OnCollisionStay2D(Collision2D collision)
+    {
 
         if (collision.gameObject.tag == "Floor")
         {
             animator.SetBool(GroundingID, true);
+        }
+    }
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+
+        if (collision.gameObject.tag == "Floor")
+        {
+            animator.SetBool(GroundingID, false);
         }
     }
 
@@ -295,7 +304,8 @@ public class PlayerController2D : MonoBehaviour{
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision){
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
         Vector3 hit = collision.contacts[0].normal;
         float angle = Vector3.Angle(hit, Vector3.up);
 
@@ -303,49 +313,39 @@ public class PlayerController2D : MonoBehaviour{
         {
             animator.SetTrigger(DamagedID);
 
-            if (Mathf.Approximately(angle, 90))
+            GameObject head = Instantiate(HeadFall, new Vector3(transform.position.x, transform.position.y + 0.3f, 0), Quaternion.identity);
+            GameObject body = Instantiate(BodyEmpty, new Vector3(transform.position.x, transform.position.y - 0.22f, 0), Quaternion.identity);
+
+            headReturn = head.GetComponent<HeadReturn>();
+            headReturn.controller = this.controller;
+            headReturn.skin = this.skin;
+            headReturn.Body = body;
+
+            Rigidbody2D headRigid;
+            headRigid = head.GetComponent<Rigidbody2D>(); //ASIGN ITS RIGID
+            headCharge = 2f;
+
+            if (Mathf.Approximately(angle, 90)) //DETECT COLLISION SIDE
             {
                 Vector3 cross = Vector3.Cross(Vector3.forward, hit);
                 if (cross.y == 1f) //RIGHT
                 {
-                    Debug.Log("Right"); 
+                    Debug.Log("Right");
+                    headRigid.velocity = new Vector2(headCharge * 1.8f, 2f);
                 }
-                else if (cross.y > 90) //LEFT
+                else if (cross.y == -1f) //LEFT
                 {
-                    Debug.Log("Left"); 
+                    Debug.Log("Left");
+                    headRigid.velocity = new Vector2(-headCharge * 1.8f, 2f);
                 }
-                else
-                {
-                    Debug.Log("WTF GENTE");
-                }
+                else { Debug.Log("ERROR DETEC DIREC COLLISION"); }
             }
 
-            HeadOFF();
+            bodyReceive = body.GetComponent<HeadReceive>();
+            bodyReceive.controller = this.controller;
+            bodyReceive.skin = this.skin;
+
+            Destroy(gameObject); //AUTODESTRUCCION
         }
-    }
-
-    private void OnCollisionExit2D(Collision2D collision){
-
-        if (collision.gameObject.tag == "Floor")
-        {
-            animator.SetBool(GroundingID, false);
-        }
-    }
-
-    private void HeadOFF(){
-        GameObject head = Instantiate(Head, new Vector3(transform.position.x, transform.position.y + 0.3f, 0), Quaternion.identity);
-        GameObject body = Instantiate(Body, new Vector3(transform.position.x, transform.position.y - 0.22f, 0), Quaternion.identity);
-
-        headReturn = head.GetComponent <HeadReturn>();
-        headReturn.controller = this.controller;
-        headReturn.skin = this.skin;
-        headReturn.Body = body;
-
-
-        bodyReceive = body.GetComponent <HeadReceive>();
-        bodyReceive.controller = this.controller;
-        bodyReceive.skin = this.skin;
-
-        Destroy(gameObject); //AUTODESTRUCCION
     }
 }
