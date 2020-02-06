@@ -330,12 +330,10 @@ public class PlayerController2D : MonoBehaviour{
                 Vector3 cross = Vector3.Cross(Vector3.forward, hit);
                 if (cross.y == 1f) //RIGHT
                 {
-                    Debug.Log("Right");
                     headRigid.velocity = new Vector2(headCharge * 1.8f, 2f);
                 }
                 else if (cross.y == -1f) //LEFT
                 {
-                    Debug.Log("Left");
                     headRigid.velocity = new Vector2(-headCharge * 1.8f, 2f);
                 }
                 else { Debug.Log("ERROR DETEC DIREC COLLISION"); }
