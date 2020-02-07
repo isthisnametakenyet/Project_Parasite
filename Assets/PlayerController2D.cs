@@ -76,15 +76,15 @@ public class PlayerController2D : MonoBehaviour{
                 break;
 
             case Controller.PLAYER1:
-                player = ReInput.players.GetPlayer(0);
-                break;
-
-            case Controller.PLAYER2:
                 player = ReInput.players.GetPlayer(1);
                 break;
 
-            case Controller.PLAYER3:
+            case Controller.PLAYER2:
                 player = ReInput.players.GetPlayer(2);
+                break;
+
+            case Controller.PLAYER3:
+                player = ReInput.players.GetPlayer(3);
                 break;
         }
 
