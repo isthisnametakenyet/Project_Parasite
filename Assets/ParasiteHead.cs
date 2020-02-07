@@ -9,35 +9,23 @@ public class ParasiteHead : MonoBehaviour
 
     public Controller controller = Controller.NONE;
     public Skin skin = Skin.NONE;
+    public Sprite NONE, Skin1, Skin2;
 
-    private Player player;
-
-    public GameObject HeadFall;
-    private HeadReturn headReturn;
-
+    SpriteRenderer spriteRenderer;
 
     void Start()
     {
-        switch (controller)
+        switch (skin)
         {
-            case Controller.PLAYER1:
-                player = ReInput.players.GetPlayer(0);
+            case Skin.NONE:
+                spriteRenderer.sprite = NONE;
                 break;
-
-            case Controller.PLAYER2:
-                player = ReInput.players.GetPlayer(1);
+            case Skin.SKIN1:
+                spriteRenderer.sprite = Skin1;
                 break;
-
-            case Controller.PLAYER3:
-                player = ReInput.players.GetPlayer(2);
-                break;
-
-            case Controller.PLAYER4:
-                player = ReInput.players.GetPlayer(3);
+            case Skin.SKIN2:
+                spriteRenderer.sprite = Skin2;
                 break;
         }
     }
-
-
-    
 }

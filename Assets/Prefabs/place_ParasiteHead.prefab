@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2474311634616692562}
   - component: {fileID: 3497049597487372443}
   m_Layer: 9
-  m_Name: place_Parasite
+  m_Name: place_ParasiteHead
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -97,7 +97,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: 0
   skin: 0
-  HeadFall: {fileID: 0}
+  NONE: {fileID: 21300000, guid: 50433d92bfcb76b4eb16c5f797e6d2f5, type: 3}
+  Skin1: {fileID: 0}
+  Skin2: {fileID: 0}
 --- !u!50 &1619987212421543528
 Rigidbody2D:
   serializedVersion: 4
