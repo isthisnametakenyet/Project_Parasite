@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Rewired;
 
 public class HeadReturn : MonoBehaviour
 {
     public Controller controller = Controller.NONE;
     public Skin skin = Skin.NONE;
+
+    private Player player;
 
     public GameObject Body;
     public GameObject All;
@@ -27,33 +30,30 @@ public class HeadReturn : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         Stunned = false;
+        switch (controller)
+        {
+            case Controller.PLAYER0:
+                player = ReInput.players.GetPlayer(3);
+                break;
 
-        if (controller == Controller.PLAYER1)
-        {
-            backButton = KeyCode.Q;
-            BackID = Animator.StringToHash("");
-        }
-        if (controller == Controller.PLAYER2)
-        {
-            backButton = KeyCode.B;
-            BackID = Animator.StringToHash("");
-        }
-        if (controller == Controller.PLAYER3)
-        {
-            backButton = KeyCode.C;
-            BackID = Animator.StringToHash("");
-        }
-        if (controller == Controller.PLAYER4)
-        {
-            backButton = KeyCode.D;
-            BackID = Animator.StringToHash("");
+            case Controller.PLAYER1:
+                player = ReInput.players.GetPlayer(0);
+                break;
+
+            case Controller.PLAYER2:
+                player = ReInput.players.GetPlayer(1);
+                break;
+
+            case Controller.PLAYER3:
+                player = ReInput.players.GetPlayer(2);
+                break;
         }
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (Input.GetKey(backButton) && Stunned == false)
+        if (player.GetButtonDown("Head Return") && Stunned == false)
         {
             //transform.position.y = Body.transform.position.y;
             animator.Play(BackID);

@@ -12,7 +12,7 @@ public class ParasitedBody : MonoBehaviour
 
     private Player player;
 
-    int originalController;
+    public int originalController;
 
     public GameObject HeadFall;
     private HeadReturn headReturn;
@@ -60,6 +60,10 @@ public class ParasitedBody : MonoBehaviour
         //KEYS
         switch (controller)
         {
+            case Controller.PLAYER0:
+                player = ReInput.players.GetPlayer(3);
+                break;
+
             case Controller.PLAYER1:
                 player = ReInput.players.GetPlayer(0);
                 break;
@@ -70,10 +74,6 @@ public class ParasitedBody : MonoBehaviour
 
             case Controller.PLAYER3:
                 player = ReInput.players.GetPlayer(2);
-                break;
-
-            case Controller.PLAYER4:
-                player = ReInput.players.GetPlayer(3);
                 break;
         }
 

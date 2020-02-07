@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 using Rewired;
 
-public enum Controller { NONE, PLAYER1, PLAYER2, PLAYER3, PLAYER4 };
+public enum Controller { NONE, PLAYER0, PLAYER1, PLAYER2, PLAYER3 };
 public enum Skin { NONE, SKIN1, SKIN2 };
 
 public class PlayerController2D : MonoBehaviour{
@@ -71,6 +71,10 @@ public class PlayerController2D : MonoBehaviour{
         //KEYS
         switch (controller)
         {
+            case Controller.PLAYER0:
+                player = ReInput.players.GetPlayer(0);
+                break;
+
             case Controller.PLAYER1:
                 player = ReInput.players.GetPlayer(0);
                 break;
@@ -81,10 +85,6 @@ public class PlayerController2D : MonoBehaviour{
 
             case Controller.PLAYER3:
                 player = ReInput.players.GetPlayer(2);
-                break;
-
-            case Controller.PLAYER4:
-                player = ReInput.players.GetPlayer(3);
                 break;
         }
 

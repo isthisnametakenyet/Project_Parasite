@@ -12,7 +12,12 @@ public class HeadThrow : MonoBehaviour
 
     public GameObject BodyEmpty;
     public GameObject PlayerAll;
+    public GameObject Head;
+    public GameObject Body;
     private PlayerController2D playerAll;
+    private ParasiteHead parasiteHead;
+    private ParasitedBody parasitedBody;
+    private HeadReceive collisionScript;
 
     bool BadThrow = false;
 
@@ -20,6 +25,10 @@ public class HeadThrow : MonoBehaviour
     {
         switch (controller)
         {
+            case Controller.PLAYER0:
+                player = ReInput.players.GetPlayer(3);
+                break;
+
             case Controller.PLAYER1:
                 player = ReInput.players.GetPlayer(0);
             break;
@@ -30,10 +39,6 @@ public class HeadThrow : MonoBehaviour
 
             case Controller.PLAYER3:
                 player = ReInput.players.GetPlayer(2);
-            break;
-
-            case Controller.PLAYER4:
-                player = ReInput.players.GetPlayer(3);
             break;
         }
     }
@@ -51,7 +56,7 @@ public class HeadThrow : MonoBehaviour
             playerAll.skin = this.skin;
 
             Destroy(BodyEmpty);
-            Destroy(gameObject); //AUTODESTRUCCION        }
+            Destroy(gameObject); //AUTODESTRUCCION
         }
     }
 
@@ -60,7 +65,40 @@ public class HeadThrow : MonoBehaviour
 
         if (collision.gameObject.tag == "EmptyBody")
         {
-           this.transform.position = new Vector3(collision.transform.position.x, collision.transform.position.y+0.3f, 0);
+            collisionScript = collision.gameObject.GetComponent<HeadReceive>();
+
+            if (collisionScript.controller != this.controller)
+            {
+                this.transform.position = new Vector3(collision.transform.position.x, collision.transform.position.y, 0);
+                GameObject parasite = Instantiate(Head, new Vector3(transform.position.x, transform.position.y + 0.3f, 0), Quaternion.identity);
+                GameObject body = Instantiate(Body, new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
+
+                parasiteHead = parasite.GetComponent<ParasiteHead>();
+                parasiteHead.controller = this.controller;
+                parasiteHead.skin = this.skin;
+
+                parasitedBody = body.GetComponent<ParasitedBody>();
+                parasitedBody.controller = this.controller;
+                parasitedBody.skin = collisionScript.skin;
+                switch (collisionScript.controller)
+                {
+                    case Controller.PLAYER0:
+                        parasitedBody.originalController = 0;
+                        break;
+                    case Controller.PLAYER1:
+                        parasitedBody.originalController = 1;
+                        break;
+                    case Controller.PLAYER2:
+                        parasitedBody.originalController = 2;
+                        break;
+                    case Controller.PLAYER3:
+                        parasitedBody.originalController = 3;
+                        break;
+                }
+
+                Destroy(collision.gameObject);
+                Destroy(gameObject); //AUTODESTRUCCION
+            }
         }
 
         if (collision.gameObject.tag == "Floor")

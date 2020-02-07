@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 9144914561572531147}
   - component: {fileID: 6884082196387458093}
   - component: {fileID: 2145802316629285469}
-  m_Layer: 9
+  m_Layer: 12
   m_Name: place_throw
   m_TagString: FlyingHead
   m_Icon: {fileID: 0}
@@ -96,9 +96,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: 0
   skin: 0
-  BodyEmpty: {fileID: 0}
+  BodyEmpty: {fileID: 4959081448858527720, guid: fe1dbb5e0e1ec9d46ba6c06ed0cbb8f3,
+    type: 3}
   PlayerAll: {fileID: 2741911751103152782, guid: 4024a1b0451196f4391612bc284b5795,
     type: 3}
+  Head: {fileID: 3772916918683522350, guid: fa1fa1924ae7ff24284720f44febcea9, type: 3}
+  Body: {fileID: 5387038309214729801, guid: 57ded2ce5ec5980469b9a7d7c990f71c, type: 3}
 --- !u!50 &6884082196387458093
 Rigidbody2D:
   serializedVersion: 4
