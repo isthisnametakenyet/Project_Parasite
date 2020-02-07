@@ -50,18 +50,17 @@ public class HeadThrow : MonoBehaviour
             playerAll.controller = this.controller;
             playerAll.skin = this.skin;
 
-            Destroy(BodyEmpty); 
-            Destroy(gameObject); //AUTODESTRUCCION
+            Destroy(BodyEmpty);
+            Destroy(gameObject); //AUTODESTRUCCION        }
         }
-
-
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+
         if (collision.gameObject.tag == "EmptyBody")
         {
-
+           this.transform.position = new Vector3(collision.transform.position.x, collision.transform.position.y+0.3f, 0);
         }
 
         if (collision.gameObject.tag == "Floor")
