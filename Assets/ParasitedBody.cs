@@ -6,7 +6,6 @@ using Rewired;
 
 public class ParasitedBody : MonoBehaviour
 {
-
     public Controller controller = Controller.NONE;
     public Skin skin = Skin.NONE;
 

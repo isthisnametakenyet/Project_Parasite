@@ -94,6 +94,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 420bc1130856e19438bd73f6ac5758e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controller: 0
+  skin: 0
+  originalController: 0
+  HeadFall: {fileID: 410505914479801519, guid: dad8e66d2b28c7342897aa140478f827, type: 3}
+  runSpeed: 2
+  jumpStrengh: 6.5
 --- !u!50 &4102940104107774250
 Rigidbody2D:
   serializedVersion: 4

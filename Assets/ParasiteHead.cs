@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using Rewired;
 
 public class ParasiteHead : MonoBehaviour
 {

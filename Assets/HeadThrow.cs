@@ -73,13 +73,9 @@ public class HeadThrow : MonoBehaviour
                 GameObject parasite = Instantiate(Head, new Vector3(transform.position.x, transform.position.y + 0.3f, 0), Quaternion.identity);
                 GameObject body = Instantiate(Body, new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
 
-                parasiteHead = parasite.GetComponent<ParasiteHead>();
-                parasiteHead.controller = this.controller;
-                parasiteHead.skin = this.skin;
-
                 parasitedBody = body.GetComponent<ParasitedBody>();
-                parasitedBody.controller = this.controller;
                 parasitedBody.skin = collisionScript.skin;
+                parasitedBody.controller = this.controller;
                 switch (collisionScript.controller)
                 {
                     case Controller.PLAYER0:
@@ -95,6 +91,11 @@ public class HeadThrow : MonoBehaviour
                         parasitedBody.originalController = 3;
                         break;
                 }
+                parasiteHead = parasite.GetComponent<ParasiteHead>();
+                parasiteHead.controller = this.controller;
+                parasiteHead.skin = this.skin;
+                //Head.parent = Body.transform;
+                //https://forum.unity.com/threads/attaching-child-objects-at-runtime.25335/ //TODO: PARENT PREFABS
 
                 Destroy(collision.gameObject);
                 Destroy(gameObject); //AUTODESTRUCCION

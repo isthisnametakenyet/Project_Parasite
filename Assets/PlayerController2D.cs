@@ -7,8 +7,8 @@ using Rewired;
 public enum Controller { NONE, PLAYER0, PLAYER1, PLAYER2, PLAYER3 };
 public enum Skin { NONE, SKIN1, SKIN2 };
 
-public class PlayerController2D : MonoBehaviour{
-
+public class PlayerController2D : MonoBehaviour
+{
     public Controller controller = Controller.NONE;
     public Skin skin = Skin.NONE;
 
@@ -48,8 +48,8 @@ public class PlayerController2D : MonoBehaviour{
     Rigidbody2D body2D;
     SpriteRenderer spriteRenderer;
 
-    void Start(){
-
+    void Start()
+    {
         animator = GetComponent<Animator>();
         body2D = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -59,12 +59,15 @@ public class PlayerController2D : MonoBehaviour{
         {
             case Skin.NONE:
                 animator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Animations/SkinPlaceholder");
+                Debug.Log("1");
                 break;
             case Skin.SKIN1:
                 animator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Animations/Skin1");
+                Debug.Log("2");
                 break;
             case Skin.SKIN2:
                 animator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Animations/Skin2");
+                Debug.Log("3");
                 break;
         }
 

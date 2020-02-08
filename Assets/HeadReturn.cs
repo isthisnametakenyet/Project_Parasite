@@ -12,7 +12,8 @@ public class HeadReturn : MonoBehaviour
     private Player player;
 
     public GameObject Body;
-    public GameObject All;
+    public GameObject PlayerAll;
+    private PlayerController2D playerAll;
 
     bool Stunned = true;
 
@@ -55,14 +56,17 @@ public class HeadReturn : MonoBehaviour
     {
         if (player.GetButtonDown("Head Return") && Stunned == false)
         {
-            //transform.position.y = Body.transform.position.y;
             animator.Play(BackID);
-            //spriteRenderer.flipX = true;
 
-            GameObject all = Instantiate(All, new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
+            this.transform.position = new Vector3(Body.transform.position.x, Body.transform.position.y, 0);
+            GameObject player = Instantiate(PlayerAll, new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
+
+            playerAll = player.GetComponent<PlayerController2D>();
+            playerAll.controller = this.controller;
+            playerAll.skin = this.skin;
 
             Destroy(Body);
-            Destroy(gameObject);
+            Destroy(gameObject); //AUTODESTRUCCION
         }
     }
 }
