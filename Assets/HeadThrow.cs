@@ -91,6 +91,7 @@ public class HeadThrow : MonoBehaviour
                         parasitedBody.originalController = 3;
                         break;
                 }
+
                 parasiteHead = parasite.GetComponent<ParasiteHead>();
                 parasiteHead.controller = this.controller;
                 parasiteHead.skin = this.skin;

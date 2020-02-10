@@ -12,8 +12,6 @@ GameObject:
   - component: {fileID: 7188958813649104512}
   - component: {fileID: 8734544280447692557}
   - component: {fileID: 1619987212421543528}
-  - component: {fileID: 2474311634616692562}
-  - component: {fileID: 3497049597487372443}
   m_Layer: 9
   m_Name: place_ParasiteHead
   m_TagString: Player
@@ -98,8 +96,6 @@ MonoBehaviour:
   controller: 0
   skin: 0
   NONE: {fileID: 21300000, guid: 50433d92bfcb76b4eb16c5f797e6d2f5, type: 3}
-  Skin1: {fileID: 0}
-  Skin2: {fileID: 0}
 --- !u!50 &1619987212421543528
 Rigidbody2D:
   serializedVersion: 4
@@ -121,48 +117,3 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
---- !u!61 &2474311634616692562
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3772916918683522350}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.005856395, y: 0.063700914}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.6, y: 2.6}
-    newSize: {x: 2.6, y: 2.6}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 2.4945858, y: 2.1889706}
-  m_EdgeRadius: 0
---- !u!95 &3497049597487372443
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3772916918683522350}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0

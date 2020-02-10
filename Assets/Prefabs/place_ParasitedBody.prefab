@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 9186060911275391572}
   - component: {fileID: 4102940104107774250}
   - component: {fileID: 8352187480104180405}
+  - component: {fileID: 2852549378365394499}
   m_Layer: 9
   m_Name: place_ParasitedBody
-  m_TagString: EmptyBody
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -97,7 +98,8 @@ MonoBehaviour:
   controller: 0
   skin: 0
   originalController: 0
-  HeadFall: {fileID: 410505914479801519, guid: dad8e66d2b28c7342897aa140478f827, type: 3}
+  HeadFall: {fileID: 4497101520460140210, guid: e5f7053439fc2fe4494641d0061ac6c9,
+    type: 3}
   runSpeed: 2
   jumpStrengh: 6.5
 --- !u!50 &4102940104107774250
@@ -147,3 +149,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.6, y: 0.5945223}
   m_EdgeRadius: 0
+--- !u!95 &2852549378365394499
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5387038309214729801}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

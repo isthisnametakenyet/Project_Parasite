@@ -47,12 +47,15 @@ public class ParasitedBody : MonoBehaviour
         {
             case Skin.NONE:
                 animator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Animations/SkinPlaceholder");
+                Debug.Log("Skin: PlaceHolder");
                 break;
             case Skin.SKIN1:
                 animator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Animations/Skin1");
+                Debug.Log("Skin: 1");
                 break;
             case Skin.SKIN2:
                 animator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Animations/Skin2");
+                Debug.Log("Skin: 2");
                 break;
         }
 
