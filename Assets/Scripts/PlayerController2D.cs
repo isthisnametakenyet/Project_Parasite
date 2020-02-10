@@ -59,15 +59,15 @@ public class PlayerController2D : MonoBehaviour
         {
             case Skin.NONE:
                 animator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Animations/SkinPlaceholder");
-                Debug.Log("1");
+                Debug.Log("Skin: PlaceHolder");
                 break;
             case Skin.SKIN1:
                 animator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Animations/Skin1");
-                Debug.Log("2");
+                Debug.Log("Skin: 1");
                 break;
             case Skin.SKIN2:
                 animator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Animations/Skin2");
-                Debug.Log("3");
+                Debug.Log("Skin: 2");
                 break;
         }
 
@@ -104,9 +104,6 @@ public class PlayerController2D : MonoBehaviour
     }
 
     private void FixedUpdate(){
-        if (headReturnedCount < headReturnDelay) { headReturnedCount += Time.deltaTime * 1f; }
-        else { canThrow = true; }
-
         //bool isCondition = animator.GetBool(ConditionID); //animator.SetBool(ConditionID, true);
         bool isGrounded = animator.GetBool(GroundingID);
         bool isMoving = animator.GetBool(MovingID);
@@ -192,7 +189,7 @@ public class PlayerController2D : MonoBehaviour
         }
 
         //HEAD THROW
-        if (player.GetButton("Head Throw") && canThrow == true && isCharging == false && isDucking == false)
+        if (player.GetButton("Head Throw") && isCharging == false && isDucking == false)
         { //TODO: AUNQ HAY DELAY PARA Q NO SE LANZA NADA MAS VOVLER, UNA VEZ SE TERMINA EL DELAY YA EMPIEZA A CARGAR, Y EN CAMBIO EL JUGADOR DEBERIA DE TENER Q PULSAR EL BOTON DEPUES DEL DELAY PARA EMEPZAR A LANZAR
             {
                 animator.SetBool(HeadingID, true);
@@ -207,7 +204,8 @@ public class PlayerController2D : MonoBehaviour
                 }
             }
         }
-        else if (headCharge > 0) //THROW
+        else if (headCharge < 0.4) { headCharge = 0; animator.SetBool(HeadingID, false); }
+        else if (headCharge > 0.4) //THROW
         {
             animator.SetBool(HeadingID, false);
 
@@ -234,8 +232,6 @@ public class PlayerController2D : MonoBehaviour
             {
             headRigid.velocity = new Vector2(-headCharge * 1.8f, 2f);
             }
-
-            headCharge = 0;
 
             Destroy(gameObject); //AUTODESTRUCCION
         }

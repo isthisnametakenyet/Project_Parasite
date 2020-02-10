@@ -47,7 +47,7 @@ public class HeadThrow : MonoBehaviour
     {
         if (player.GetButtonDown("Head Return") && BadThrow == true)
         {
-            Debug.Log("fk u");
+            Debug.Log("d vuelta");
             this.transform.position = new Vector3(BodyEmpty.transform.position.x, BodyEmpty.transform.position.y, 0);
             GameObject player = Instantiate(PlayerAll, new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
 
@@ -94,7 +94,7 @@ public class HeadThrow : MonoBehaviour
                 parasiteHead = parasite.GetComponent<ParasiteHead>();
                 parasiteHead.controller = this.controller;
                 parasiteHead.skin = this.skin;
-                //Head.parent = Body.transform;
+                parasite.transform.parent = body.transform;
                 //https://forum.unity.com/threads/attaching-child-objects-at-runtime.25335/ //TODO: PARENT PREFABS
 
                 Destroy(collision.gameObject);
