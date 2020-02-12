@@ -19,6 +19,7 @@ public class EmptyBody : MonoBehaviour
     public float runSpeed = 2f;
     public float jumpStrengh = 6.5f;
     bool facingright = true;
+    public bool parasited = false;
 
     //CONDITIONS
     private int GroundingID;
@@ -46,7 +47,7 @@ public class EmptyBody : MonoBehaviour
         {
             case Skin.NONE:
                 animator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Animations/SkinPlaceholder");
-                Debug.Log("Skin: PlaceHolder");
+                Debug.Log("EmptyB Skin: PlaceHolder");
                 break;
             case Skin.SKIN1:
                 animator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Animations/Skin1");
@@ -92,62 +93,68 @@ public class EmptyBody : MonoBehaviour
 
     void FixedUpdate()
     {
-        bool isGrounded = animator.GetBool(GroundingID);
-        bool isMoving = animator.GetBool(MovingID);
-        bool isWeaponed = animator.GetBool(WeaponingID);
-        int whichWeapon = animator.GetInteger(whichWeaponID);
-        bool isCharging = animator.GetBool(ChargingID);
-        bool isHeading = animator.GetBool(HeadingID);
-        bool isDucking = false;
 
-        //IDLE IS AUTOMATIC
-        body2D.velocity = new Vector2(0, body2D.velocity.y);
-
-        //MOVEMENT
-        if (player.GetAxis("Move Joystick") > 0 || player.GetButton("Move Right Keys"))
-        {
-            if (isCharging == false && isHeading == false && isDucking == false)
-            {
-                body2D.velocity = new Vector2(runSpeed, body2D.velocity.y);
-                spriteRenderer.flipX = true;
-                animator.SetBool(MovingID, true);
-                facingright = true;
-            }
-        }
-        else if (player.GetAxis("Move Joystick") < 0 || player.GetButton("Move Left Keys"))
-        {
-            if (isCharging == false && isHeading == false && isDucking == false)
-            {
-                body2D.velocity = new Vector2(-runSpeed, body2D.velocity.y);
-                spriteRenderer.flipX = false;
-                animator.SetBool(MovingID, true);
-                facingright = false;
-            }
-        }
+        if (parasited == false) {  }
         else
         {
-            animator.SetBool(MovingID, false);
-        }
+            Debug.Log("NOT Empty");
+            bool isGrounded = animator.GetBool(GroundingID);
+            bool isMoving = animator.GetBool(MovingID);
+            bool isWeaponed = animator.GetBool(WeaponingID);
+            int whichWeapon = animator.GetInteger(whichWeaponID);
+            bool isCharging = animator.GetBool(ChargingID);
+            bool isHeading = animator.GetBool(HeadingID);
+            bool isDucking = false;
 
-        //JUMP
-        if (player.GetButtonDown("Jump") && isGrounded == true && isCharging == false && isDucking == false)
-        {
-            animator.SetTrigger(JumpedID);
-            body2D.velocity = new Vector2(body2D.velocity.x, jumpStrengh);
-        }
+            //IDLE IS AUTOMATIC
+            body2D.velocity = new Vector2(0, body2D.velocity.y);
 
-        //HEAD RETURN
-        if (player.GetButton("Head Throw") && isCharging == false && isDucking == false)
-        {
-            GameObject head = Instantiate(ParasiteHeadReturn, new Vector3(transform.position.x, transform.position.y + 0.3f, 0), Quaternion.identity);
+            //MOVEMENT
+            if (player.GetAxis("Move Joystick") > 0 || player.GetButton("Move Right Keys"))
+            {
+                if (isCharging == false && isHeading == false && isDucking == false)
+                {
+                    body2D.velocity = new Vector2(runSpeed, body2D.velocity.y);
+                    spriteRenderer.flipX = true;
+                    animator.SetBool(MovingID, true);
+                    facingright = true;
+                }
+            }
+            else if (player.GetAxis("Move Joystick") < 0 || player.GetButton("Move Left Keys"))
+            {
+                if (isCharging == false && isHeading == false && isDucking == false)
+                {
+                    body2D.velocity = new Vector2(-runSpeed, body2D.velocity.y);
+                    spriteRenderer.flipX = false;
+                    animator.SetBool(MovingID, true);
+                    facingright = false;
+                }
+            }
+            else
+            {
+                animator.SetBool(MovingID, false);
+            }
 
-            headReturn = head.GetComponent<HeadReturn>();
-            headReturn.controller = this.controller;
-            headReturn.skin = this.skin;
-            headReturn.OriginalBody = ParasiteBody; //REFERENCE EMPTYBODY IN HEAD THROW TO KNOW ORIGIN
-            headReturn.ParasiteReturn = true;
+            //JUMP
+            if (player.GetButtonDown("Jump") && isGrounded == true && isCharging == false && isDucking == false)
+            {
+                animator.SetTrigger(JumpedID);
+                body2D.velocity = new Vector2(body2D.velocity.x, jumpStrengh);
+            }
 
-            Destroy(gameObject); //AUTODESTRUCCION
+            //HEAD RETURN
+            if (player.GetButton("Head Throw") && isCharging == false && isDucking == false)
+            {
+                GameObject head = Instantiate(ParasiteHeadReturn, new Vector3(transform.position.x, transform.position.y + 0.3f, 0), Quaternion.identity);
+
+                headReturn = head.GetComponent<HeadReturn>();
+                headReturn.controller = this.controller;
+                headReturn.skin = this.skin;
+                headReturn.OriginalBody = ParasiteBody; //REFERENCE EMPTYBODY IN HEAD THROW TO KNOW ORIGIN
+                headReturn.ParasiteReturn = true;
+
+                Destroy(gameObject); //AUTODESTRUCCION
+            }
         }
     }
 

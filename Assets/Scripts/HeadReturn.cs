@@ -16,6 +16,7 @@ public class HeadReturn : MonoBehaviour
     private PlayerController2D playerAll;
 
     public float MaxStun = 2;
+    float Wait = 0;
     public bool Stunned = false;
     public bool ParasiteReturn = false;
 
@@ -54,10 +55,10 @@ public class HeadReturn : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        float Wait = 0;
         if (Stunned == true && Wait < MaxStun)
         {
-            Wait += Time.deltaTime;
+            Wait += Time.deltaTime * 1f;
+            Debug.Log("Stun:" + Wait);
         }
         else { Stunned = false; }
 

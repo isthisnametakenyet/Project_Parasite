@@ -59,7 +59,7 @@ public class PlayerController2D : MonoBehaviour
         {
             case Skin.NONE:
                 animator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Animations/SkinPlaceholder");
-                Debug.Log("Skin: PlaceHolder");
+                Debug.Log("PlayerB Skin: PlaceHolder");
                 break;
             case Skin.SKIN1:
                 animator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Animations/Skin1");
