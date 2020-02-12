@@ -322,6 +322,12 @@ PrefabInstance:
       propertyPath: controller
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2741911751103152779, guid: 4024a1b0451196f4391612bc284b5795,
+        type: 3}
+      propertyPath: HeadFall
+      value: 
+      objectReference: {fileID: 4497101520460140210, guid: e5f7053439fc2fe4494641d0061ac6c9,
+        type: 3}
     - target: {fileID: 2741911751103152788, guid: 4024a1b0451196f4391612bc284b5795,
         type: 3}
       propertyPath: m_Controller
