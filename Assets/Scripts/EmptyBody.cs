@@ -4,16 +4,15 @@ using UnityEngine;
 using System;
 using Rewired;
 
-public class ParasitedBody : MonoBehaviour
+public class EmptyBody : MonoBehaviour
 {
     public Controller controller = Controller.NONE;
     public Skin skin = Skin.NONE;
 
     private Player player;
 
-    public int originalController;
-
-    public GameObject HeadFall;
+    public GameObject ParasiteBody;
+    public GameObject ParasiteHeadReturn;
     private HeadReturn headReturn;
 
     //CAMBIABLE
@@ -135,6 +134,20 @@ public class ParasitedBody : MonoBehaviour
         {
             animator.SetTrigger(JumpedID);
             body2D.velocity = new Vector2(body2D.velocity.x, jumpStrengh);
+        }
+
+        //HEAD RETURN
+        if (player.GetButton("Head Throw") && isCharging == false && isDucking == false)
+        {
+            GameObject head = Instantiate(ParasiteHeadReturn, new Vector3(transform.position.x, transform.position.y + 0.3f, 0), Quaternion.identity);
+
+            headReturn = head.GetComponent<HeadReturn>();
+            headReturn.controller = this.controller;
+            headReturn.skin = this.skin;
+            headReturn.OriginalBody = ParasiteBody; //REFERENCE EMPTYBODY IN HEAD THROW TO KNOW ORIGIN
+            headReturn.ParasiteReturn = true;
+
+            Destroy(gameObject); //AUTODESTRUCCION
         }
     }
 

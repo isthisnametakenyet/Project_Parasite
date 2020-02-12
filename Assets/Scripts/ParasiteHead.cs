@@ -5,8 +5,6 @@ using System;
 
 public class ParasiteHead : MonoBehaviour
 {
-
-    public Controller controller = Controller.NONE;
     public Skin skin = Skin.NONE;
     public Sprite NONE;
 

@@ -96,8 +96,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: 0
   skin: 0
-  BodyEmpty: {fileID: 4959081448858527720, guid: fe1dbb5e0e1ec9d46ba6c06ed0cbb8f3,
-    type: 3}
+  BodyEmpty: {fileID: 0}
   PlayerAll: {fileID: 2741911751103152782, guid: 4024a1b0451196f4391612bc284b5795,
     type: 3}
   Head: {fileID: 3772916918683522350, guid: fa1fa1924ae7ff24284720f44febcea9, type: 3}

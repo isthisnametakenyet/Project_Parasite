@@ -11,13 +11,14 @@ public class HeadReturn : MonoBehaviour
 
     private Player player;
 
-    public GameObject Body;
+    public GameObject OriginalBody;
     public GameObject PlayerAll;
     private PlayerController2D playerAll;
 
-    bool Stunned = true;
+    public float MaxStun = 2;
+    public bool Stunned = false;
+    public bool ParasiteReturn = false;
 
-    KeyCode backButton = KeyCode.None;
     private int BackID;
 
     Animator animator;
@@ -30,7 +31,6 @@ public class HeadReturn : MonoBehaviour
         body2D = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
 
-        Stunned = false;
         switch (controller)
         {
             case Controller.PLAYER0:
@@ -54,19 +54,31 @@ public class HeadReturn : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        float Wait = 0;
+        if (Stunned == true && Wait < MaxStun)
+        {
+            Wait += Time.deltaTime;
+        }
+        else { Stunned = false; }
+
         if (player.GetButtonDown("Head Return") && Stunned == false)
         {
             animator.Play(BackID);
 
-            this.transform.position = new Vector3(Body.transform.position.x, Body.transform.position.y, 0);
+            this.transform.position = new Vector3(OriginalBody.transform.position.x, OriginalBody.transform.position.y, 0);
             GameObject player = Instantiate(PlayerAll, new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
 
             playerAll = player.GetComponent<PlayerController2D>();
             playerAll.controller = this.controller;
             playerAll.skin = this.skin;
 
-            Destroy(Body);
+            Destroy(OriginalBody);
             Destroy(gameObject); //AUTODESTRUCCION
+        }
+
+        if (ParasiteReturn == true)
+        {
+
         }
     }
 }

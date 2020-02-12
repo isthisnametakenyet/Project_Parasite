@@ -13,8 +13,9 @@ GameObject:
   - component: {fileID: 3524472607687733234}
   - component: {fileID: 3954225103890759819}
   - component: {fileID: 9077082855221758740}
+  - component: {fileID: 3001534629517892388}
   m_Layer: 11
-  m_Name: place_Body
+  m_Name: place_EmptyBody
   m_TagString: EmptyBody
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -96,6 +97,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: 0
   skin: 0
+  ParasiteBody: {fileID: 0}
+  ParasiteHeadReturn: {fileID: 4497101520460140210, guid: e5f7053439fc2fe4494641d0061ac6c9,
+    type: 3}
+  runSpeed: 2
+  jumpStrengh: 6.5
 --- !u!50 &3954225103890759819
 Rigidbody2D:
   serializedVersion: 4
@@ -143,3 +149,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.6, y: 0.5945223}
   m_EdgeRadius: 0
+--- !u!95 &3001534629517892388
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4959081448858527720}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

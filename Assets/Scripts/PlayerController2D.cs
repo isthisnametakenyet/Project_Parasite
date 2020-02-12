@@ -19,7 +19,7 @@ public class PlayerController2D : MonoBehaviour
     public GameObject HeadThrow;
     private HeadThrow headThrow;
     private HeadReturn headReturn;
-    private HeadReceive bodyReceive;
+    private EmptyBody emptyBody;
 
     //CAMBIABLE
     public float runSpeed = 2f; 
@@ -212,14 +212,14 @@ public class PlayerController2D : MonoBehaviour
             GameObject head = Instantiate(HeadThrow, new Vector3(transform.position.x, transform.position.y + 0.3f, 0), Quaternion.identity);
             GameObject body = Instantiate(BodyEmpty, new Vector3(transform.position.x, transform.position.y - 0.22f, 0), Quaternion.identity);
 
-            bodyReceive = body.GetComponent<HeadReceive>();
-            bodyReceive.controller = this.controller;
-            bodyReceive.skin = this.skin;
+            emptyBody = body.GetComponent<EmptyBody>();
+            emptyBody.controller = this.controller;
+            emptyBody.skin = this.skin;
 
             headThrow = head.GetComponent<HeadThrow>();
             headThrow.controller = this.controller;
             headThrow.skin = this.skin;
-            headThrow.BodyEmpty = body; //REFERENCE EMPTYBODY IN HEAD THROW TO KNOW ORIGIN
+            headThrow.OriginalBody = body; //REFERENCE EMPTYBODY IN HEAD THROW TO KNOW ORIGIN
 
             Rigidbody2D headRigid;
             headRigid = head.GetComponent<Rigidbody2D>(); //ASIGN HEAD RIGIDBODY
@@ -325,7 +325,8 @@ public class PlayerController2D : MonoBehaviour
             headReturn = head.GetComponent<HeadReturn>();
             headReturn.controller = this.controller;
             headReturn.skin = this.skin;
-            headReturn.Body = body;
+            headReturn.OriginalBody = body;
+            headReturn.Stunned = true;
 
             Rigidbody2D headRigid;
             headRigid = head.GetComponent<Rigidbody2D>(); //ASIGN ITS RIGID
@@ -342,12 +343,12 @@ public class PlayerController2D : MonoBehaviour
                 {
                     headRigid.velocity = new Vector2(-headCharge * 1.8f, 2f);
                 }
-                else { Debug.Log("ERROR DETEC DIREC COLLISION"); }
+                else { Debug.Log("ERROR DETEC DIREC COLLISION-------"); }
             }
 
-            bodyReceive = body.GetComponent<HeadReceive>();
-            bodyReceive.controller = this.controller;
-            bodyReceive.skin = this.skin;
+            emptyBody = body.GetComponent<EmptyBody>();
+            emptyBody.controller = this.controller;
+            emptyBody.skin = this.skin;
 
             Destroy(gameObject); //AUTODESTRUCCION
         }
