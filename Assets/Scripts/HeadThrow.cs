@@ -17,11 +17,15 @@ public class HeadThrow : MonoBehaviour
     public GameObject PlayerAll;
     private PlayerController2D playerAll;
     private EmptyBody collisionScript;
+    private EmptyBody returnScript;
 
     private bool Parasiting = false;
     private bool BadThrow = false;
+    public float floorStunMax = 2f;
+    public float actualStun;
     public bool Expulsed = false;
     public bool GoBack = false;
+    public bool canReturn = false;
 
     void Start()
     {
@@ -59,13 +63,17 @@ public class HeadThrow : MonoBehaviour
                 //    spriteRenderer.sprite = Skin2;
                 //    break;
         }
+
+        returnScript = OriginalBody.gameObject.GetComponent<EmptyBody>();
     }
 
     private void FixedUpdate()
-    {
-        if (player.GetButtonDown("Head Return") && BadThrow == true && Parasiting == false || GoBack == true)
+    {//RETURN TO EMPTY
+        if (BadThrow == true && actualStun < floorStunMax) { actualStun += Time.deltaTime; }
+        else if (actualStun >= floorStunMax) { canReturn = true; }
+
+        if (player.GetButtonDown("Head Return") && canReturn == true && returnScript.parasited == false || GoBack == true && returnScript.parasited == false) 
         {
-            Debug.Log("d vuelta");
             this.transform.position = new Vector3(OriginalBody.transform.position.x, OriginalBody.transform.position.y, 0);
             GameObject player = Instantiate(PlayerAll, new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
 
@@ -76,14 +84,18 @@ public class HeadThrow : MonoBehaviour
             Destroy(OriginalBody);
             Destroy(gameObject); //AUTODESTRUCCION
         }
+        else if (player.GetButtonDown("Head Return") && BadThrow == true && returnScript.parasited == true)
+        {
+
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        collisionScript = collision.gameObject.GetComponent<EmptyBody>();
 
         if (collision.gameObject.tag == "EmptyBody" && Parasiting == false && Expulsed == false)
         {
-            collisionScript = collision.gameObject.GetComponent<EmptyBody>();
 
             if (collisionScript.controller != this.controller)
             {
