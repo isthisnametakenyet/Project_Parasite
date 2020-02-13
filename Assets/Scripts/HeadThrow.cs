@@ -12,6 +12,7 @@ public class HeadThrow : MonoBehaviour
 
     private Player player;
     Rigidbody2D body2D;
+    BoxCollider2D collider2D;
 
     public GameObject OriginalBody;
     public GameObject PlayerAll;
@@ -31,6 +32,7 @@ public class HeadThrow : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         body2D = GetComponent<Rigidbody2D>();
+        collider2D = GetComponent<BoxCollider2D>();
 
         switch (controller)
         {
@@ -95,24 +97,25 @@ public class HeadThrow : MonoBehaviour
     {
         collisionScript = collision.gameObject.GetComponent<EmptyBody>();
 
-        if (collision.gameObject.tag == "EmptyBody" && Parasiting == false && Expulsed == false)
+        if (collision.gameObject.tag == "EmptyBody" && collisionScript.parasited == false && Expulsed == false)
         {
-
             if (collisionScript.controller != this.controller)
             {
+               
+
                 collisionScript.controller = this.controller;
                 collisionScript.parasited = true;
                 collisionScript.Parasite = this.gameObject;
 
+                Parasiting = true;
                 body2D.isKinematic = true;
-                //body2D.bodyType = RigidbodyType2D.Kinematic;
+                body2D.Sleep();
+                collider2D.enabled = false;
+
                 this.transform.position = new Vector3(collision.transform.position.x, collision.transform.position.y+0.6f, 0);
                 this.transform.parent = collisionScript.transform;
                 body2D.constraints = RigidbodyConstraints2D.FreezeRotation;
                 transform.rotation = Quaternion.Euler(0, 0, 0);
-                body2D.velocity = new Vector2(0,0);
-                //body2D.Sleep();
-                Parasiting = true;
             }
         }
 

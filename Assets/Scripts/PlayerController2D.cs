@@ -317,7 +317,7 @@ public class PlayerController2D : MonoBehaviour
 
         if (collision.gameObject.tag == "Damage")
         {
-            animator.SetTrigger(DamagedID);
+            //animator.SetTrigger(DamagedID);
 
             GameObject head = Instantiate(HeadFall, new Vector3(transform.position.x, transform.position.y + 0.3f, 0), Quaternion.identity);
             GameObject body = Instantiate(BodyEmpty, new Vector3(transform.position.x, transform.position.y - 0.22f, 0), Quaternion.identity);
