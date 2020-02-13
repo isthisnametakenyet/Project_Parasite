@@ -11,9 +11,8 @@ public class EmptyBody : MonoBehaviour
 
     private Player player;
 
-    public GameObject ParasiteBody;
-    public GameObject ParasiteHeadReturn;
-    private HeadReturn headReturn;
+    GameObject Parasite;
+    HeadThrow parasiteScript;
 
     //CAMBIABLE
     public float runSpeed = 2f;
@@ -45,10 +44,10 @@ public class EmptyBody : MonoBehaviour
         //SKIN
         switch (skin)
         {
-            case Skin.NONE:
-                animator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Animations/SkinPlaceholder");
-                Debug.Log("EmptyB Skin: PlaceHolder");
-                break;
+            //case Skin.NONE:
+            //    animator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Animations/SkinPlaceholder");
+            //    Debug.Log("EmptyB Skin: PlaceHolder");
+            //    break;
             case Skin.SKIN1:
                 animator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Animations/Skin1");
                 Debug.Log("Skin: 1");
@@ -145,15 +144,9 @@ public class EmptyBody : MonoBehaviour
             //HEAD RETURN
             if (player.GetButton("Head Throw") && isCharging == false && isDucking == false)
             {
-                GameObject head = Instantiate(ParasiteHeadReturn, new Vector3(transform.position.x, transform.position.y + 0.3f, 0), Quaternion.identity);
-
-                headReturn = head.GetComponent<HeadReturn>();
-                headReturn.controller = this.controller;
-                headReturn.skin = this.skin;
-                headReturn.OriginalBody = ParasiteBody; //REFERENCE EMPTYBODY IN HEAD THROW TO KNOW ORIGIN
-                headReturn.ParasiteReturn = true;
-
-                Destroy(gameObject); //AUTODESTRUCCION
+                parasiteScript.transform.parent = null;
+                parasiteScript.GoBack = true;
+                parasited = false;
             }
         }
     }

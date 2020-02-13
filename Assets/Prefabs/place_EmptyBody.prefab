@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 8622284248001381995}
   - component: {fileID: 7999689463433834305}
   - component: {fileID: 3524472607687733234}
+  - component: {fileID: 3001534629517892388}
   - component: {fileID: 3954225103890759819}
   - component: {fileID: 9077082855221758740}
-  - component: {fileID: 3001534629517892388}
+  - component: {fileID: 8740231116266781377}
   m_Layer: 11
   m_Name: place_EmptyBody
   m_TagString: EmptyBody
@@ -102,6 +103,26 @@ MonoBehaviour:
     type: 3}
   runSpeed: 2
   jumpStrengh: 6.5
+  parasited: 0
+--- !u!95 &3001534629517892388
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4959081448858527720}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!50 &3954225103890759819
 Rigidbody2D:
   serializedVersion: 4
@@ -149,22 +170,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.6, y: 0.5945223}
   m_EdgeRadius: 0
---- !u!95 &3001534629517892388
-Animator:
-  serializedVersion: 3
+--- !u!251 &8740231116266781377
+PlatformEffector2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4959081448858527720}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 1281
+  m_RotationalOffset: 0
+  m_UseOneWay: 0
+  m_UseOneWayGrouping: 0
+  m_SurfaceArc: 180
+  m_UseSideFriction: 0
+  m_UseSideBounce: 0
+  m_SideArc: 1

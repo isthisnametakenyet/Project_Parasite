@@ -96,11 +96,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: 0
   skin: 0
-  BodyEmpty: {fileID: 0}
+  NONE: {fileID: 21300000, guid: 50433d92bfcb76b4eb16c5f797e6d2f5, type: 3}
+  OriginalBody: {fileID: 0}
   PlayerAll: {fileID: 2741911751103152782, guid: 4024a1b0451196f4391612bc284b5795,
     type: 3}
-  Head: {fileID: 3772916918683522350, guid: fa1fa1924ae7ff24284720f44febcea9, type: 3}
-  Body: {fileID: 5387038309214729801, guid: 57ded2ce5ec5980469b9a7d7c990f71c, type: 3}
 --- !u!50 &8746114737944884127
 Rigidbody2D:
   serializedVersion: 4

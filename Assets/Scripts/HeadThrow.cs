@@ -7,44 +7,63 @@ public class HeadThrow : MonoBehaviour
 {
     public Controller controller = Controller.NONE;
     public Skin skin = Skin.NONE;
+    public Sprite NONE;
+    SpriteRenderer spriteRenderer;
 
     private Player player;
+    Rigidbody2D body2D;
 
     public GameObject OriginalBody;
     public GameObject PlayerAll;
-    public GameObject Head;
-    public GameObject Body;
     private PlayerController2D playerAll;
-    private ParasiteHead parasiteHead;
     private EmptyBody collisionScript;
 
-    bool BadThrow = false;
+    private bool Parasiting = false;
+    private bool BadThrow = false;
+    public bool Expulsed = false;
+    public bool GoBack = false;
 
     void Start()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        body2D = GetComponent<Rigidbody2D>();
+
         switch (controller)
         {
             case Controller.PLAYER0:
-                player = ReInput.players.GetPlayer(3);
+                player = ReInput.players.GetPlayer(0);
                 break;
 
             case Controller.PLAYER1:
-                player = ReInput.players.GetPlayer(0);
-            break;
+                player = ReInput.players.GetPlayer(1);
+                break;
 
             case Controller.PLAYER2:
-                player = ReInput.players.GetPlayer(1);
-            break;
+                player = ReInput.players.GetPlayer(2);
+                break;
 
             case Controller.PLAYER3:
-                player = ReInput.players.GetPlayer(2);
-            break;
+                player = ReInput.players.GetPlayer(3);
+                break;
+        }
+
+        switch (skin)
+        {
+            case Skin.NONE:
+                spriteRenderer.sprite = NONE;
+                break;
+                //case Skin.SKIN1:
+                //    spriteRenderer.sprite = Skin1;
+                //    break;
+                //case Skin.SKIN2:
+                //    spriteRenderer.sprite = Skin2;
+                //    break;
         }
     }
 
     private void FixedUpdate()
     {
-        if (player.GetButtonDown("Head Return") && BadThrow == true)
+        if (player.GetButtonDown("Head Return") && BadThrow == true && Parasiting == false || GoBack == true)
         {
             Debug.Log("d vuelta");
             this.transform.position = new Vector3(OriginalBody.transform.position.x, OriginalBody.transform.position.y, 0);
@@ -62,27 +81,25 @@ public class HeadThrow : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
 
-        if (collision.gameObject.tag == "EmptyBody")
+        if (collision.gameObject.tag == "EmptyBody" && Parasiting == false && Expulsed == false)
         {
             collisionScript = collision.gameObject.GetComponent<EmptyBody>();
 
             if (collisionScript.controller != this.controller)
             {
-                this.transform.position = new Vector3(collision.transform.position.x, collision.transform.position.y, 0);
-                GameObject parasite = Instantiate(Head, new Vector3(transform.position.x, transform.position.y + 0.3f, 0), Quaternion.identity);
-
                 collisionScript.controller = this.controller;
-                collisionScript.ParasiteBody = OriginalBody;
+                collisionScript.parasited = true;
 
-                parasiteHead = parasite.GetComponent<ParasiteHead>();
-                parasiteHead.skin = this.skin;
-                parasite.transform.parent = collisionScript.transform;
-
-                Destroy(gameObject); //AUTODESTRUCCION
+                body2D.bodyType = RigidbodyType2D.Kinematic;
+                this.transform.position = new Vector3(collision.transform.position.x, collision.transform.position.y+0.6f, 0);
+                this.transform.parent = collisionScript.transform;
+                body2D.constraints = RigidbodyConstraints2D.FreezeRotation;
+                transform.rotation = Quaternion.Euler(0, 0, 0);
+                Parasiting = true;
             }
         }
 
-        if (collision.gameObject.tag == "Floor")
+        if (collision.gameObject.tag == "Floor" && Parasiting == false)
         {
             BadThrow = true;
             Debug.Log("Head Thrown Hits Ground");
