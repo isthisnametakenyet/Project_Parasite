@@ -23,6 +23,7 @@ public class HeadThrow : MonoBehaviour
     private bool Parasiting = false;
     private bool BadThrow = false;
     public float floorStunMax = 2f;
+    public float expulsedStunMax = 3f;
     public float actualStun;
     public bool Expulsed = false;
     public bool GoBack = false;
@@ -74,6 +75,9 @@ public class HeadThrow : MonoBehaviour
         if (BadThrow == true && actualStun < floorStunMax) { actualStun += Time.deltaTime; }
         else if (actualStun >= floorStunMax) { canReturn = true; }
 
+        if (Expulsed == true && actualStun < expulsedStunMax) { actualStun += Time.deltaTime; }
+        else if (actualStun >= expulsedStunMax) { canReturn = true; }
+
         if (player.GetButtonDown("Head Return") && canReturn == true && returnScript.parasited == false || GoBack == true && returnScript.parasited == false) 
         {
             this.transform.position = new Vector3(OriginalBody.transform.position.x, OriginalBody.transform.position.y, 0);
@@ -86,7 +90,7 @@ public class HeadThrow : MonoBehaviour
             Destroy(OriginalBody);
             Destroy(gameObject); //AUTODESTRUCCION
         }
-        else if (player.GetButtonDown("Head Return") && BadThrow == true && returnScript.parasited == true || GoBack == true && returnScript.parasited == true)
+        else if (player.GetButtonDown("Head Return") && canReturn == true && returnScript.parasited == true || GoBack == true && returnScript.parasited == true)
         {//RETURN TO PARASITED
             Debug.Log("Return to parasited body----");
             returnScript.expulseParasite = true;
@@ -101,8 +105,6 @@ public class HeadThrow : MonoBehaviour
         {
             if (collisionScript.controller != this.controller)
             {
-               
-
                 collisionScript.controller = this.controller;
                 collisionScript.parasited = true;
                 collisionScript.Parasite = this.gameObject;
