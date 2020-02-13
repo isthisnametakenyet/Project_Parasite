@@ -89,12 +89,16 @@ public class HeadThrow : MonoBehaviour
             {
                 collisionScript.controller = this.controller;
                 collisionScript.parasited = true;
+                collisionScript.Parasite = this.gameObject;
 
-                body2D.bodyType = RigidbodyType2D.Kinematic;
+                body2D.isKinematic = true;
+                //body2D.bodyType = RigidbodyType2D.Kinematic;
                 this.transform.position = new Vector3(collision.transform.position.x, collision.transform.position.y+0.6f, 0);
                 this.transform.parent = collisionScript.transform;
                 body2D.constraints = RigidbodyConstraints2D.FreezeRotation;
                 transform.rotation = Quaternion.Euler(0, 0, 0);
+                body2D.velocity = new Vector2(0,0);
+                //body2D.Sleep();
                 Parasiting = true;
             }
         }

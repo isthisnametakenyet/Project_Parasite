@@ -11,7 +11,7 @@ public class EmptyBody : MonoBehaviour
 
     private Player player;
 
-    GameObject Parasite;
+    public GameObject Parasite;
     HeadThrow parasiteScript;
 
     //CAMBIABLE
@@ -21,15 +21,22 @@ public class EmptyBody : MonoBehaviour
     public bool parasited = false;
 
     //CONDITIONS
-    private int GroundingID;
-    private int MovingID;
-    private int JumpedID;
-    private int WeaponingID;
-    private int whichWeaponID;
-    private int AttackedID;
-    private int ChargingID;
-    private int HeadingID;
-    private int DamagedID;
+    //private int GroundingID;
+    //private int MovingID;
+    //private int JumpedID;
+    //private int WeaponingID;
+    //private int whichWeaponID;
+    //private int AttackedID;
+    //private int ChargingID;
+    //private int HeadingID;
+    //private int DamagedID;
+    bool isGrounded;
+    bool isMoving;
+    bool isWeaponed;
+    bool isCharging;
+    bool isHeading;
+    bool isDucking;
+    int whichWeapon;
 
     Animator animator;
     Rigidbody2D body2D;
@@ -44,10 +51,6 @@ public class EmptyBody : MonoBehaviour
         //SKIN
         switch (skin)
         {
-            //case Skin.NONE:
-            //    animator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Animations/SkinPlaceholder");
-            //    Debug.Log("EmptyB Skin: PlaceHolder");
-            //    break;
             case Skin.SKIN1:
                 animator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Animations/Skin1");
                 Debug.Log("Skin: 1");
@@ -79,15 +82,16 @@ public class EmptyBody : MonoBehaviour
         }
 
         //CONDITIONS
-        GroundingID = Animator.StringToHash("Grounding");
-        MovingID = Animator.StringToHash("Moving");
-        JumpedID = Animator.StringToHash("Jumped");
-        WeaponingID = Animator.StringToHash("Weaponing");
-        whichWeaponID = Animator.StringToHash("whichWeapon");
-        AttackedID = Animator.StringToHash("Attacked");
-        ChargingID = Animator.StringToHash("Charging");
-        HeadingID = Animator.StringToHash("Heading");
-        DamagedID = Animator.StringToHash("Damaged");
+        //GroundingID = Animator.StringToHash("Grounding");
+        //MovingID = Animator.StringToHash("Moving");
+        //JumpedID = Animator.StringToHash("Jumped");
+        //WeaponingID = Animator.StringToHash("Weaponing");
+        //whichWeaponID = Animator.StringToHash("whichWeapon");
+        //AttackedID = Animator.StringToHash("Attacked");
+        //ChargingID = Animator.StringToHash("Charging");
+        //HeadingID = Animator.StringToHash("Heading");
+        //DamagedID = Animator.StringToHash("Damaged");
+  
     }
 
     void FixedUpdate()
@@ -96,14 +100,13 @@ public class EmptyBody : MonoBehaviour
         if (parasited == false) {  }
         else
         {
-            Debug.Log("NOT Empty");
-            bool isGrounded = animator.GetBool(GroundingID);
-            bool isMoving = animator.GetBool(MovingID);
-            bool isWeaponed = animator.GetBool(WeaponingID);
-            int whichWeapon = animator.GetInteger(whichWeaponID);
-            bool isCharging = animator.GetBool(ChargingID);
-            bool isHeading = animator.GetBool(HeadingID);
-            bool isDucking = false;
+            //bool isGrounded = animator.GetBool(GroundingID);
+            //bool isMoving = animator.GetBool(MovingID);
+            //bool isWeaponed = animator.GetBool(WeaponingID);
+            //int whichWeapon = animator.GetInteger(whichWeaponID);
+            //bool isCharging = animator.GetBool(ChargingID);
+            //bool isHeading = animator.GetBool(HeadingID);
+            //bool isDucking = false;
 
             //IDLE IS AUTOMATIC
             body2D.velocity = new Vector2(0, body2D.velocity.y);
@@ -115,7 +118,8 @@ public class EmptyBody : MonoBehaviour
                 {
                     body2D.velocity = new Vector2(runSpeed, body2D.velocity.y);
                     spriteRenderer.flipX = true;
-                    animator.SetBool(MovingID, true);
+                    isMoving = true;
+                    //animator.SetBool(MovingID, true);
                     facingright = true;
                 }
             }
@@ -125,26 +129,29 @@ public class EmptyBody : MonoBehaviour
                 {
                     body2D.velocity = new Vector2(-runSpeed, body2D.velocity.y);
                     spriteRenderer.flipX = false;
-                    animator.SetBool(MovingID, true);
+                    isMoving = true;
+                    //animator.SetBool(MovingID, true);
                     facingright = false;
                 }
             }
             else
             {
-                animator.SetBool(MovingID, false);
+                isMoving = false;
+                //animator.SetBool(MovingID, false);
             }
 
             //JUMP
             if (player.GetButtonDown("Jump") && isGrounded == true && isCharging == false && isDucking == false)
             {
-                animator.SetTrigger(JumpedID);
+                //animator.SetTrigger(JumpedID);
                 body2D.velocity = new Vector2(body2D.velocity.x, jumpStrengh);
             }
 
             //HEAD RETURN
             if (player.GetButton("Head Throw") && isCharging == false && isDucking == false)
             {
-                parasiteScript.transform.parent = null;
+                Parasite.transform.parent = null;
+                parasiteScript = Parasite.gameObject.GetComponent<HeadThrow>();
                 parasiteScript.GoBack = true;
                 parasited = false;
             }
@@ -156,7 +163,8 @@ public class EmptyBody : MonoBehaviour
 
         if (collision.gameObject.tag == "Floor")
         {
-            animator.SetBool(GroundingID, true);
+            isGrounded = true;
+            //animator.SetBool(GroundingID, true);
         }
     }
     private void OnCollisionExit2D(Collision2D collision)
@@ -164,7 +172,8 @@ public class EmptyBody : MonoBehaviour
 
         if (collision.gameObject.tag == "Floor")
         {
-            animator.SetBool(GroundingID, false);
+            isGrounded = false;
+            //animator.SetBool(GroundingID, false);
         }
     }
 }
