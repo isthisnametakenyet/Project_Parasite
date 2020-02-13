@@ -19,6 +19,7 @@ public class EmptyBody : MonoBehaviour
     public float jumpStrengh = 6.5f;
     bool facingright = true;
     public bool parasited = false;
+    public bool expulseParasite = false;
 
     //CONDITIONS
     //private int GroundingID;
@@ -153,6 +154,15 @@ public class EmptyBody : MonoBehaviour
                 Parasite.transform.parent = null;
                 parasiteScript = Parasite.gameObject.GetComponent<HeadThrow>();
                 parasiteScript.GoBack = true;
+                parasited = false;
+            }
+
+            //EXPULSE
+            if (expulseParasite == true)
+            {
+                Parasite.transform.parent = null;
+                parasiteScript = Parasite.gameObject.GetComponent<HeadThrow>();
+                parasiteScript.Expulsed = true;
                 parasited = false;
             }
         }

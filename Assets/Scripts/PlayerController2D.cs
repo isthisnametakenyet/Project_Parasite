@@ -190,7 +190,7 @@ public class PlayerController2D : MonoBehaviour
 
         //HEAD THROW
         if (player.GetButton("Head Throw") && isCharging == false && isDucking == false)
-        { //TODO: AUNQ HAY DELAY PARA Q NO SE LANZA NADA MAS VOVLER, UNA VEZ SE TERMINA EL DELAY YA EMPIEZA A CARGAR, Y EN CAMBIO EL JUGADOR DEBERIA DE TENER Q PULSAR EL BOTON DEPUES DEL DELAY PARA EMEPZAR A LANZAR
+        { 
             {
                 animator.SetBool(HeadingID, true);
                 if (headCharge <= 2f)
@@ -343,7 +343,7 @@ public class PlayerController2D : MonoBehaviour
                 {
                     headRigid.velocity = new Vector2(-headCharge * 1.8f, 2f);
                 }
-                else { Debug.Log("ERROR DETEC DIREC COLLISION-------"); }
+                else { Debug.Log("---------ERROR DETEC DIREC COLLISION"); }
             }
 
             emptyBody = body.GetComponent<EmptyBody>();

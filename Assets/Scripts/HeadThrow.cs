@@ -84,9 +84,10 @@ public class HeadThrow : MonoBehaviour
             Destroy(OriginalBody);
             Destroy(gameObject); //AUTODESTRUCCION
         }
-        else if (player.GetButtonDown("Head Return") && BadThrow == true && returnScript.parasited == true)
-        {
-
+        else if (player.GetButtonDown("Head Return") && BadThrow == true && returnScript.parasited == true || GoBack == true && returnScript.parasited == true)
+        {//RETURN TO PARASITED
+            Debug.Log("Return to parasited body----");
+            returnScript.expulseParasite = true;
         }
     }
 
