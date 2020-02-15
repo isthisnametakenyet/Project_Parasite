@@ -20,6 +20,7 @@ public class PlayerController2D : MonoBehaviour
     private HeadThrow headThrow;
     private HeadReturn headReturn;
     private EmptyBody emptyBody;
+    private PickUpScript pickUpScript;
 
     //CAMBIABLE
     public float runSpeed = 2f; 
@@ -279,12 +280,15 @@ public class PlayerController2D : MonoBehaviour
 
         if (collision.gameObject.tag == "PickUp" && player.GetButtonDown("PickUp") && isWeaponed == false)
         {
-            
+            pickUpScript = collision.GetComponent<PickUpScript>();
+            pickUpScript.Picker = this.gameObject;
+            pickUpScript.picked = true;
             animator.SetBool(WeaponingID, true);
 
             if (collision.gameObject.name == "Sword")
             {
                 animator.SetInteger(whichWeaponID, 1);
+
             }
             else if (collision.gameObject.name == "Axe")
             {
