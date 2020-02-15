@@ -31,7 +31,6 @@ public class Axe : MonoBehaviour
     void FixedUpdate()
     {
         //Debug.Log("tis but an axe");
-       
         if (Idle == true && collider2D.enabled == true && inUse == false && Thrown == false)
         {
             Debug.Log("Wp: Idle");
