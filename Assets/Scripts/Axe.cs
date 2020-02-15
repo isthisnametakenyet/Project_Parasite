@@ -11,6 +11,7 @@ public class Axe : MonoBehaviour
     public bool Attack = false;
     public bool Charging = false;
     public bool Thrown = false;
+    public bool Landed = false;
     private bool inUse = false;
 
     //VARIABLES
@@ -31,7 +32,7 @@ public class Axe : MonoBehaviour
     {
         //Debug.Log("tis but an axe");
        
-        if (Idle == true && collider2D.enabled == true && inUse == false)
+        if (Idle == true && collider2D.enabled == true && inUse == false && Thrown == false)
         {
             Debug.Log("Wp: Idle");
             actualTime = 0f;
@@ -39,7 +40,7 @@ public class Axe : MonoBehaviour
             transform.gameObject.tag = "Weapon";
             //START ANIMATION IDLE
         }
-        else if (Attack == true && inUse == false)
+        else if (Attack == true && inUse == false && Thrown == false)
         {
             Debug.Log("Wp: Attack");
             collider2D.enabled = true;
@@ -48,7 +49,7 @@ public class Axe : MonoBehaviour
             actualTime = 0f;
             inUse = true;
         }
-        else if (Charging == true && inUse == false)
+        else if (Charging == true && inUse == false && Thrown == false)
         {
             Debug.Log("Wp: Charging");
             //BEFORE THIS, IDLE, ALLWAYS

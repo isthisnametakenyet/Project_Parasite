@@ -31,7 +31,7 @@ public class PlayerController2D : MonoBehaviour
     private CrossBow crossbowScript;
     private Boomerang boomerangScript;
 
-    //CAMBIABLE
+    //VARIABLES
     public float runSpeed = 2f; 
     public float jumpStrengh = 6.5f;
     public float headReturnDelay = 2f;
@@ -184,32 +184,32 @@ public class PlayerController2D : MonoBehaviour
                     case 1:
                         swordScript = PickedWeapon.GetComponent<Sword>();
                         swordScript.Attack = true;
-                        Debug.Log("Weapon: 1");
+                        Debug.Log("PWeapon: 1");
                         break;
                     case 2:
                         axeScript = PickedWeapon.GetComponent<Axe>();
                         axeScript.Attack = true;
-                        Debug.Log("Weapon: 2");
+                        Debug.Log("PWeapon: 2");
                         break;
                     case 3:
                         spearScript = PickedWeapon.GetComponent<Spear>();
                         spearScript.Attack = true;
-                        Debug.Log("Weapon: 3");
+                        Debug.Log("PWeapon: 3");
                         break;
                     case 4:
                         bowScript = PickedWeapon.GetComponent<Bow>();
                         bowScript.Attack = true;
-                        Debug.Log("Weapon: 4");
+                        Debug.Log("PWeapon: 4");
                         break;
                     case 5:
                         crossbowScript = PickedWeapon.GetComponent<CrossBow>();
                         crossbowScript.Attack = true;
-                        Debug.Log("Weapon: 5");
+                        Debug.Log("PWeapon: 5");
                         break;
                     case 6:
                         boomerangScript = PickedWeapon.GetComponent<Boomerang>();
                         boomerangScript.Attack = true;
-                        Debug.Log("Weapon: 6");
+                        Debug.Log("PWeapon: 6");
                         break;
                 }
             }
@@ -223,6 +223,36 @@ public class PlayerController2D : MonoBehaviour
             {
                 weaponCharge += Time.deltaTime; 
                 Debug.Log(weaponCharge);
+                if(weaponCharge < forgetWeaponChargeRange)
+                {
+                    switch (whichWeapon)
+                    {
+                        case 1:
+                            swordScript = PickedWeapon.GetComponent<Sword>();
+                            swordScript.Charging = true;
+                            break;
+                        case 2:
+                            axeScript = PickedWeapon.GetComponent<Axe>();
+                            axeScript.Charging = true;
+                            break;
+                        case 3:
+                            spearScript = PickedWeapon.GetComponent<Spear>();
+                            spearScript.Charging = true;
+                            break;
+                        case 4:
+                            bowScript = PickedWeapon.GetComponent<Bow>();
+                            bowScript.Charging = true;
+                            break;
+                        case 5:
+                            crossbowScript = PickedWeapon.GetComponent<CrossBow>();
+                            crossbowScript.Charging = true;
+                            break;
+                        case 6:
+                            boomerangScript = PickedWeapon.GetComponent<Boomerang>();
+                            boomerangScript.Charging = true;
+                            break;
+                    }
+                }
             }
             else if (weaponCharge >= maxWeaponCharge)
             {
@@ -232,6 +262,28 @@ public class PlayerController2D : MonoBehaviour
         else if (weaponCharge < forgetWeaponChargeRange) { weaponCharge = 0; animator.SetBool(ChargingID, false); }
         else if (weaponCharge > forgetWeaponChargeRange)
         {
+            Debug.Log("PWeapon: THROW");
+            switch (whichWeapon)
+            {
+                case 1:
+                    swordScript.Thrown = true;
+                    break;
+                case 2:
+                    axeScript.Thrown = true;
+                    break;
+                case 3:
+                    spearScript.Thrown = true;
+                    break;
+                case 4:
+                    bowScript.Thrown = true;
+                    break;
+                case 5:
+                    crossbowScript.Thrown = true;
+                    break;
+                case 6:
+                    boomerangScript.Thrown = true;
+                    break;
+            }
             animator.SetBool(ChargingID, false);
             weaponCharge = 0;
             //THROW WEAPON
