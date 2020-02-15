@@ -20,13 +20,25 @@ public class PlayerController2D : MonoBehaviour
     private HeadThrow headThrow;
     private HeadReturn headReturn;
     private EmptyBody emptyBody;
+
+    //WEAPONS PICKUP
     public GameObject PickedWeapon;
     private PickUpScript pickUpScript;
+    private Sword swordScript;
+    private Axe axeScript;
+    private Spear spearScript;
+    private Bow bowScript;
+    private CrossBow crossbowScript;
+    private Boomerang boomerangScript;
 
     //CAMBIABLE
     public float runSpeed = 2f; 
     public float jumpStrengh = 6.5f;
     public float headReturnDelay = 2f;
+    public float maxWeaponCharge = 3f;
+    public float headThrowCharge = 2f;
+    public float forgetWeaponChargeRange = 0.4f;
+    public float forgetHeadThrowRange = 0.4f;
 
     //TEMPORALES
     bool facingright = true;
@@ -164,29 +176,65 @@ public class PlayerController2D : MonoBehaviour
         //ATTACK
         if (player.GetButtonDown("Attack"))
         {
-            animator.SetBool(AttackedID, true);
+            //animator.SetBool(AttackedID, true);
+            if (isWeaponed == true)
+            {
+                switch (whichWeapon)
+                {
+                    case 1:
+                        swordScript = PickedWeapon.GetComponent<Sword>();
+                        swordScript.Attack = true;
+                        Debug.Log("Weapon: 1");
+                        break;
+                    case 2:
+                        axeScript = PickedWeapon.GetComponent<Axe>();
+                        axeScript.Attack = true;
+                        Debug.Log("Weapon: 2");
+                        break;
+                    case 3:
+                        spearScript = PickedWeapon.GetComponent<Spear>();
+                        spearScript.Attack = true;
+                        Debug.Log("Weapon: 3");
+                        break;
+                    case 4:
+                        bowScript = PickedWeapon.GetComponent<Bow>();
+                        bowScript.Attack = true;
+                        Debug.Log("Weapon: 4");
+                        break;
+                    case 5:
+                        crossbowScript = PickedWeapon.GetComponent<CrossBow>();
+                        crossbowScript.Attack = true;
+                        Debug.Log("Weapon: 5");
+                        break;
+                    case 6:
+                        boomerangScript = PickedWeapon.GetComponent<Boomerang>();
+                        boomerangScript.Attack = true;
+                        Debug.Log("Weapon: 6");
+                        break;
+                }
+            }
         }
 
         //CHARGED
         if (player.GetButton("Charge") && isHeading == false && isDucking == false)
         {
             animator.SetBool(ChargingID, true);
-            if (weaponCharge < 3f){
-                weaponCharge += Time.deltaTime*1f; 
+            if (weaponCharge < maxWeaponCharge)
+            {
+                weaponCharge += Time.deltaTime; 
                 Debug.Log(weaponCharge);
             }
-            else if (weaponCharge >= 3f)
+            else if (weaponCharge >= maxWeaponCharge)
             {
                 Debug.Log("MaxCharge");
             }
         }
-        else if (weaponCharge > 0)
+        else if (weaponCharge < forgetWeaponChargeRange) { weaponCharge = 0; animator.SetBool(ChargingID, false); }
+        else if (weaponCharge > forgetWeaponChargeRange)
         {
-            {
             animator.SetBool(ChargingID, false);
             weaponCharge = 0;
-                //THROW
-            }
+            //THROW WEAPON
         }
 
         //HEAD THROW
@@ -194,19 +242,19 @@ public class PlayerController2D : MonoBehaviour
         { 
             {
                 animator.SetBool(HeadingID, true);
-                if (headCharge <= 2f)
+                if (headCharge <= headThrowCharge)
                 {
-                    headCharge += Time.deltaTime * 1f;
+                    headCharge += Time.deltaTime;
                     Debug.Log(headCharge);
                 }
-                else if (headCharge >= 2f)
+                else if (headCharge >= headThrowCharge)
                 {
                     Debug.Log("MaxCharge");
                 }
             }
         }
-        else if (headCharge < 0.4) { headCharge = 0; animator.SetBool(HeadingID, false); }
-        else if (headCharge > 0.4) //THROW
+        else if (headCharge < forgetHeadThrowRange) { headCharge = 0; animator.SetBool(HeadingID, false); }
+        else if (headCharge > forgetHeadThrowRange) //THROW
         {
             animator.SetBool(HeadingID, false);
 
@@ -286,30 +334,26 @@ public class PlayerController2D : MonoBehaviour
             pickUpScript.picked = true;
             animator.SetBool(WeaponingID, true);
 
-            if (collision.gameObject.name == "Sword")
+            switch (pickUpScript.picktype)
             {
-                animator.SetInteger(whichWeaponID, 1);
-
-            }
-            else if (collision.gameObject.name == "Axe")
-            {
-                animator.SetInteger(whichWeaponID, 2);
-            }
-            else if (collision.gameObject.name == "Lance")
-            {
-                animator.SetInteger(whichWeaponID, 3);
-            }
-            else if (collision.gameObject.name == "Bow")
-            {
-                animator.SetInteger(whichWeaponID, 4);
-            }
-            else if (collision.gameObject.name == "CrossBow")
-            {
-                animator.SetInteger(whichWeaponID, 5);
-            }
-            else if (collision.gameObject.name == "Boomerang")
-            {
-                animator.SetInteger(whichWeaponID, 6);
+                case PickTypes.Sword:
+                    animator.SetInteger(whichWeaponID, 1);
+                    break;
+                case PickTypes.Axe:
+                    animator.SetInteger(whichWeaponID, 2);
+                    break;
+                case PickTypes.Spear:
+                    animator.SetInteger(whichWeaponID, 3);
+                    break;
+                case PickTypes.Bow:
+                    animator.SetInteger(whichWeaponID, 4);
+                    break;
+                case PickTypes.CrossBow:
+                    animator.SetInteger(whichWeaponID, 5);
+                    break;
+                case PickTypes.Boomerang:
+                    animator.SetInteger(whichWeaponID, 6);
+                    break;
             }
         }
     }
