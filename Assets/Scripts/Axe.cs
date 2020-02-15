@@ -7,10 +7,10 @@ public class Axe : MonoBehaviour
     public GameObject Picker;
     public Sprite axeSprite;
 
-    bool Idle;
-    bool Attack = false;
-    bool Charging = false;
-    bool Thrown = false;
+    public bool Idle;
+    public bool Attack = false;
+    public bool Charging = false;
+    public bool Thrown = false;
 
     BoxCollider2D collider2D;
     Rigidbody2D body2D;
@@ -20,6 +20,8 @@ public class Axe : MonoBehaviour
         collider2D = GetComponent<BoxCollider2D>();
         body2D = GetComponent<Rigidbody2D>();
         Idle = true;
+
+        
     }
 
     void FixedUpdate()

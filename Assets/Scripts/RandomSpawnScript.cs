@@ -5,7 +5,7 @@ using UnityEngine;
 // maps enum
 public enum Maps { Map1, Map2, Map3 };
 
-public enum PickTypes { Sword, Axe, Lance, Bow, CrossBow, Boomerang };
+public enum PickTypes { Sword, Axe, Spear, Bow, CrossBow, Boomerang };
 
 
 public class RandomSpawnScript : MonoBehaviour
@@ -102,7 +102,7 @@ public class RandomSpawnScript : MonoBehaviour
             {
                 GameObject pick = Instantiate(PickUp, actualMap[whereToSpawn], Quaternion.identity);
                 PickObject = pick.GetComponent<PickUpScript>();
-                PickObject.picktype = PickTypes.Lance;
+                PickObject.picktype = PickTypes.Spear;
             }
            else if(whatToSpawn == 4)
             {

@@ -96,6 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   picktype: 0
+  Picker: {fileID: 0}
   Sword: {fileID: 3040493000438626130, guid: b48adec35004cc94fb8878b2f83c61b9, type: 3}
   Axe: {fileID: 4109791825871390401, guid: 34431f682b8fae9449bfd8e2e32a67ef, type: 3}
   Spear: {fileID: 2345261996967496709, guid: b0bb9be49655bb74cbc385e989cf2c95, type: 3}
@@ -156,7 +157,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.25, y: 0.14}
+  m_Size: {x: 0.7, y: 0.7}
   m_EdgeRadius: 0
 --- !u!95 &4837911121375504654
 Animator:

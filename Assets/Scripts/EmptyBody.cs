@@ -12,7 +12,9 @@ public class EmptyBody : MonoBehaviour
     private Player player;
 
     public GameObject Parasite;
-    HeadThrow parasiteScript;
+    private HeadThrow parasiteScript;
+    public GameObject PickedWeapon;
+    private PickUpScript pickUpScript;
 
     //CAMBIABLE
     public float runSpeed = 2f;

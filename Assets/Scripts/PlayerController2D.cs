@@ -20,6 +20,7 @@ public class PlayerController2D : MonoBehaviour
     private HeadThrow headThrow;
     private HeadReturn headReturn;
     private EmptyBody emptyBody;
+    public GameObject PickedWeapon;
     private PickUpScript pickUpScript;
 
     //CAMBIABLE
