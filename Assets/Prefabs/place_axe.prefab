@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7073445862110367866}
   - component: {fileID: 5803057810198495129}
   - component: {fileID: 3893103222167882299}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: place_axe
   m_TagString: Weapon
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.012648284, y: 0.27091813}
+  m_Offset: {x: 0.008653119, y: 0.27091813}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -106,7 +106,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.635517, y: 0.86416376}
+  m_Size: {x: 0.6754688, y: 0.86416376}
   m_EdgeRadius: 0
 --- !u!50 &5803057810198495129
 Rigidbody2D:
@@ -143,3 +143,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Picker: {fileID: 0}
   axeSprite: {fileID: 21300000, guid: 9af6f35fa913dfa40a207c3c3d509a79, type: 3}
+  Idle: 0
+  Attack: 0
+  Charging: 0
+  Thrown: 0
+  Landed: 0
+  AttackTime: 2

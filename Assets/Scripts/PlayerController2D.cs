@@ -216,7 +216,7 @@ public class PlayerController2D : MonoBehaviour
         }
 
         //CHARGED
-        if (player.GetButton("Charge") && isHeading == false && isDucking == false)
+        if (player.GetButton("Charge") && isHeading == false && isDucking == false && isWeaponed == true)
         {
             animator.SetBool(ChargingID, true);
             if (weaponCharge < maxWeaponCharge)
@@ -284,9 +284,23 @@ public class PlayerController2D : MonoBehaviour
                     boomerangScript.Thrown = true;
                     break;
             }
-            animator.SetBool(ChargingID, false);
+            animator.SetBool(ChargingID, false); //END ANIAMTION, BACK TO IDLE
+
+            PickedWeapon.transform.parent = null;
+            Rigidbody2D weaponRigid;
+            weaponRigid = PickedWeapon.GetComponent<Rigidbody2D>(); //ASIGN HEAD RIGIDBODY
+            weaponRigid.bodyType = RigidbodyType2D.Dynamic;
+
+            if (facingright == true) //THROW WEAPON with headCharge as force
+            {
+                weaponRigid.velocity = new Vector2(weaponCharge * 1.8f, 2f);
+            }
+            else if (facingright == false)
+            {
+                weaponRigid.velocity = new Vector2(-weaponCharge * 1.8f, 2f);
+            }
             weaponCharge = 0;
-            //THROW WEAPON
+            animator.SetBool(WeaponingID, false);
         }
 
         //HEAD THROW
@@ -323,7 +337,7 @@ public class PlayerController2D : MonoBehaviour
             headThrow.OriginalBody = body; //REFERENCE EMPTYBODY IN HEAD THROW TO KNOW ORIGIN
 
             Rigidbody2D headRigid;
-            headRigid = head.GetComponent<Rigidbody2D>(); //ASIGN HEAD RIGIDBODY
+            headRigid = head.GetComponent<Rigidbody2D>(); //GET HEAD RIGIDBODY
 
             if (facingright == true) //THROW HEAD with headCharge as force
             {
