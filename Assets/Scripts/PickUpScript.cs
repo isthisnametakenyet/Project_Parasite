@@ -17,8 +17,8 @@ public class PickUpScript : MonoBehaviour
     private Axe axeScript;
     private Spear spearScript;
     private Bow bowScript;
-    private Crossbow boomerangScript;
-    private Boomerang crossbowScript;
+    private CrossBow crossbowScript;
+    private Boomerang boomerangScript;
 
     private PlayerController2D playerAllScript;
     private EmptyBody playerEmptyScript;
@@ -71,11 +71,11 @@ public class PickUpScript : MonoBehaviour
                     swordScript.Picker = Picker;
                     sword.transform.parent = Picker.transform; //set parent
 
-                    if (Picker.gameObject.tag == "Player") { playerAllScript.PickedWeapon = sword; }
+                    if (Picker.gameObject.tag == "Player") { playerAllScript.PickedWeapon = sword; } //reference this weapon to player
                     else if (Picker.gameObject.tag == "Empty") { playerEmptyScript.PickedWeapon = sword; }
-
                     Destroy(gameObject); //AUTODESTRUCCION
                     break;
+
                 case PickTypes.Axe:
                     GameObject axe = Instantiate(Axe, new Vector3(transform.position.x, transform.position.y + 0.3f, 0), Quaternion.identity);
                     axeScript = axe.GetComponent<Axe>();
@@ -85,28 +85,54 @@ public class PickUpScript : MonoBehaviour
 
                     if (Picker.gameObject.tag == "Player") { playerAllScript.PickedWeapon = axe; }
                     else if (Picker.gameObject.tag == "Empty") { playerEmptyScript.PickedWeapon = axe; }
-
                     Destroy(gameObject); //AUTODESTRUCCION
                     break;
 
                 case PickTypes.Spear:
                     GameObject spear = Instantiate(Spear, new Vector3(transform.position.x, transform.position.y + 0.3f, 0), Quaternion.identity);
+                    spearScript = spear.GetComponent<Spear>();
 
+                    spearScript.Picker = Picker;
+                    spear.transform.parent = Picker.transform;
+
+                    if (Picker.gameObject.tag == "Player") { playerAllScript.PickedWeapon = spear; }
+                    else if (Picker.gameObject.tag == "Empty") { playerEmptyScript.PickedWeapon = spear; }
                     Destroy(gameObject); //AUTODESTRUCCION
                     break;
+
                 case PickTypes.Bow:
                     GameObject bow = Instantiate(Bow, new Vector3(transform.position.x, transform.position.y + 0.3f, 0), Quaternion.identity);
+                    bowScript = bow.GetComponent<Bow>();
 
+                    bowScript.Picker = Picker;
+                    bow.transform.parent = Picker.transform;
+
+                    if (Picker.gameObject.tag == "Player") { playerAllScript.PickedWeapon = bow; }
+                    else if (Picker.gameObject.tag == "Empty") { playerEmptyScript.PickedWeapon = bow; }
                     Destroy(gameObject); //AUTODESTRUCCION
                     break;
+
                 case PickTypes.CrossBow:
                     GameObject crossbow = Instantiate(CrossBow, new Vector3(transform.position.x, transform.position.y + 0.3f, 0), Quaternion.identity);
+                    crossbowScript = crossbow.GetComponent<CrossBow>();
 
+                    crossbowScript.Picker = Picker;
+                    crossbow.transform.parent = Picker.transform;
+
+                    if (Picker.gameObject.tag == "Player") { playerAllScript.PickedWeapon = crossbow; }
+                    else if (Picker.gameObject.tag == "Empty") { playerEmptyScript.PickedWeapon = crossbow; }
                     Destroy(gameObject); //AUTODESTRUCCION
                     break;
+
                 case PickTypes.Boomerang:
                     GameObject boomerang = Instantiate(Boomerang, new Vector3(transform.position.x, transform.position.y + 0.3f, 0), Quaternion.identity);
+                    boomerangScript = boomerang.GetComponent<Boomerang>();
 
+                    boomerangScript.Picker = Picker;
+                    boomerang.transform.parent = Picker.transform;
+
+                    if (Picker.gameObject.tag == "Player") { playerAllScript.PickedWeapon = boomerang; }
+                    else if (Picker.gameObject.tag == "Empty") { playerEmptyScript.PickedWeapon = boomerang; }
                     Destroy(gameObject); //AUTODESTRUCCION
                     break;
             }
