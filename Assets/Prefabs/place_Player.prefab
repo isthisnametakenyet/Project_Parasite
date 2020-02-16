@@ -104,9 +104,14 @@ MonoBehaviour:
     type: 3}
   HeadThrow: {fileID: 8496102874259545990, guid: bbafa50b4269fea4183837cbfa1156e0,
     type: 3}
+  PickedWeapon: {fileID: 0}
   runSpeed: 2
   jumpStrengh: 6.5
   headReturnDelay: 2
+  maxWeaponCharge: 3
+  headThrowCharge: 2
+  forgetWeaponChargeRange: 0.4
+  forgetHeadThrowRange: 0.4
 --- !u!95 &2741911751103152788
 Animator:
   serializedVersion: 3
@@ -184,7 +189,7 @@ PlatformEffector2D:
   m_UseColliderMask: 1
   m_ColliderMask:
     serializedVersion: 2
-    m_Bits: 1281
+    m_Bits: 5377
   m_RotationalOffset: 0
   m_UseOneWay: 0
   m_UseOneWayGrouping: 0

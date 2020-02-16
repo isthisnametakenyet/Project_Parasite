@@ -77,7 +77,7 @@ public class Spear : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Floor")
+        if (collision.gameObject.tag == "Floor" && Thrown == true)
         {
             Debug.Log("Wp: Landed");
             Uses--;
@@ -85,12 +85,22 @@ public class Spear : MonoBehaviour
             Thrown = false;
         }
 
-        if (collision.gameObject.tag == "EmptyBody")
+        if (collision.gameObject.tag == "Player" && Thrown == true)
         {
-            Debug.Log("Wp: Landed");
+            Debug.Log("Wp: Hit");
             Uses--;
             Landed = true;
             Thrown = false;
+            this.transform.parent = collision.transform;
+        }
+
+        if (collision.gameObject.tag == "EmptyBody" && Thrown == true)
+        {
+            Debug.Log("Wp: Hit");
+            Uses--;
+            Landed = true;
+            Thrown = false;
+            this.transform.parent = collision.transform;
         }
     }
 }
