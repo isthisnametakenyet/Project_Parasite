@@ -2,11 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// maps enum
 public enum Maps { Map1, Map2, Map3 };
-
 public enum PickTypes { Sword, Axe, Spear, Bow, CrossBow, Boomerang };
-
 
 public class RandomSpawnScript : MonoBehaviour
 {
@@ -14,7 +11,6 @@ public class RandomSpawnScript : MonoBehaviour
 
     // prefabs to instantiate
     public GameObject PickUp;
-
     private PickUpScript PickObject;
 
     // spawn prefabs once per 2 secs
@@ -72,10 +68,10 @@ public class RandomSpawnScript : MonoBehaviour
         if(Time.time > nextSpawn) // if time has come
         {
             whatToSpawn = Random.Range(1, 7); //define random value between 1 and 6 (7 is exclusive)
-            Debug.Log(whatToSpawn);
+            Debug.Log("What Spawned: " + whatToSpawn);
 
             whereToSpawn = Random.Range(0, 5); // define random value between 0 and 4 (5 is exclusive)
-            Debug.Log(whereToSpawn);
+            Debug.Log("Where it Spawned: " + whereToSpawn);
 
             whenToSpawn = Random.Range(spawnMinRate, spawnMaxRate); // define random time value to spawn
             
@@ -84,7 +80,6 @@ public class RandomSpawnScript : MonoBehaviour
                 whatToSpawn = Random.Range(1, 7);
             }
             lastSpawned = whatToSpawn;
-            Debug.Log(whatToSpawn);
 
             if (whatToSpawn == 1)
             {
