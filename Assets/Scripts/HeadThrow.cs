@@ -24,10 +24,10 @@ public class HeadThrow : MonoBehaviour
     private bool BadThrow = false;
     public float floorStunMax = 2f;
     public float expulsedStunMax = 3f;
-    public float actualStun;
+    private float actualStun = 0;
     public bool Expulsed = false;
     public bool GoBack = false;
-    public bool canReturn = false;
+    public bool canReturn = true;
 
     void Start()
     {
@@ -72,10 +72,10 @@ public class HeadThrow : MonoBehaviour
 
     private void FixedUpdate()
     {//RETURN TO EMPTY
-        if (BadThrow == true && actualStun < floorStunMax) { actualStun += Time.deltaTime; }
+        if (BadThrow == true && actualStun < floorStunMax) { actualStun += Time.deltaTime; canReturn = false; }
         else if (actualStun >= floorStunMax) { canReturn = true; }
 
-        if (Expulsed == true && actualStun < expulsedStunMax) { actualStun += Time.deltaTime; }
+        if (Expulsed == true && actualStun < expulsedStunMax) { actualStun += Time.deltaTime; canReturn = false; }
         else if (actualStun >= expulsedStunMax) { canReturn = true; }
 
         if (player.GetButtonDown("Head Return") && canReturn == true && returnScript.parasited == false || GoBack == true && returnScript.parasited == false) 

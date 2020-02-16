@@ -72,7 +72,7 @@ public class PickUpScript : MonoBehaviour
                     sword.transform.parent = Picker.transform; //set parent
 
                     if (Picker.gameObject.tag == "Player") { playerAllScript.PickedWeapon = sword; } //reference this weapon to player
-                    else if (Picker.gameObject.tag == "Empty") { playerEmptyScript.PickedWeapon = sword; }
+                    else if (Picker.gameObject.tag == "EmptyBody") { playerEmptyScript.PickedWeapon = sword; }
                     Destroy(gameObject); //AUTODESTRUCCION
                     break;
 
@@ -84,7 +84,7 @@ public class PickUpScript : MonoBehaviour
                     axe.transform.parent = Picker.transform;
 
                     if (Picker.gameObject.tag == "Player") { playerAllScript.PickedWeapon = axe; }
-                    else if (Picker.gameObject.tag == "Empty") { playerEmptyScript.PickedWeapon = axe; }
+                    else if (Picker.gameObject.tag == "EmptyBody") { playerEmptyScript.PickedWeapon = axe; }
                     Destroy(gameObject); //AUTODESTRUCCION
                     break;
 
@@ -96,7 +96,7 @@ public class PickUpScript : MonoBehaviour
                     spear.transform.parent = Picker.transform;
 
                     if (Picker.gameObject.tag == "Player") { playerAllScript.PickedWeapon = spear; }
-                    else if (Picker.gameObject.tag == "Empty") { playerEmptyScript.PickedWeapon = spear; }
+                    else if (Picker.gameObject.tag == "EmptyBody") { playerEmptyScript.PickedWeapon = spear; }
                     Destroy(gameObject); //AUTODESTRUCCION
                     break;
 
@@ -108,7 +108,7 @@ public class PickUpScript : MonoBehaviour
                     bow.transform.parent = Picker.transform;
 
                     if (Picker.gameObject.tag == "Player") { playerAllScript.PickedWeapon = bow; }
-                    else if (Picker.gameObject.tag == "Empty") { playerEmptyScript.PickedWeapon = bow; }
+                    else if (Picker.gameObject.tag == "EmptyBody") { playerEmptyScript.PickedWeapon = bow; }
                     Destroy(gameObject); //AUTODESTRUCCION
                     break;
 
@@ -120,7 +120,7 @@ public class PickUpScript : MonoBehaviour
                     crossbow.transform.parent = Picker.transform;
 
                     if (Picker.gameObject.tag == "Player") { playerAllScript.PickedWeapon = crossbow; }
-                    else if (Picker.gameObject.tag == "Empty") { playerEmptyScript.PickedWeapon = crossbow; }
+                    else if (Picker.gameObject.tag == "EmptyBody") { playerEmptyScript.PickedWeapon = crossbow; }
                     Destroy(gameObject); //AUTODESTRUCCION
                     break;
 
@@ -132,7 +132,7 @@ public class PickUpScript : MonoBehaviour
                     boomerang.transform.parent = Picker.transform;
 
                     if (Picker.gameObject.tag == "Player") { playerAllScript.PickedWeapon = boomerang; }
-                    else if (Picker.gameObject.tag == "Empty") { playerEmptyScript.PickedWeapon = boomerang; }
+                    else if (Picker.gameObject.tag == "EmptyBody") { playerEmptyScript.PickedWeapon = boomerang; }
                     Destroy(gameObject); //AUTODESTRUCCION
                     break;
             }

@@ -59,12 +59,15 @@ public class Axe : MonoBehaviour
         else if (Thrown == true)
         {
             Debug.Log("Wp: Thrown");
+            Charging = false;
+            Idle = false;
+            inUse = false;
             collider2D.enabled = true;
             transform.gameObject.tag = "Throwing";
             //START ANIMATION THROW
         }
 
         if (actualTime <= AttackTime && inUse == true && Charging == false) { actualTime += Time.deltaTime; } //TIEMPO Q DURA LA ANIMACION D ATAQUE
-        else { inUse = false; Idle = true; Attack = false; }
+        else if (Thrown == false) { inUse = false; Idle = true; Attack = false; }
     }
 }

@@ -42,7 +42,6 @@ public class PlayerController2D : MonoBehaviour
 
     //TEMPORALES
     bool facingright = true;
-    bool canThrow = false;
     float headCharge = 0f;
     float weaponCharge = 0f;
 
