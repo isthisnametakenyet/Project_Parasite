@@ -222,7 +222,7 @@ public class PlayerController2D : MonoBehaviour
             {
                 weaponCharge += Time.deltaTime; 
                 Debug.Log(weaponCharge);
-                if(weaponCharge < forgetWeaponChargeRange)
+                if(weaponCharge > forgetWeaponChargeRange)
                 {
                     switch (whichWeapon)
                     {

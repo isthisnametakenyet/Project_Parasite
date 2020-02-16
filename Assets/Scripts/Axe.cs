@@ -12,6 +12,7 @@ public class Axe : MonoBehaviour
     public bool Charging = false;
     public bool Thrown = false;
     public bool Landed = false;
+    public int Uses = 2;
     private bool inUse = false;
 
     //VARIABLES
@@ -31,7 +32,8 @@ public class Axe : MonoBehaviour
     void FixedUpdate()
     {
         //Debug.Log("tis but an axe");
-        if (Idle == true && collider2D.enabled == true && inUse == false && Thrown == false)
+        if (Uses == 0 && inUse == false) { Destroy(gameObject); } //AUTODESTRUCCION
+        else if (Idle == true && collider2D.enabled == true && inUse == false && Thrown == false && Landed == false)
         {
             Debug.Log("Wp: Idle");
             actualTime = 0f;
@@ -47,6 +49,8 @@ public class Axe : MonoBehaviour
             //START ANIMATION ATTACKING
             actualTime = 0f;
             inUse = true;
+            Idle = false;
+            Uses--;
         }
         else if (Charging == true && inUse == false && Thrown == false)
         {
@@ -56,7 +60,7 @@ public class Axe : MonoBehaviour
             //START ANIMATION CHARGING
             inUse = true;
         }
-        else if (Thrown == true)
+        else if (Thrown == true && Landed == false)
         {
             Debug.Log("Wp: Thrown");
             Charging = false;
@@ -69,5 +73,24 @@ public class Axe : MonoBehaviour
 
         if (actualTime <= AttackTime && inUse == true && Charging == false) { actualTime += Time.deltaTime; } //TIEMPO Q DURA LA ANIMACION D ATAQUE
         else if (Thrown == false) { inUse = false; Idle = true; Attack = false; }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Floor")
+        {
+            Debug.Log("Wp: Landed");
+            Uses--;
+            Landed = true;
+            Thrown = false;
+        }
+
+        if (collision.gameObject.tag == "EmptyBody")
+        {
+            Debug.Log("Wp: Landed");
+            Uses--;
+            Landed = true;
+            Thrown = false;
+        }
     }
 }
