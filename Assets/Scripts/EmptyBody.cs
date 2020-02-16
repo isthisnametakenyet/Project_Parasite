@@ -426,6 +426,12 @@ public class EmptyBody : MonoBehaviour
 
             Rigidbody2D parasiteRigid;
             parasiteRigid = Parasite.GetComponent<Rigidbody2D>(); //ASIGN ITS RIGID
+            parasiteRigid.bodyType = RigidbodyType2D.Dynamic;
+
+            Collider2D parasiteCollider;
+            parasiteCollider = Parasite.GetComponent<Collider2D>();
+            parasiteCollider.enabled = true;
+
 
             if (Mathf.Approximately(angle, 90)) //DETECT COLLISION SIDE
             {
