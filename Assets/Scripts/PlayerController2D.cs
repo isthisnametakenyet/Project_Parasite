@@ -269,6 +269,7 @@ public class PlayerController2D : MonoBehaviour
                     break;
                 case 2:
                     axeScript.Thrown = true;
+                    Debug.Log("axethrow");
                     break;
                 case 3:
                     spearScript.Thrown = true;

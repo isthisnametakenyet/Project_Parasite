@@ -7,17 +7,21 @@ public class CrossBow : MonoBehaviour
     public GameObject Picker;
     public Sprite crossbowSprite;
 
+    //STATE
     public bool Idle;
     public bool Attack = false;
     public bool Charging = false;
     public bool Thrown = false;
     public bool Landed = false;
-    public int Uses = 2;
+    public bool Stuck = false;
     private bool inUse = false;
 
     //VARIABLES
+    public int Uses = 2;
     public float AttackTime = 2f;
-    private float actualTime = 0f;
+    private float actualAttack = 0f;
+    public float stuckTime = 5f;
+    private float actualStuck = 0f;
 
     BoxCollider2D collider2D;
     Rigidbody2D body2D;
@@ -36,7 +40,7 @@ public class CrossBow : MonoBehaviour
         else if (Idle == true && collider2D.enabled == true && inUse == false && Thrown == false && Landed == false)
         {
             Debug.Log("Wp: Idle");
-            actualTime = 0f;
+            actualAttack = 0f;
             collider2D.enabled = false;
             transform.gameObject.tag = "Weapon";
             //START ANIMATION IDLE
@@ -47,7 +51,7 @@ public class CrossBow : MonoBehaviour
             collider2D.enabled = true;
             transform.gameObject.tag = "Attacking";
             //START ANIMATION ATTACKING
-            actualTime = 0f;
+            actualAttack = 0f;
             inUse = true;
             Idle = false;
             Uses--;
@@ -60,46 +64,54 @@ public class CrossBow : MonoBehaviour
             //START ANIMATION CHARGING
             inUse = true;
         }
-        else if (Thrown == true && Landed == false)
+        else if (Thrown == true && Stuck == false)
         {
             Debug.Log("Wp: Thrown");
             Charging = false;
             Idle = false;
             inUse = false;
             collider2D.enabled = true;
+            collider2D.isTrigger = true;
             transform.gameObject.tag = "Throwing";
             //START ANIMATION THROW
         }
+        if (actualAttack <= AttackTime && inUse == true && Charging == false) { actualAttack += Time.deltaTime; }
+        else if (Thrown == false) { inUse = false; Idle = true; Attack = false; } //TIEMPO Q DURA LA ANIMACION D ATAQUE
 
-        if (actualTime <= AttackTime && inUse == true && Charging == false) { actualTime += Time.deltaTime; } //TIEMPO Q DURA LA ANIMACION D ATAQUE
-        else if (Thrown == false) { inUse = false; Idle = true; Attack = false; }
+        //SI GOLPEA ALGO SE PARA Y SE QUEDA PEGADO
+        if (actualStuck >= stuckTime)
+        {
+            Stuck = true;
+            Thrown = false;
+            body2D.velocity = new Vector2(0, 0);
+            Uses--;
+            body2D.isKinematic = true;
+            actualStuck = 0f;
+        }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Floor" && Thrown == true)
         {
             Debug.Log("Wp: Landed");
-            Uses--;
-            Landed = true;
-            Thrown = false;
+            actualStuck += Time.deltaTime * 10;
+            transform.position = new Vector3(transform.position.x, transform.position.y, 1);
         }
 
-        if (collision.gameObject.tag == "Player" && Thrown == true)
+        if (collision.gameObject.tag == "Player" && collision.gameObject != Picker && Thrown == true)
         {
             Debug.Log("Wp: Hit");
-            Uses--;
-            Landed = true;
-            Thrown = false;
+            actualStuck += Time.deltaTime * 10;
+            transform.position = new Vector3(transform.position.x, transform.position.y, 1);
             this.transform.parent = collision.transform;
         }
 
-        if (collision.gameObject.tag == "EmptyBody" && Thrown == true)
+        if (collision.gameObject.tag == "EmptyBody" && collision.gameObject != Picker && Thrown == true)
         {
             Debug.Log("Wp: Hit");
-            Uses--;
-            Landed = true;
-            Thrown = false;
+            actualStuck += Time.deltaTime * 10;
+            transform.position = new Vector3(transform.position.x, transform.position.y, 1);
             this.transform.parent = collision.transform;
         }
     }
