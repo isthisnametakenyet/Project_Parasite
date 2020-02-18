@@ -5,6 +5,10 @@ using UnityEngine;
 public class Spear : MonoBehaviour
 {
     public GameObject Picker;
+    private PlayerController2D pickerPlayerScript;
+    private EmptyBody pickerEmptyScript;
+    private PlayerController2D playerScript;
+    private EmptyBody emptyScript;
     public Sprite spearSprite;
 
     //STATE
@@ -22,7 +26,6 @@ public class Spear : MonoBehaviour
     private float actualAttack = 0f;
     public float stuckTime = 0.5f;
     private float actualStuck = 0f;
-
     BoxCollider2D collider2D;
     Rigidbody2D body2D;
 
@@ -30,7 +33,11 @@ public class Spear : MonoBehaviour
     {
         collider2D = GetComponent<BoxCollider2D>();
         body2D = GetComponent<Rigidbody2D>();
+        if (Picker.gameObject.tag == "Player") { pickerPlayerScript = Picker.GetComponent<PlayerController2D>(); }
+        else if (Picker.gameObject.tag == "EmptyBody") { pickerEmptyScript = Picker.GetComponent<EmptyBody>(); }
         Idle = true;
+        collider2D.isTrigger = true;
+        body2D.isKinematic = true;
     }
 
     void FixedUpdate()
@@ -58,7 +65,7 @@ public class Spear : MonoBehaviour
         }
         else if (Charging == true && inUse == false && Thrown == false)
         {
-            Debug.Log("Wp: Charging");
+            //Debug.Log("Wp: Charging");
             //BEFORE THIS, IDLE, ALLWAYS
             collider2D.enabled = false;
             //START ANIMATION CHARGING
@@ -71,7 +78,6 @@ public class Spear : MonoBehaviour
             Idle = false;
             inUse = false;
             collider2D.enabled = true;
-            collider2D.isTrigger = true;
             transform.gameObject.tag = "Throwing";
             //START ANIMATION THROW
         }
@@ -85,8 +91,8 @@ public class Spear : MonoBehaviour
             Thrown = false;
             body2D.velocity = new Vector2(0, 0);
             Uses--;
-            body2D.isKinematic = true;
             actualStuck = 0f;
+            Debug.Log("Wp: Stuck");
         }
     }
 
@@ -99,20 +105,30 @@ public class Spear : MonoBehaviour
             transform.position = new Vector3(transform.position.x, transform.position.y, 1);
         }
 
-        if (collision.gameObject.tag == "Player" && collision.gameObject != Picker && Thrown == true)
+        if (collision.gameObject.tag == "Player" && Thrown == true)
         {
-            Debug.Log("Wp: Hit");
-            actualStuck += Time.deltaTime * 10;
-            transform.position = new Vector3(transform.position.x, transform.position.y, 1);
-            this.transform.parent = collision.transform;
+            playerScript = collision.GetComponent<PlayerController2D>();
+            if (Picker.gameObject.tag == "Player" && playerScript.controller != pickerPlayerScript.controller
+                || Picker.gameObject.tag == "EmptyBody" && playerScript.controller != pickerEmptyScript.controller)
+            {
+                Debug.LogError("Wp: Hit");
+                actualStuck += Time.deltaTime * 10;
+                transform.position = new Vector3(transform.position.x, transform.position.y, 1);
+                this.transform.parent = collision.transform;
+            }
         }
 
-        if (collision.gameObject.tag == "EmptyBody" && collision.gameObject != Picker && Thrown == true)
+        if (collision.gameObject.tag == "EmptyBody" && Thrown == true)
         {
-            Debug.Log("Wp: Hit");
-            actualStuck += Time.deltaTime * 10;
-            transform.position = new Vector3(transform.position.x, transform.position.y, 1);
-            this.transform.parent = collision.transform;
+            emptyScript = collision.GetComponent<EmptyBody>();
+            if (Picker.gameObject.tag == "Player" && emptyScript.controller != pickerPlayerScript.controller
+                || Picker.gameObject.tag == "EmptyBody" && emptyScript.controller != pickerEmptyScript.controller)
+            {
+                Debug.LogError("Wp: Hit");
+                actualStuck += Time.deltaTime * 10;
+                transform.position = new Vector3(transform.position.x, transform.position.y, 1);
+                this.transform.parent = collision.transform;
+            }
         }
     }
 }

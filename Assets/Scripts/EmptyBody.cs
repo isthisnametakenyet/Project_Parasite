@@ -266,7 +266,7 @@ public class EmptyBody : MonoBehaviour
             else if (weaponCharge < forgetWeaponChargeRange) { weaponCharge = 0; /*animator.SetBool(ChargingID, false);*/ }
             else if (weaponCharge > forgetWeaponChargeRange)
             {
-                Debug.Log("E-Weapon: THROW");
+                Debug.Log("PWeapon: THROW");
                 switch (whichWeapon)
                 {
                     case 1:
@@ -274,6 +274,7 @@ public class EmptyBody : MonoBehaviour
                         break;
                     case 2:
                         axeScript.Thrown = true;
+                        Debug.Log("axethrow");
                         break;
                     case 3:
                         spearScript.Thrown = true;
@@ -293,19 +294,17 @@ public class EmptyBody : MonoBehaviour
                 PickedWeapon.transform.parent = null;
                 Rigidbody2D weaponRigid;
                 weaponRigid = PickedWeapon.GetComponent<Rigidbody2D>(); //ASIGN HEAD RIGIDBODY
-                weaponRigid.bodyType = RigidbodyType2D.Dynamic;
 
                 if (facingright == true) //THROW WEAPON with headCharge as force
                 {
-                    weaponRigid.velocity = new Vector2(weaponCharge * 1.8f, 2f);
+                    weaponRigid.velocity = new Vector2(weaponCharge * 2.2f, 0);
                 }
                 else if (facingright == false)
                 {
-                    weaponRigid.velocity = new Vector2(-weaponCharge * 1.8f, 2f);
+                    weaponRigid.velocity = new Vector2(-weaponCharge * 2.2f, 0);
                 }
                 weaponCharge = 0;
                 //animator.SetBool(WeaponingID, false);
-                isWeaponed = false;
             }
 
             //50% MOVEMENT
@@ -410,12 +409,9 @@ public class EmptyBody : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision) //DAMAGE
     {
-        Vector3 hit = collision.contacts[0].normal;
-        float angle = Vector3.Angle(hit, Vector3.up);
-
-        if (collision.gameObject.tag == "Damage")
+        if (collision.gameObject.tag == "Throwing" && collision.gameObject != PickedWeapon)
         {
             //animator.SetTrigger(DamagedID);
 
@@ -432,20 +428,15 @@ public class EmptyBody : MonoBehaviour
             parasiteCollider = Parasite.GetComponent<Collider2D>();
             parasiteCollider.enabled = true;
 
-
-            if (Mathf.Approximately(angle, 90)) //DETECT COLLISION SIDE
+            if (transform.position.x > collision.transform.position.x) //RIGHT
             {
-                Vector3 cross = Vector3.Cross(Vector3.forward, hit);
-                if (cross.y == 1f) //RIGHT
-                {
-                    parasiteRigid.velocity = new Vector2(expulseStrengh * 1.8f, 2f);
-                }
-                else if (cross.y == -1f) //LEFT
-                {
-                    parasiteRigid.velocity = new Vector2(-expulseStrengh * 1.8f, 2f);
-                }
-                else { Debug.Log("---------ERROR DETEC DIREC COLLISION"); }
+                parasiteRigid.velocity = new Vector2(expulseStrengh * 1.8f, 2f);
             }
+            else if (transform.position.x < collision.transform.position.x) //LEFT
+            {
+                parasiteRigid.velocity = new Vector2(-expulseStrengh * 1.8f, 2f);
+            }
+            else { Debug.LogError("Error Detectando Direccion de Collision"); }
         }
     }
 }

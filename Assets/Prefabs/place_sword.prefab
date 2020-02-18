@@ -92,7 +92,7 @@ BoxCollider2D:
   m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.037687585, y: -0.2263745}
@@ -148,4 +148,7 @@ MonoBehaviour:
   Charging: 0
   Thrown: 0
   Landed: 0
+  Stuck: 0
+  Uses: 2
   AttackTime: 2
+  stuckTime: 0.5

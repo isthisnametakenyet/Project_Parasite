@@ -289,15 +289,14 @@ public class PlayerController2D : MonoBehaviour
             PickedWeapon.transform.parent = null;
             Rigidbody2D weaponRigid;
             weaponRigid = PickedWeapon.GetComponent<Rigidbody2D>(); //ASIGN HEAD RIGIDBODY
-            weaponRigid.bodyType = RigidbodyType2D.Dynamic;
 
             if (facingright == true) //THROW WEAPON with headCharge as force
             {
-                weaponRigid.velocity = new Vector2(weaponCharge * 1.8f, 2f);
+                weaponRigid.velocity = new Vector2(weaponCharge * 2.2f, 0);
             }
             else if (facingright == false)
             {
-                weaponRigid.velocity = new Vector2(-weaponCharge * 1.8f, 2f);
+                weaponRigid.velocity = new Vector2(-weaponCharge * 2.2f, 0);
             }
             weaponCharge = 0;
             animator.SetBool(WeaponingID, false);
@@ -389,9 +388,9 @@ public class PlayerController2D : MonoBehaviour
         }
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision) //PICKUP
     {
-        bool isWeaponed = animator.GetBool(WeaponingID);
+        bool isWeaponed = animator.GetBool(WeaponingID); 
 
         if (collision.gameObject.tag == "PickUp" && player.GetButtonDown("PickUp") && isWeaponed == false)
         {
@@ -424,15 +423,11 @@ public class PlayerController2D : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision) //DAMAGE
     {
-        Vector3 hit = collision.contacts[0].normal;
-        float angle = Vector3.Angle(hit, Vector3.up);
-
-        if (collision.gameObject.tag == "Damage")
+        if (collision.gameObject.tag == "Throwing" && collision.gameObject != PickedWeapon)
         {
             //animator.SetTrigger(DamagedID);
-
             GameObject head = Instantiate(HeadFall, new Vector3(transform.position.x, transform.position.y + 0.3f, 0), Quaternion.identity);
             GameObject body = Instantiate(BodyEmpty, new Vector3(transform.position.x, transform.position.y - 0.22f, 0), Quaternion.identity);
 
@@ -445,20 +440,16 @@ public class PlayerController2D : MonoBehaviour
             Rigidbody2D headRigid;
             headRigid = head.GetComponent<Rigidbody2D>(); //ASIGN ITS RIGID
             headCharge = 2f;
-
-            if (Mathf.Approximately(angle, 90)) //DETECT COLLISION SIDE
+            
+            if (transform.position.x > collision.transform.position.x) //RIGHT
             {
-                Vector3 cross = Vector3.Cross(Vector3.forward, hit);
-                if (cross.y == 1f) //RIGHT
-                {
-                    headRigid.velocity = new Vector2(headCharge * 1.8f, 2f);
-                }
-                else if (cross.y == -1f) //LEFT
-                {
-                    headRigid.velocity = new Vector2(-headCharge * 1.8f, 2f);
-                }
-                else { Debug.Log("---------ERROR DETEC DIREC COLLISION"); }
+                headRigid.velocity = new Vector2(headCharge * 1.8f, 2f);
             }
+            else if (transform.position.x < collision.transform.position.x) //LEFT
+            {
+                headRigid.velocity = new Vector2(-headCharge * 1.8f, 2f);
+            }
+            else { Debug.LogError("Error Detectando Direccion de Collision"); }
 
             emptyBody = body.GetComponent<EmptyBody>();
             emptyBody.controller = this.controller;
