@@ -448,5 +448,10 @@ public class EmptyBody : MonoBehaviour
         {
             //LOSE ARM
         }
+
+        if (collision.gameObject.tag == "Damage") //DEATH
+        {
+            Destroy(gameObject); //AUTODESTRUCCION
+        }
     }
 }

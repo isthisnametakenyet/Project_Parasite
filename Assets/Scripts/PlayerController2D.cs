@@ -59,6 +59,7 @@ public class PlayerController2D : MonoBehaviour
     Animator animator;
     Rigidbody2D body2D;
     SpriteRenderer spriteRenderer;
+    BoxCollider2D box2D;
 
     void Start()
     {
@@ -466,6 +467,32 @@ public class PlayerController2D : MonoBehaviour
         if (collision.gameObject.tag == "Attacking" && collision.gameObject != PickedWeapon)
         {
             //LOSE ARM
+        }
+
+        if (collision.gameObject.tag == "Damage") //DEATH
+        {
+            GameObject head = Instantiate(HeadFall, new Vector3(transform.position.x, transform.position.y + 0.3f, 0), Quaternion.identity);
+
+            Rigidbody2D headRigid;
+            headRigid = head.GetComponent<Rigidbody2D>(); //ASIGN ITS RIGID
+            headCharge = 2f;
+
+            if (transform.position.x > collision.transform.position.x) //RIGHT
+            {
+                headRigid.velocity = new Vector2(headCharge * 1.8f, 2f);
+            }
+            else if (transform.position.x < collision.transform.position.x) //LEFT
+            {
+                headRigid.velocity = new Vector2(-headCharge * 1.8f, 2f);
+            }
+            else { Debug.LogError("Error Detectando Direccion de Collision"); }
+
+            box2D = head.GetComponent<BoxCollider2D>();
+            headThrow = head.GetComponent<HeadThrow>();
+            box2D.enabled = false;
+            headThrow.enabled = false;
+
+            Destroy(gameObject); //AUTODESTRUCCION
         }
     }
 }

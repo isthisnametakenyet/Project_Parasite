@@ -14,6 +14,7 @@ TagManager:
   - Weapon
   - Attacking
   - Throwing
+  - Stuck
   layers:
   - Default
   - TransparentFX
