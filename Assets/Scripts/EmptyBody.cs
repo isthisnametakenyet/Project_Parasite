@@ -438,5 +438,10 @@ public class EmptyBody : MonoBehaviour
             }
             else { Debug.LogError("Error Detectando Direccion de Collision"); }
         }
+
+        if (collision.gameObject.tag == "Attacking" && collision.gameObject != PickedWeapon)
+        {
+
+        }
     }
 }

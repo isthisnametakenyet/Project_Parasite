@@ -87,12 +87,13 @@ public class CrossBow : MonoBehaviour
         //SI GOLPEA ALGO SE PARA Y SE QUEDA PEGADO
         if (actualStuck >= stuckTime)
         {
+            Debug.Log("Wp: Stuck");
             Stuck = true;
             Thrown = false;
             body2D.velocity = new Vector2(0, 0);
             Uses--;
             actualStuck = 0f;
-            Debug.Log("Wp: Stuck");
+            transform.gameObject.tag = "Stuck";
         }
     }
 
