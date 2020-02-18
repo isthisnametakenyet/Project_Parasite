@@ -148,4 +148,7 @@ MonoBehaviour:
   Charging: 0
   Thrown: 0
   Landed: 0
+  Stuck: 0
+  Uses: 2
   AttackTime: 2
+  stuckTime: 0.5
