@@ -420,6 +420,11 @@ public class PlayerController2D : MonoBehaviour
                     animator.SetInteger(whichWeaponID, 6);
                     break;
             }
+
+            if (collision.gameObject.tag == "Stuck" && player.GetButtonDown("PickUp") && isWeaponed == false)
+            {
+                //PICKUP
+            }
         }
     }
 
@@ -456,6 +461,11 @@ public class PlayerController2D : MonoBehaviour
             emptyBody.skin = this.skin;
 
             Destroy(gameObject); //AUTODESTRUCCION
+        }
+
+        if (collision.gameObject.tag == "Attacking" && collision.gameObject != PickedWeapon)
+        {
+            //LOSE ARM
         }
     }
 }

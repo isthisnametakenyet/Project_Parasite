@@ -406,6 +406,11 @@ public class EmptyBody : MonoBehaviour
                     whichWeapon = 6;
                     break;
             }
+
+            if (collision.gameObject.tag == "Stuck" && player.GetButtonDown("PickUp") && isWeaponed == false)
+            {
+                //PICKUP
+            }
         }
     }
 
@@ -441,7 +446,7 @@ public class EmptyBody : MonoBehaviour
 
         if (collision.gameObject.tag == "Attacking" && collision.gameObject != PickedWeapon)
         {
-
+            //LOSE ARM
         }
     }
 }
