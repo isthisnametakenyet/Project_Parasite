@@ -35,9 +35,10 @@ public class PlayerController2D : MonoBehaviour
     public float runSpeed = 2f; 
     public float jumpStrengh = 6.5f;
     public float headReturnDelay = 2f;
-    public float maxWeaponCharge = 2f;
+    public float maxWeaponCharge = 1.5f;
+    public float throwWeaponSpeed = 8f;
     public float headThrowCharge = 2f;
-    public float forgetWeaponChargeRange = 0.4f;
+    public float forgetWeaponChargeRange = 0.3f;
     public float forgetHeadThrowRange = 0.4f;
 
     //TEMPORALES
@@ -292,11 +293,11 @@ public class PlayerController2D : MonoBehaviour
 
             if (facingright == true) //THROW WEAPON with headCharge as force
             {
-                weaponRigid.velocity = new Vector2(weaponCharge * 4f, 0);
+                weaponRigid.velocity = new Vector2(throwWeaponSpeed, 0);
             }
             else if (facingright == false)
             {
-                weaponRigid.velocity = new Vector2(-weaponCharge * 4f, 0);
+                weaponRigid.velocity = new Vector2(-throwWeaponSpeed, 0);
             }
             weaponCharge = 0;
             animator.SetBool(WeaponingID, false);

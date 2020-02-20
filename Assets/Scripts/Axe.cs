@@ -24,7 +24,7 @@ public class Axe : MonoBehaviour
     public int Uses = 2;
     public float AttackTime = 2f;
     private float actualAttack = 0f;
-    public float stuckTime = 0.5f;
+    public float stuckTime = 0.3f;
     private float actualStuck = 0f;
     BoxCollider2D collider2D;
     Rigidbody2D body2D;

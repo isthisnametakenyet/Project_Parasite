@@ -151,4 +151,4 @@ MonoBehaviour:
   Stuck: 0
   Uses: 2
   AttackTime: 2
-  stuckTime: 0.5
+  stuckTime: 0.3

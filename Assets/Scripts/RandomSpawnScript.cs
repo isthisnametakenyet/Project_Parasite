@@ -18,7 +18,7 @@ public class RandomSpawnScript : MonoBehaviour
     public float spawnMinRate = 7f;
 
     // positions to spawn the prefabs
-    Vector3[] positionsMap1 = new[] { new Vector3(0f, 0f, 0f), new Vector3(1f, 1f, 1f), new Vector3(2f, 2f, 2f), new Vector3(3f, 3f, 3f), new Vector3(4f, 4f, 4f) };
+    Vector3[] positionsMap1 = new[] { new Vector3(1f, 0f, 0f), new Vector3(0f, -1f, 0f), new Vector3(-1f, 0f, 0f), new Vector3(0f, 1f, 0f), new Vector3(0f, 0f, 0f) };
     Vector3[] positionsMap2 = new[] { new Vector3(0f, 0f, 0f), new Vector3(5f, 5f, 5f), new Vector3(-2f, -2f, -2f), new Vector3(-3f, -3f, -3f), new Vector3(-4f, -4f, -4f) };
     Vector3[] positionsMap3 = new[] { new Vector3(0f, 0f, 0f), new Vector3(10f, 10f, 10f), new Vector3(-2f, -2f, -2f), new Vector3(3f, 3f, 3f), new Vector3(-4f, -4f, -4f) };
 

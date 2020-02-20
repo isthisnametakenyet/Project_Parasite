@@ -1359,7 +1359,7 @@ PrefabInstance:
     - target: {fileID: 8940266391300385506, guid: db4c6c334c299ae45ac64f060c984ab4,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.66
+      value: -0.7
       objectReference: {fileID: 0}
     - target: {fileID: 8940266391300385506, guid: db4c6c334c299ae45ac64f060c984ab4,
         type: 3}
@@ -1410,6 +1410,11 @@ PrefabInstance:
         type: 3}
       propertyPath: controller
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8940266391300385504, guid: db4c6c334c299ae45ac64f060c984ab4,
+        type: 3}
+      propertyPath: throwWeaponSpeed
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: db4c6c334c299ae45ac64f060c984ab4, type: 3}
@@ -2064,6 +2069,11 @@ PrefabInstance:
         type: 3}
       propertyPath: controller
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8940266391300385504, guid: db4c6c334c299ae45ac64f060c984ab4,
+        type: 3}
+      propertyPath: throwWeaponSpeed
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: db4c6c334c299ae45ac64f060c984ab4, type: 3}
