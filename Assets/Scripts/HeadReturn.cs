@@ -19,6 +19,8 @@ public class HeadReturn : MonoBehaviour
     float Wait = 0;
     public bool Stunned = false;
     public bool ParasiteReturn = false;
+    public bool isDead = false;
+    public bool Returning = false;
 
     private int BackID;
 
@@ -49,37 +51,38 @@ public class HeadReturn : MonoBehaviour
             case Controller.PLAYER3:
                 player = ReInput.players.GetPlayer(3);
                 break;
+
+            default:
+                isDead = true;
+                break;
         }
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
-        if (Stunned == true && Wait < MaxStun)
+        if (isDead == false)
         {
-            Wait += Time.deltaTime * 1f;
-            Debug.Log("Stun:" + Wait);
-        }
-        else { Stunned = false; }
+            if (Stunned == true && Wait < MaxStun)
+            {
+                Wait += Time.deltaTime * 1f;
+                Debug.Log("Stun:" + Wait);
+            }
+            else { Stunned = false; }
 
-        if (player.GetButtonDown("Head Return") && Stunned == false)
-        {
-            animator.Play(BackID);
+            if (player.GetButtonDown("Head Return") && Stunned == false || Returning == true)
+            {
+                animator.Play(BackID);
 
-            this.transform.position = new Vector3(OriginalBody.transform.position.x, OriginalBody.transform.position.y, 0);
-            GameObject player = Instantiate(PlayerAll, new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
+                this.transform.position = new Vector3(OriginalBody.transform.position.x, OriginalBody.transform.position.y, 0);
+                GameObject player = Instantiate(PlayerAll, new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
 
-            playerAll = player.GetComponent<PlayerController2D>();
-            playerAll.controller = this.controller;
-            playerAll.skin = this.skin;
+                playerAll = player.GetComponent<PlayerController2D>();
+                playerAll.controller = this.controller;
+                playerAll.skin = this.skin;
 
-            Destroy(OriginalBody);
-            Destroy(gameObject); //AUTODESTRUCCION
-        }
-
-        if (ParasiteReturn == true)
-        {
-
+                Destroy(OriginalBody);
+                Destroy(gameObject); //AUTODESTRUCCION
+            }
         }
     }
 }

@@ -16,6 +16,7 @@ public class HeadThrow : MonoBehaviour
 
     public GameObject OriginalBody;
     public GameObject PlayerAll;
+    public GameObject HeadDead;
     private PlayerController2D playerAll;
     private EmptyBody collisionScript;
     private EmptyBody returnScript;
@@ -71,7 +72,14 @@ public class HeadThrow : MonoBehaviour
     }
 
     private void FixedUpdate()
-    {//RETURN TO EMPTY
+    {
+        if (OriginalBody == null)
+        {
+            GameObject headDead = Instantiate(HeadDead, new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
+            Destroy(gameObject); //AUTODESTRUCCION
+        }
+
+        //RETURN TO EMPTY
         if (BadThrow == true && actualStun < floorStunMax) { actualStun += Time.deltaTime; canReturn = false; }
         else if (actualStun >= floorStunMax) { canReturn = true; }
 

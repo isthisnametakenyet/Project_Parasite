@@ -15,7 +15,9 @@ public class EmptyBody : MonoBehaviour
     private Player player;
 
     public GameObject Parasite;
+    public GameObject ReturnParasite;
     private HeadThrow parasiteScript;
+    private HeadReturn headReturn;
 
     //WEAPONS PICKUP
     public GameObject PickedWeapon;
@@ -451,6 +453,18 @@ public class EmptyBody : MonoBehaviour
 
         if (collision.gameObject.tag == "Damage") //DEATH
         {
+
+            GameObject returnParasite = Instantiate(ReturnParasite, new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
+            headReturn = returnParasite.GetComponent<HeadReturn>(); //ASIGN ITS RIGID
+
+            parasiteScript = Parasite.GetComponent<HeadThrow>();
+            headReturn.skin = parasiteScript.skin;
+            headReturn.OriginalBody = parasiteScript.OriginalBody;
+            headReturn.controller = this.controller;
+            headReturn.Returning = true;
+
+            //ANIMACION & SONIDO DE MUERTE
+
             Destroy(gameObject); //AUTODESTRUCCION
         }
     }

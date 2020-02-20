@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8940266391300385509}
   - component: {fileID: 8940266391300385508}
   m_Layer: 9
-  m_Name: place_Player (1)
+  m_Name: place_Player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -108,7 +108,7 @@ MonoBehaviour:
   runSpeed: 2
   jumpStrengh: 10
   headReturnDelay: 2
-  maxWeaponCharge: 3
+  maxWeaponCharge: 2
   headThrowCharge: 2
   forgetWeaponChargeRange: 0.4
   forgetHeadThrowRange: 0.4

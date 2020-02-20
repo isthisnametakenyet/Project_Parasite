@@ -98,8 +98,15 @@ MonoBehaviour:
   skin: 0
   NONE: {fileID: 21300000, guid: 50433d92bfcb76b4eb16c5f797e6d2f5, type: 3}
   OriginalBody: {fileID: 0}
-  PlayerAll: {fileID: 2741911751103152782, guid: 4024a1b0451196f4391612bc284b5795,
+  PlayerAll: {fileID: 8940266391300385515, guid: db4c6c334c299ae45ac64f060c984ab4,
     type: 3}
+  HeadDead: {fileID: 4497101520460140210, guid: e5f7053439fc2fe4494641d0061ac6c9,
+    type: 3}
+  floorStunMax: 2
+  expulsedStunMax: 3
+  Expulsed: 0
+  GoBack: 0
+  canReturn: 1
 --- !u!50 &8746114737944884127
 Rigidbody2D:
   serializedVersion: 4

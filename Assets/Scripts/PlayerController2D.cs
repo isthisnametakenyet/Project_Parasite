@@ -35,7 +35,7 @@ public class PlayerController2D : MonoBehaviour
     public float runSpeed = 2f; 
     public float jumpStrengh = 6.5f;
     public float headReturnDelay = 2f;
-    public float maxWeaponCharge = 3f;
+    public float maxWeaponCharge = 2f;
     public float headThrowCharge = 2f;
     public float forgetWeaponChargeRange = 0.4f;
     public float forgetHeadThrowRange = 0.4f;
@@ -270,7 +270,6 @@ public class PlayerController2D : MonoBehaviour
                     break;
                 case 2:
                     axeScript.Thrown = true;
-                    Debug.Log("axethrow");
                     break;
                 case 3:
                     spearScript.Thrown = true;
@@ -293,11 +292,11 @@ public class PlayerController2D : MonoBehaviour
 
             if (facingright == true) //THROW WEAPON with headCharge as force
             {
-                weaponRigid.velocity = new Vector2(weaponCharge * 2.2f, 0);
+                weaponRigid.velocity = new Vector2(weaponCharge * 4f, 0);
             }
             else if (facingright == false)
             {
-                weaponRigid.velocity = new Vector2(-weaponCharge * 2.2f, 0);
+                weaponRigid.velocity = new Vector2(-weaponCharge * 4f, 0);
             }
             weaponCharge = 0;
             animator.SetBool(WeaponingID, false);
@@ -374,7 +373,6 @@ public class PlayerController2D : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-
         if (collision.gameObject.tag == "Floor")
         {
             animator.SetBool(GroundingID, true);
@@ -382,7 +380,6 @@ public class PlayerController2D : MonoBehaviour
     }
     private void OnCollisionExit2D(Collision2D collision)
     {
-
         if (collision.gameObject.tag == "Floor")
         {
             animator.SetBool(GroundingID, false);
@@ -471,6 +468,7 @@ public class PlayerController2D : MonoBehaviour
 
         if (collision.gameObject.tag == "Damage") //DEATH
         {
+            Debug.Log("Touch Sierra");
             GameObject head = Instantiate(HeadFall, new Vector3(transform.position.x, transform.position.y + 0.3f, 0), Quaternion.identity);
 
             Rigidbody2D headRigid;
@@ -486,11 +484,6 @@ public class PlayerController2D : MonoBehaviour
                 headRigid.velocity = new Vector2(-headCharge * 1.8f, 2f);
             }
             else { Debug.LogError("Error Detectando Direccion de Collision"); }
-
-            box2D = head.GetComponent<BoxCollider2D>();
-            headThrow = head.GetComponent<HeadThrow>();
-            box2D.enabled = false;
-            headThrow.enabled = false;
 
             Destroy(gameObject); //AUTODESTRUCCION
         }
