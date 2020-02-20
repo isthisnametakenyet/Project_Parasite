@@ -82,7 +82,7 @@ public class Axe : MonoBehaviour
             //START ANIMATION THROW
         }
         if (actualAttack <= AttackTime && inUse == true && Charging == false) { actualAttack += Time.deltaTime; } 
-        else if (Thrown == false) { inUse = false; Idle = true; Attack = false; } //TIEMPO Q DURA LA ANIMACION D ATAQUE
+        else if (Thrown == false && Stuck == false) { inUse = false; Idle = true; Attack = false; } //TIEMPO Q DURA LA ANIMACION D ATAQUE
 
         //SI GOLPEA ALGO SE PARA Y SE QUEDA PEGADO
         if (actualStuck >= stuckTime)
@@ -92,8 +92,9 @@ public class Axe : MonoBehaviour
             Thrown = false;
             body2D.velocity = new Vector2(0,0);
             Uses--;
-            actualStuck = 0f;
             transform.gameObject.tag = "Stuck";
+            collider2D.enabled = true;
+            actualStuck = 0f;
         }
     }
 

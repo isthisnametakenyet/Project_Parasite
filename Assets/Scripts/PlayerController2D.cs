@@ -419,11 +419,28 @@ public class PlayerController2D : MonoBehaviour
                     animator.SetInteger(whichWeaponID, 6);
                     break;
             }
-
-            if (collision.gameObject.tag == "Stuck" && player.GetButtonDown("PickUp") && isWeaponed == false)
+        }
+        else if (collision.gameObject.tag == "Stuck" && player.GetButtonDown("PickUp") && isWeaponed == false)  //RE-PICKUP
+        {
+            switch (collision.gameObject.name)
             {
-                //PICKUP
+                case "place_sword(Clone)":
+                    swordScript = collision.GetComponent<Sword>();
+                    swordScript.Picker = this.gameObject;
+                    animator.SetInteger(whichWeaponID, 1);
+                    break;
+                case "place_axe(Clone)":
+                    axeScript = collision.GetComponent<Axe>();
+                    axeScript.Picker = this.gameObject;
+                    animator.SetInteger(whichWeaponID, 2);
+                    break;
+                case "place_spear(Clone)":
+                    spearScript = collision.GetComponent<Spear>();
+                    spearScript.Picker = this.gameObject;
+                    animator.SetInteger(whichWeaponID, 3);
+                    break;
             }
+
         }
     }
 
