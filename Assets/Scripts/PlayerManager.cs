@@ -41,7 +41,6 @@ public class PlayerManager : MonoBehaviour
         for (int i = 0; i < numPlayers; i++)
         {
             scorePlayers[i] = 0;
-
         }
     }
 }

@@ -81,6 +81,7 @@ public class PlayerJoin : MonoBehaviour
         else { AllConnected(); }
     }
 
+    //Player Join Functions
     void PlayerConnect(GameObject icon, Color colorChange, GameObject playerTxt, int numPlayer)
     {
         SpriteRenderer playerColor = icon.GetComponent<SpriteRenderer>();
@@ -105,6 +106,8 @@ public class PlayerJoin : MonoBehaviour
                 PlayerManager.Instance.Player4ON = true;
                 break;
         }
+
+        PlayerManager.Instance.AddPlayer();
     }
     void PlayerDisconnect(GameObject icon, Color colorChange, GameObject playerTxt, int numPlayer)
     {
@@ -130,7 +133,10 @@ public class PlayerJoin : MonoBehaviour
                 PlayerManager.Instance.Player4ON = false;
                 break;
         }
+        PlayerManager.Instance.DeletePlayer();
     }
+
+    //PressToJoin Animation
     void PressAnim()
     {
         Text actualTxt = PressToJoin.GetComponent<Text>();
@@ -149,8 +155,6 @@ public class PlayerJoin : MonoBehaviour
                 actualTxt.color = selectGreen;
                 break;
         }
-        //actualTxt.color = ;
-
     }
     void AllConnected()
     {
