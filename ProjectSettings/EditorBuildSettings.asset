@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/sample_SceneChange.unity
     guid: c90cc119f566165438e8a092296b1faf
   - enabled: 1
+    path: Assets/Scenes/sample_PlayerConnect.unity
+    guid: 549f420e5d48b5c4a972cdd00130598b
+  - enabled: 1
     path: Assets/Scenes/sample_MecanicaPrincipal.unity
     guid: 3a86dfc9fa541e344a920faf56c106d3
   - enabled: 1
