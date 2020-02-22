@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bow : MonoBehaviour
+public class CrossBow : MonoBehaviour
 {
     public GameObject Picker;
     private PlayerController2D pickerPlayerScript;
     private EmptyBody pickerEmptyScript;
     private PlayerController2D playerScript;
     private EmptyBody emptyScript;
-    public Sprite bowSprite;
+    public Sprite crossbowSprite;
     public GameObject Arrow;
     private Arrow arrowScript;
 

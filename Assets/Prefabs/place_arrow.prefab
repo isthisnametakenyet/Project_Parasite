@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &8543419847265760279
+--- !u!1 &7382603600782899059
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,39 +8,39 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 129957171609308264}
-  - component: {fileID: 2104723247667026329}
-  - component: {fileID: 1947854526900297370}
-  - component: {fileID: 599510520671853798}
-  - component: {fileID: 4416291337725197103}
+  - component: {fileID: 3911222173408979741}
+  - component: {fileID: 6893476188857154619}
+  - component: {fileID: 2136347100146409588}
+  - component: {fileID: 7991772641057145693}
+  - component: {fileID: 6596026375303345628}
   m_Layer: 12
-  m_Name: place_bow
-  m_TagString: Weapon
+  m_Name: place_arrow
+  m_TagString: Throwing
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &129957171609308264
+--- !u!4 &3911222173408979741
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8543419847265760279}
+  m_GameObject: {fileID: 7382603600782899059}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.004, y: 0.0045, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &2104723247667026329
+--- !u!212 &6893476188857154619
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8543419847265760279}
+  m_GameObject: {fileID: 7382603600782899059}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -71,51 +71,51 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 8cf2ed2bc07b49d449c2726b1a2fcd42, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c25e6b3788b167341bdfbf5d9823f2a2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.29, y: 2.118}
+  m_Size: {x: 0.716, y: 0.548}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &1947854526900297370
+--- !u!61 &2136347100146409588
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8543419847265760279}
-  m_Enabled: 0
+  m_GameObject: {fileID: 7382603600782899059}
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.046297472, y: 0.012626767}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.29, y: 2.118}
-    newSize: {x: 0.29, y: 2.118}
+    oldSize: {x: 320, y: 68}
+    newSize: {x: 0.716, y: 0.548}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.19740507, y: 1.6886961}
+  m_Size: {x: 300, y: 30}
   m_EdgeRadius: 0
---- !u!50 &599510520671853798
+--- !u!50 &7991772641057145693
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8543419847265760279}
+  m_GameObject: {fileID: 7382603600782899059}
   m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
@@ -127,30 +127,17 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
---- !u!114 &4416291337725197103
+--- !u!114 &6596026375303345628
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8543419847265760279}
+  m_GameObject: {fileID: 7382603600782899059}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca03098e1bd8a59408063985104d0f06, type: 3}
+  m_Script: {fileID: 11500000, guid: 07495093069561b42b90d665e114728c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Picker: {fileID: 0}
-  bowSprite: {fileID: 0}
-  Arrow: {fileID: 7382603600782899059, guid: 60dffed7062884b4faed5b9b199217e1, type: 3}
-  arrowScript: {fileID: 0}
-  Idle: 0
-  Attack: 0
-  Charging: 0
-  Thrown: 0
-  Landed: 0
-  Stuck: 0
-  Uses: 2
-  AttackTime: 2
-  arrowSpeed: 2

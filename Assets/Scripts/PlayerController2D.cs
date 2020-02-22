@@ -440,7 +440,6 @@ public class PlayerController2D : MonoBehaviour
                     animator.SetInteger(whichWeaponID, 3);
                     break;
             }
-
         }
     }
 
