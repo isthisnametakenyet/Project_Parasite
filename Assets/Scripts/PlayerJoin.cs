@@ -20,15 +20,21 @@ public class PlayerJoin : MonoBehaviour
 
     void Start()
     {
-        selectRed = new Color(200, 200, 200, 255);
-        ColorUtility.TryParseHtmlString("", out selectRed);
+        //selectRed = new Color(200, 200, 200, 255);
+        ColorUtility.TryParseHtmlString("#FF0000", out selectRed);
         ColorUtility.TryParseHtmlString("#8C0000", out disconectRed); 
     }
 
     void Update()
     {
-        //PlayerConnect(Player1Icon, Player1Text, 1);
-        //Player1Icon.gameObject.SpriteRend.color = Color.red;
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            PlayerDisconnect(Player1Icon, disconectRed, Player1Text, 1);
+        }
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            PlayerConnect(Player1Icon, selectRed, Player1Text, 1);
+        }
     }
 
     void PlayerConnect(GameObject icon, Color colorChange, GameObject playerTxt, int numPlayer)
