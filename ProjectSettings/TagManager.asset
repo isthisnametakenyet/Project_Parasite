@@ -15,6 +15,7 @@ TagManager:
   - Attacking
   - Throwing
   - Stuck
+  - FreeArm
   layers:
   - Default
   - TransparentFX

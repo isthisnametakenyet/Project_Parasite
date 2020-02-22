@@ -42,8 +42,14 @@ public class Boomerang : MonoBehaviour
 
     void FixedUpdate()
     {
-        //Debug.Log("tis but an axe");
-        if (Uses == 0 && inUse == false) { Destroy(gameObject); } //AUTODESTRUCCION
+        if (Uses == 0 && inUse == false)
+        {
+            if (Picker.gameObject.tag == "Player") { pickerPlayerScript.isWeaponed = false; }
+
+            else if (Picker.gameObject.tag == "EmptyBody") { pickerEmptyScript.isWeaponed = false; }
+
+            Destroy(gameObject); //AUTODESTRUCCION
+        }
         else if (Idle == true && collider2D.enabled == true && inUse == false && Thrown == false && Landed == false)
         {
             Debug.Log("Wp: Idle");

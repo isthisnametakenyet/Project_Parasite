@@ -30,7 +30,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8940266391300385515}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.88, y: -3.75, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -98,6 +98,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: 0
   skin: 0
+  arms: 0
   HeadFall: {fileID: 4497101520460140210, guid: e5f7053439fc2fe4494641d0061ac6c9,
     type: 3}
   BodyEmpty: {fileID: 4959081448858527720, guid: fe1dbb5e0e1ec9d46ba6c06ed0cbb8f3,
@@ -109,6 +110,7 @@ MonoBehaviour:
   jumpStrengh: 10
   headReturnDelay: 2
   maxWeaponCharge: 2
+  throwWeaponSpeed: 10
   headThrowCharge: 2
   forgetWeaponChargeRange: 0.4
   forgetHeadThrowRange: 0.4

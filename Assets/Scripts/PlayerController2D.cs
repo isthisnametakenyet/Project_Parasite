@@ -6,20 +6,25 @@ using Rewired;
 
 public enum Controller { NONE, PLAYER0, PLAYER1, PLAYER2, PLAYER3 };
 public enum Skin { NONE, SKIN1, SKIN2 };
+public enum Arms { NONE, ONE, TWO };
 
 public class PlayerController2D : MonoBehaviour
 {
     public Controller controller = Controller.NONE;
     public Skin skin = Skin.NONE;
+    public Arms arms = Arms.NONE;
 
     private Player player;
 
     public GameObject HeadFall;
     public GameObject BodyEmpty;
     public GameObject HeadThrow;
+    public GameObject RightArm;
+    public GameObject LeftArm;
     private HeadThrow headThrow;
     private HeadReturn headReturn;
     private EmptyBody emptyBody;
+    private Arm armScript;
 
     //WEAPONS PICKUP
     public GameObject PickedWeapon;
@@ -36,7 +41,7 @@ public class PlayerController2D : MonoBehaviour
     public float jumpStrengh = 6.5f;
     public float headReturnDelay = 2f;
     public float maxWeaponCharge = 1.5f;
-    public float throwWeaponSpeed = 8f;
+    public float throwWeaponSpeed = 10f;
     public float headThrowCharge = 2f;
     public float forgetWeaponChargeRange = 0.3f;
     public float forgetHeadThrowRange = 0.4f;
@@ -117,11 +122,13 @@ public class PlayerController2D : MonoBehaviour
         DamagedID = Animator.StringToHash("Damaged");
     }
 
+    public bool isWeaponed = false;
+
     private void FixedUpdate(){
         //bool isCondition = animator.GetBool(ConditionID); //animator.SetBool(ConditionID, true);
         bool isGrounded = animator.GetBool(GroundingID);
         bool isMoving = animator.GetBool(MovingID);
-        bool isWeaponed = animator.GetBool(WeaponingID);
+        //bool isWeaponed = animator.GetBool(WeaponingID);
         int whichWeapon = animator.GetInteger(whichWeaponID);
         bool isCharging = animator.GetBool(ChargingID);
         bool isHeading = animator.GetBool(HeadingID);
@@ -300,7 +307,8 @@ public class PlayerController2D : MonoBehaviour
                 weaponRigid.velocity = new Vector2(-throwWeaponSpeed, 0);
             }
             weaponCharge = 0;
-            animator.SetBool(WeaponingID, false);
+            //animator.SetBool(WeaponingID, false);
+            isWeaponed = false;
         }
 
         //HEAD THROW
@@ -389,14 +397,15 @@ public class PlayerController2D : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision) //PICKUP
     {
-        bool isWeaponed = animator.GetBool(WeaponingID); 
+        //bool isWeaponed = animator.GetBool(WeaponingID); 
 
         if (collision.gameObject.tag == "PickUp" && player.GetButtonDown("PickUp") && isWeaponed == false)
         {
             pickUpScript = collision.GetComponent<PickUpScript>();
             pickUpScript.Picker = this.gameObject;
             pickUpScript.picked = true;
-            animator.SetBool(WeaponingID, true);
+            //animator.SetBool(WeaponingID, true);
+            isWeaponed = true;
 
             switch (pickUpScript.picktype)
             {
@@ -422,6 +431,7 @@ public class PlayerController2D : MonoBehaviour
         }
         else if (collision.gameObject.tag == "Stuck" && player.GetButtonDown("PickUp") && isWeaponed == false)  //RE-PICKUP
         {
+            isWeaponed = true;
             switch (collision.gameObject.name)
             {
                 case "place_sword(Clone)":
@@ -480,7 +490,48 @@ public class PlayerController2D : MonoBehaviour
 
         if (collision.gameObject.tag == "Attacking" && collision.gameObject != PickedWeapon)
         {
+            Rigidbody2D armRigid;
+            BoxCollider2D armCollider;
             //LOSE ARM
+            switch (arms)
+            {
+
+                case Arms.NONE:
+                    Debug.Log("boi u stupid"); //WHAT? why?
+                    break;
+
+                case Arms.ONE:
+                    Debug.Log("armles"); //OUT RightArm
+                    arms = Arms.NONE;
+
+                    armScript = RightArm.GetComponent<Arm>();
+                    armScript.armType = ArmType.NONE;
+                    RightArm.transform.parent = null;
+
+                    armCollider = RightArm.GetComponent<BoxCollider2D>();
+                    armCollider.enabled = true;
+                    armCollider.isTrigger = true;
+
+                    armRigid = RightArm.GetComponent<Rigidbody2D>();
+                    armRigid.bodyType = RigidbodyType2D.Dynamic; //CHANGE TO DYNAMIC
+                    break;
+
+                case Arms.TWO:
+                    Debug.Log("1 arm left"); //OUT LeftArm
+                    arms = Arms.ONE;
+
+                    armScript = LeftArm.GetComponent<Arm>();
+                    armScript.armType = ArmType.NONE;
+                    LeftArm.transform.parent = null;
+
+                    armCollider = LeftArm.GetComponent<BoxCollider2D>();
+                    armCollider.enabled = true;
+                    armCollider.isTrigger = true;
+
+                    armRigid = LeftArm.GetComponent<Rigidbody2D>();
+                    armRigid.bodyType = RigidbodyType2D.Dynamic; //CHANGE TO DYNAMIC
+                    break;
+            }
         }
 
         if (collision.gameObject.tag == "Damage") //DEATH

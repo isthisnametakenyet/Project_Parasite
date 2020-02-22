@@ -13,14 +13,17 @@ public class Arrow : MonoBehaviour
 
     //VARIABLES
     private float actualStuck = 0f;
-    public float stuckTime = 0.5f;
+    public float stuckTime = 0.3f;
 
     BoxCollider2D collider2D;
     Rigidbody2D body2D;
+    SpriteRenderer render;
     void Start()
     {
         collider2D = GetComponent<BoxCollider2D>();
         body2D = GetComponent<Rigidbody2D>();
+        render = GetComponent<SpriteRenderer>();
+        if (body2D.velocity.x < 0) { render.flipX = true; }
     }
 
     void FixedUpdate()

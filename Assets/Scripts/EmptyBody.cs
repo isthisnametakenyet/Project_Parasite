@@ -54,7 +54,7 @@ public class EmptyBody : MonoBehaviour
     //private int DamagedID;
     bool isGrounded;
     bool isMoving;
-    bool isWeaponed;
+    public bool isWeaponed;
     bool isCharging;
     bool isDucking = false;
     int whichWeapon;
