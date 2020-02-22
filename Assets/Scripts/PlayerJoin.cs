@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerJoin : MonoBehaviour
@@ -15,30 +13,49 @@ public class PlayerJoin : MonoBehaviour
     public GameObject Player4Text;
     public GameObject PressToJoin;
 
+    Color selectRed;
+    Color disconectRed;
+
     string playerNumString;
 
     void Start()
     {
-        Text Player1TXT = Player1Text.GetComponent<Text>();
-        Text Player2TXT = Player2Text.GetComponent<Text>();
-        Text Player3TXT = Player3Text.GetComponent<Text>();
-        Text Player4TXT = Player4Text.GetComponent<Text>();
-        Text PressToJoinTXT = PressToJoin.GetComponent<Text>();
+        selectRed = new Color(200, 200, 200, 255);
+        ColorUtility.TryParseHtmlString("", out selectRed);
+        ColorUtility.TryParseHtmlString("#8C0000", out disconectRed); 
     }
 
     void Update()
     {
-
+        //PlayerConnect(Player1Icon, Player1Text, 1);
+        //Player1Icon.gameObject.SpriteRend.color = Color.red;
     }
 
-    void PlayerConnect(Text playerTxt, int numPlayer)
+    void PlayerConnect(GameObject icon, Color colorChange, GameObject playerTxt, int numPlayer)
     {
+        SpriteRenderer playerColor = icon.GetComponent<SpriteRenderer>();
+        playerColor.color = colorChange;
+
+        Text actualTxt = playerTxt.GetComponent<Text>();
         playerNumString = numPlayer.ToString();
-        playerTxt.text = "Player " + playerNumString + " Joined";
+        actualTxt.text = "Player " + playerNumString + " Joined";
     }
-    void PlayerDisconnect(Text playerTxt, int numPlayer)
+    void PlayerDisconnect(GameObject icon, Color colorChange, GameObject playerTxt, int numPlayer)
     {
+        SpriteRenderer playerColor = icon.GetComponent<SpriteRenderer>();
+        playerColor.color = colorChange;
+
+        Text actualTxt = playerTxt.GetComponent<Text>();
         playerNumString = numPlayer.ToString();
-        playerTxt.text = "Player " + playerNumString + " Disconnected";
+        actualTxt.text = "Player " + playerNumString + " Disconnected";
+    }
+    void PressAnim()
+    {
+
+    }
+    void AllConnected(GameObject PressToJoin)
+    {
+        Text actualTxt = PressToJoin.GetComponent<Text>();
+        actualTxt.text = "";
     }
 }
