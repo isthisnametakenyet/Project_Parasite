@@ -90,7 +90,7 @@ public class PlayerJoin : MonoBehaviour
     }
     void PressAnim()
     {
-        Text actualTxt = playerTxt.GetComponent<Text>();
+        Text actualTxt = PressToJoin.GetComponent<Text>();
         //actualTxt.color = ;
 
     }
