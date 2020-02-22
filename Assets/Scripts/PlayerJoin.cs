@@ -25,6 +25,8 @@ public class PlayerJoin : MonoBehaviour
     string playerNumString;
 
     float animDelay;
+    float maxDelay = 100;
+    int colorAnim = 0;
 
     void Start()
     {
@@ -54,7 +56,11 @@ public class PlayerJoin : MonoBehaviour
         {
             animDelay--;
         }
-        else { animDelay = 1500; }
+        else {
+            animDelay = maxDelay;
+            colorAnim++;
+            if (colorAnim == 5) { colorAnim = 1; }
+        }
     }
 
     void FixedUpdate()
@@ -91,6 +97,21 @@ public class PlayerJoin : MonoBehaviour
     void PressAnim()
     {
         Text actualTxt = PressToJoin.GetComponent<Text>();
+        switch (colorAnim)
+        {
+            case 1:
+                actualTxt.color = selectRed;
+                break;
+            case 2:
+                actualTxt.color = selectPurple;
+                break;
+            case 3:
+                actualTxt.color = selectYellow;
+                break;
+            case 4:
+                actualTxt.color = selectGreen;
+                break;
+        }
         //actualTxt.color = ;
 
     }
