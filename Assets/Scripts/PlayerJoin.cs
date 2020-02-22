@@ -73,7 +73,12 @@ public class PlayerJoin : MonoBehaviour
         {
             PlayerConnect(Player1Icon, selectRed, Player1Text, 1);
         }
-        PressAnim();
+
+        if (PlayerManager.Instance.Player1ON == false && PlayerManager.Instance.Player2ON == false && PlayerManager.Instance.Player3ON == false && PlayerManager.Instance.Player4ON == false)
+        {
+            PressAnim();
+        }
+        else { AllConnected(); }
     }
 
     void PlayerConnect(GameObject icon, Color colorChange, GameObject playerTxt, int numPlayer)
@@ -84,6 +89,22 @@ public class PlayerJoin : MonoBehaviour
         Text actualTxt = playerTxt.GetComponent<Text>();
         playerNumString = numPlayer.ToString();
         actualTxt.text = "Player " + playerNumString + " Joined";
+
+        switch (numPlayer)
+        {
+            case 1:
+                PlayerManager.Instance.Player1ON = true;
+                break;
+            case 2:
+                PlayerManager.Instance.Player2ON = true;
+                break;
+            case 3:
+                PlayerManager.Instance.Player3ON = true;
+                break;
+            case 4:
+                PlayerManager.Instance.Player4ON = true;
+                break;
+        }
     }
     void PlayerDisconnect(GameObject icon, Color colorChange, GameObject playerTxt, int numPlayer)
     {
@@ -93,6 +114,22 @@ public class PlayerJoin : MonoBehaviour
         Text actualTxt = playerTxt.GetComponent<Text>();
         playerNumString = numPlayer.ToString();
         actualTxt.text = "Player " + playerNumString + " Disconnected";
+
+        switch (numPlayer)
+        {
+            case 1:
+                PlayerManager.Instance.Player1ON = false;
+                break;
+            case 2:
+                PlayerManager.Instance.Player2ON = false;
+                break;
+            case 3:
+                PlayerManager.Instance.Player3ON = false;
+                break;
+            case 4:
+                PlayerManager.Instance.Player4ON = false;
+                break;
+        }
     }
     void PressAnim()
     {
@@ -115,7 +152,7 @@ public class PlayerJoin : MonoBehaviour
         //actualTxt.color = ;
 
     }
-    void AllConnected(GameObject PressToJoin)
+    void AllConnected()
     {
         Text actualTxt = PressToJoin.GetComponent<Text>();
         actualTxt.text = "";

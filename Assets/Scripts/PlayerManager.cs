@@ -8,6 +8,10 @@ public class PlayerManager : MonoBehaviour
     
     public int numPlayers;
     public int[] scorePlayers;
+    public bool Player1ON;
+    public bool Player2ON;
+    public bool Player3ON;
+    public bool Player4ON;
 
     private void Awake()
     {
