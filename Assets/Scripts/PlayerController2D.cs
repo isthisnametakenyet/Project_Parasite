@@ -24,7 +24,8 @@ public class PlayerController2D : MonoBehaviour
     private HeadThrow headThrow;
     private HeadReturn headReturn;
     private EmptyBody emptyBody;
-    private Arm armScript;
+    private Arm rightScript;
+    private Arm leftScript;
 
     //WEAPONS PICKUP
     public GameObject PickedWeapon;
@@ -45,11 +46,14 @@ public class PlayerController2D : MonoBehaviour
     public float headThrowCharge = 2f;
     public float forgetWeaponChargeRange = 0.3f;
     public float forgetHeadThrowRange = 0.4f;
+    public float pickDelay = 0.2f;
 
     //TEMPORALES
     bool facingright = true;
     float headCharge = 0f;
     float weaponCharge = 0f;
+    bool picking = false;
+    float pickTemp = 0;
 
     //CONDITIONS
     private int GroundingID;
@@ -125,7 +129,9 @@ public class PlayerController2D : MonoBehaviour
     public bool isWeaponed = false;
 
     private void FixedUpdate(){
-
+        if (pickDelay <= pickTemp && picking == true) { picking = false; pickTemp = 0; }
+        else if (picking == true) { pickTemp += Time.deltaTime; }
+        
         //bool isCondition = animator.GetBool(ConditionID); //animator.SetBool(ConditionID, true);
         bool isGrounded = animator.GetBool(GroundingID);
         bool isMoving = animator.GetBool(MovingID);
@@ -400,7 +406,7 @@ public class PlayerController2D : MonoBehaviour
     {
         //bool isWeaponed = animator.GetBool(WeaponingID); 
 
-        if (collision.gameObject.tag == "PickUp" && player.GetButtonDown("PickUp") && isWeaponed == false)
+        if (collision.gameObject.tag == "PickUp" && player.GetButtonDown("PickUp") && isWeaponed == false && picking == false)
         {
             pickUpScript = collision.GetComponent<PickUpScript>();
             pickUpScript.Picker = this.gameObject;
@@ -411,44 +417,98 @@ public class PlayerController2D : MonoBehaviour
             switch (pickUpScript.picktype)
             {
                 case PickTypes.Sword:
+                    if (arms == Arms.NONE) { break; }
+                    picking = true;
                     animator.SetInteger(whichWeaponID, 1);
                     break;
                 case PickTypes.Axe:
+                    if (arms == Arms.NONE) { break; }
+                    picking = true;
                     animator.SetInteger(whichWeaponID, 2);
                     break;
                 case PickTypes.Spear:
+                    if (arms == Arms.NONE) { break; }
+                    picking = true;
                     animator.SetInteger(whichWeaponID, 3);
                     break;
                 case PickTypes.Bow:
+                    if (arms == Arms.NONE || arms == Arms.ONE) { break; }
+                    picking = true;
                     animator.SetInteger(whichWeaponID, 4);
                     break;
                 case PickTypes.CrossBow:
+                    if (arms == Arms.NONE || arms == Arms.ONE) { break; }
+                    picking = true;
                     animator.SetInteger(whichWeaponID, 5);
                     break;
                 case PickTypes.Boomerang:
+                    if (arms == Arms.NONE || arms == Arms.ONE) { break; }
+                    picking = true;
                     animator.SetInteger(whichWeaponID, 6);
                     break;
             }
         }
-        else if (collision.gameObject.tag == "Stuck" && player.GetButtonDown("PickUp") && isWeaponed == false)  //RE-PICKUP
+        else if (collision.gameObject.tag == "Stuck" && player.GetButtonDown("PickUp") && isWeaponed == false && picking == false)  //RE-PICKUP
         {
             isWeaponed = true;
             switch (collision.gameObject.name)
             {
                 case "place_sword(Clone)":
+                    if (arms == Arms.NONE) { break; }
+                    picking = true;
                     swordScript = collision.GetComponent<Sword>();
                     swordScript.Picker = this.gameObject;
                     animator.SetInteger(whichWeaponID, 1);
                     break;
                 case "place_axe(Clone)":
+                    if (arms == Arms.NONE) { break; }
+                    picking = true;
                     axeScript = collision.GetComponent<Axe>();
                     axeScript.Picker = this.gameObject;
                     animator.SetInteger(whichWeaponID, 2);
                     break;
                 case "place_spear(Clone)":
+                    if (arms == Arms.NONE) { break; }
+                    picking = true;
                     spearScript = collision.GetComponent<Spear>();
                     spearScript.Picker = this.gameObject;
                     animator.SetInteger(whichWeaponID, 3);
+                    break;
+                case "place_boomerang(Clone)":
+                    if (arms == Arms.NONE || arms == Arms.ONE) { break; }
+                    picking = true;
+                    boomerangScript = collision.GetComponent<Boomerang>();
+                    boomerangScript.Picker = this.gameObject;
+                    animator.SetInteger(whichWeaponID, 6);
+                    break;
+            }
+        }
+        if (collision.gameObject.tag == "FreeArm" && player.GetButtonDown("PickUp") && picking == false)
+        {
+            switch (arms)
+            {
+                case Arms.NONE: //PICKUP ARM NOT HAVING ANY
+                    picking = true;
+                    arms = Arms.ONE;
+                    Debug.Log(controller + "Armed:" + arms);
+
+                    RightArm = collision.gameObject;
+                    RightArm.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, -1);
+                    RightArm.transform.parent = this.transform;
+                    break;
+
+                case Arms.ONE: //PICKUP ARM HAVING ONE
+                    picking = true;
+                    arms = Arms.TWO;
+                    Debug.Log(controller + "Armed:" + arms);
+
+                    LeftArm = collision.gameObject;
+                    LeftArm.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, 1);
+                    LeftArm.transform.parent = this.transform;
+                    break;
+
+                case Arms.TWO: //CANT PICKUP ARM
+                    Debug.Log("Nope");
                     break;
             }
         }
@@ -505,8 +565,55 @@ public class PlayerController2D : MonoBehaviour
                     Debug.Log("armles"); //OUT RightArm
                     arms = Arms.NONE;
 
-                    armScript = RightArm.GetComponent<Arm>();
-                    armScript.armType = ArmType.NONE;
+                    rightScript = RightArm.GetComponent<Arm>();
+                    //rightScript.armType = ArmType.NONE;
+                    RightArm.transform.parent = null;
+
+                    armCollider = RightArm.GetComponent<BoxCollider2D>();
+                    armCollider.enabled = true;
+                    armCollider.isTrigger = true;
+
+                    armRigid = RightArm.GetComponent<Rigidbody2D>();
+                    armRigid.bodyType = RigidbodyType2D.Dynamic; //CHANGE TO DYNAMIC
+                    RightArm = null;
+                    break;
+
+                case Arms.TWO:
+                    Debug.Log("1 arm left"); //OUT LeftArm
+                    arms = Arms.ONE;
+
+                    leftScript = LeftArm.GetComponent<Arm>();
+                    //leftScript.armType = ArmType.NONE;
+                    LeftArm.transform.parent = null;
+
+                    armCollider = LeftArm.GetComponent<BoxCollider2D>();
+                    armCollider.enabled = true;
+                    armCollider.isTrigger = true;
+
+                    armRigid = LeftArm.GetComponent<Rigidbody2D>();
+                    armRigid.bodyType = RigidbodyType2D.Dynamic; //CHANGE TO DYNAMIC
+                    LeftArm = null;
+                    break;
+            }
+        }
+
+        if (collision.gameObject.tag == "Damage") //DEATH
+        {
+            Debug.Log("Touch Sierra [DEATH " + controller + "]");
+            GameObject head = Instantiate(HeadFall, new Vector3(transform.position.x, transform.position.y + 0.3f, 0), Quaternion.identity);
+
+            Rigidbody2D headRigid;
+            headRigid = head.GetComponent<Rigidbody2D>(); //ASIGN HEAD RIGID
+            headCharge = 2f;
+
+            Rigidbody2D armRigid;
+            BoxCollider2D armCollider;
+            //LOSE ARM
+            switch (arms)
+            {
+                case Arms.ONE:
+                    rightScript = RightArm.GetComponent<Arm>();
+                    //rightScript.armType = ArmType.NONE;
                     RightArm.transform.parent = null;
 
                     armCollider = RightArm.GetComponent<BoxCollider2D>();
@@ -518,11 +625,9 @@ public class PlayerController2D : MonoBehaviour
                     break;
 
                 case Arms.TWO:
-                    Debug.Log("1 arm left"); //OUT LeftArm
-                    arms = Arms.ONE;
-
-                    armScript = LeftArm.GetComponent<Arm>();
-                    armScript.armType = ArmType.NONE;
+                    //LEFT ARM DOWN
+                    leftScript = LeftArm.GetComponent<Arm>();
+                    //leftScript.armType = ArmType.NONE;
                     LeftArm.transform.parent = null;
 
                     armCollider = LeftArm.GetComponent<BoxCollider2D>();
@@ -530,19 +635,23 @@ public class PlayerController2D : MonoBehaviour
                     armCollider.isTrigger = true;
 
                     armRigid = LeftArm.GetComponent<Rigidbody2D>();
-                    armRigid.bodyType = RigidbodyType2D.Dynamic; //CHANGE TO DYNAMIC
+                    armRigid.bodyType = RigidbodyType2D.Dynamic;
+                    armRigid.velocity = new Vector2(headCharge * 1.8f, 2f);
+
+                    //RIGHT ARM DOWN
+                    rightScript = RightArm.GetComponent<Arm>();
+                    //rightScript.armType = ArmType.NONE;
+                    RightArm.transform.parent = null;
+
+                    armCollider = RightArm.GetComponent<BoxCollider2D>();
+                    armCollider.enabled = true;
+                    armCollider.isTrigger = true;
+
+                    armRigid = RightArm.GetComponent<Rigidbody2D>();
+                    armRigid.bodyType = RigidbodyType2D.Dynamic; 
+                    armRigid.velocity = new Vector2(headCharge * 1.8f, 2f);
                     break;
             }
-        }
-
-        if (collision.gameObject.tag == "Damage") //DEATH
-        {
-            Debug.Log("Touch Sierra");
-            GameObject head = Instantiate(HeadFall, new Vector3(transform.position.x, transform.position.y + 0.3f, 0), Quaternion.identity);
-
-            Rigidbody2D headRigid;
-            headRigid = head.GetComponent<Rigidbody2D>(); //ASIGN ITS RIGID
-            headCharge = 2f;
 
             if (transform.position.x > collision.transform.position.x) //RIGHT
             {
