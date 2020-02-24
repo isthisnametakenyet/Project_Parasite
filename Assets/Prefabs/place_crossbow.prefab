@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6113518691373144293}
   - component: {fileID: 9105266587001376358}
   - component: {fileID: 3360823825880402151}
-  - component: {fileID: 1906826083073399395}
+  - component: {fileID: 8766024848246269319}
   m_Layer: 12
   m_Name: place_crossbow
   m_TagString: Weapon
@@ -129,7 +129,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &1906826083073399395
+--- !u!114 &8766024848246269319
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
