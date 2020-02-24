@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum ArmType { NONE, LEFT, RIGHT };
+//public enum ArmType { NONE, LEFT, RIGHT }; //MAYBE DELETE
 
 public class Arm : MonoBehaviour
 {
-    public ArmType armType = ArmType.NONE;
+    //public ArmType armType = ArmType.NONE; //MAYBE DELETE
 
     public GameObject pickUpRange;
 

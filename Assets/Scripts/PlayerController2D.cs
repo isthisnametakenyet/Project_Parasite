@@ -566,7 +566,7 @@ public class PlayerController2D : MonoBehaviour
                     arms = Arms.NONE;
 
                     rightScript = RightArm.GetComponent<Arm>();
-                    rightScript.armType = ArmType.NONE;
+                    //rightScript.armType = ArmType.NONE;
                     RightArm.transform.parent = null;
 
                     armCollider = RightArm.GetComponent<BoxCollider2D>();
@@ -575,6 +575,7 @@ public class PlayerController2D : MonoBehaviour
 
                     armRigid = RightArm.GetComponent<Rigidbody2D>();
                     armRigid.bodyType = RigidbodyType2D.Dynamic; //CHANGE TO DYNAMIC
+                    RightArm = null;
                     break;
 
                 case Arms.TWO:
@@ -582,7 +583,7 @@ public class PlayerController2D : MonoBehaviour
                     arms = Arms.ONE;
 
                     leftScript = LeftArm.GetComponent<Arm>();
-                    leftScript.armType = ArmType.NONE;
+                    //leftScript.armType = ArmType.NONE;
                     LeftArm.transform.parent = null;
 
                     armCollider = LeftArm.GetComponent<BoxCollider2D>();
@@ -591,6 +592,7 @@ public class PlayerController2D : MonoBehaviour
 
                     armRigid = LeftArm.GetComponent<Rigidbody2D>();
                     armRigid.bodyType = RigidbodyType2D.Dynamic; //CHANGE TO DYNAMIC
+                    LeftArm = null;
                     break;
             }
         }
@@ -611,7 +613,7 @@ public class PlayerController2D : MonoBehaviour
             {
                 case Arms.ONE:
                     rightScript = RightArm.GetComponent<Arm>();
-                    rightScript.armType = ArmType.NONE;
+                    //rightScript.armType = ArmType.NONE;
                     RightArm.transform.parent = null;
 
                     armCollider = RightArm.GetComponent<BoxCollider2D>();
@@ -625,7 +627,7 @@ public class PlayerController2D : MonoBehaviour
                 case Arms.TWO:
                     //LEFT ARM DOWN
                     leftScript = LeftArm.GetComponent<Arm>();
-                    leftScript.armType = ArmType.NONE;
+                    //leftScript.armType = ArmType.NONE;
                     LeftArm.transform.parent = null;
 
                     armCollider = LeftArm.GetComponent<BoxCollider2D>();
@@ -638,7 +640,7 @@ public class PlayerController2D : MonoBehaviour
 
                     //RIGHT ARM DOWN
                     rightScript = RightArm.GetComponent<Arm>();
-                    rightScript.armType = ArmType.NONE;
+                    //rightScript.armType = ArmType.NONE;
                     RightArm.transform.parent = null;
 
                     armCollider = RightArm.GetComponent<BoxCollider2D>();
