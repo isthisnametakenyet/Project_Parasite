@@ -125,6 +125,7 @@ public class PlayerController2D : MonoBehaviour
     public bool isWeaponed = false;
 
     private void FixedUpdate(){
+
         //bool isCondition = animator.GetBool(ConditionID); //animator.SetBool(ConditionID, true);
         bool isGrounded = animator.GetBool(GroundingID);
         bool isMoving = animator.GetBool(MovingID);

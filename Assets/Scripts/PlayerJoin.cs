@@ -1,5 +1,7 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
+using Rewired;
 
 public class PlayerJoin : MonoBehaviour
 {
@@ -61,20 +63,27 @@ public class PlayerJoin : MonoBehaviour
             colorAnim++;
             if (colorAnim == 5) { colorAnim = 1; }
         }
+
+
+        //if (!ReInput.isReady) return;
+        //AssignController();
     }
 
     void FixedUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            PlayerDisconnect(Player1Icon, disconectRed, Player1Text, 1);
-        }
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            PlayerConnect(Player1Icon, selectRed, Player1Text, 1);
-        }
+        //if (Input.GetKeyDown(KeyCode.A))
+        //{
+        //    PlayerDisconnect(Player1Icon, disconectRed, Player1Text, 1);
+        //}
+        //if (Input.GetKeyDown(KeyCode.S))
+        //{
+        //    PlayerConnect(Player1Icon, selectRed, Player1Text, 1);
+        //}
 
-        if (PlayerManager.Instance.Player1ON == false && PlayerManager.Instance.Player2ON == false && PlayerManager.Instance.Player3ON == false && PlayerManager.Instance.Player4ON == false)
+        if (PlayerManager.Instance.Player1ON == false &&
+            PlayerManager.Instance.Player2ON == false &&
+            PlayerManager.Instance.Player3ON == false &&
+            PlayerManager.Instance.Player4ON == false)
         {
             PressAnim();
         }
@@ -106,9 +115,8 @@ public class PlayerJoin : MonoBehaviour
                 PlayerManager.Instance.Player4ON = true;
                 break;
         }
-
-        PlayerManager.Instance.AddPlayer();
     }
+
     void PlayerDisconnect(GameObject icon, Color colorChange, GameObject playerTxt, int numPlayer)
     {
         SpriteRenderer playerColor = icon.GetComponent<SpriteRenderer>();
@@ -133,8 +141,59 @@ public class PlayerJoin : MonoBehaviour
                 PlayerManager.Instance.Player4ON = false;
                 break;
         }
-        PlayerManager.Instance.DeletePlayer();
     }
+
+    //private void AssignController()
+    //{
+    //    // Check all joysticks for a button press and assign it tp
+    //    // the first Player foudn without a joystick
+    //    IList<Joystick> joysticks = ReInput.controllers.Joysticks;
+    //    for (int i = 0; i < joysticks.Count; i++)
+    //    {
+    //        Debug.Log(joysticks[i]);
+    //        Joystick joystick = joysticks[i];
+    //        if (ReInput.controllers.IsControllerAssigned(joystick.type, joystick.id)) continue; // joystick is already assigned to a Player
+
+    //        // Chec if a button was pressed on the joystick
+    //        if (joystick.GetAnyButtonDown())
+    //        {
+
+    //            // Find the next Player without a Joystick
+    //            Player player = FindPlayerWithoutJoystick();
+    //            if (player == null) return; // no free joysticks
+
+    //            // Assign the joystick to this Player
+    //            player.controllers.AddController(joystick, false);
+    //        }
+    //    }
+
+    //    // If all players have joysticks, enable joystick auto-assignment
+    //    // so controllers are re-assigned correctly when a joystick is disconnected
+    //    // and re-connected and disable this script
+    //    if (DoAllPlayersHaveJoysticks())
+    //    {
+    //        ReInput.configuration.autoAssignJoysticks = true;
+    //        this.enabled = false; // disable this script
+    //    }
+
+    //}
+
+    //// Searches all Players to find the next Player without a Joystick assigned
+    //private Player FindPlayerWithoutJoystick()
+    //{
+    //    IList<Player> players = ReInput.players.Players;
+    //    for (int i = 0; i < players.Count; i++)
+    //    {
+    //        if (players[i].controllers.joystickCount > 0) continue;
+    //        return players[i];
+    //    }
+    //    return null;
+    //}
+
+    //private bool DoAllPlayersHaveJoysticks()
+    //{
+    //    return FindPlayerWithoutJoystick() == null;
+    //}
 
     //PressToJoin Animation
     void PressAnim()
