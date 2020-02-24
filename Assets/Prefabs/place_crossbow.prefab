@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6113518691373144293}
   - component: {fileID: 9105266587001376358}
   - component: {fileID: 3360823825880402151}
+  - component: {fileID: 8766024848246269319}
   m_Layer: 12
   m_Name: place_crossbow
   m_TagString: Weapon
@@ -128,3 +129,26 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &8766024848246269319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3346044492393024279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5de563ab71118444780d61d8fb28ed32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Picker: {fileID: 0}
+  crossbowSprite: {fileID: 0}
+  Arrow: {fileID: 7382603600782899059, guid: 60dffed7062884b4faed5b9b199217e1, type: 3}
+  Idle: 0
+  Attack: 0
+  Charging: 0
+  Thrown: 0
+  Landed: 0
+  Uses: 1
+  AttackTime: 2
+  arrowSpeed: 2
