@@ -26,6 +26,7 @@ public class PlayerController2D : MonoBehaviour
     private EmptyBody emptyBody;
     private Arm rightScript;
     private Arm leftScript;
+    private Transform ArmParent;
 
     //WEAPONS PICKUP
     public GameObject PickedWeapon;
@@ -492,9 +493,11 @@ public class PlayerController2D : MonoBehaviour
                     arms = Arms.ONE;
                     Debug.Log(controller + "Armed:" + arms);
 
-                    RightArm = collision.gameObject;
-                    RightArm.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, -1);
-                    RightArm.transform.parent = this.transform;
+                    collision.gameObject.transform.parent.transform.parent = this.transform;
+                    RightArm = collision.gameObject.transform.parent.gameObject;
+                    collision.gameObject.transform.parent.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, 1);
+                    collision.gameObject.transform.parent.gameObject.GetComponent<BoxCollider2D>().enabled = true;
+                    collision.gameObject.gameObject.GetComponent<BoxCollider2D>().enabled = false;
                     break;
 
                 case Arms.ONE: //PICKUP ARM HAVING ONE
@@ -502,10 +505,12 @@ public class PlayerController2D : MonoBehaviour
                     arms = Arms.TWO;
                     Debug.Log(controller + "Armed:" + arms);
 
-                    LeftArm = collision.gameObject;
-                    LeftArm.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, 1);
-                    LeftArm.transform.parent = this.transform;
-                    break;
+                    collision.gameObject.transform.parent.transform.parent = this.transform;
+                    LeftArm = collision.gameObject.transform.parent.gameObject;
+                    collision.gameObject.transform.parent.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, 1);
+                    collision.gameObject.transform.parent.gameObject.GetComponent<BoxCollider2D>().enabled = true;
+                    collision.gameObject.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+                    break; 
 
                 case Arms.TWO: //CANT PICKUP ARM
                     Debug.Log("Nope");
