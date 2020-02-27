@@ -18,6 +18,7 @@ public class Boomerang : MonoBehaviour
     public bool Thrown = false;
     public bool Landed = false;
     public bool Stuck = false;
+    public bool Drop = false;
     private bool inUse = false;
 
     //VARIABLES
@@ -42,7 +43,11 @@ public class Boomerang : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (Uses == 0 && inUse == false)
+        if(Drop == true)
+        {
+            Idle = false;
+        }
+        else if (Uses == 0 && inUse == false)
         {
             if (Picker.gameObject.tag == "Player") { pickerPlayerScript.isWeaponed = false; }
 
@@ -87,9 +92,9 @@ public class Boomerang : MonoBehaviour
             transform.gameObject.tag = "Throwing";
             //START ANIMATION THROW
         }
+
         if (actualAttack <= AttackTime && inUse == true && Charging == false) { actualAttack += Time.deltaTime; }
         else if (Thrown == false) { inUse = false; Idle = true; Attack = false; } //TIEMPO Q DURA LA ANIMACION D ATAQUE
-
         //SI GOLPEA ALGO SE PARA Y SE QUEDA PEGADO
         if (actualStuck >= stuckTime)
         {
@@ -110,6 +115,13 @@ public class Boomerang : MonoBehaviour
             Debug.Log("Wp: Landed");
             actualStuck += Time.deltaTime * 10;
             transform.position = new Vector3(transform.position.x, transform.position.y, 1);
+        }
+        else if (collision.gameObject.tag == "Floor" && Drop == true)
+        {
+            Debug.Log("Dropped");
+            body2D.transform.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+            body2D.velocity = new Vector2(0, 0);
+            transform.gameObject.tag = "Stuck";
         }
 
         if (collision.gameObject.tag == "Player" && Thrown == true)

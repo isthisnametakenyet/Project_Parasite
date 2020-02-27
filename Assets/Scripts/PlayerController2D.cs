@@ -418,7 +418,7 @@ public class PlayerController2D : MonoBehaviour
             switch (pickUpScript.picktype)
             {
                 case PickTypes.Sword:
-                    if (arms == Arms.NONE) { break; }
+                    if (arms == Arms.NONE) { Debug.Log("NONE, cant pick"); break; }
                     picking = true;
                     animator.SetInteger(whichWeaponID, 1);
                     break;
@@ -558,6 +558,7 @@ public class PlayerController2D : MonoBehaviour
         {
             Rigidbody2D armRigid;
             BoxCollider2D armCollider;
+            int whichWeapon = animator.GetInteger(whichWeaponID);
             //LOSE ARM
             switch (arms)
             {
@@ -599,6 +600,66 @@ public class PlayerController2D : MonoBehaviour
                     armRigid.bodyType = RigidbodyType2D.Dynamic; //CHANGE TO DYNAMIC
                     LeftArm = null;
                     break;
+            }
+            if (isWeaponed == true)
+            {
+                switch (whichWeapon)
+                {
+                    case 1:
+                        if (arms == Arms.NONE) { PickedWeapon.transform.parent = null;
+                            PickedWeapon.transform.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+                            swordScript = PickedWeapon.GetComponent<Sword>();
+                            swordScript.Drop = true;
+                            PickedWeapon = null;
+                            isWeaponed = false; }
+                        break;
+                    case 2:
+                        if (arms == Arms.NONE) { PickedWeapon.transform.parent = null;
+                            PickedWeapon.transform.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+                            axeScript = PickedWeapon.GetComponent<Axe>();
+                            axeScript.Drop = true;
+                            PickedWeapon = null;
+                            isWeaponed = false;
+                        }
+                        break;
+                    case 3:
+                        if (arms == Arms.NONE) { PickedWeapon.transform.parent = null;
+                            PickedWeapon.transform.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+                            spearScript = PickedWeapon.GetComponent<Spear>();
+                            spearScript.Drop = true;
+                            PickedWeapon = null;
+                            isWeaponed = false;
+                        }
+                        break;
+                    case 4:
+                        if (arms == Arms.NONE || arms == Arms.ONE) { PickedWeapon.transform.parent = null;
+                            PickedWeapon.transform.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+                            bowScript = PickedWeapon.GetComponent<Bow>();
+                            bowScript.Drop = true;
+                            PickedWeapon = null;
+                            isWeaponed = false;
+                        }
+                        break;
+                    case 5:
+                        if (arms == Arms.NONE || arms == Arms.ONE) { PickedWeapon.transform.parent = null;
+                            PickedWeapon.transform.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+                            crossbowScript = PickedWeapon.GetComponent<CrossBow>();
+                            spearScript.Drop = true;
+                            PickedWeapon = null;
+                            isWeaponed = false;
+                        }
+                        break;
+                    case 6:
+                        if (arms == Arms.NONE || arms == Arms.ONE) { PickedWeapon.transform.parent = null;
+                            PickedWeapon.transform.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+                            PickedWeapon.transform.GetComponent<BoxCollider2D>().enabled = true;
+                            boomerangScript = PickedWeapon.GetComponent<Boomerang>();
+                            boomerangScript.Drop = true;
+                            PickedWeapon = null;
+                            isWeaponed = false;
+                        }
+                        break;
+                }
             }
         }
 

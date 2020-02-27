@@ -18,6 +18,7 @@ public class CrossBow : MonoBehaviour
     public bool Attack = false;
     public bool Charging = false;
     public bool Thrown = false;
+    public bool Drop = false;
     private bool inUse = false;
 
     //VARIABLES
@@ -41,7 +42,11 @@ public class CrossBow : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (Idle == true && collider2D.enabled == true && inUse == false && Thrown == false)
+        if (Drop == true)
+        {
+            Idle = false;
+        }
+        else if (Idle == true && collider2D.enabled == true && inUse == false && Thrown == false)
         {
             Debug.Log("Wp: Idle");
             actualAttack = 0f;
@@ -92,5 +97,16 @@ public class CrossBow : MonoBehaviour
             Destroy(gameObject);
         }
         if (actualAttack <= AttackTime && inUse == true && Charging == false) { actualAttack += Time.deltaTime; }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Floor" && Drop == true)
+        {
+            Debug.Log("Dropped");
+            body2D.transform.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+            body2D.velocity = new Vector2(0, 0);
+            transform.gameObject.tag = "Stuck";
+        }
     }
 }

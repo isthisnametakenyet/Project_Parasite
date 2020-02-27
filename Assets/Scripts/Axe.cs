@@ -18,6 +18,7 @@ public class Axe : MonoBehaviour
     public bool Thrown = false;
     public bool Landed = false;
     public bool Stuck = false;
+    public bool Drop = false;
     private bool inUse = false;
 
     //VARIABLES
@@ -43,7 +44,11 @@ public class Axe : MonoBehaviour
     void FixedUpdate()
     {
         //Debug.Log("tis but an axe");
-        if (Uses == 0 && inUse == false)
+        if (Drop == true)
+        {
+            Idle = false;
+        }
+        else if (Uses == 0 && inUse == false)
         {
             if (Picker.gameObject.tag == "Player") { pickerPlayerScript.isWeaponed = false; }
 
@@ -113,6 +118,13 @@ public class Axe : MonoBehaviour
             actualStuck += Time.deltaTime * 10;
             transform.position = new Vector3(transform.position.x, transform.position.y, 1);
         }
+        else if (collision.gameObject.tag == "Floor" && Drop == true)
+        {
+            Debug.Log("Dropped");
+            body2D.transform.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+            body2D.velocity = new Vector2(0, 0);
+            transform.gameObject.tag = "Stuck";
+        }
 
         if (collision.gameObject.tag == "Player" && Thrown == true)
         {
@@ -120,7 +132,7 @@ public class Axe : MonoBehaviour
             if (Picker.gameObject.tag == "Player" && playerScript.controller != pickerPlayerScript.controller 
                 || Picker.gameObject.tag == "EmptyBody" && playerScript.controller != pickerEmptyScript.controller)
             {
-                //Debug.LogError("Wp: Hit");
+                Debug.Log("Wp: Hit");
                 actualStuck += Time.deltaTime * 10;
                 transform.position = new Vector3(transform.position.x, transform.position.y, 1);
                 this.transform.parent = collision.transform;
@@ -133,7 +145,7 @@ public class Axe : MonoBehaviour
             if (Picker.gameObject.tag == "Player" && emptyScript.controller != pickerPlayerScript.controller
                 || Picker.gameObject.tag == "EmptyBody" && emptyScript.controller != pickerEmptyScript.controller)
             {
-                Debug.LogError("Wp: Hit");
+                Debug.Log("Wp: Hit");
                 actualStuck += Time.deltaTime * 10;
                 transform.position = new Vector3(transform.position.x, transform.position.y, 1);
                 this.transform.parent = collision.transform;
