@@ -101,7 +101,7 @@ MonoBehaviour:
   Axe: {fileID: 4109791825871390401, guid: 34431f682b8fae9449bfd8e2e32a67ef, type: 3}
   Spear: {fileID: 2345261996967496709, guid: b0bb9be49655bb74cbc385e989cf2c95, type: 3}
   Bow: {fileID: 8543419847265760279, guid: 9ff26bafdd5dcc044837cfbe62cf4f84, type: 3}
-  CrossBow: {fileID: 3346044492393024279, guid: 257730045f7b3334abcab25603150c6b,
+  CrossBow: {fileID: 9170290620089918391, guid: 6aa5178614c21ec49ad7ea3b11b5bb66,
     type: 3}
   Boomerang: {fileID: 1911622075723830657, guid: b3cac058b5486864db272695012c4650,
     type: 3}

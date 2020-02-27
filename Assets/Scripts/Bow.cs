@@ -18,7 +18,6 @@ public class Bow : MonoBehaviour
     public bool Attack = false;
     public bool Charging = false;
     public bool Thrown = false;
-    public bool Landed = false;
     private bool inUse = false;
 
     //VARIABLES
@@ -42,7 +41,7 @@ public class Bow : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (Idle == true && collider2D.enabled == true && inUse == false && Thrown == false && Landed == false)
+        if (Idle == true && collider2D.enabled == true && inUse == false && Thrown == false)
         {
             Debug.Log("Wp: Idle");
             actualAttack = 0f;

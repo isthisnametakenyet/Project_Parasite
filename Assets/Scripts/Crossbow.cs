@@ -18,7 +18,6 @@ public class CrossBow : MonoBehaviour
     public bool Attack = false;
     public bool Charging = false;
     public bool Thrown = false;
-    public bool Landed = false;
     private bool inUse = false;
 
     //VARIABLES
@@ -42,7 +41,7 @@ public class CrossBow : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (Idle == true && collider2D.enabled == true && inUse == false && Thrown == false && Landed == false)
+        if (Idle == true && collider2D.enabled == true && inUse == false && Thrown == false)
         {
             Debug.Log("Wp: Idle");
             actualAttack = 0f;
@@ -76,7 +75,9 @@ public class CrossBow : MonoBehaviour
             Idle = false;
             inUse = false;
 
+
             GameObject arrow = Instantiate(Arrow, new Vector3(transform.position.x, transform.position.y + 0.3f, 0), Quaternion.identity);
+            if (arrow == null) { Debug.LogError("arrow prefab not set"); }
 
             Rigidbody2D arrowRigid;
             arrowRigid = arrow.GetComponent<Rigidbody2D>(); //ASIGN ITS RIGID
