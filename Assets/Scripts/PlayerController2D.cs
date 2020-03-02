@@ -96,23 +96,27 @@ public class PlayerController2D : MonoBehaviour
         }
 
         //KEYS
-        switch (controller)
+        if (ReInput.isReady)
         {
-            case Controller.PLAYER0:
-                player = ReInput.players.GetPlayer(0);
-                break;
+                switch (controller)
+            {
+            
+                case Controller.PLAYER0:
+                    player = ReInput.players.GetPlayer(0);
+                    break;
 
-            case Controller.PLAYER1:
-                player = ReInput.players.GetPlayer(1);
-                break;
+                case Controller.PLAYER1:
+                    player = ReInput.players.GetPlayer(1);
+                    break;
 
-            case Controller.PLAYER2:
-                player = ReInput.players.GetPlayer(2);
-                break;
+                case Controller.PLAYER2:
+                    player = ReInput.players.GetPlayer(2);
+                    break;
 
-            case Controller.PLAYER3:
-                player = ReInput.players.GetPlayer(3);
-                break;
+                case Controller.PLAYER3:
+                    player = ReInput.players.GetPlayer(3);
+                    break;
+            }
         }
 
         //CONDITIONS

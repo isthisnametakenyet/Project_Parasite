@@ -8,19 +8,19 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/sample_SceneChange.unity
     guid: c90cc119f566165438e8a092296b1faf
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/sample_PlayerConnect.unity
     guid: 549f420e5d48b5c4a972cdd00130598b
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/sample_MecanicaPrincipal.unity
     guid: 3a86dfc9fa541e344a920faf56c106d3
   - enabled: 1
     path: Assets/Scenes/sample_ObjectSpawn.unity
     guid: 1e3d28e21d882664095c0f1ba3e0d958
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/sample_Map.unity
     guid: 66f1840dbc740bc448039dce4d23be8e
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Map1.unity
     guid: c89e9e974507ce542afdd8cab4a20e10
   m_configObjects: {}
