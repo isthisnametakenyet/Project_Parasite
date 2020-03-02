@@ -146,7 +146,7 @@ public class PlayerController2D : MonoBehaviour
         body2D.velocity = new Vector2(0, body2D.velocity.y);
 
         //MOVEMENT
-        if (player.GetAxis("Move Joystick") > 0 || player.GetButton("Move Right Keys"))
+        if (player.GetAxis("Move") > 0)
         {
             if (isCharging == false && isHeading == false && isDucking == false)
             {
@@ -156,7 +156,7 @@ public class PlayerController2D : MonoBehaviour
                 facingright = true;
             }
         }
-        else if (player.GetAxis("Move Joystick") < 0 || player.GetButton("Move Left Keys"))
+        else if (player.GetAxis("Move") < 0)
         {
             if (isCharging == false && isHeading == false && isDucking == false)
             {
@@ -346,6 +346,13 @@ public class PlayerController2D : MonoBehaviour
             emptyBody = body.GetComponent<EmptyBody>();
             emptyBody.controller = this.controller;
             emptyBody.skin = this.skin;
+            emptyBody.arms = this.arms;
+            emptyBody.LeftArm = LeftArm;
+            LeftArm.transform.parent = emptyBody.transform;
+            Debug.Log("Left-Brazo");
+            emptyBody.RightArm = RightArm;
+            RightArm.transform.parent = emptyBody.transform;
+            Debug.Log("Right-Brazo");
 
             headThrow = head.GetComponent<HeadThrow>();
             headThrow.controller = this.controller;
@@ -368,7 +375,7 @@ public class PlayerController2D : MonoBehaviour
         }
 
         //50% MOVEMENT
-        if (player.GetAxis("Move Joystick") > 0 || player.GetButton("Move Right Keys"))
+        if (player.GetAxis("Move") > 0)
         {
             if (isCharging == true || isHeading == true)
             {
@@ -377,7 +384,7 @@ public class PlayerController2D : MonoBehaviour
                 facingright = true;
             }
         }
-        else if (player.GetAxis("Move Joystick") < 0 || player.GetButton("Move Left Keys"))
+        else if (player.GetAxis("Move") < 0)
         {
             if (isCharging == true || isHeading == true)
             {

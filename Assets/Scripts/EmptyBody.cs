@@ -11,6 +11,7 @@ public class EmptyBody : MonoBehaviour
 {
     public Controller controller = Controller.NONE;
     public Skin skin = Skin.NONE;
+    public Arms arms = Arms.NONE;
 
     private Player player;
 
@@ -18,6 +19,11 @@ public class EmptyBody : MonoBehaviour
     public GameObject ReturnParasite;
     private HeadThrow parasiteScript;
     private HeadReturn headReturn;
+    public GameObject RightArm;
+    public GameObject LeftArm;
+    private Arm rightScript;
+    private Arm leftScript;
+    private Transform ArmParent;
 
     //WEAPONS PICKUP
     public GameObject PickedWeapon;
@@ -132,7 +138,7 @@ public class EmptyBody : MonoBehaviour
             body2D.velocity = new Vector2(0, body2D.velocity.y);
 
             //MOVEMENT
-            if (player.GetAxis("Move Joystick") > 0 || player.GetButton("Move Right Keys"))
+            if (player.GetAxis("Move") > 0)
             {
                 if (isCharging == false && isDucking == false)
                 {
@@ -143,7 +149,7 @@ public class EmptyBody : MonoBehaviour
                     facingright = true;
                 }
             }
-            else if (player.GetAxis("Move Joystick") < 0 || player.GetButton("Move Left Keys"))
+            else if (player.GetAxis("Move") < 0)
             {
                 if (isCharging == false && isDucking == false)
                 {
@@ -310,7 +316,7 @@ public class EmptyBody : MonoBehaviour
             }
 
             //50% MOVEMENT
-            if (player.GetAxis("Move Joystick") > 0 || player.GetButton("Move Right Keys"))
+            if (player.GetAxis("Move") > 0)
             {
                 if (isCharging == true)
                 {
@@ -319,7 +325,7 @@ public class EmptyBody : MonoBehaviour
                     facingright = true;
                 }
             }
-            else if (player.GetAxis("Move Joystick") < 0 || player.GetButton("Move Left Keys"))
+            else if (player.GetAxis("Move") < 0)
             {
                 if (isCharging == true)
                 {
