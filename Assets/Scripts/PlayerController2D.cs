@@ -507,7 +507,7 @@ public class PlayerController2D : MonoBehaviour
 
                     collision.gameObject.transform.parent.transform.parent = this.transform;
                     LeftArm = collision.gameObject.transform.parent.gameObject;
-                    collision.gameObject.transform.parent.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, 1);
+                    collision.gameObject.transform.parent.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, -1);
                     collision.gameObject.transform.parent.gameObject.GetComponent<BoxCollider2D>().enabled = true;
                     collision.gameObject.gameObject.GetComponent<BoxCollider2D>().enabled = false;
                     break; 
