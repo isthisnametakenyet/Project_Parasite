@@ -146,7 +146,7 @@ public class PlayerController2D : MonoBehaviour
         body2D.velocity = new Vector2(0, body2D.velocity.y);
 
         //MOVEMENT
-        if (player.GetAxis("Move Joystick") > 0 || player.GetButton("Move Right Keys"))
+        if (player.GetAxis("Move") > 0)
         {
             if (isCharging == false && isHeading == false && isDucking == false)
             {
@@ -156,7 +156,7 @@ public class PlayerController2D : MonoBehaviour
                 facingright = true;
             }
         }
-        else if (player.GetAxis("Move Joystick") < 0 || player.GetButton("Move Left Keys"))
+        else if (player.GetAxis("Move") < 0)
         {
             if (isCharging == false && isHeading == false && isDucking == false)
             {
@@ -375,7 +375,7 @@ public class PlayerController2D : MonoBehaviour
         }
 
         //50% MOVEMENT
-        if (player.GetAxis("Move Joystick") > 0 || player.GetButton("Move Right Keys"))
+        if (player.GetAxis("Move") > 0)
         {
             if (isCharging == true || isHeading == true)
             {
@@ -384,7 +384,7 @@ public class PlayerController2D : MonoBehaviour
                 facingright = true;
             }
         }
-        else if (player.GetAxis("Move Joystick") < 0 || player.GetButton("Move Left Keys"))
+        else if (player.GetAxis("Move") < 0)
         {
             if (isCharging == true || isHeading == true)
             {
