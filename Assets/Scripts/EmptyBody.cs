@@ -11,6 +11,7 @@ public class EmptyBody : MonoBehaviour
 {
     public Controller controller = Controller.NONE;
     public Skin skin = Skin.NONE;
+    public Arms arms = Arms.NONE;
 
     private Player player;
 
@@ -18,6 +19,11 @@ public class EmptyBody : MonoBehaviour
     public GameObject ReturnParasite;
     private HeadThrow parasiteScript;
     private HeadReturn headReturn;
+    public GameObject RightArm;
+    public GameObject LeftArm;
+    private Arm rightScript;
+    private Arm leftScript;
+    private Transform ArmParent;
 
     //WEAPONS PICKUP
     public GameObject PickedWeapon;

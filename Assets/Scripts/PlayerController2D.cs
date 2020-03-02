@@ -346,6 +346,13 @@ public class PlayerController2D : MonoBehaviour
             emptyBody = body.GetComponent<EmptyBody>();
             emptyBody.controller = this.controller;
             emptyBody.skin = this.skin;
+            emptyBody.arms = this.arms;
+            emptyBody.LeftArm = LeftArm;
+            LeftArm.transform.parent = emptyBody.transform;
+            Debug.Log("Left-Brazo");
+            emptyBody.RightArm = RightArm;
+            RightArm.transform.parent = emptyBody.transform;
+            Debug.Log("Right-Brazo");
 
             headThrow = head.GetComponent<HeadThrow>();
             headThrow.controller = this.controller;

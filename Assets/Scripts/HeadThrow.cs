@@ -15,6 +15,7 @@ public class HeadThrow : MonoBehaviour
     BoxCollider2D collider2D;
 
     public GameObject OriginalBody;
+    private PlayerController2D originalScript;
     public GameObject PlayerAll;
     public GameObject HeadDead;
     private PlayerController2D playerAll;
@@ -94,6 +95,10 @@ public class HeadThrow : MonoBehaviour
             playerAll = player.GetComponent<PlayerController2D>();
             playerAll.controller = this.controller;
             playerAll.skin = this.skin;
+            originalScript = OriginalBody.GetComponent<PlayerController2D>();
+            playerAll.arms = originalScript.arms;
+            playerAll.LeftArm = originalScript.LeftArm;
+            playerAll.RightArm = originalScript.RightArm;
 
             Destroy(OriginalBody);
             Destroy(gameObject); //AUTODESTRUCCION
@@ -109,7 +114,7 @@ public class HeadThrow : MonoBehaviour
     {
         collisionScript = collision.gameObject.GetComponent<EmptyBody>();
 
-        if (collision.gameObject.tag == "EmptyBody" && collisionScript.parasited == false && Expulsed == false)
+        if (collision.gameObject.tag == "EmptyBody" && collisionScript.parasited == false && Expulsed == false && Parasiting == false)
         {
             if (collisionScript.controller != this.controller)
             {
