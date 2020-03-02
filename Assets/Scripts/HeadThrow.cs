@@ -15,7 +15,6 @@ public class HeadThrow : MonoBehaviour
     BoxCollider2D collider2D;
 
     public GameObject OriginalBody;
-    private PlayerController2D originalScript;
     public GameObject PlayerAll;
     public GameObject HeadDead;
     private PlayerController2D playerAll;
@@ -95,10 +94,14 @@ public class HeadThrow : MonoBehaviour
             playerAll = player.GetComponent<PlayerController2D>();
             playerAll.controller = this.controller;
             playerAll.skin = this.skin;
-            originalScript = OriginalBody.GetComponent<PlayerController2D>();
-            playerAll.arms = originalScript.arms;
-            playerAll.LeftArm = originalScript.LeftArm;
-            playerAll.RightArm = originalScript.RightArm;
+            returnScript = OriginalBody.GetComponent<EmptyBody>();
+            playerAll.arms = returnScript.arms;
+            playerAll.LeftArm = returnScript.LeftArm;
+            returnScript.LeftArm.transform.parent = playerAll.transform;
+            //playerAll.LeftArm.transform.position = new Vector3();
+            playerAll.RightArm = returnScript.RightArm;
+            returnScript.RightArm.transform.parent = playerAll.transform;
+            //playerAll.RightArm.transform.position = new Vector3();
 
             Destroy(OriginalBody);
             Destroy(gameObject); //AUTODESTRUCCION
