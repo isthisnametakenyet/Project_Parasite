@@ -810,7 +810,7 @@ GameObject:
   - component: {fileID: 1413530002}
   - component: {fileID: 1413530001}
   m_Layer: 5
-  m_Name: PressSpacetoJoin
+  m_Name: PressAtoJoin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -832,8 +832,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 24.6, y: -66.6}
-  m_SizeDelta: {x: 177.53, y: 23.8}
+  m_AnchoredPosition: {x: 14.9, y: -81.4}
+  m_SizeDelta: {x: 103.9, y: 19.39}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1413530001
 MonoBehaviour:
@@ -868,7 +868,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Press Space to Join
+  m_Text: Press A to Join
 --- !u!222 &1413530002
 CanvasRenderer:
   m_ObjectHideFlags: 0
