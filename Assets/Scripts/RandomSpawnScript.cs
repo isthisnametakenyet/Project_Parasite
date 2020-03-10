@@ -39,6 +39,10 @@ public class RandomSpawnScript : MonoBehaviour
     // variable to declare when to spawn
     public float whenToSpawn;
 
+    //nuemro de objetos espawneados
+    public int numSpawned = 0;
+    public int maxNumSpawned;
+
     private void Start()
     {
         switch(maps)
@@ -65,61 +69,69 @@ public class RandomSpawnScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Time.time > nextSpawn) // if time has come
-        {
-            whatToSpawn = Random.Range(1, 7); //define random value between 1 and 6 (7 is exclusive)
-            Debug.Log("What Spawned: " + whatToSpawn);
+        if (numSpawned < maxNumSpawned) {
+            if (Time.time > nextSpawn) // if time has come
+            {
+                whatToSpawn = Random.Range(1, 7); //define random value between 1 and 6 (7 is exclusive)
 
-            whereToSpawn = Random.Range(0, 5); // define random value between 0 and 4 (5 is exclusive)
-            Debug.Log("Where it Spawned: " + whereToSpawn);
+                whereToSpawn = Random.Range(0, 5); // define random value between 0 and 4 (5 is exclusive)
 
-            whenToSpawn = Random.Range(spawnMinRate, spawnMaxRate); // define random time value to spawn
-            
-            while(whatToSpawn == lastSpawned)
-            {
-                whatToSpawn = Random.Range(1, 7);
-            }
-            lastSpawned = whatToSpawn;
+                whenToSpawn = Random.Range(spawnMinRate, spawnMaxRate); // define random time value to spawn
 
-            if (whatToSpawn == 1)
-            {
-                GameObject pick = Instantiate(PickUp, actualMap[whereToSpawn], Quaternion.identity);
-                PickObject = pick.GetComponent<PickUpScript>();
-                PickObject.picktype = PickTypes.Sword;
-            }
-           else if(whatToSpawn == 2)
-            {
-                GameObject pick = Instantiate(PickUp, actualMap[whereToSpawn], Quaternion.identity);
-                PickObject = pick.GetComponent<PickUpScript>();
-                PickObject.picktype = PickTypes.Axe;
-            }
-           else if(whatToSpawn == 3)
-            {
-                GameObject pick = Instantiate(PickUp, actualMap[whereToSpawn], Quaternion.identity);
-                PickObject = pick.GetComponent<PickUpScript>();
-                PickObject.picktype = PickTypes.Spear;
-            }
-           else if(whatToSpawn == 4)
-            {
-                GameObject pick = Instantiate(PickUp, actualMap[whereToSpawn], Quaternion.identity);
-                PickObject = pick.GetComponent<PickUpScript>();
-                PickObject.picktype = PickTypes.Bow;
-            }
-           else if( whereToSpawn == 5)
-            {
-                GameObject pick = Instantiate(PickUp, actualMap[whereToSpawn], Quaternion.identity);
-                PickObject = pick.GetComponent<PickUpScript>();
-                PickObject.picktype = PickTypes.CrossBow;
-            }
-            else if (whatToSpawn == 6)
-            {
-                GameObject pick = Instantiate(PickUp, actualMap[whereToSpawn], Quaternion.identity);
-                PickObject = pick.GetComponent<PickUpScript>();
-                PickObject.picktype = PickTypes.Boomerang;
-            }
+                while (whatToSpawn == lastSpawned)
+                {
+                    whatToSpawn = Random.Range(1, 7);
+                }
+                lastSpawned = whatToSpawn;
 
-            // set next spawn time
-            nextSpawn = Time.time + whenToSpawn;
+                numSpawned++;
+
+                if (whatToSpawn == 1)
+                {
+                    GameObject pick = Instantiate(PickUp, actualMap[whereToSpawn], Quaternion.identity);
+                    PickObject = pick.GetComponent<PickUpScript>();
+                    PickObject.picktype = PickTypes.Sword;
+                    PickObject.RadomSpawner = this.gameObject;
+                }
+                else if (whatToSpawn == 2)
+                {
+                    GameObject pick = Instantiate(PickUp, actualMap[whereToSpawn], Quaternion.identity);
+                    PickObject = pick.GetComponent<PickUpScript>();
+                    PickObject.picktype = PickTypes.Axe;
+                    PickObject.RadomSpawner = this.gameObject;
+                }
+                else if (whatToSpawn == 3)
+                {
+                    GameObject pick = Instantiate(PickUp, actualMap[whereToSpawn], Quaternion.identity);
+                    PickObject = pick.GetComponent<PickUpScript>();
+                    PickObject.picktype = PickTypes.Spear;
+                    PickObject.RadomSpawner = this.gameObject;
+                }
+                else if (whatToSpawn == 4)
+                {
+                    GameObject pick = Instantiate(PickUp, actualMap[whereToSpawn], Quaternion.identity);
+                    PickObject = pick.GetComponent<PickUpScript>();
+                    PickObject.picktype = PickTypes.Bow;
+                    PickObject.RadomSpawner = this.gameObject;
+                }
+                else if (whereToSpawn == 5)
+                {
+                    GameObject pick = Instantiate(PickUp, actualMap[whereToSpawn], Quaternion.identity);
+                    PickObject = pick.GetComponent<PickUpScript>();
+                    PickObject.picktype = PickTypes.CrossBow;
+                    PickObject.RadomSpawner = this.gameObject;
+                }
+                else if (whatToSpawn == 6)
+                {
+                    GameObject pick = Instantiate(PickUp, actualMap[whereToSpawn], Quaternion.identity);
+                    PickObject = pick.GetComponent<PickUpScript>();
+                    PickObject.picktype = PickTypes.Boomerang;
+                    PickObject.RadomSpawner = this.gameObject;
+                }
+
+                // set next spawn time
+                nextSpawn = Time.time + whenToSpawn;
+            }
         }
     }
 }

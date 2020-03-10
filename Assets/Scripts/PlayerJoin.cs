@@ -5,10 +5,16 @@ using Rewired;
 
 public class PlayerJoin : MonoBehaviour
 {
-    public GameObject Player1Icon;
-    public GameObject Player2Icon;
-    public GameObject Player3Icon;
-    public GameObject Player4Icon;
+    private PlayerAssignment assignementScript;
+
+    public GameObject Player1;
+    private AsignerController Player1Asigner;
+    public GameObject Player2;
+    private AsignerController Player2Asigner;
+    public GameObject Player3;
+    private AsignerController Player3Asigner;
+    public GameObject Player4;
+    private AsignerController Player4Asigner;
     public GameObject Player1Text;
     public GameObject Player2Text;
     public GameObject Player3Text;
@@ -42,6 +48,12 @@ public class PlayerJoin : MonoBehaviour
         //Green ON: 00FF00
         //Green Off: 006A00
 
+        assignementScript = this.gameObject.GetComponent<PlayerAssignment>();
+        Player1Asigner = Player1.GetComponent<AsignerController>();
+        Player2Asigner = Player2.GetComponent<AsignerController>();
+        Player3Asigner = Player3.GetComponent<AsignerController>();
+        Player4Asigner = Player4.GetComponent<AsignerController>();
+
         ColorUtility.TryParseHtmlString("#FF0000", out selectRed);
         ColorUtility.TryParseHtmlString("#8C0000", out disconectRed);
         ColorUtility.TryParseHtmlString("#7700E7", out selectPurple);
@@ -63,22 +75,18 @@ public class PlayerJoin : MonoBehaviour
             colorAnim++;
             if (colorAnim == 5) { colorAnim = 1; }
         }
-
-
-        //if (!ReInput.isReady) return;
-        //AssignController();
     }
 
     void FixedUpdate()
     {
-        //if (Input.GetKeyDown(KeyCode.A))
-        //{
-        //    PlayerDisconnect(Player1Icon, disconectRed, Player1Text, 1);
-        //}
-        //if (Input.GetKeyDown(KeyCode.S))
-        //{
-        //    PlayerConnect(Player1Icon, selectRed, Player1Text, 1);
-        //}
+        if (Player1Asigner.asignerReady == true) { PlayerConnect(Player1, selectRed, Player1Text, 1); }
+        else { PlayerDisconnect(Player1, disconectRed, Player1Text, 1); }
+        if (Player2Asigner.asignerReady == true) { PlayerConnect(Player2, selectPurple, Player2Text, 2); }
+        else { PlayerDisconnect(Player2, disconectPurple, Player2Text, 2); }
+        if (Player3Asigner.asignerReady == true) { PlayerConnect(Player3, selectYellow, Player3Text, 3); }
+        else { PlayerDisconnect(Player3, disconectYellow, Player3Text, 3); }
+        if (Player4Asigner.asignerReady == true) { PlayerConnect(Player4, selectGreen, Player4Text, 4); }
+        else { PlayerDisconnect(Player4, disconectGreen, Player4Text, 4); }
 
         if (PlayerManager.Instance.Player1ON == false &&
             PlayerManager.Instance.Player2ON == false &&

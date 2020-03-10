@@ -10,11 +10,14 @@ public enum Arms { NONE, ONE, TWO };
 
 public class PlayerController2D : MonoBehaviour
 {
+    private Rewired.Player player { get { return PlayerAssignment.GetRewiredPlayer(((int)controller)-1); } }
+
+
     public Controller controller = Controller.NONE;
     public Skin skin = Skin.NONE;
     public Arms arms = Arms.NONE;
 
-    private Player player;
+    public bool playerReady = false;
 
     public GameObject HeadFall;
     public GameObject BodyEmpty;
@@ -95,30 +98,6 @@ public class PlayerController2D : MonoBehaviour
                 break;
         }
 
-        //KEYS
-        if (ReInput.isReady)
-        {
-                switch (controller)
-            {
-            
-                case Controller.PLAYER0:
-                    player = ReInput.players.GetPlayer(0);
-                    break;
-
-                case Controller.PLAYER1:
-                    player = ReInput.players.GetPlayer(1);
-                    break;
-
-                case Controller.PLAYER2:
-                    player = ReInput.players.GetPlayer(2);
-                    break;
-
-                case Controller.PLAYER3:
-                    player = ReInput.players.GetPlayer(3);
-                    break;
-            }
-        }
-
         //CONDITIONS
         GroundingID = Animator.StringToHash("Grounding");
         MovingID = Animator.StringToHash("Moving");
@@ -134,6 +113,11 @@ public class PlayerController2D : MonoBehaviour
     public bool isWeaponed = false;
 
     private void FixedUpdate(){
+        if(!ReInput.isReady || player == null) {
+            Debug.Log("not set or Disconnected");
+            return;
+        };
+
         if (pickDelay <= pickTemp && picking == true) { picking = false; pickTemp = 0; }
         else if (picking == true) { pickTemp += Time.deltaTime; }
         
@@ -150,7 +134,7 @@ public class PlayerController2D : MonoBehaviour
         body2D.velocity = new Vector2(0, body2D.velocity.y);
 
         //MOVEMENT
-        if (player.GetAxis("Move") > 0)
+        if (player.GetAxis("Move") > 0 )
         {
             if (isCharging == false && isHeading == false && isDucking == false)
             {

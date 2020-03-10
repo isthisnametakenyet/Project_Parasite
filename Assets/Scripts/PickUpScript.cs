@@ -6,6 +6,9 @@ public class PickUpScript : MonoBehaviour
 {
     public PickTypes picktype;
 
+    public GameObject RadomSpawner;
+    private RandomSpawnScript RadomSpawnerscript;
+
     public GameObject Picker;
     public GameObject Sword;
     public GameObject Axe;
@@ -59,6 +62,8 @@ public class PickUpScript : MonoBehaviour
     {
         if(picked == true)
         {
+            RadomSpawnerscript = RadomSpawner.GetComponent<RandomSpawnScript>();
+            RadomSpawnerscript.numSpawned--;
             playerAllScript = Picker.GetComponent<PlayerController2D>();
             playerEmptyScript = Picker.GetComponent<EmptyBody>();
 
