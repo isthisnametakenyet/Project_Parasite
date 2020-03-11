@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SFXManager : Singleton<MonoBehaviour>
+public class MusicManager : Singleton<MusicManager>
 {
-    public AudioClip[] sfxList;
+    public AudioClip[] musicList;
 
     AudioSource audioSource;
 
