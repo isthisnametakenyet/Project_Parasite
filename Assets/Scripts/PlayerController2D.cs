@@ -114,7 +114,7 @@ public class PlayerController2D : MonoBehaviour
 
     private void FixedUpdate(){
         if(!ReInput.isReady || player == null) {
-            Debug.Log("not set or Disconnected");
+            Debug.Log("not set or Disconnected"); //TODO: MESSAGE IN SCREEN
             return;
         };
 

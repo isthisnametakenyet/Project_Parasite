@@ -30,6 +30,8 @@ public class MenuAsignemet : MonoBehaviour
     public int maxPlayers = 4;
     public int actualPlayers = 0;
 
+    private int[] temp;
+
     private List<PlayerMap> playerMap; // Maps Rewired Player ids to game player ids
     private int gamePlayerIdCounter = 0;
 
@@ -41,6 +43,7 @@ public class MenuAsignemet : MonoBehaviour
 
     void Update()
     {
+        PlayerManager.Instance.numPlayers = actualPlayers;
 
         // Watch for JoinGame action in each Player
         for (int i = 0; i < ReInput.players.playerCount; i++)

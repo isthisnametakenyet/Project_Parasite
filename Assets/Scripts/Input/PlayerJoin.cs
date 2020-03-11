@@ -20,6 +20,8 @@ public class PlayerJoin : MonoBehaviour
     public GameObject Player3Text;
     public GameObject Player4Text;
     public GameObject PressToJoin;
+    public GameObject TutorialButton;
+    public GameObject PlayButton;
 
     Color selectRed;
     Color disconectRed;
@@ -80,13 +82,13 @@ public class PlayerJoin : MonoBehaviour
     void FixedUpdate()
     {
         if (Player1Asigner.asignerReady == true) { PlayerConnect(Player1, selectRed, Player1Text, 1); }
-        else { PlayerDisconnect(Player1, disconectRed, Player1Text, 1); }
+        //else { PlayerDisconnect(Player1, disconectRed, Player1Text, 1); }
         if (Player2Asigner.asignerReady == true) { PlayerConnect(Player2, selectPurple, Player2Text, 2); }
-        else { PlayerDisconnect(Player2, disconectPurple, Player2Text, 2); }
+        //else { PlayerDisconnect(Player2, disconectPurple, Player2Text, 2); }
         if (Player3Asigner.asignerReady == true) { PlayerConnect(Player3, selectYellow, Player3Text, 3); }
-        else { PlayerDisconnect(Player3, disconectYellow, Player3Text, 3); }
+        //else { PlayerDisconnect(Player3, disconectYellow, Player3Text, 3); }
         if (Player4Asigner.asignerReady == true) { PlayerConnect(Player4, selectGreen, Player4Text, 4); }
-        else { PlayerDisconnect(Player4, disconectGreen, Player4Text, 4); }
+        //else { PlayerDisconnect(Player4, disconectGreen, Player4Text, 4); }
 
         if (PlayerManager.Instance.Player1ON == false &&
             PlayerManager.Instance.Player2ON == false &&
@@ -151,57 +153,57 @@ public class PlayerJoin : MonoBehaviour
         }
     }
 
-    //private void AssignController()
-    //{
-    //    // Check all joysticks for a button press and assign it tp
-    //    // the first Player foudn without a joystick
-    //    IList<Joystick> joysticks = ReInput.controllers.Joysticks;
-    //    for (int i = 0; i < joysticks.Count; i++)
-    //    {
-    //        Debug.Log(joysticks[i]);
-    //        Joystick joystick = joysticks[i];
-    //        if (ReInput.controllers.IsControllerAssigned(joystick.type, joystick.id)) continue; // joystick is already assigned to a Player
+    private void AssignController()
+    {
+        // Check all joysticks for a button press and assign it tp
+        // the first Player foudn without a joystick
+        IList<Joystick> joysticks = ReInput.controllers.Joysticks;
+        for (int i = 0; i < joysticks.Count; i++)
+        {
+            Debug.Log(joysticks[i]);
+            Joystick joystick = joysticks[i];
+            if (ReInput.controllers.IsControllerAssigned(joystick.type, joystick.id)) continue; // joystick is already assigned to a Player
 
-    //        // Chec if a button was pressed on the joystick
-    //        if (joystick.GetAnyButtonDown())
-    //        {
+            // Chec if a button was pressed on the joystick
+            if (joystick.GetAnyButtonDown())
+            {
 
-    //            // Find the next Player without a Joystick
-    //            Player player = FindPlayerWithoutJoystick();
-    //            if (player == null) return; // no free joysticks
+                // Find the next Player without a Joystick
+                Player player = FindPlayerWithoutJoystick();
+                if (player == null) return; // no free joysticks
 
-    //            // Assign the joystick to this Player
-    //            player.controllers.AddController(joystick, false);
-    //        }
-    //    }
+                // Assign the joystick to this Player
+                player.controllers.AddController(joystick, false);
+            }
+        }
 
-    //    // If all players have joysticks, enable joystick auto-assignment
-    //    // so controllers are re-assigned correctly when a joystick is disconnected
-    //    // and re-connected and disable this script
-    //    if (DoAllPlayersHaveJoysticks())
-    //    {
-    //        ReInput.configuration.autoAssignJoysticks = true;
-    //        this.enabled = false; // disable this script
-    //    }
+        // If all players have joysticks, enable joystick auto-assignment
+        // so controllers are re-assigned correctly when a joystick is disconnected
+        // and re-connected and disable this script
+        if (DoAllPlayersHaveJoysticks())
+        {
+            ReInput.configuration.autoAssignJoysticks = true;
+            this.enabled = false; // disable this script
+        }
 
-    //}
+    }
 
-    //// Searches all Players to find the next Player without a Joystick assigned
-    //private Player FindPlayerWithoutJoystick()
-    //{
-    //    IList<Player> players = ReInput.players.Players;
-    //    for (int i = 0; i < players.Count; i++)
-    //    {
-    //        if (players[i].controllers.joystickCount > 0) continue;
-    //        return players[i];
-    //    }
-    //    return null;
-    //}
+    // Searches all Players to find the next Player without a Joystick assigned
+    private Player FindPlayerWithoutJoystick()
+    {
+        IList<Player> players = ReInput.players.Players;
+        for (int i = 0; i < players.Count; i++)
+        {
+            if (players[i].controllers.joystickCount > 0) continue;
+            return players[i];
+        }
+        return null;
+    }
 
-    //private bool DoAllPlayersHaveJoysticks()
-    //{
-    //    return FindPlayerWithoutJoystick() == null;
-    //}
+    private bool DoAllPlayersHaveJoysticks()
+    {
+        return FindPlayerWithoutJoystick() == null;
+    }
 
     //PressToJoin Animation
     void PressAnim()
@@ -227,5 +229,7 @@ public class PlayerJoin : MonoBehaviour
     {
         Text actualTxt = PressToJoin.GetComponent<Text>();
         actualTxt.text = "";
+        TutorialButton.transform.gameObject.SetActive(true);
+        PlayButton.transform.gameObject.SetActive(true);
     }
 }
