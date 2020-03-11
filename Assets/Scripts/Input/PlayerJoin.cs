@@ -5,7 +5,7 @@ using Rewired;
 
 public class PlayerJoin : MonoBehaviour
 {
-    private PlayerAssignment assignementScript;
+    private MenuAsignemet assignementScript;
 
     public GameObject Player1;
     private AsignerController Player1Asigner;
@@ -50,7 +50,7 @@ public class PlayerJoin : MonoBehaviour
         //Green ON: 00FF00
         //Green Off: 006A00
 
-        assignementScript = this.gameObject.GetComponent<PlayerAssignment>();
+        assignementScript = this.gameObject.GetComponent<MenuAsignemet>();
         Player1Asigner = Player1.GetComponent<AsignerController>();
         Player2Asigner = Player2.GetComponent<AsignerController>();
         Player3Asigner = Player3.GetComponent<AsignerController>();
@@ -82,13 +82,13 @@ public class PlayerJoin : MonoBehaviour
     void FixedUpdate()
     {
         if (Player1Asigner.asignerReady == true) { PlayerConnect(Player1, selectRed, Player1Text, 1); }
-        //else { PlayerDisconnect(Player1, disconectRed, Player1Text, 1); }
+        else { PlayerDisconnect(Player1, disconectRed, Player1Text, 1); }
         if (Player2Asigner.asignerReady == true) { PlayerConnect(Player2, selectPurple, Player2Text, 2); }
-        //else { PlayerDisconnect(Player2, disconectPurple, Player2Text, 2); }
+        else { PlayerDisconnect(Player2, disconectPurple, Player2Text, 2); }
         if (Player3Asigner.asignerReady == true) { PlayerConnect(Player3, selectYellow, Player3Text, 3); }
-        //else { PlayerDisconnect(Player3, disconectYellow, Player3Text, 3); }
+        else { PlayerDisconnect(Player3, disconectYellow, Player3Text, 3); }
         if (Player4Asigner.asignerReady == true) { PlayerConnect(Player4, selectGreen, Player4Text, 4); }
-        //else { PlayerDisconnect(Player4, disconectGreen, Player4Text, 4); }
+        else { PlayerDisconnect(Player4, disconectGreen, Player4Text, 4); }
 
         if (PlayerManager.Instance.Player1ON == false &&
             PlayerManager.Instance.Player2ON == false &&

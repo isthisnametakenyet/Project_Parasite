@@ -10,8 +10,8 @@ public enum Arms { NONE, ONE, TWO };
 
 public class PlayerController2D : MonoBehaviour
 {
-    private Rewired.Player player { get { return PlayerAssignment.GetRewiredPlayer(((int)controller)-1); } }
-
+    //private Rewired.Player player { get { return PlayerAssignment.GetRewiredPlayer(((int)controller)-1); } }
+    private Player player;
 
     public Controller controller = Controller.NONE;
     public Skin skin = Skin.NONE;
@@ -98,6 +98,25 @@ public class PlayerController2D : MonoBehaviour
                 break;
         }
 
+        switch (controller)
+        {
+            case Controller.PLAYER0:
+                if (PlayerManager.Instance.Player1ON == true) { playerReady = true; player = ReInput.players.GetPlayer(0); }
+                break;
+
+            case Controller.PLAYER1:
+                if (PlayerManager.Instance.Player2ON == true) { playerReady = true; player = ReInput.players.GetPlayer(1); }
+                break;
+
+            case Controller.PLAYER2:
+                player = ReInput.players.GetPlayer(2);
+                break;
+
+            case Controller.PLAYER3:
+                player = ReInput.players.GetPlayer(3);
+                break;
+        }
+
         //CONDITIONS
         GroundingID = Animator.StringToHash("Grounding");
         MovingID = Animator.StringToHash("Moving");
@@ -115,6 +134,11 @@ public class PlayerController2D : MonoBehaviour
     private void FixedUpdate(){
         if(!ReInput.isReady || player == null) {
             Debug.Log("not set or Disconnected"); //TODO: MESSAGE IN SCREEN
+            return;
+        }
+        else if (playerReady == false)
+        {
+            Debug.Log("player not ready");
             return;
         };
 

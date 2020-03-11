@@ -146,7 +146,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -350, y: -0}
+  m_AnchoredPosition: {x: -350, y: 0}
   m_SizeDelta: {x: 127.92, y: 146.75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &130567540
@@ -559,7 +559,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Player 4 Joined
+  m_Text: Player 4 Disconnected
 --- !u!222 &768732018
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -812,7 +812,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Player 1 Joined
+  m_Text: Player 1 Disconnected
 --- !u!222 &908556444
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1065,7 +1065,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Player 2 Joined
+  m_Text: Player 2 Disconnected
 --- !u!222 &1089291131
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1163,6 +1163,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: Tutorial
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1631143474041647104, guid: 0a436846a704a5742a438bbbd501cb35,
+          type: 3}
+        m_MethodName: StartGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
@@ -1374,6 +1386,18 @@ MonoBehaviour:
           m_StringArgument: Map1
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1631143474041647104, guid: 0a436846a704a5742a438bbbd501cb35,
+          type: 3}
+        m_MethodName: StartGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1434624502
@@ -1578,7 +1602,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Player 3 Joined
+  m_Text: Player 3 Disconnected
 --- !u!222 &1785668145
 CanvasRenderer:
   m_ObjectHideFlags: 0

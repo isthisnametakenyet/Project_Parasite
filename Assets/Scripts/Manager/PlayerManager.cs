@@ -7,6 +7,7 @@ public class PlayerManager : Singleton <PlayerManager>
 {
     public int numPlayers = 4;
     public int[] scorePlayers;
+    public int[] skinPlayers;
     public bool[] onPlayers;
     private int[] inttemp;
     private bool[] booltemp;
@@ -17,6 +18,8 @@ public class PlayerManager : Singleton <PlayerManager>
 
     public void StartGame() //GAME
     {
+        Debug.Log("PlayerManager: Startgame();");
+
         int[] inttemp = new int[numPlayers];
         scorePlayers.CopyTo(inttemp, 0);
         scorePlayers = inttemp;

@@ -75,7 +75,7 @@ public class MenuAsignemet : MonoBehaviour
         rewiredPlayer.controllers.maps.SetMapsEnabled(false, "Default");
 
         // Enable UI control for this Player now that he has joined
-        rewiredPlayer.controllers.maps.SetMapsEnabled(true, "Select Menu");
+        rewiredPlayer.controllers.maps.SetMapsEnabled(true, "InGame");
 
         Debug.Log("Added Rewired Player id " + rewiredPlayerId + " to game player " + gamePlayerId);
     }
