@@ -70,8 +70,9 @@ GameObject:
   - component: {fileID: 4887021494666035410}
   - component: {fileID: 116099315849590434}
   - component: {fileID: 8127292247002872761}
+  - component: {fileID: 5416011900979002504}
   m_Layer: 9
-  m_Name: place_arm
+  m_Name: Arm
   m_TagString: FlyingHead
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -199,5 +200,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 845ebcb25540fef47bfd2eee1fd15abe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  armType: 0
   pickUpRange: {fileID: 740330825481652919}
+--- !u!114 &5416011900979002504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5718016435271085259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57c008f954fe54a8bb972de1018a2cb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RootBone: {fileID: 1234098442880422554}
+  m_BoneTransforms: []
+  m_Bounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
