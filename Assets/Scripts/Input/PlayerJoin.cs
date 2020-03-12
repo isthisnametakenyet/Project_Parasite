@@ -20,8 +20,10 @@ public class PlayerJoin : MonoBehaviour
     public GameObject Player3Text;
     public GameObject Player4Text;
 
-    public GameObject Player1Skin1;
-    public GameObject Player1Skin2;
+    public GameObject Player1SkinSelector;
+    public GameObject Player2SkinSelector;
+    public GameObject Player3SkinSelector;
+    public GameObject Player4SkinSelector;
 
     public GameObject PressToJoin;
     public GameObject TutorialButton;
@@ -86,10 +88,10 @@ public class PlayerJoin : MonoBehaviour
     void FixedUpdate()
     {
         if (Player1Asigner.asignerReady == true) { PlayerConnect(Player1, selectRed, Player1Text, 1);
-            Player1Skin1.transform.gameObject.SetActive(true);
+            Player1SkinSelector.transform.gameObject.SetActive(true);
         }
         else { PlayerDisconnect(Player1, disconectRed, Player1Text, 1);
-            Player1Skin1.transform.gameObject.SetActive(false);
+            Player1SkinSelector.transform.gameObject.SetActive(false);
         }
         if (Player2Asigner.asignerReady == true) { PlayerConnect(Player2, selectPurple, Player2Text, 2); }
         else { PlayerDisconnect(Player2, disconectPurple, Player2Text, 2); }
