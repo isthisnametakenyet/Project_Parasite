@@ -74,7 +74,7 @@ public class RandomSpawnScript : MonoBehaviour
             {
                 whatToSpawn = Random.Range(1, 7); //define random value between 1 and 6 (7 is exclusive)
 
-                whereToSpawn = Random.Range(0, 5); // define random value between 0 and 4 (5 is exclusive)
+                whereToSpawn = Random.Range(0, 5); // define random value between 0 and 4 (5 is exclusive) TODO:ArrayList.Length
 
                 whenToSpawn = Random.Range(spawnMinRate, spawnMaxRate); // define random time value to spawn
 

@@ -6,15 +6,19 @@ using Rewired;
 public class PlayerManager : Singleton <PlayerManager>
 {
     public int numPlayers = 4;
+
     public int[] scorePlayers;
+
     public int[] skinPlayers;
+
     public bool[] onPlayers;
-    private int[] inttemp;
-    private bool[] booltemp;
     public bool Player1ON;
     public bool Player2ON;
     public bool Player3ON;
     public bool Player4ON;
+
+    private int[] inttemp;
+    private bool[] booltemp;
 
     public void StartGame() //GAME
     {
