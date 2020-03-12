@@ -24,17 +24,17 @@ public class PlayerManager : Singleton <PlayerManager>
     {
         Debug.Log("PlayerManager: Startgame();");
 
-        int[] inttemp = new int[numPlayers];
-        scorePlayers.CopyTo(inttemp, 0);
+        int[] scorePlayers = new int[numPlayers];
+        //scorePlayers.CopyTo(inttemp, 0);
         scorePlayers = inttemp;
 
         bool[] booltemp = new bool[numPlayers];
         onPlayers.CopyTo(booltemp, 0);
         onPlayers = booltemp;
 
-        for (int i = 0; i < numPlayers; i++)
-        {
-            scorePlayers[i] = 0;
-        }
+        //for (int i = 0; i < numPlayers; i++)
+        //{
+        //    scorePlayers[i] = 0;
+        //}
     }
 }

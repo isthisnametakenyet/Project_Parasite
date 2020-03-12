@@ -7,7 +7,6 @@ public class MenuAsignemet : MonoBehaviour
 {
     // Static
     private static MenuAsignemet instance;
-    public static MenuAsignemet Get { get; }
     public static MenuAsignemet Set { get; private set; }
 
     public static Rewired.Player GetRewiredPlayer(int gamePlayerId)
@@ -15,7 +14,7 @@ public class MenuAsignemet : MonoBehaviour
         if (!Rewired.ReInput.isReady) return null;
         if (instance == null)
         {
-            Debug.LogError("Not initialized. Do you have a PressStartToJoinPlayerSelector in your scene?");
+            Debug.LogError("Not initialized. Do you have an Assigner in your scene?");
             return null;
         }
         for (int i = 0; i < instance.playerMap.Count; i++)
@@ -26,7 +25,6 @@ public class MenuAsignemet : MonoBehaviour
     }
 
     // Instance
-
     public int maxPlayers = 4;
     public int actualPlayers = 0;
 

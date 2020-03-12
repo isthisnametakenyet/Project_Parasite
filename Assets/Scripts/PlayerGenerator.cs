@@ -36,7 +36,7 @@ public class PlayerGenerator : MonoBehaviour
 
         Debug.Log("Spawning Players");
 
-        for (int i = 0; i > PlayerManager.Instance.numPlayers; i++)
+        for (int i = 0; i < PlayerManager.Instance.numPlayers; i++)
         {
             randPos = Random.Range(1, actualMap.Length);
 
