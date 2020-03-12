@@ -6,6 +6,7 @@ public class PlayerGenerator : MonoBehaviour
 {
     public Maps maps;
 
+    public GameObject spawnSkin0;
     public GameObject spawnSkin1;
     public GameObject spawnSkin2;
     private PlayerController2D playerController;
@@ -41,6 +42,9 @@ public class PlayerGenerator : MonoBehaviour
 
             switch (PlayerManager.Instance.skinPlayers[i])
             {
+                case 0:
+                    GameObject Skin0 = Instantiate(spawnSkin0, actualMap[randPos], Quaternion.identity);
+                    break;
                 case 1:
                     GameObject Skin1 = Instantiate(spawnSkin1, actualMap[randPos], Quaternion.identity);
                     break;
