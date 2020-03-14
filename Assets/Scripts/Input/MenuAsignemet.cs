@@ -41,10 +41,11 @@ public class MenuAsignemet : MonoBehaviour
 
     void Update()
     {
+        if (!PlayerManager.Instance) { Debug.LogError("Not initialized. Do you have an PlayerManager in your scene?"); }
         PlayerManager.Instance.numPlayers = actualPlayers;
 
         // Watch for JoinGame action in each Player
-        for (int i = 0; i < ReInput.players.playerCount; i++)
+        for (int i = 0; i < ReInput.players.playerCount; i++) //ERROR: Rewired is not initialized. Do you have a Rewired Input Manager in the scene and enabled?
         {
             if (ReInput.players.GetPlayer(i).GetButtonDown("JoinGame"))
             {
