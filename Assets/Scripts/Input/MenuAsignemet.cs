@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using Rewired;
+using System;
 
 [AddComponentMenu("")]
 public class MenuAsignemet : MonoBehaviour
@@ -27,8 +28,6 @@ public class MenuAsignemet : MonoBehaviour
     // Instance
     public int maxPlayers = 4;
     public int actualPlayers = 0;
-
-    private int[] temp;
 
     private List<PlayerMap> playerMap; // Maps Rewired Player ids to game player ids
     private int gamePlayerIdCounter = 0;

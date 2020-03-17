@@ -9,7 +9,7 @@ public class PlayerGenerator : MonoBehaviour
     public GameObject spawnSkin0;
     public GameObject spawnSkin1;
     public GameObject spawnSkin2;
-    private PlayerController2D playerController;
+    private PlayerController2D playerScript;
 
     Vector3[] positionsMap1 = new[] { new Vector3(1f, 0f, 0f), new Vector3(0f, -1f, 0f), new Vector3(-1f, 0f, 0f), new Vector3(0f, 1f, 0f), new Vector3(0f, 0f, 0f) };
     Vector3[] positionsMap2 = new[] { new Vector3(0f, 0f, 0f), new Vector3(5f, 5f, 5f), new Vector3(-2f, -2f, -2f), new Vector3(-3f, -3f, -3f), new Vector3(-4f, -4f, -4f) };
@@ -40,16 +40,91 @@ public class PlayerGenerator : MonoBehaviour
         {
             randPos = Random.Range(1, actualMap.Length);
 
-            switch (PlayerManager.Instance.skinPlayers[i])
+            switch (PlayerManager.Instance.SkinPlayer1)
             {
                 case 0:
                     GameObject Skin0 = Instantiate(spawnSkin0, actualMap[randPos], Quaternion.identity);
+                    playerScript = Skin0.GetComponent<PlayerController2D>();
+                    playerScript.controller = Controller.PLAYER0;
                     break;
                 case 1:
                     GameObject Skin1 = Instantiate(spawnSkin1, actualMap[randPos], Quaternion.identity);
+                    playerScript = Skin1.GetComponent<PlayerController2D>();
+                    playerScript.controller = Controller.PLAYER0;
                     break;
                 case 2:
                     GameObject Skin2 = Instantiate(spawnSkin2, actualMap[randPos], Quaternion.identity);
+                    playerScript = Skin2.GetComponent<PlayerController2D>();
+                    playerScript.controller = Controller.PLAYER0;
+                    break;
+                defualt:
+                    Debug.LogError("Error, Random Player Generator received skin number that is not inside of the posibilities");
+                    break;
+            }
+
+            if (PlayerManager.Instance.Player2ON == false) { return; }
+            switch (PlayerManager.Instance.SkinPlayer2)
+            {
+                case 0:
+                    GameObject Skin0 = Instantiate(spawnSkin0, actualMap[randPos], Quaternion.identity);
+                    playerScript = Skin0.GetComponent<PlayerController2D>();
+                    playerScript.controller = Controller.PLAYER1;
+                    break;
+                case 1:
+                    GameObject Skin1 = Instantiate(spawnSkin1, actualMap[randPos], Quaternion.identity);
+                    playerScript = Skin1.GetComponent<PlayerController2D>();
+                    playerScript.controller = Controller.PLAYER1;
+                    break;
+                case 2:
+                    GameObject Skin2 = Instantiate(spawnSkin2, actualMap[randPos], Quaternion.identity);
+                    playerScript = Skin2.GetComponent<PlayerController2D>();
+                    playerScript.controller = Controller.PLAYER1;
+                    break;
+                defualt:
+                    Debug.LogError("Error, Random Player Generator received skin number that is not inside of the posibilities");
+                    break;
+            }
+
+            if (PlayerManager.Instance.Player3ON == false) { return; }
+            switch (PlayerManager.Instance.SkinPlayer1)
+            {
+                case 0:
+                    GameObject Skin0 = Instantiate(spawnSkin0, actualMap[randPos], Quaternion.identity);
+                    playerScript = Skin0.GetComponent<PlayerController2D>();
+                    playerScript.controller = Controller.PLAYER2;
+                    break;
+                case 1:
+                    GameObject Skin1 = Instantiate(spawnSkin1, actualMap[randPos], Quaternion.identity);
+                    playerScript = Skin1.GetComponent<PlayerController2D>();
+                    playerScript.controller = Controller.PLAYER2;
+                    break;
+                case 2:
+                    GameObject Skin2 = Instantiate(spawnSkin2, actualMap[randPos], Quaternion.identity);
+                    playerScript = Skin2.GetComponent<PlayerController2D>();
+                    playerScript.controller = Controller.PLAYER2;
+                    break;
+                defualt:
+                    Debug.LogError("Error, Random Player Generator received skin number that is not inside of the posibilities");
+                    break;
+            }
+
+            if (PlayerManager.Instance.Player4ON == false) { return; }
+            switch (PlayerManager.Instance.SkinPlayer4)
+            {
+                case 0:
+                    GameObject Skin0 = Instantiate(spawnSkin0, actualMap[randPos], Quaternion.identity);
+                    playerScript = Skin0.GetComponent<PlayerController2D>();
+                    playerScript.controller = Controller.PLAYER3;
+                    break;
+                case 1:
+                    GameObject Skin1 = Instantiate(spawnSkin1, actualMap[randPos], Quaternion.identity);
+                    playerScript = Skin1.GetComponent<PlayerController2D>();
+                    playerScript.controller = Controller.PLAYER3;
+                    break;
+                case 2:
+                    GameObject Skin2 = Instantiate(spawnSkin2, actualMap[randPos], Quaternion.identity);
+                    playerScript = Skin2.GetComponent<PlayerController2D>();
+                    playerScript.controller = Controller.PLAYER3;
                     break;
                 defualt:
                     Debug.LogError("Error, Random Player Generator received skin number that is not inside of the posibilities");
