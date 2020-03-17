@@ -22,6 +22,16 @@ public class PlayerJoin : MonoBehaviour
 
     public GameObject Player1Skin1;
     public GameObject Player1Skin2;
+    public GameObject Player1Skin3;
+    public GameObject Player2Skin1;
+    public GameObject Player2Skin2;
+    public GameObject Player2Skin3;
+    public GameObject Player3Skin1;
+    public GameObject Player3Skin2;
+    public GameObject Player3Skin3;
+    public GameObject Player4Skin1;
+    public GameObject Player4Skin2;
+    public GameObject Player4Skin3;
 
     public GameObject PressToJoin;
     public GameObject TutorialButton;
@@ -88,17 +98,43 @@ public class PlayerJoin : MonoBehaviour
         if (Player1Asigner.asignerReady == true) { PlayerConnect(Player1, selectRed, Player1Text, 1);
             Player1Skin1.transform.gameObject.SetActive(true);
             Player1Skin2.transform.gameObject.SetActive(true);
+            Player1Skin3.transform.gameObject.SetActive(true);
         }
         else { PlayerDisconnect(Player1, disconectRed, Player1Text, 1);
             Player1Skin1.transform.gameObject.SetActive(false);
             Player1Skin2.transform.gameObject.SetActive(false);
+            Player1Skin3.transform.gameObject.SetActive(false);
         }
-        if (Player2Asigner.asignerReady == true) { PlayerConnect(Player2, selectPurple, Player2Text, 2); }
-        else { PlayerDisconnect(Player2, disconectPurple, Player2Text, 2); }
-        if (Player3Asigner.asignerReady == true) { PlayerConnect(Player3, selectYellow, Player3Text, 3); }
-        else { PlayerDisconnect(Player3, disconectYellow, Player3Text, 3); }
-        if (Player4Asigner.asignerReady == true) { PlayerConnect(Player4, selectGreen, Player4Text, 4); }
-        else { PlayerDisconnect(Player4, disconectGreen, Player4Text, 4); }
+        if (Player2Asigner.asignerReady == true) { PlayerConnect(Player2, selectPurple, Player2Text, 2);
+            Player2Skin1.transform.gameObject.SetActive(true);
+            Player2Skin2.transform.gameObject.SetActive(true);
+            Player2Skin3.transform.gameObject.SetActive(true);
+        }
+        else { PlayerDisconnect(Player2, disconectPurple, Player2Text, 2);
+            Player2Skin1.transform.gameObject.SetActive(false);
+            Player2Skin2.transform.gameObject.SetActive(false);
+            Player2Skin3.transform.gameObject.SetActive(false);
+        }
+        if (Player3Asigner.asignerReady == true) { PlayerConnect(Player3, selectYellow, Player3Text, 3);
+            Player3Skin1.transform.gameObject.SetActive(true);
+            Player3Skin2.transform.gameObject.SetActive(true);
+            Player3Skin3.transform.gameObject.SetActive(true);
+        }
+        else { PlayerDisconnect(Player3, disconectYellow, Player3Text, 3);
+            Player3Skin1.transform.gameObject.SetActive(false);
+            Player3Skin2.transform.gameObject.SetActive(false);
+            Player3Skin3.transform.gameObject.SetActive(false);
+        }
+        if (Player4Asigner.asignerReady == true) { PlayerConnect(Player4, selectGreen, Player4Text, 4);
+            Player4Skin1.transform.gameObject.SetActive(true);
+            Player4Skin2.transform.gameObject.SetActive(true);
+            Player4Skin3.transform.gameObject.SetActive(true);
+        }
+        else { PlayerDisconnect(Player4, disconectGreen, Player4Text, 4);
+            Player4Skin1.transform.gameObject.SetActive(false);
+            Player4Skin2.transform.gameObject.SetActive(false);
+            Player4Skin3.transform.gameObject.SetActive(false);
+        }
 
         if (PlayerManager.Instance.Player1ON == false &&
             PlayerManager.Instance.Player2ON == false &&
