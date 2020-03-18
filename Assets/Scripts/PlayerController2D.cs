@@ -93,7 +93,7 @@ public class PlayerController2D : MonoBehaviour
                 Debug.Log("Skin: 1");
                 break;
             case Skin.SKIN2:
-                animator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Animations/Skin2");
+                animator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Animations/Skin1");
                 Debug.Log("Skin: 2");
                 break;
         }
@@ -109,11 +109,11 @@ public class PlayerController2D : MonoBehaviour
                 break;
 
             case Controller.PLAYER2:
-                player = ReInput.players.GetPlayer(2);
+                if (PlayerManager.Instance.Player2ON == true) { playerReady = true; player = ReInput.players.GetPlayer(2); }
                 break;
 
             case Controller.PLAYER3:
-                player = ReInput.players.GetPlayer(3);
+                if (PlayerManager.Instance.Player2ON == true) { playerReady = true; player = ReInput.players.GetPlayer(3); }
                 break;
         }
 
