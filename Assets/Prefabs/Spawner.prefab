@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2532107623028046303}
   - component: {fileID: 2532107623028046300}
+  - component: {fileID: 8049303869487651745}
   m_Layer: 8
   m_Name: Spawner
   m_TagString: Untagged
@@ -53,3 +54,21 @@ MonoBehaviour:
   whenToSpawn: 0
   numSpawned: 0
   maxNumSpawned: 6
+--- !u!114 &8049303869487651745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2532107623028046301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d502fcd52a3424245b83d88f546f2e51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maps: 0
+  spawnSkin1: {fileID: 1164842668750402546, guid: 4f754537c38517247a1dd25e83c48c79,
+    type: 3}
+  spawnSkin2: {fileID: 0}
+  spawnSkin3: {fileID: 0}
+  actualMap: []

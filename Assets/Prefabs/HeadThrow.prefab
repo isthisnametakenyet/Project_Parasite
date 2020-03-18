@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8746114737944884127}
   - component: {fileID: 4264405947799471599}
   m_Layer: 12
-  m_Name: place_throw
+  m_Name: HeadThrow
   m_TagString: FlyingHead
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -96,7 +96,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: 0
   skin: 0
-  NONE: {fileID: 21300000, guid: 50433d92bfcb76b4eb16c5f797e6d2f5, type: 3}
+  Skin1: {fileID: 21300000, guid: 4985531bf856c054b8f458c75c011d62, type: 3}
+  Skin2: {fileID: 0}
+  Skin3: {fileID: 0}
   OriginalBody: {fileID: 0}
   PlayerAll: {fileID: 8940266391300385515, guid: db4c6c334c299ae45ac64f060c984ab4,
     type: 3}

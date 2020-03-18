@@ -7,7 +7,10 @@ public class HeadThrow : MonoBehaviour
 {
     public Controller controller = Controller.NONE;
     public Skin skin = Skin.NONE;
-    public Sprite NONE;
+    public Sprite Skin1;
+    public Sprite Skin2;
+    public Sprite Skin3;
+
     SpriteRenderer spriteRenderer;
 
     private Player player;
@@ -57,15 +60,15 @@ public class HeadThrow : MonoBehaviour
 
         switch (skin)
         {
-            case Skin.NONE:
-                spriteRenderer.sprite = NONE;
+            case Skin.SKIN1:
+                spriteRenderer.sprite = Skin1;
                 break;
-                //case Skin.SKIN1:
-                //    spriteRenderer.sprite = Skin1;
-                //    break;
-                //case Skin.SKIN2:
-                //    spriteRenderer.sprite = Skin2;
-                //    break;
+            case Skin.SKIN2:
+                spriteRenderer.sprite = Skin2;
+                break;
+            case Skin.SKIN3:
+                spriteRenderer.sprite = Skin3;
+                break;
         }
 
         returnScript = OriginalBody.gameObject.GetComponent<EmptyBody>();

@@ -11,6 +11,10 @@ public class HeadReturn : MonoBehaviour
 
     private Player player;
 
+    public Sprite Skin1;
+    public Sprite Skin2;
+    public Sprite Skin3;
+
     public GameObject OriginalBody;
     public GameObject PlayerAll;
     private PlayerController2D playerAll;
@@ -54,6 +58,19 @@ public class HeadReturn : MonoBehaviour
 
             default:
                 isDead = true;
+                break;
+        }
+
+        switch (skin)
+        {
+            case Skin.SKIN1:
+                spriteRenderer.sprite = Skin1;
+                break;
+            case Skin.SKIN2:
+                spriteRenderer.sprite = Skin2;
+                break;
+            case Skin.SKIN3:
+                spriteRenderer.sprite = Skin3;
                 break;
         }
     }

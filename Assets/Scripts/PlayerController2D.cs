@@ -5,7 +5,7 @@ using System;
 using Rewired;
 
 public enum Controller { NONE, PLAYER0, PLAYER1, PLAYER2, PLAYER3 };
-public enum Skin { NONE, SKIN1, SKIN2 };
+public enum Skin { NONE, SKIN1, SKIN2, SKIN3 };
 public enum Arms { NONE, ONE, TWO };
 
 public class PlayerController2D : MonoBehaviour
