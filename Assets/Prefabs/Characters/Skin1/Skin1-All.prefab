@@ -259,6 +259,7 @@ MonoBehaviour:
     type: 3}
   HeadThrow: {fileID: 8496102874259545990, guid: bbafa50b4269fea4183837cbfa1156e0,
     type: 3}
+  ActualHead: {fileID: 6602269340801625972}
   RightArm: {fileID: 707871775757931963}
   LeftArm: {fileID: 4970889896390777268}
   PickedWeapon: {fileID: 0}
@@ -934,6 +935,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8501056520917886909, guid: 00326174b7137c24a82b58387b8fcc90,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 00326174b7137c24a82b58387b8fcc90, type: 3}

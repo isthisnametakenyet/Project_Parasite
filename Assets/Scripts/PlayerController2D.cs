@@ -22,6 +22,7 @@ public class PlayerController2D : MonoBehaviour
     public GameObject HeadFall;
     public GameObject BodyEmpty;
     public GameObject HeadThrow;
+    public GameObject ActualHead;
     public GameObject RightArm;
     public GameObject LeftArm;
     private HeadThrow headThrow;
@@ -30,6 +31,9 @@ public class PlayerController2D : MonoBehaviour
     private Arm rightScript;
     private Arm leftScript;
     private Transform ArmParent;
+    private SpriteRenderer LArmRenderer;
+    private SpriteRenderer RArmRenderer;
+    private SpriteRenderer HeadRenderer;
 
     //WEAPONS PICKUP
     public GameObject PickedWeapon;
@@ -80,6 +84,9 @@ public class PlayerController2D : MonoBehaviour
         animator = GetComponent<Animator>();
         body2D = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        LArmRenderer = LeftArm.GetComponent<SpriteRenderer>();
+        RArmRenderer = RightArm.GetComponent<SpriteRenderer>();
+        HeadRenderer = ActualHead.GetComponent<SpriteRenderer>();
 
         //SKIN
         switch (skin)
@@ -132,7 +139,7 @@ public class PlayerController2D : MonoBehaviour
     public bool isWeaponed = false;
 
     private void FixedUpdate(){
-        if (PlayerManager.Instance.WinRound == true || PlayerManager.Instance.Draw == true) { Destroy(gameObject); }
+        if (PlayerManager.Instance.DeleteProps == true) { Destroy(gameObject); } //END ROUND
 
         if(!ReInput.isReady || player == null) {
             Debug.Log("not set or Disconnected"); //TODO: MESSAGE IN SCREEN
@@ -167,6 +174,9 @@ public class PlayerController2D : MonoBehaviour
                 body2D.velocity = new Vector2(runSpeed, body2D.velocity.y);
                 //spriteRenderer.flipX = true;
                 spriteRenderer.flipX = false;
+                LArmRenderer.flipX = false;
+                RArmRenderer.flipX = false;
+                HeadRenderer.flipX = false;
                 animator.SetBool(MovingID, true);
                 facingright = true;
             }
@@ -178,6 +188,9 @@ public class PlayerController2D : MonoBehaviour
                 body2D.velocity = new Vector2(-runSpeed, body2D.velocity.y);
                 //spriteRenderer.flipX = false;
                 spriteRenderer.flipX = true;
+                LArmRenderer.flipX = true;
+                RArmRenderer.flipX = true;
+                HeadRenderer.flipX = true;
                 animator.SetBool(MovingID, true);
                 facingright = false;
             }

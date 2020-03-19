@@ -44,4 +44,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numPlayers: 0
-  scorePlayers: 
+  gameON: 0
+  DeleteProps: 0
+  GameEnd: 0
+  Player1ON: 0
+  Player2ON: 0
+  Player3ON: 0
+  Player4ON: 0
+  ScorePlayer1: 0
+  ScorePlayer2: 0
+  ScorePlayer3: 0
+  ScorePlayer4: 0
+  SkinPlayer1: 1
+  SkinPlayer2: 1
+  SkinPlayer3: 1
+  SkinPlayer4: 1
+  isAlivePlayer1: 0
+  isAlivePlayer2: 0
+  isAlivePlayer3: 0
+  isAlivePlayer4: 0
+  tempskin: 0

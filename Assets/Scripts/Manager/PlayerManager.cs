@@ -8,10 +8,11 @@ public class PlayerManager : Singleton <PlayerManager>
 {
     public int numPlayers = 4;
     public bool gameON = false;
-    public bool WinRound = false;
-    public bool Draw = false;
-    public bool RestartingRound = false;
-    public bool WinGame = false;
+    private bool WinRound = false;
+    private bool RestartingRound = false;
+    private bool WinGame = false;
+    public bool DeleteProps = false;
+    public bool GameEnd = false;
 
     //public bool[] onPlayers;
     public bool Player1ON;
@@ -49,19 +50,17 @@ public class PlayerManager : Singleton <PlayerManager>
             if(isAlivePlayer3 == true) { tmpInt++; }
             if(isAlivePlayer4 == true) { tmpInt++; }
             if (tmpInt == 1) { WinRound = true; } //1 ALIVE
-            //if (tmpInt == 0) { Draw = true; } //DRAW
         }
         if (WinRound == true)
         {
+
             if (isAlivePlayer1 == true) { ScorePlayer1++; }
             if (isAlivePlayer2 == true) { ScorePlayer2++; }
             if (isAlivePlayer3 == true) { ScorePlayer3++; }
             if (isAlivePlayer4 == true) { ScorePlayer4++; }
+            Debug.Log("a: RestartRound();");
+            //RestartRound();
         }
-        //else if (Draw == true)
-        //{
-
-        //}
 
         if (ScorePlayer1 == 5) { WinGame = true; }
         else if (ScorePlayer2 == 5) { WinGame = true; }
@@ -71,12 +70,18 @@ public class PlayerManager : Singleton <PlayerManager>
 
     private void RestartRound()
     {
-
+        Debug.Log("PlayerManager: RestartRound();");
+        DeleteProps = true;
+        //ANIAMTION PLAYER SCORE
+        DeleteProps = false;
+        //RECREATE PROPS
     }
 
     private void EndGame()
     {
-
+        Debug.Log("PlayerManager: EndGame();");
+        DeleteProps = true;
+        gameON = false;
     }
 
     public int tempskin;
@@ -109,13 +114,13 @@ public class PlayerManager : Singleton <PlayerManager>
         PlayerManager.Instance.ScorePlayer3 = 0;
         PlayerManager.Instance.ScorePlayer4 = 0;
 
-        if (Player1ON == true) { isAlivePlayer1 = true; }
+        if (Player1ON == true) { isAlivePlayer1 = true; Debug.Log("PlayerManager: FKU();"); }
         if (Player2ON == true) { isAlivePlayer2 = true; }
         if (Player3ON == true) { isAlivePlayer3 = true; }
         if (Player4ON == true) { isAlivePlayer4 = true; }
 
+        DeleteProps = false;
         gameON = true;
-
         Debug.Log("PlayerManager: Startgame();");
     }
 }
