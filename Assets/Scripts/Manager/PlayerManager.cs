@@ -7,6 +7,11 @@ using Rewired;
 public class PlayerManager : Singleton <PlayerManager>
 {
     public int numPlayers = 4;
+    public bool gameON = false;
+    public bool WinRound = false;
+    public bool Draw = false;
+    public bool RestartingRound = false;
+    public bool WinGame = false;
 
     //public bool[] onPlayers;
     public bool Player1ON;
@@ -27,9 +32,55 @@ public class PlayerManager : Singleton <PlayerManager>
     public int SkinPlayer3;
     public int SkinPlayer4;
 
+    //public bool[] isAlivePlayers;
+    public bool isAlivePlayer1;
+    public bool isAlivePlayer2;
+    public bool isAlivePlayer3;
+    public bool isAlivePlayer4;
+
+    int tmpInt = 0;
+    private void FixedUpdate()
+    {
+        if (gameON == true)
+        {
+            tmpInt = 0;
+            if(isAlivePlayer1 == true) { tmpInt++; }
+            if(isAlivePlayer2 == true) { tmpInt++; }
+            if(isAlivePlayer3 == true) { tmpInt++; }
+            if(isAlivePlayer4 == true) { tmpInt++; }
+            if (tmpInt == 1) { WinRound = true; } //1 ALIVE
+            //if (tmpInt == 0) { Draw = true; } //DRAW
+        }
+        if (WinRound == true)
+        {
+            if (isAlivePlayer1 == true) { ScorePlayer1++; }
+            if (isAlivePlayer2 == true) { ScorePlayer2++; }
+            if (isAlivePlayer3 == true) { ScorePlayer3++; }
+            if (isAlivePlayer4 == true) { ScorePlayer4++; }
+        }
+        //else if (Draw == true)
+        //{
+
+        //}
+
+        if (ScorePlayer1 == 5) { WinGame = true; }
+        else if (ScorePlayer2 == 5) { WinGame = true; }
+        else if (ScorePlayer3 == 5) { WinGame = true; }
+        else if (ScorePlayer4 == 5) { WinGame = true; }
+    }
+
+    private void RestartRound()
+    {
+
+    }
+
+    private void EndGame()
+    {
+
+    }
+
     public int tempskin;
     public void SetSkin (int temp) { tempskin = temp; }
-
     public void SetSkinTOPlayer(int player)
     {
         if (tempskin == -1) { Debug.LogError("ERROR: SkinSet(); skintemp was not changed (-1)"); return; }
@@ -57,6 +108,13 @@ public class PlayerManager : Singleton <PlayerManager>
         PlayerManager.Instance.ScorePlayer2 = 0;
         PlayerManager.Instance.ScorePlayer3 = 0;
         PlayerManager.Instance.ScorePlayer4 = 0;
+
+        if (Player1ON == true) { isAlivePlayer1 = true; }
+        if (Player2ON == true) { isAlivePlayer2 = true; }
+        if (Player3ON == true) { isAlivePlayer3 = true; }
+        if (Player4ON == true) { isAlivePlayer4 = true; }
+
+        gameON = true;
 
         Debug.Log("PlayerManager: Startgame();");
     }

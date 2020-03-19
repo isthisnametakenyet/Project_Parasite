@@ -132,6 +132,8 @@ public class PlayerController2D : MonoBehaviour
     public bool isWeaponed = false;
 
     private void FixedUpdate(){
+        if (PlayerManager.Instance.WinRound == true || PlayerManager.Instance.Draw == true) { Destroy(gameObject); }
+
         if(!ReInput.isReady || player == null) {
             Debug.Log("not set or Disconnected"); //TODO: MESSAGE IN SCREEN
             return;
@@ -692,6 +694,10 @@ public class PlayerController2D : MonoBehaviour
             Rigidbody2D headRigid;
             headRigid = head.GetComponent<Rigidbody2D>(); //ASIGN HEAD RIGID
             headCharge = 2f;
+            headReturn = head.GetComponent<HeadReturn>();
+            headReturn.skin = this.skin;
+            headReturn.controller = this.controller;
+            headReturn.isDead = true;
 
             Rigidbody2D armRigid;
             BoxCollider2D armCollider;

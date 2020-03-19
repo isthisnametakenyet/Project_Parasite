@@ -77,29 +77,46 @@ public class HeadReturn : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (isDead == false)
+        if (isDead == true)
         {
-            if (Stunned == true && Wait < MaxStun)
+            switch (controller)
             {
-                Wait += Time.deltaTime * 1f;
-                Debug.Log("Stun:" + Wait);
+                case Controller.PLAYER0:
+                    PlayerManager.Instance.isAlivePlayer1 = false;
+                    break;
+                case Controller.PLAYER1:
+                    PlayerManager.Instance.isAlivePlayer2 = false;
+                    break;
+                case Controller.PLAYER2:
+                    PlayerManager.Instance.isAlivePlayer3 = false;
+                    break;
+                case Controller.PLAYER3:
+                    PlayerManager.Instance.isAlivePlayer4 = false;
+                    break;
             }
-            else { Stunned = false; }
+            this.enabled = false;
+        }
 
-            if (player.GetButtonDown("Head Return") && Stunned == false || Returning == true)
-            {
-                animator.Play(BackID);
+        if (Stunned == true && Wait < MaxStun)
+        {
+            Wait += Time.deltaTime * 1f;
+            Debug.Log("Stun:" + Wait);
+        }
+        else { Stunned = false; }
 
-                this.transform.position = new Vector3(OriginalBody.transform.position.x, OriginalBody.transform.position.y, 0);
-                GameObject player = Instantiate(PlayerAll, new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
+        if (player.GetButtonDown("Head Return") && Stunned == false || Returning == true)
+        {
+            animator.Play(BackID);
 
-                playerAll = player.GetComponent<PlayerController2D>();
-                playerAll.controller = this.controller;
-                playerAll.skin = this.skin;
+            this.transform.position = new Vector3(OriginalBody.transform.position.x, OriginalBody.transform.position.y, 0);
+            GameObject player = Instantiate(PlayerAll, new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
 
-                Destroy(OriginalBody);
-                Destroy(gameObject); //AUTODESTRUCCION
-            }
+            playerAll = player.GetComponent<PlayerController2D>();
+            playerAll.controller = this.controller;
+            playerAll.skin = this.skin;
+
+            Destroy(OriginalBody);
+            Destroy(gameObject); //AUTODESTRUCCION
         }
     }
 }
