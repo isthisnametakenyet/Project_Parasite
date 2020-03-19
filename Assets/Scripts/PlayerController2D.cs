@@ -163,7 +163,8 @@ public class PlayerController2D : MonoBehaviour
             if (isCharging == false && isHeading == false && isDucking == false)
             {
                 body2D.velocity = new Vector2(runSpeed, body2D.velocity.y);
-                spriteRenderer.flipX = true;
+                //spriteRenderer.flipX = true;
+                spriteRenderer.flipX = false;
                 animator.SetBool(MovingID, true);
                 facingright = true;
             }
@@ -173,7 +174,8 @@ public class PlayerController2D : MonoBehaviour
             if (isCharging == false && isHeading == false && isDucking == false)
             {
                 body2D.velocity = new Vector2(-runSpeed, body2D.velocity.y);
-                spriteRenderer.flipX = false;
+                //spriteRenderer.flipX = false;
+                spriteRenderer.flipX = true;
                 animator.SetBool(MovingID, true);
                 facingright = false;
             }

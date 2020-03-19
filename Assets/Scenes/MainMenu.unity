@@ -1443,7 +1443,22 @@ PrefabInstance:
     - target: {fileID: 1631143474041647104, guid: 0a436846a704a5742a438bbbd501cb35,
         type: 3}
       propertyPath: SkinPlayer1
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1631143474041647104, guid: 0a436846a704a5742a438bbbd501cb35,
+        type: 3}
+      propertyPath: SkinPlayer2
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1631143474041647104, guid: 0a436846a704a5742a438bbbd501cb35,
+        type: 3}
+      propertyPath: SkinPlayer3
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1631143474041647104, guid: 0a436846a704a5742a438bbbd501cb35,
+        type: 3}
+      propertyPath: SkinPlayer4
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0a436846a704a5742a438bbbd501cb35, type: 3}
