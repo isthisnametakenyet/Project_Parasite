@@ -96,6 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   picktype: 0
+  RadomSpawner: {fileID: 0}
   Picker: {fileID: 0}
   Sword: {fileID: 3040493000438626130, guid: b48adec35004cc94fb8878b2f83c61b9, type: 3}
   Axe: {fileID: 4109791825871390401, guid: 34431f682b8fae9449bfd8e2e32a67ef, type: 3}
@@ -105,7 +106,7 @@ MonoBehaviour:
     type: 3}
   Boomerang: {fileID: 1911622075723830657, guid: b3cac058b5486864db272695012c4650,
     type: 3}
-  swordSprite: {fileID: 21300000, guid: b61af1c011cf4b24d91d7b5786976d69, type: 3}
+  swordSprite: {fileID: 21300000, guid: ffdd31b5e670606409a7f916e8dde518, type: 3}
   axeSprite: {fileID: 21300000, guid: 9af6f35fa913dfa40a207c3c3d509a79, type: 3}
   lanceSprite: {fileID: 21300000, guid: 8b5d166df27d93a438d023f1aa31f19e, type: 3}
   bowSprite: {fileID: 21300000, guid: 8cf2ed2bc07b49d449c2726b1a2fcd42, type: 3}
