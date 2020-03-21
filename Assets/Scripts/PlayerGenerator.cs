@@ -17,9 +17,13 @@ public class PlayerGenerator : MonoBehaviour
 
     public Vector3[] actualMap;
     int randPos;
-    
 
     void Start()
+    {
+        Spawn();
+    }
+
+    void Spawn()
     {
         switch (maps)
         {
@@ -62,7 +66,7 @@ public class PlayerGenerator : MonoBehaviour
                     break;
             }
 
-            if (PlayerManager.Instance.Player2ON == false) { Debug.Log("1 Players Spawned"); Destroy(this); return; }
+            if (PlayerManager.Instance.Player2ON == false) { Debug.Log("1 Players Spawned"); return; }
             switch (PlayerManager.Instance.SkinPlayer2)
             {
                 case 1:
@@ -85,7 +89,7 @@ public class PlayerGenerator : MonoBehaviour
                     break;
             }
 
-            if (PlayerManager.Instance.Player3ON == false) { Debug.Log("2 Players Spawned"); Destroy(this); return; }
+            if (PlayerManager.Instance.Player3ON == false) { Debug.Log("2 Players Spawned"); return; }
             switch (PlayerManager.Instance.SkinPlayer1)
             {
                 case 1:
@@ -108,7 +112,7 @@ public class PlayerGenerator : MonoBehaviour
                     break;
             }
 
-            if (PlayerManager.Instance.Player4ON == false) { Debug.Log("3 Players Spawned"); Destroy(this); return; }
+            if (PlayerManager.Instance.Player4ON == false) { Debug.Log("3 Players Spawned"); return; }
             switch (PlayerManager.Instance.SkinPlayer4)
             {
                 case 1:
@@ -131,9 +135,7 @@ public class PlayerGenerator : MonoBehaviour
                     break;
             }
         }
-
-        Debug.Log("All Players Spawned, auto-destroying this");
-
-        Destroy(this);
+        Debug.Log("All Players Spawned");
+        //Destroy(this);
     }
 }
