@@ -11,6 +11,7 @@ public class PlayerManager : Singleton <PlayerManager>
     private bool WinRound = false;
     private bool RestartingRound = false;
     private bool WinGame = false;
+    public int Round = 0;
     public bool DeleteProps = false;
     public bool GameEnd = false;
 
@@ -54,10 +55,10 @@ public class PlayerManager : Singleton <PlayerManager>
         if (WinRound == true)
         {
 
-            if (isAlivePlayer1 == true) { ScorePlayer1++; }
-            if (isAlivePlayer2 == true) { ScorePlayer2++; }
-            if (isAlivePlayer3 == true) { ScorePlayer3++; }
-            if (isAlivePlayer4 == true) { ScorePlayer4++; }
+            if (isAlivePlayer1 == true) { ScorePlayer1++; Round = 1; }
+            if (isAlivePlayer2 == true) { ScorePlayer2++; Round = 2; }
+            if (isAlivePlayer3 == true) { ScorePlayer3++; Round = 3; }
+            if (isAlivePlayer4 == true) { ScorePlayer4++; Round = 4; }
             Debug.Log("a: RestartRound();");
             //RestartRound();
         }
@@ -72,9 +73,7 @@ public class PlayerManager : Singleton <PlayerManager>
     {
         Debug.Log("PlayerManager: RestartRound();");
         DeleteProps = true;
-        //ANIAMTION PLAYER SCORE
-        DeleteProps = false;
-        //RECREATE PROPS
+        //DeleteProps = false; //PlayerGenerator lo pone en false y re-Spawnea los jugadores
     }
 
     private void EndGame()

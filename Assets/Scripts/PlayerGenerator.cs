@@ -18,8 +18,43 @@ public class PlayerGenerator : MonoBehaviour
     public Vector3[] actualMap;
     int randPos;
 
+    public ScoreHUD scoreHUD;
+    private ScoreHUD scoreScript;
+
+    public float scoreDelay;
+    
+
     void Start()
     {
+        Spawn();
+        scoreScript = scoreHUD.GetComponent<ScoreHUD>();
+    }
+
+    void FixedUpdate() 
+    {
+        if (PlayerManager.Instance.DeleteProps == true)
+        {
+            PlayerManager.Instance.DeleteProps = false;
+            scoreScript.Activate();
+            scoreScript.Round(PlayerManager.Instance.Round);
+            StartCoroutine("DelayHUD");
+        }
+
+        if (PlayerManager.Instance.GameEnd == true)
+        {
+            PlayerManager.Instance.GameEnd = false;
+            scoreScript.Activate();
+            if (PlayerManager.Instance.ScorePlayer1 == 5) { scoreScript.Win(1); }
+            else if (PlayerManager.Instance.ScorePlayer2 == 5) { scoreScript.Win(2); }
+            else if (PlayerManager.Instance.ScorePlayer3 == 5) { scoreScript.Win(3); }
+            else if (PlayerManager.Instance.ScorePlayer4 == 5) { scoreScript.Win(4); }
+        }
+    }
+
+    IEnumerator DelayHUD()
+    {
+        yield return new WaitForSeconds(scoreDelay);
+        scoreScript.Desactivate();
         Spawn();
     }
 
