@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ScoreHUD : MonoBehaviour
 {
@@ -423,5 +424,6 @@ public class ScoreHUD : MonoBehaviour
     {
         yield return new WaitForSeconds(delayEnd);
         //CARGAR MAIN MENU
+        SceneManager.LoadScene("MainMenu");
     }
 }
