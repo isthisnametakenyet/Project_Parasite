@@ -10,7 +10,7 @@ public class SawScript : MonoBehaviour
 
     public float rotationSpeed;
     float movement;
-    public float rotattionz;
+    float rotattionz;
 
     SpriteRenderer spriteRenderer;
 
