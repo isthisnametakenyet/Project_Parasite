@@ -131,15 +131,135 @@ public class ScoreHUD : MonoBehaviour
         Debug.Log("Hiding ScoreHUD");
         P1B.SetActive(true);
         P1H.SetActive(true);
+        switch (PlayerManager.Instance.ScorePlayer1)
+        {
+            case 1:
+                P1_1.SetActive(true);
+                break;
+            case 2:
+                P1_1.SetActive(true);
+                P1_2.SetActive(true);
+                break;
+            case 3:
+                P1_1.SetActive(true);
+                P1_2.SetActive(true);
+                P1_3.SetActive(true);
+                break;
+            case 4:
+                P1_1.SetActive(true);
+                P1_2.SetActive(true);
+                P1_3.SetActive(true);
+                P1_4.SetActive(true);
+                break;
+            case 5:
+                P1_1.SetActive(true);
+                P1_2.SetActive(true);
+                P1_3.SetActive(true);
+                P1_4.SetActive(true);
+                P1_5.SetActive(true);
+                break;
+            default:
+                break;
+        }
         if (PlayerManager.Instance.Player2ON == false) { return; }
         P2B.SetActive(true);
         P2H.SetActive(true);
+        switch (PlayerManager.Instance.ScorePlayer2)
+        {
+            case 1:
+                P2_1.SetActive(true);
+                break;
+            case 2:
+                P2_1.SetActive(true);
+                P2_2.SetActive(true);
+                break;
+            case 3:
+                P2_1.SetActive(true);
+                P2_2.SetActive(true);
+                P2_3.SetActive(true);
+                break;
+            case 4:
+                P2_1.SetActive(true);
+                P2_2.SetActive(true);
+                P2_3.SetActive(true);
+                P2_4.SetActive(true);
+                break;
+            case 5:
+                P2_1.SetActive(true);
+                P2_2.SetActive(true);
+                P2_3.SetActive(true);
+                P2_4.SetActive(true);
+                P2_5.SetActive(true);
+                break;
+            default:
+                break;
+        }
         if (PlayerManager.Instance.Player3ON == false) { return; }
         P3B.SetActive(true);
         P3H.SetActive(true);
+        switch (PlayerManager.Instance.ScorePlayer3)
+        {
+            case 1:
+                P3_1.SetActive(true);
+                break;
+            case 2:
+                P3_1.SetActive(true);
+                P3_2.SetActive(true);
+                break;
+            case 3:
+                P3_1.SetActive(true);
+                P3_2.SetActive(true);
+                P3_3.SetActive(true);
+                break;
+            case 4:
+                P3_1.SetActive(true);
+                P3_2.SetActive(true);
+                P3_3.SetActive(true);
+                P3_4.SetActive(true);
+                break;
+            case 5:
+                P3_1.SetActive(true);
+                P3_2.SetActive(true);
+                P3_3.SetActive(true);
+                P3_4.SetActive(true);
+                P3_5.SetActive(true);
+                break;
+            default:
+                break;
+        }
         if (PlayerManager.Instance.Player4ON == false) { return; }
         P4B.SetActive(true);
         P4H.SetActive(true);
+        switch (PlayerManager.Instance.ScorePlayer4)
+        {
+            case 1:
+                P4_1.SetActive(true);
+                break;
+            case 2:
+                P4_1.SetActive(true);
+                P4_2.SetActive(true);
+                break;
+            case 3:
+                P4_1.SetActive(true);
+                P4_2.SetActive(true);
+                P4_3.SetActive(true);
+                break;
+            case 4:
+                P4_1.SetActive(true);
+                P4_2.SetActive(true);
+                P4_3.SetActive(true);
+                P4_4.SetActive(true);
+                break;
+            case 5:
+                P4_1.SetActive(true);
+                P4_2.SetActive(true);
+                P4_3.SetActive(true);
+                P4_4.SetActive(true);
+                P4_5.SetActive(true);
+                break;
+            default:
+                break;
+        }
     }
 
     public void Desactivate()
@@ -147,15 +267,35 @@ public class ScoreHUD : MonoBehaviour
         Debug.Log("Revealing ScoreHUD");
         P1B.SetActive(false);
         P1H.SetActive(false);
+        P1_1.SetActive(false);
+        P1_2.SetActive(false);
+        P1_3.SetActive(false);
+        P1_4.SetActive(false);
+        P1_5.SetActive(false);
         if (PlayerManager.Instance.Player2ON == false) { return; }
         P2B.SetActive(false);
         P2H.SetActive(false);
+        P2_1.SetActive(false);
+        P2_2.SetActive(false);
+        P2_3.SetActive(false);
+        P2_4.SetActive(false);
+        P2_5.SetActive(false);
         if (PlayerManager.Instance.Player3ON == false) { return; }
         P3B.SetActive(false);
         P3H.SetActive(false);
+        P3_1.SetActive(false);
+        P3_2.SetActive(false);
+        P3_3.SetActive(false);
+        P3_4.SetActive(false);
+        P3_5.SetActive(false);
         if (PlayerManager.Instance.Player4ON == false) { return; }
         P4B.SetActive(false);
         P4H.SetActive(false);
+        P4_1.SetActive(false);
+        P4_2.SetActive(false);
+        P4_3.SetActive(false);
+        P4_4.SetActive(false);
+        P4_5.SetActive(false);
     }
 
     public void Round(int winner)
@@ -166,16 +306,84 @@ public class ScoreHUD : MonoBehaviour
                 Debug.LogError("Round Winner not set in PlayerManager");
                 break;
             case 1:
-
+                switch (PlayerManager.Instance.ScorePlayer1)
+                {
+                    case 1:
+                        animP1_1.SetBool(WinID, true);
+                        break;
+                    case 2:
+                        animP1_2.SetBool(WinID, true);
+                        break;
+                    case 3:
+                        animP1_3.SetBool(WinID, true);
+                        break;
+                    case 4:
+                        animP1_4.SetBool(WinID, true);
+                        break;
+                    case 5:
+                        animP1_5.SetBool(WinID, true);
+                        break;
+                }
                 break;
             case 2:
-
+                switch (PlayerManager.Instance.ScorePlayer2)
+                {
+                    case 1:
+                        animP2_1.SetBool(WinID, true);
+                        break;
+                    case 2:
+                        animP2_2.SetBool(WinID, true);
+                        break;
+                    case 3:
+                        animP2_3.SetBool(WinID, true);
+                        break;
+                    case 4:
+                        animP2_4.SetBool(WinID, true);
+                        break;
+                    case 5:
+                        animP2_5.SetBool(WinID, true);
+                        break;
+                }
                 break;
             case 3:
-
+                switch (PlayerManager.Instance.ScorePlayer3)
+                {
+                    case 1:
+                        animP3_1.SetBool(WinID, true);
+                        break;
+                    case 2:
+                        animP3_2.SetBool(WinID, true);
+                        break;
+                    case 3:
+                        animP3_3.SetBool(WinID, true);
+                        break;
+                    case 4:
+                        animP3_4.SetBool(WinID, true);
+                        break;
+                    case 5:
+                        animP3_5.SetBool(WinID, true);
+                        break;
+                }
                 break;
             case 4:
-
+                switch (PlayerManager.Instance.ScorePlayer4)
+                {
+                    case 1:
+                        animP4_1.SetBool(WinID, true);
+                        break;
+                    case 2:
+                        animP4_2.SetBool(WinID, true);
+                        break;
+                    case 3:
+                        animP4_3.SetBool(WinID, true);
+                        break;
+                    case 4:
+                        animP4_4.SetBool(WinID, true);
+                        break;
+                    case 5:
+                        animP4_5.SetBool(WinID, true);
+                        break;
+                }
                 break;
             default:
                 Debug.LogError("Round Winner received number not from 0 to 4");
