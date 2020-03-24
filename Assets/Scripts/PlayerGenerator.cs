@@ -39,7 +39,7 @@ public class PlayerGenerator : MonoBehaviour
             scoreScript.Round(PlayerManager.Instance.Round);
             if (PlayerManager.Instance.GameEnd == false) { StartCoroutine("DelayHUD"); }
 
-            if (PlayerManager.Instance.ScorePlayer1 == 5) { scoreScript.End(1); PlayerManager.Instance.GameEnd = true; }
+            if (PlayerManager.Instance.ScorePlayer1 == 5) { /*scoreScript.End(1);*/ PlayerManager.Instance.GameEnd = true; }
             else if (PlayerManager.Instance.ScorePlayer2 == 5) { scoreScript.End(2); PlayerManager.Instance.GameEnd = true; }
             else if (PlayerManager.Instance.ScorePlayer3 == 5) { scoreScript.End(3); PlayerManager.Instance.GameEnd = true; }
             else if (PlayerManager.Instance.ScorePlayer4 == 5) { scoreScript.End(4); PlayerManager.Instance.GameEnd = true; }
