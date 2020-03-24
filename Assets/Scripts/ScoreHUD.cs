@@ -119,6 +119,11 @@ public class ScoreHUD : MonoBehaviour
         P3_3.SetActive(false);
         P3_4.SetActive(false);
         P3_5.SetActive(false);
+        P4_1.SetActive(false);
+        P4_2.SetActive(false);
+        P4_3.SetActive(false);
+        P4_4.SetActive(false);
+        P4_5.SetActive(false);
     }
 
     public void Activate()
