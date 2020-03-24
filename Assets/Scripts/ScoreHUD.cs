@@ -392,7 +392,7 @@ public class ScoreHUD : MonoBehaviour
         PlayerManager.Instance.Round = 0;
     }
 
-    public void Win(int winner)
+    public void End(int winner)
     {
         switch (winner)
         {

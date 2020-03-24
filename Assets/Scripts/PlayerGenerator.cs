@@ -37,17 +37,12 @@ public class PlayerGenerator : MonoBehaviour
             PlayerManager.Instance.DeleteProps = false;
             scoreScript.Activate();
             scoreScript.Round(PlayerManager.Instance.Round);
-            StartCoroutine("DelayHUD");
-        }
+            if (PlayerManager.Instance.GameEnd == false) { StartCoroutine("DelayHUD"); }
 
-        if (PlayerManager.Instance.GameEnd == true)
-        {
-            PlayerManager.Instance.GameEnd = false;
-            scoreScript.Activate();
-            if (PlayerManager.Instance.ScorePlayer1 == 5) { scoreScript.Win(1); }
-            else if (PlayerManager.Instance.ScorePlayer2 == 5) { scoreScript.Win(2); }
-            else if (PlayerManager.Instance.ScorePlayer3 == 5) { scoreScript.Win(3); }
-            else if (PlayerManager.Instance.ScorePlayer4 == 5) { scoreScript.Win(4); }
+            if (PlayerManager.Instance.ScorePlayer1 == 5) { scoreScript.End(1); PlayerManager.Instance.GameEnd = true; }
+            else if (PlayerManager.Instance.ScorePlayer2 == 5) { scoreScript.End(2); PlayerManager.Instance.GameEnd = true; }
+            else if (PlayerManager.Instance.ScorePlayer3 == 5) { scoreScript.End(3); PlayerManager.Instance.GameEnd = true; }
+            else if (PlayerManager.Instance.ScorePlayer4 == 5) { scoreScript.End(4); PlayerManager.Instance.GameEnd = true; }
         }
     }
 
