@@ -322,6 +322,7 @@ public class ScoreHUD : MonoBehaviour
                         break;
                     case 5:
                         animP1_5.SetBool(WinID, true);
+                        PlayerManager.Instance.GameEnd = true;
                         break;
                 }
                 break;
@@ -342,6 +343,7 @@ public class ScoreHUD : MonoBehaviour
                         break;
                     case 5:
                         animP2_5.SetBool(WinID, true);
+                        PlayerManager.Instance.GameEnd = true;
                         break;
                 }
                 break;
@@ -362,6 +364,7 @@ public class ScoreHUD : MonoBehaviour
                         break;
                     case 5:
                         animP3_5.SetBool(WinID, true);
+                        PlayerManager.Instance.GameEnd = true;
                         break;
                 }
                 break;
@@ -382,6 +385,7 @@ public class ScoreHUD : MonoBehaviour
                         break;
                     case 5:
                         animP4_5.SetBool(WinID, true);
+                        PlayerManager.Instance.GameEnd = true;
                         break;
                 }
                 break;
