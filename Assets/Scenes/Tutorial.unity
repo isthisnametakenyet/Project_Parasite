@@ -2900,7 +2900,7 @@ PrefabInstance:
     - target: {fileID: 2503348166692240417, guid: c0ebb2942ef3a574bb401d5c06434664,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2503348166692240417, guid: c0ebb2942ef3a574bb401d5c06434664,
         type: 3}
@@ -2919,6 +2919,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c0ebb2942ef3a574bb401d5c06434664, type: 3}
+--- !u!1 &264027369 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2503348166692240421, guid: c0ebb2942ef3a574bb401d5c06434664,
+    type: 3}
+  m_PrefabInstance: {fileID: 264027368}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &524088451
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2998,6 +3004,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c79242808fa0d8c45a73f6869217905c, type: 3}
+--- !u!1 &524088452 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1932586694915495182, guid: c79242808fa0d8c45a73f6869217905c,
+    type: 3}
+  m_PrefabInstance: {fileID: 524088451}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &754335562
 GameObject:
   m_ObjectHideFlags: 0
@@ -3053,6 +3065,7 @@ GameObject:
   - component: {fileID: 918169742}
   - component: {fileID: 918169741}
   - component: {fileID: 918169740}
+  - component: {fileID: 918169743}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -3124,6 +3137,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &918169743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 918169739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97e436de18f7c11479a4f7458a2acebb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Dummy: {fileID: 1260923584}
+  Pickup: {fileID: 264027369}
+  Saw: {fileID: 524088452}
 --- !u!1001 &1260923583
 PrefabInstance:
   m_ObjectHideFlags: 0
