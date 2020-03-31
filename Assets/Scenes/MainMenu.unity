@@ -468,7 +468,7 @@ TilemapRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
-  m_ChunkCullingBounds: {x: 0.39999998, y: 0.39999998, z: 0}
+  m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
   m_SortOrder: 0
@@ -903,75 +903,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &648499243
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 6028586320151207350, guid: 9d151fd1cdf154441b6201be3e8a8633,
-        type: 3}
-      propertyPath: m_Name
-      value: Rewired Input Manager
-      objectReference: {fileID: 0}
-    - target: {fileID: 4070482300638870025, guid: 9d151fd1cdf154441b6201be3e8a8633,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4070482300638870025, guid: 9d151fd1cdf154441b6201be3e8a8633,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4070482300638870025, guid: 9d151fd1cdf154441b6201be3e8a8633,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4070482300638870025, guid: 9d151fd1cdf154441b6201be3e8a8633,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4070482300638870025, guid: 9d151fd1cdf154441b6201be3e8a8633,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4070482300638870025, guid: 9d151fd1cdf154441b6201be3e8a8633,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4070482300638870025, guid: 9d151fd1cdf154441b6201be3e8a8633,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4070482300638870025, guid: 9d151fd1cdf154441b6201be3e8a8633,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 4070482300638870025, guid: 9d151fd1cdf154441b6201be3e8a8633,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4070482300638870025, guid: 9d151fd1cdf154441b6201be3e8a8633,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4070482300638870025, guid: 9d151fd1cdf154441b6201be3e8a8633,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 9d151fd1cdf154441b6201be3e8a8633, type: 3}
 --- !u!1 &728297112
 GameObject:
   m_ObjectHideFlags: 0
@@ -1307,7 +1238,7 @@ MonoBehaviour:
   m_Script: {fileID: 1980459831, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -1326,7 +1257,7 @@ Canvas:
   m_GameObject: {fileID: 1351398509}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 1
+  m_RenderMode: 0
   m_Camera: {fileID: 507420142}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -1413,7 +1344,7 @@ PrefabInstance:
     - target: {fileID: 1631143474041647111, guid: 0a436846a704a5742a438bbbd501cb35,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1631143474041647111, guid: 0a436846a704a5742a438bbbd501cb35,
         type: 3}
@@ -1532,7 +1463,7 @@ TilemapRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
-  m_ChunkCullingBounds: {x: 0.39999998, y: 0.39999998, z: 0}
+  m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
   m_MaxFrameAge: 16
   m_SortOrder: 0
@@ -2273,7 +2204,7 @@ PrefabInstance:
     - target: {fileID: 564604310033955443, guid: 85d538516bf128c4e88a863f6ce05c23,
         type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 564604310033955443, guid: 85d538516bf128c4e88a863f6ce05c23,
         type: 3}
@@ -2342,7 +2273,7 @@ PrefabInstance:
     - target: {fileID: 2776592608274794232, guid: 1ab788fff2dba3e47ba9b13d2b75c59e,
         type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 2776592608274794232, guid: 1ab788fff2dba3e47ba9b13d2b75c59e,
         type: 3}
