@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Maps { MapTut, Map1, Map2, Map3 };
+public enum Maps { Map1, Map2, Map3 };
 public enum PickTypes { Sword, Axe, Spear, Bow, CrossBow, Boomerang };
 
 public class RandomSpawnScript : MonoBehaviour
@@ -18,7 +18,6 @@ public class RandomSpawnScript : MonoBehaviour
     public float spawnMinRate = 7f;
 
     // positions to spawn the prefabs
-    Vector3[] positionsMapTut = new[] { new Vector3(-5.5f, 1.8f, 1f), new Vector3(5.5f, 1.8f, 0f), new Vector3(3.4f, -2.25f, 0f), new Vector3(-3.4f, -2.25f, 0f), new Vector3(0f, -4.2f, 0f) };
     Vector3[] positionsMap1 = new[] { new Vector3(-5.5f, 1.8f, 1f), new Vector3(5.5f, 1.8f, 0f), new Vector3(3.4f, -2.25f, 0f), new Vector3(-3.4f, -2.25f, 0f), new Vector3(0f, -4.2f, 0f) };
     Vector3[] positionsMap2 = new[] { new Vector3(0f, 0f, 0f), new Vector3(5f, 5f, 5f), new Vector3(-2f, -2f, -2f), new Vector3(-3f, -3f, -3f), new Vector3(-4f, -4f, -4f) };
     Vector3[] positionsMap3 = new[] { new Vector3(0f, 0f, 0f), new Vector3(10f, 10f, 10f), new Vector3(-2f, -2f, -2f), new Vector3(3f, 3f, 3f), new Vector3(-4f, -4f, -4f) };
@@ -48,9 +47,6 @@ public class RandomSpawnScript : MonoBehaviour
     {
         switch(maps)
         {
-            case Maps.MapTut:
-                actualMap = positionsMapTut;
-                break;
             case Maps.Map1:
                 actualMap = positionsMap1;
                 break;

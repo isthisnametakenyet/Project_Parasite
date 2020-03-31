@@ -450,6 +450,7 @@ public class PlayerController2D : MonoBehaviour
             pickUpScript.picked = true;
             //animator.SetBool(WeaponingID, true);
             isWeaponed = true;
+            PickedWeapon = collision.gameObject;
 
             switch (pickUpScript.picktype)
             {
