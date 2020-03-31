@@ -140,7 +140,7 @@ GameObject:
   - component: {fileID: 7080901360997618304}
   m_Layer: 0
   m_Name: Skin1-All
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -588,7 +588,7 @@ GameObject:
   - component: {fileID: 3769917409377559385}
   m_Layer: 0
   m_Name: Skin1-Head
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -761,6 +761,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Skin1-LArm 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4475355069340734767, guid: eee47d99b67266b45b94e2e445dd2616,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 4475355069340734770, guid: eee47d99b67266b45b94e2e445dd2616,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -876,6 +881,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Skin1-R_Arm 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4998161384137668983, guid: 9f5ff80b4705ba8428a723859d5e3b35,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 6853864785593161990, guid: 9f5ff80b4705ba8428a723859d5e3b35,
         type: 3}
