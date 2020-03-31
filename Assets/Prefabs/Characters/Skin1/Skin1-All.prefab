@@ -264,7 +264,7 @@ MonoBehaviour:
   LeftArm: {fileID: 3065640643303086882}
   PickedWeapon: {fileID: 0}
   runSpeed: 2
-  jumpStrengh: 6.5
+  jumpStrengh: 8
   headReturnDelay: 2
   maxWeaponCharge: 1.5
   throwWeaponSpeed: 10
