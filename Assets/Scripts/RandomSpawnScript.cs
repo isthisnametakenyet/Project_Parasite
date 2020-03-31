@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Maps { Map1, Map2, Map3 };
+public enum Maps { MapTut, Map1, Map2, Map3 };
 public enum PickTypes { Sword, Axe, Spear, Bow, CrossBow, Boomerang };
 
 public class RandomSpawnScript : MonoBehaviour
