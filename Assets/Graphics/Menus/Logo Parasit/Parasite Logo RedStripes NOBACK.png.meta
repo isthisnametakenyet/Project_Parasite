@@ -1,8 +1,7 @@
 fileFormatVersion: 2
-guid: d010e43bfba794c4d9fceb3e2b0d9b85
+guid: 698fa1674cfab0f409f454257782a189
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: "Rect\xE1ngulo 2_0"
+  fileIDToRecycleName: {}
   externalObjects: {}
   serializedVersion: 9
   mipmaps:
@@ -41,13 +40,13 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
-  spriteMeshType: 0
+  spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
-  spriteBorder: {x: 70, y: 70, z: 70, w: 70}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -70,44 +69,13 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
-  - serializedVersion: 2
-    buildTarget: Standalone
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: "Rect\xE1ngulo 2_0"
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 527
-        height: 530
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 36, y: 60, z: 46, w: 63}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8dc1336bbd8d27247a0d980cf6e30d64
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
+    sprites: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: e592ce33af31aeb4da666f7f1b3f1a61
+    spriteID: 3a74215774fc904449487ad9bc515730
     vertices: []
     indices: 
     edges: []
