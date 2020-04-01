@@ -25,7 +25,7 @@ public class Sword : MonoBehaviour
     public float AttackTime = 2f;
     private float actualAttack = 0f;
     public float stuckTime = 0.5f;
-    private float actualStuck = 0f;
+    public float actualStuck = 0f;
     BoxCollider2D collider2D;
     Rigidbody2D body2D;
 
@@ -81,11 +81,11 @@ public class Sword : MonoBehaviour
             //START ANIMATION CHARGING
             inUse = true;
         }
-        else if (Stuck == false)
+
+        if (Thrown = true)
         {
             Debug.Log("Wp: Thrown");
             Charging = false;
-            Thrown = true;
             Idle = false;
             inUse = false;
             collider2D.enabled = true;

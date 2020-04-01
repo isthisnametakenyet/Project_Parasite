@@ -41,10 +41,10 @@ GameObject:
   - component: {fileID: 8861466371265719173}
   - component: {fileID: 8148072926115016327}
   - component: {fileID: 4992025109243950989}
-  - component: {fileID: 4396984508785446700}
   - component: {fileID: 3302762827540640738}
   - component: {fileID: 7795074756308561334}
   - component: {fileID: 6061455346431444807}
+  - component: {fileID: 2240356279183813757}
   m_Layer: 0
   m_Name: cuerpo dummy
   m_TagString: Untagged
@@ -138,40 +138,6 @@ MonoBehaviour:
   m_Bounds:
     m_Center: {x: 2.3120184, y: -0.47669888, z: 0}
     m_Extent: {x: 2.926662, y: 0.66052854, z: 0}
---- !u!114 &4396984508785446700
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5150084802653497960}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: daa3a9a9ccd92c54a8c746805f23e2d6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  controller: 0
-  skin: 0
-  arms: 0
-  playerReady: 0
-  HeadFall: {fileID: 0}
-  BodyEmpty: {fileID: 4959081448858527720, guid: fe1dbb5e0e1ec9d46ba6c06ed0cbb8f3,
-    type: 3}
-  HeadThrow: {fileID: 0}
-  ActualHead: {fileID: 0}
-  RightArm: {fileID: 0}
-  LeftArm: {fileID: 0}
-  PickedWeapon: {fileID: 0}
-  runSpeed: 2
-  jumpStrengh: 6.5
-  headReturnDelay: 2
-  maxWeaponCharge: 1.5
-  throwWeaponSpeed: 10
-  headThrowCharge: 2
-  forgetWeaponChargeRange: 0.3
-  forgetHeadThrowRange: 0.4
-  pickDelay: 0.2
-  isWeaponed: 0
 --- !u!50 &3302762827540640738
 Rigidbody2D:
   serializedVersion: 4
@@ -238,6 +204,28 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.28130627, y: 1.2484775}
   m_EdgeRadius: 0
+--- !u!114 &2240356279183813757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5150084802653497960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ff2731fde36ea34ebaab2911b2afd5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skin: 0
+  arms: 2
+  playerReady: 0
+  HeadFall: {fileID: 5908352438470408175, guid: 77d60520aeb9b514da9708810ff54d0e,
+    type: 3}
+  BodyEmpty: {fileID: 4205037738256340489, guid: dc78eb6fffb173d448687566f66aa415,
+    type: 3}
+  RightArm: {fileID: 7580192067199830201, guid: 0ffb7e2422615db4fbba4634cefa400d,
+    type: 3}
+  LeftArm: {fileID: 8605902978378586341, guid: f72f2a468a17ea341afa748de13d1e87, type: 3}
 --- !u!1 &5189555668327750281
 GameObject:
   m_ObjectHideFlags: 0
@@ -275,6 +263,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8861466371265719173}
     m_Modifications:
+    - target: {fileID: 8605902978378586341, guid: f72f2a468a17ea341afa748de13d1e87,
+        type: 3}
+      propertyPath: m_Name
+      value: brazo izquierdo dummy
+      objectReference: {fileID: 0}
     - target: {fileID: 58656172698020554, guid: f72f2a468a17ea341afa748de13d1e87,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -330,11 +323,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8605902978378586341, guid: f72f2a468a17ea341afa748de13d1e87,
-        type: 3}
-      propertyPath: m_Name
-      value: brazo izquierdo dummy
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f72f2a468a17ea341afa748de13d1e87, type: 3}
 --- !u!4 &3844357916808695806 stripped
@@ -350,6 +338,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8861466371265719173}
     m_Modifications:
+    - target: {fileID: 7580192067199830201, guid: 0ffb7e2422615db4fbba4634cefa400d,
+        type: 3}
+      propertyPath: m_Name
+      value: brazo derecho dummy
+      objectReference: {fileID: 0}
     - target: {fileID: 3329342903594083928, guid: 0ffb7e2422615db4fbba4634cefa400d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -405,11 +398,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7580192067199830201, guid: 0ffb7e2422615db4fbba4634cefa400d,
-        type: 3}
-      propertyPath: m_Name
-      value: brazo derecho dummy
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ffb7e2422615db4fbba4634cefa400d, type: 3}
 --- !u!4 &7369659755250526409 stripped
@@ -425,6 +413,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8861466371265719173}
     m_Modifications:
+    - target: {fileID: 5908352438470408175, guid: 77d60520aeb9b514da9708810ff54d0e,
+        type: 3}
+      propertyPath: m_Name
+      value: cabeza dummy
+      objectReference: {fileID: 0}
     - target: {fileID: 6999016996585864805, guid: 77d60520aeb9b514da9708810ff54d0e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -479,11 +472,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5908352438470408175, guid: 77d60520aeb9b514da9708810ff54d0e,
-        type: 3}
-      propertyPath: m_Name
-      value: cabeza dummy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 77d60520aeb9b514da9708810ff54d0e, type: 3}
