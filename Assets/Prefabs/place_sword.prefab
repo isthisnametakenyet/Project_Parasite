@@ -142,8 +142,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Picker: {fileID: 0}
-  swordSprite: {fileID: 0}
-  Idle: 0
+  Idle: 1
   Attack: 0
   Charging: 0
   Thrown: 0

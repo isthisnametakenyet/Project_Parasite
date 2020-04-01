@@ -9,7 +9,6 @@ public class Sword : MonoBehaviour
     private EmptyBody pickerEmptyScript;
     private PlayerController2D playerScript;
     private EmptyBody emptyScript;
-    public Sprite swordSprite;
 
     //STATE
     public bool Idle;
@@ -55,7 +54,7 @@ public class Sword : MonoBehaviour
 
             Destroy(gameObject); //AUTODESTRUCCION
         }
-        else if (Idle == true && collider2D.enabled == true && inUse == false && Thrown == false && Landed == false)
+        else if (Idle == true && inUse == false && Thrown == false && Landed == false)
         {
             Debug.Log("Wp: Idle");
             actualAttack = 0f;
@@ -82,16 +81,18 @@ public class Sword : MonoBehaviour
             //START ANIMATION CHARGING
             inUse = true;
         }
-        else if (Thrown == true && Stuck == false)
+        else if (Stuck == false)
         {
             Debug.Log("Wp: Thrown");
             Charging = false;
+            Thrown = true;
             Idle = false;
             inUse = false;
             collider2D.enabled = true;
             transform.gameObject.tag = "Throwing";
             //START ANIMATION THROW
         }
+
         if (actualAttack <= AttackTime && inUse == true && Charging == false) { actualAttack += Time.deltaTime; }
         else if (Thrown == false && Stuck == false) { inUse = false; Idle = true; Attack = false; } //TIEMPO Q DURA LA ANIMACION D ATAQUE
 
@@ -99,13 +100,12 @@ public class Sword : MonoBehaviour
         if (actualStuck >= stuckTime)
         {
             Debug.Log("Wp: Stuck");
-            Stuck = true;
+            //Stuck = true;
             Thrown = false;
             body2D.velocity = new Vector2(0, 0);
             Uses--;
             actualStuck = 0f;
-            transform.gameObject.tag = "Stuck";
-        }
+         }
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -127,8 +127,7 @@ public class Sword : MonoBehaviour
         if (collision.gameObject.tag == "Player" && Thrown == true)
         {
             playerScript = collision.GetComponent<PlayerController2D>();
-            if (Picker.gameObject.tag == "Player" && playerScript.controller != pickerPlayerScript.controller
-                || Picker.gameObject.tag == "EmptyBody" && playerScript.controller != pickerEmptyScript.controller)
+            if (Picker.gameObject.tag == "Player" && playerScript.controller != pickerPlayerScript.controller)
             {
                 Debug.Log("Wp: Hit");
                 actualStuck += Time.deltaTime * 10;
@@ -140,8 +139,7 @@ public class Sword : MonoBehaviour
         if (collision.gameObject.tag == "EmptyBody" && Thrown == true)
         {
             emptyScript = collision.GetComponent<EmptyBody>();
-            if (Picker.gameObject.tag == "Player" && emptyScript.controller != pickerPlayerScript.controller
-                || Picker.gameObject.tag == "EmptyBody" && emptyScript.controller != pickerEmptyScript.controller)
+            if (Picker.gameObject.tag == "EmptyBody" && emptyScript.controller != pickerEmptyScript.controller)
             {
                 Debug.Log("Wp: Hit");
                 actualStuck += Time.deltaTime * 10;
@@ -153,9 +151,11 @@ public class Sword : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Floor" && Drop == true)
+        if (collision.gameObject.tag == "Floor" && Thrown == true)
         {
-
+            Debug.Log("Wp: Landed");
+            actualStuck += Time.deltaTime * 10;
+            transform.position = new Vector3(transform.position.x, transform.position.y, 1);
         }
     }
 }

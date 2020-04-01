@@ -448,9 +448,10 @@ public class PlayerController2D : MonoBehaviour
             pickUpScript = collision.GetComponent<PickUpScript>();
             pickUpScript.Picker = this.gameObject;
             pickUpScript.picked = true;
-            //animator.SetBool(WeaponingID, true);
-            isWeaponed = true;
             PickedWeapon = collision.gameObject;
+            animator.SetBool(WeaponingID, true);
+            collision.transform.position = new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y +1, 6);
+            isWeaponed = true;
 
             switch (pickUpScript.picktype)
             {
