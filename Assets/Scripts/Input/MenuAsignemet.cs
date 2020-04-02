@@ -70,10 +70,10 @@ public class MenuAsignemet : MonoBehaviour
         Player rewiredPlayer = ReInput.players.GetPlayer(rewiredPlayerId);
 
         // Disable the Assignment map category in Player so no more JoinGame Actions return
-        rewiredPlayer.controllers.maps.SetMapsEnabled(false, "Default");
+        rewiredPlayer.controllers.maps.SetMapsEnabled(false, "Assignment");
 
         // Enable UI control for this Player now that he has joined
-        rewiredPlayer.controllers.maps.SetMapsEnabled(true, "InGame");
+        rewiredPlayer.controllers.maps.SetMapsEnabled(true, "Default");
 
         Debug.Log("Added Rewired Player id " + rewiredPlayerId + " to game player " + gamePlayerId);
     }
