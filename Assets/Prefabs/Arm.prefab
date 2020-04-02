@@ -73,7 +73,7 @@ GameObject:
   - component: {fileID: 5416011900979002504}
   m_Layer: 9
   m_Name: Arm
-  m_TagString: FlyingHead
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

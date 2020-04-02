@@ -76,19 +76,6 @@ public class EmptyBody : MonoBehaviour
         body2D = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
 
-        //SKIN
-        //switch (skin)
-        //{
-        //    case Skin.SKIN1:
-        //        animator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Animations/Skin1");
-        //        Debug.Log("Skin: 1");
-        //        break;
-        //    case Skin.SKIN2:
-        //        animator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Animations/Skin2");
-        //        Debug.Log("Skin: 2");
-        //        break;
-        //}
-
         //KEYS
         switch (controller)
         {

@@ -58,9 +58,6 @@ public class DummyController : MonoBehaviour
             }
             else { Debug.LogError("Error Detectando Direccion de Collision"); }
 
-            emptyBody = body.GetComponent<EmptyBody>();
-            //emptyBody.skin = this.skin;
-
             Destroy(gameObject); //AUTODESTRUCCION
         }
 

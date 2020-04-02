@@ -83,7 +83,7 @@ GameObject:
   - component: {fileID: 2882593102167214013}
   m_Layer: 0
   m_Name: Warrior_Cuerpo
-  m_TagString: Untagged
+  m_TagString: EmptyBody
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
