@@ -7,9 +7,9 @@ public class HeadThrow : MonoBehaviour
 {
     public Controller controller = Controller.NONE;
     //public Skin skin = Skin.NONE;
-    public Sprite Skin1;
-    public Sprite Skin2;
-    public Sprite Skin3;
+    //public Sprite Skin1;
+    //public Sprite Skin2;
+    //public Sprite Skin3;
 
     SpriteRenderer spriteRenderer;
 

@@ -77,6 +77,10 @@ GameObject:
   - component: {fileID: 5541209219095883082}
   - component: {fileID: 3549596004225829715}
   - component: {fileID: 2215135508193521314}
+  - component: {fileID: 1851058838924066627}
+  - component: {fileID: 4889082972790823231}
+  - component: {fileID: 135444687583061706}
+  - component: {fileID: 2882593102167214013}
   m_Layer: 0
   m_Name: Warrior_Cuerpo
   m_TagString: Untagged
@@ -172,6 +176,100 @@ MonoBehaviour:
   m_Bounds:
     m_Center: {x: 3.2463377, y: 0.21065497, z: 0}
     m_Extent: {x: 5.324569, y: 3.4290812, z: 0}
+--- !u!114 &1851058838924066627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 933644952808977107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81975b749c89af24cb0ac44f05f8f336, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controller: 0
+  arms: 0
+  Parasite: {fileID: 0}
+  ReturnParasite: {fileID: 6639280174949446922, guid: 35bbdda292f2ad74fbc5b03158ab37bf,
+    type: 3}
+  RightArm: {fileID: 0}
+  LeftArm: {fileID: 0}
+  PickedWeapon: {fileID: 0}
+  runSpeed: 2
+  jumpStrengh: 6.5
+  maxWeaponCharge: 3
+  forgetWeaponChargeRange: 0.4
+  expulseStrengh: 2
+  parasited: 0
+  expulseParasite: 0
+  isWeaponed: 0
+--- !u!50 &4889082972790823231
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 933644952808977107}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 2
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 4
+--- !u!61 &135444687583061706
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 933644952808977107}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 1
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.2, y: -0.3}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 12, y: 18}
+    newSize: {x: 12, y: 18}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2, y: 7}
+  m_EdgeRadius: 0
+--- !u!251 &2882593102167214013
+PlatformEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 933644952808977107}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 5377
+  m_RotationalOffset: 0
+  m_UseOneWay: 0
+  m_UseOneWayGrouping: 0
+  m_SurfaceArc: 180
+  m_UseSideFriction: 0
+  m_UseSideBounce: 0
+  m_SideArc: 1
 --- !u!1 &2754091792988200986
 GameObject:
   m_ObjectHideFlags: 0

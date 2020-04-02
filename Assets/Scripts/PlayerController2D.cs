@@ -399,6 +399,7 @@ public class PlayerController2D : MonoBehaviour
             {
             headRigid.velocity = new Vector2(-headCharge * 1.8f, 2f);
             }
+            headCharge = 0;
 
             Destroy(gameObject); //AUTODESTRUCCION
         }

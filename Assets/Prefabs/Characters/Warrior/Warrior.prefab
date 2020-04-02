@@ -926,10 +926,9 @@ MonoBehaviour:
     type: 3}
   BodyEmpty: {fileID: 933644952808977107, guid: 2d40e38198fdff44b83e9165203109ba,
     type: 3}
-  HeadThrow: {fileID: 6639280174949446922, guid: 35bbdda292f2ad74fbc5b03158ab37bf,
+  HeadThrow: {fileID: 6639280174949446922, guid: 0e4201d927378ad49a0458174c8ad018,
     type: 3}
-  ActualHead: {fileID: 6639280174949446922, guid: 35bbdda292f2ad74fbc5b03158ab37bf,
-    type: 3}
+  ActualHead: {fileID: 8933385773293774280}
   RightArm: {fileID: 3487937855032653505}
   LeftArm: {fileID: 4510950114363085305}
   PickedWeapon: {fileID: 0}

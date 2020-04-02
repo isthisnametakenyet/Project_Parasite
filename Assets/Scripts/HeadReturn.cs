@@ -11,9 +11,9 @@ public class HeadReturn : MonoBehaviour
 
     private Player player;
 
-    public Sprite Skin1;
-    public Sprite Skin2;
-    public Sprite Skin3;
+    //public Sprite Skin1;
+    //public Sprite Skin2;
+    //public Sprite Skin3;
 
     public GameObject OriginalBody;
     public GameObject PlayerAll;
