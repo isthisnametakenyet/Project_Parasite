@@ -36,6 +36,8 @@ public class Sword : MonoBehaviour
         if (Picker.gameObject.tag == "Player") { pickerPlayerScript = Picker.GetComponent<PlayerController2D>(); }
         else if (Picker.gameObject.tag == "EmptyBody") { pickerEmptyScript = Picker.GetComponent<EmptyBody>(); }
         Idle = true;
+        Thrown = false;
+        Attack = false;
         collider2D.isTrigger = true;
         body2D.isKinematic = true;
     }
@@ -62,7 +64,7 @@ public class Sword : MonoBehaviour
             transform.gameObject.tag = "Weapon";
             //START ANIMATION IDLE
         }
-        else if (Attack == true && inUse == false && Thrown == false)
+        else if (Attack == true && inUse == false)
         {
             Debug.Log("Wp: Attack");
             collider2D.enabled = true;
@@ -82,7 +84,7 @@ public class Sword : MonoBehaviour
             inUse = true;
         }
 
-        if (Thrown = true)
+        if (Thrown == true)
         {
             Debug.Log("Wp: Thrown");
             Charging = false;
