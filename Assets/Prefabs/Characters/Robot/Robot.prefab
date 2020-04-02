@@ -692,7 +692,7 @@ GameObject:
   - component: {fileID: 4174342767839382557}
   m_Layer: 0
   m_Name: Robot
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -797,7 +797,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: 1
-  skin: 0
   arms: 2
   playerReady: 0
   HeadFall: {fileID: 8056520248140633915, guid: fdf8a45af025a1845a9783b05c96776a,
