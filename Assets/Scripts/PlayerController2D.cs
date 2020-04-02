@@ -148,18 +148,16 @@ public class PlayerController2D : MonoBehaviour
         body2D.velocity = new Vector2(0, body2D.velocity.y);
 
         //MOVEMENT
-        if (player.GetAxis("Move") > 0 )
+
+        float moveInput = Input.GetAxisRaw("Horizontal");
+
+        if (player.GetAxis("Move") > 0)
         {
             if (isCharging == false && isHeading == false && isDucking == false)
             {
                 body2D.velocity = new Vector2(runSpeed, body2D.velocity.y);
                 //spriteRenderer.flipX = true;
-                spriteRenderer.flipX = false;
-                LArmRenderer.flipX = false;
-                RArmRenderer.flipX = false;
-                HeadRenderer.flipX = false;
                 animator.SetBool(MovingID, true);
-                facingright = true;
             }
         }
         else if (player.GetAxis("Move") < 0)
@@ -168,12 +166,7 @@ public class PlayerController2D : MonoBehaviour
             {
                 body2D.velocity = new Vector2(-runSpeed, body2D.velocity.y);
                 //spriteRenderer.flipX = false;
-                spriteRenderer.flipX = true;
-                LArmRenderer.flipX = true;
-                RArmRenderer.flipX = true;
-                HeadRenderer.flipX = true;
                 animator.SetBool(MovingID, true);
-                facingright = false;
             }
         }
         else
@@ -181,6 +174,25 @@ public class PlayerController2D : MonoBehaviour
             animator.SetBool(MovingID, false);
         }
 
+        if (player.GetAxis("Move") > 0 && !facingright)
+        {
+            Flip();
+            facingright = true;
+        }
+        else if (player.GetAxis("Move") < 0 && facingright)
+        {
+            Flip();
+            facingright = false;
+        }
+
+        //FLIP
+        void Flip()
+        {
+            facingright = !facingright;
+            Vector3 theScale = transform.localScale;
+            theScale.x *= -1;
+            transform.localScale = theScale;
+        }
         //JUMP
         if (player.GetButtonDown("Jump") && isGrounded == true && isCharging == false && isDucking == false)
         {
