@@ -3684,6 +3684,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'Press V to throw your heat to parasite
 
+
     Press it again no make your head return to your own body'
 --- !u!222 &641453799
 CanvasRenderer:
@@ -3889,7 +3890,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Press Q to throw the weapon
+  m_Text: Keep Q down to throw the weapon
 --- !u!222 &755677399
 CanvasRenderer:
   m_ObjectHideFlags: 0
