@@ -2602,6 +2602,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 792225693131997025, guid: 0281a6991b8a3984493f3154240e1245,
+        type: 3}
+      propertyPath: _userData.joystickMaps.Array.data[0].actionElementMaps.Array.data[0]._axisContribution
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 792225693131997025, guid: 0281a6991b8a3984493f3154240e1245,
+        type: 3}
+      propertyPath: _userData.joystickMaps.Array.data[0].actionElementMaps.Array.data[1]._axisContribution
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0281a6991b8a3984493f3154240e1245, type: 3}
 --- !u!1001 &2776592608853712682
