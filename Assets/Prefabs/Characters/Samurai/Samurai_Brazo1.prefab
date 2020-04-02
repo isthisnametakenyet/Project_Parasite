@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 8676964971520735084}
   - component: {fileID: 8676964971520735085}
   - component: {fileID: 8676964971520735086}
-  - component: {fileID: 114468379227882646}
+  - component: {fileID: 2593964253926396511}
   m_Layer: 0
   m_Name: Samurai_Brazo1
   m_TagString: Untagged
@@ -133,7 +133,7 @@ MonoBehaviour:
   m_Bounds:
     m_Center: {x: 0.47854388, y: -0.0023362339, z: 0}
     m_Extent: {x: 0.62218857, y: 0.1449956, z: 0}
---- !u!114 &114468379227882646
+--- !u!114 &2593964253926396511
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -142,12 +142,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 8676964971520735087}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 097b551f2844b054290f18a39bf892e9, type: 3}
+  m_Script: {fileID: 11500000, guid: 845ebcb25540fef47bfd2eee1fd15abe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Solvers:
-  - {fileID: 0}
-  m_Weight: 1
+  pickUpRange: {fileID: 0}
 --- !u!1 &8676964972142521147
 GameObject:
   m_ObjectHideFlags: 0
@@ -202,10 +200,10 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8676964972252273799}
-  m_LocalRotation: {x: 0.0095640905, y: 0.005677851, z: -0.8309716, w: 0.5562037}
+  m_LocalRotation: {x: 0.009909068, y: -0.005051784, z: 0.026266586, w: 0.99959314}
   m_LocalPosition: {x: 0.31603527, y: 0.00000006890415, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8676964970379611025}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -10.774}
+  m_LocalEulerAnglesHint: {x: 1.1500001, y: -0.549, z: 3.005}
