@@ -6,18 +6,19 @@ using System.Collections;
 namespace Rewired.Demos {
 
     [AddComponentMenu("")]
-    [RequireComponent(typeof(CharacterController))]
+    //[RequireComponent(typeof(CharacterController))]
     public class PressAnyButtonToJoinExample_GamePlayer : MonoBehaviour {
 
         public int playerId = 0;
+        public bool ON;
 
         public float moveSpeed = 3.0f;
-        public float bulletSpeed = 15.0f;
-        public GameObject bulletPrefab;
+        //public float bulletSpeed = 15.0f;
+        //public GameObject bulletPrefab;
 
         private CharacterController cc;
         private Vector3 moveVector;
-        private bool fire;
+        //private bool fire;
 
         private Rewired.Player player { get { return ReInput.isReady ? ReInput.players.GetPlayer(playerId) : null; } }
 
@@ -29,31 +30,35 @@ namespace Rewired.Demos {
         void Update() {
             if(!ReInput.isReady) return; // Exit if Rewired isn't ready. This would only happen during a script recompile in the editor.
             if(player == null) return;
+            ON = true;
 
             GetInput();
             ProcessInput();
         }
 
         private void GetInput() {
-            // Get the input from the Rewired Player. All controllers that the Player owns will contribute, so it doesn't matter
-            // whether the input is coming from a joystick, the keyboard, mouse, or a custom controller.
+            //    // Get the input from the Rewired Player. All controllers that the Player owns will contribute, so it doesn't matter
+            //    // whether the input is coming from a joystick, the keyboard, mouse, or a custom controller.
 
             moveVector.x = player.GetAxis("Move Horizontal"); // get input by name or action id
             moveVector.y = player.GetAxis("Move Vertical");
-            fire = player.GetButtonDown("Fire");
+            //    fire = player.GetButtonDown("Fire");
         }
 
-        private void ProcessInput() {
+        private void ProcessInput()
+        {
             // Process movement
-            if(moveVector.x != 0.0f || moveVector.y != 0.0f) {
+            if (moveVector.x != 0.0f || moveVector.y != 0.0f)
+            {
                 cc.Move(moveVector * moveSpeed * Time.deltaTime);
             }
 
             // Process fire
-            if(fire) {
-                GameObject bullet = (GameObject)Instantiate(bulletPrefab, transform.position + transform.right, transform.rotation);
-                bullet.GetComponent<Rigidbody>().AddForce(transform.right * bulletSpeed, ForceMode.VelocityChange);
-            }
+            //if (fire)
+            //{
+            //    GameObject bullet = (GameObject)Instantiate(bulletPrefab, transform.position + transform.right, transform.rotation);
+            //    bullet.GetComponent<Rigidbody>().AddForce(transform.right * bulletSpeed, ForceMode.VelocityChange);
+            //}
         }
     }
 }

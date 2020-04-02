@@ -35,6 +35,7 @@ namespace Rewired.Demos {
                     // Find the next Player without a Joystick
                     Player player = FindPlayerWithoutJoystick();
                     if(player == null) return; // no free joysticks
+                    Debug.Log("NO FREE PLAYERS");
 
                     // Assign the joystick to this Player
                     player.controllers.AddController(joystick, false);
