@@ -12,7 +12,7 @@ public class AsignerController : MonoBehaviour
 
     //public AsignerMenu asignerMenu = AsignerMenu.NONE;
     public Controller controller = Controller.NONE;
-    public Skin skin = Skin.NONE;
+    //public Skin skin = Skin.NONE;
 
     public bool asignerReady = false;
 

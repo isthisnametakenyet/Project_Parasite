@@ -6,7 +6,7 @@ using Rewired;
 public class HeadThrow : MonoBehaviour
 {
     public Controller controller = Controller.NONE;
-    public Skin skin = Skin.NONE;
+    //public Skin skin = Skin.NONE;
     public Sprite Skin1;
     public Sprite Skin2;
     public Sprite Skin3;
@@ -58,18 +58,18 @@ public class HeadThrow : MonoBehaviour
                 break;
         }
 
-        switch (skin)
-        {
-            case Skin.SKIN1:
-                spriteRenderer.sprite = Skin1;
-                break;
-            case Skin.SKIN2:
-                spriteRenderer.sprite = Skin2;
-                break;
-            case Skin.SKIN3:
-                spriteRenderer.sprite = Skin3;
-                break;
-        }
+        //switch (skin)
+        //{
+        //    case Skin.SKIN1:
+        //        spriteRenderer.sprite = Skin1;
+        //        break;
+        //    case Skin.SKIN2:
+        //        spriteRenderer.sprite = Skin2;
+        //        break;
+        //    case Skin.SKIN3:
+        //        spriteRenderer.sprite = Skin3;
+        //        break;
+        //}
 
         returnScript = OriginalBody.gameObject.GetComponent<EmptyBody>();
     }
@@ -96,7 +96,7 @@ public class HeadThrow : MonoBehaviour
 
             playerAll = player.GetComponent<PlayerController2D>();
             playerAll.controller = this.controller;
-            playerAll.skin = this.skin;
+            //playerAll.skin = this.skin;
             returnScript = OriginalBody.GetComponent<EmptyBody>();
             playerAll.arms = returnScript.arms;
             playerAll.LeftArm = returnScript.LeftArm;

@@ -7,7 +7,7 @@ using Rewired;
 public class HeadReturn : MonoBehaviour
 {
     public Controller controller = Controller.NONE;
-    public Skin skin = Skin.NONE;
+    //public Skin skin = Skin.NONE;
 
     private Player player;
 
@@ -61,18 +61,18 @@ public class HeadReturn : MonoBehaviour
                 break;
         }
 
-        switch (skin)
-        {
-            case Skin.SKIN1:
-                spriteRenderer.sprite = Skin1;
-                break;
-            case Skin.SKIN2:
-                spriteRenderer.sprite = Skin2;
-                break;
-            case Skin.SKIN3:
-                spriteRenderer.sprite = Skin3;
-                break;
-        }
+        //switch (skin)
+        //{
+        //    case Skin.SKIN1:
+        //        spriteRenderer.sprite = Skin1;
+        //        break;
+        //    case Skin.SKIN2:
+        //        spriteRenderer.sprite = Skin2;
+        //        break;
+        //    case Skin.SKIN3:
+        //        spriteRenderer.sprite = Skin3;
+        //        break;
+        //}
     }
 
     void FixedUpdate()
@@ -113,7 +113,7 @@ public class HeadReturn : MonoBehaviour
 
             playerAll = player.GetComponent<PlayerController2D>();
             playerAll.controller = this.controller;
-            playerAll.skin = this.skin;
+            //playerAll.skin = this.skin;
 
             Destroy(OriginalBody);
             Destroy(gameObject); //AUTODESTRUCCION

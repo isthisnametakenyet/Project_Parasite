@@ -11,7 +11,7 @@ using Rewired;
 public class EmptyBody : MonoBehaviour
 {
     public Controller controller = Controller.NONE;
-    public Skin skin = Skin.NONE;
+    //public Skin skin = Skin.NONE;
     public Arms arms = Arms.NONE;
 
     private Player player;
@@ -77,17 +77,17 @@ public class EmptyBody : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         //SKIN
-        switch (skin)
-        {
-            case Skin.SKIN1:
-                animator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Animations/Skin1");
-                Debug.Log("Skin: 1");
-                break;
-            case Skin.SKIN2:
-                animator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Animations/Skin2");
-                Debug.Log("Skin: 2");
-                break;
-        }
+        //switch (skin)
+        //{
+        //    case Skin.SKIN1:
+        //        animator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Animations/Skin1");
+        //        Debug.Log("Skin: 1");
+        //        break;
+        //    case Skin.SKIN2:
+        //        animator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Animations/Skin2");
+        //        Debug.Log("Skin: 2");
+        //        break;
+        //}
 
         //KEYS
         switch (controller)
@@ -465,7 +465,7 @@ public class EmptyBody : MonoBehaviour
             headReturn = returnParasite.GetComponent<HeadReturn>(); //ASIGN ITS RIGID
 
             parasiteScript = Parasite.GetComponent<HeadThrow>();
-            headReturn.skin = parasiteScript.skin;
+            //headReturn.skin = parasiteScript.skin;
             headReturn.OriginalBody = parasiteScript.OriginalBody;
             headReturn.controller = this.controller;
             headReturn.Returning = true;

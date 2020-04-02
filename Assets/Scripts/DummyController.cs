@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class DummyController : MonoBehaviour
 {
-    public Skin skin = Skin.NONE;
+    //public Skin skin = Skin.NONE;
     public Arms arms = Arms.NONE;
 
     public bool playerReady = false;
@@ -59,7 +59,7 @@ public class DummyController : MonoBehaviour
             else { Debug.LogError("Error Detectando Direccion de Collision"); }
 
             emptyBody = body.GetComponent<EmptyBody>();
-            emptyBody.skin = this.skin;
+            //emptyBody.skin = this.skin;
 
             Destroy(gameObject); //AUTODESTRUCCION
         }

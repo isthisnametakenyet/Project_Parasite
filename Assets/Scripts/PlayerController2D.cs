@@ -5,7 +5,7 @@ using System;
 using Rewired;
 
 public enum Controller { NONE, PLAYER0, PLAYER1, PLAYER2, PLAYER3 };
-public enum Skin { NONE, SKIN1, SKIN2, SKIN3 };
+//public enum Skin { NONE, SKIN1, SKIN2, SKIN3 };
 public enum Arms { NONE, ONE, TWO };
 
 public class PlayerController2D : MonoBehaviour
@@ -14,7 +14,7 @@ public class PlayerController2D : MonoBehaviour
     private Player player;
 
     public Controller controller = Controller.NONE;
-    public Skin skin = Skin.NONE;
+    //public Skin skin = Skin.NONE;
     public Arms arms = Arms.NONE;
 
     public bool playerReady = false;
@@ -88,22 +88,22 @@ public class PlayerController2D : MonoBehaviour
         RArmRenderer = RightArm.GetComponent<SpriteRenderer>();
         HeadRenderer = ActualHead.GetComponent<SpriteRenderer>();
 
-        //SKIN
-        switch (skin)
-        {
-            case Skin.NONE:
-                animator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Animations/SkinPlaceholder");
-                Debug.Log("PlayerB Skin: PlaceHolder");
-                break;
-            case Skin.SKIN1:
-                animator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Animations/Skin1");
-                Debug.Log("Skin: 1");
-                break;
-            case Skin.SKIN2:
-                animator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Animations/Skin1");
-                Debug.Log("Skin: 2");
-                break;
-        }
+        ////SKIN
+        //switch (skin)
+        //{
+        //    case Skin.NONE:
+        //        animator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Animations/SkinPlaceholder");
+        //        Debug.Log("PlayerB Skin: PlaceHolder");
+        //        break;
+        //    case Skin.SKIN1:
+        //        animator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Animations/Skin1");
+        //        Debug.Log("Skin: 1");
+        //        break;
+        //    case Skin.SKIN2:
+        //        animator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Animations/Skin1");
+        //        Debug.Log("Skin: 2");
+        //        break;
+        //}
 
         switch (controller)
         {
@@ -207,12 +207,12 @@ public class PlayerController2D : MonoBehaviour
             body2D.velocity = new Vector2(body2D.velocity.x, jumpStrengh);
         }
 
-        //DUCK
-        if (player.GetButton("Duck") && isGrounded == true && isCharging == false)
-        {
-            isDucking = true;
-            Debug.Log("Quack");
-        }
+        ////DUCK
+        //if (player.GetButton("Duck") && isGrounded == true && isCharging == false)
+        //{
+        //    isDucking = true;
+        //    Debug.Log("Quack");
+        //}
         else
         {
             isDucking = false;
@@ -374,7 +374,7 @@ public class PlayerController2D : MonoBehaviour
 
             emptyBody = body.GetComponent<EmptyBody>();
             emptyBody.controller = this.controller;
-            emptyBody.skin = this.skin;
+            //emptyBody.skin = this.skin;
             emptyBody.arms = this.arms;
             emptyBody.LeftArm = LeftArm;
             LeftArm.transform.parent = emptyBody.transform;
@@ -385,7 +385,7 @@ public class PlayerController2D : MonoBehaviour
 
             headThrow = head.GetComponent<HeadThrow>();
             headThrow.controller = this.controller;
-            headThrow.skin = this.skin;
+            //headThrow.skin = this.skin;
             headThrow.OriginalBody = body; //REFERENCE EMPTYBODY IN HEAD THROW TO KNOW ORIGIN
 
             Rigidbody2D headRigid;
@@ -567,7 +567,7 @@ public class PlayerController2D : MonoBehaviour
 
             headReturn = head.GetComponent<HeadReturn>();
             headReturn.controller = this.controller;
-            headReturn.skin = this.skin;
+            //headReturn.skin = this.skin;
             headReturn.OriginalBody = body;
             headReturn.Stunned = true;
 
@@ -587,7 +587,7 @@ public class PlayerController2D : MonoBehaviour
 
             emptyBody = body.GetComponent<EmptyBody>();
             emptyBody.controller = this.controller;
-            emptyBody.skin = this.skin;
+            //emptyBody.skin = this.skin;
 
             Destroy(gameObject); //AUTODESTRUCCION
         }
@@ -710,7 +710,7 @@ public class PlayerController2D : MonoBehaviour
             headRigid = head.GetComponent<Rigidbody2D>(); //ASIGN HEAD RIGID
             headCharge = 2f;
             headReturn = head.GetComponent<HeadReturn>();
-            headReturn.skin = this.skin;
+            //headReturn.skin = this.skin;
             headReturn.controller = this.controller;
             headReturn.isDead = true;
 

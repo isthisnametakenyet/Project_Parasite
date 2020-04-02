@@ -67,8 +67,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maps: 0
-  spawnSkin1: {fileID: 1164842668750402546, guid: 4f754537c38517247a1dd25e83c48c79,
+  spawnSkin1: {fileID: 8369962643732219149, guid: 8a7281e72913f7043ace960544923ec4,
     type: 3}
-  spawnSkin2: {fileID: 0}
-  spawnSkin3: {fileID: 0}
+  spawnSkin2: {fileID: 7503619486903751049, guid: 3d9cf4e94ef70de4cbd39805b70d2eef,
+    type: 3}
+  spawnSkin3: {fileID: 776357667644272455, guid: dbbdcaec53efde446a06db7d94b8705b,
+    type: 3}
   actualMap: []
+  scoreHUD: {fileID: 0}
+  scoreDelay: 0
