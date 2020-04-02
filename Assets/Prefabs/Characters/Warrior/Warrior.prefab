@@ -930,9 +930,8 @@ MonoBehaviour:
     type: 3}
   ActualHead: {fileID: 6639280174949446922, guid: 35bbdda292f2ad74fbc5b03158ab37bf,
     type: 3}
-  RightArm: {fileID: 7834514656604954803, guid: 91328f6ec9e0aca4ca1d6eb75021be15,
-    type: 3}
-  LeftArm: {fileID: 7701000817549467111, guid: 094e89593636014429994656cc407da0, type: 3}
+  RightArm: {fileID: 3487937855032653505}
+  LeftArm: {fileID: 4510950114363085305}
   PickedWeapon: {fileID: 0}
   runSpeed: 3
   jumpStrengh: 8
