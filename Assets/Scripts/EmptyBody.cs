@@ -114,6 +114,25 @@ public class EmptyBody : MonoBehaviour
         if (parasited == false) { }
         else
         {
+            switch (controller)
+            {
+                case Controller.PLAYER0:
+                    player = ReInput.players.GetPlayer(0);
+                    break;
+
+                case Controller.PLAYER1:
+                    player = ReInput.players.GetPlayer(1);
+                    break;
+
+                case Controller.PLAYER2:
+                    player = ReInput.players.GetPlayer(2);
+                    break;
+
+                case Controller.PLAYER3:
+                    player = ReInput.players.GetPlayer(3);
+                    break;
+            }
+
             //bool isGrounded = animator.GetBool(GroundingID);
             //bool isMoving = animator.GetBool(MovingID);
             //bool isWeaponed = animator.GetBool(WeaponingID);
