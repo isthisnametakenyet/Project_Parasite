@@ -108,7 +108,7 @@ Transform:
   m_GameObject: {fileID: 6639280174949446922}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 13.45, y: 3.05, z: 0}
-  m_LocalScale: {x: 0.1679336, y: 0.1679336, z: 1}
+  m_LocalScale: {x: 0.14, y: 0.14, z: 1}
   m_Children:
   - {fileID: 4783265233460099464}
   m_Father: {fileID: 0}
@@ -176,7 +176,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: 0
   OriginalBody: {fileID: 0}
-  PlayerAll: {fileID: 8369962643732219149, guid: 8a7281e72913f7043ace960544923ec4,
+  PlayerArmless: {fileID: 8082525137747852773, guid: f8a6973d084bc01438159599f82f7dab,
     type: 3}
   MaxStun: 2
   Stunned: 0

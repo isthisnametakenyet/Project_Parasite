@@ -14,7 +14,6 @@ public class TutoScript : MonoBehaviour
     public bool suicide_7 = false;
 
     public GameObject Dummy;
-    private DummyController DummyScript;
     public GameObject Pickup;
     public GameObject Saw;
 
@@ -27,6 +26,7 @@ public class TutoScript : MonoBehaviour
 
     public GameObject TextBlock1;
     public GameObject TextBlock2;
+    public GameObject TextBlock3;
 
     public GameObject TextMove1;
     public GameObject TextMove2;
@@ -76,6 +76,7 @@ public class TutoScript : MonoBehaviour
         TextPrasite1.SetActive(false);
         TextPrasite2.SetActive(false);
         TextSuicide1.SetActive(false);
+        TextBlock3.SetActive(false);
     }
 
     void Update()
@@ -168,6 +169,11 @@ public class TutoScript : MonoBehaviour
             //end
             TriggerSuicide.SetActive(false);
             suicide_7 = false;
+            PlayerManager.Instance.ScorePlayer1 = 1; 
+            PlayerManager.Instance.Round = 1;
+            PlayerManager.Instance.GameEnd = true;
+            PlayerManager.Instance.DeleteProps = true;
+            TextBlock3.SetActive(true);
         }
     }
 }

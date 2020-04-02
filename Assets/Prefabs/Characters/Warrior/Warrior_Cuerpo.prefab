@@ -97,7 +97,7 @@ Transform:
   m_GameObject: {fileID: 933644952808977107}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 13.08, y: -1.25, z: 0}
-  m_LocalScale: {x: 0.1679336, y: 0.1679336, z: 1}
+  m_LocalScale: {x: 0.14, y: 0.14, z: 1}
   m_Children:
   - {fileID: 2809747301999038347}
   m_Father: {fileID: 0}
@@ -191,7 +191,7 @@ MonoBehaviour:
   controller: 0
   arms: 0
   Parasite: {fileID: 0}
-  ReturnParasite: {fileID: 6639280174949446922, guid: 35bbdda292f2ad74fbc5b03158ab37bf,
+  ReturnParasite: {fileID: 6639280174949446922, guid: ad9f30ac4d6cc9546b529e2add702ab2,
     type: 3}
   RightArm: {fileID: 0}
   LeftArm: {fileID: 0}
