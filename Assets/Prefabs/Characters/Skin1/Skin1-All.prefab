@@ -250,7 +250,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: 0
-  skin: 1
   arms: 0
   playerReady: 0
   HeadFall: {fileID: 7358063204565961271, guid: 6d066a47498f3464289746cb16caf885,
@@ -264,7 +263,7 @@ MonoBehaviour:
   LeftArm: {fileID: 3065640643303086882}
   PickedWeapon: {fileID: 0}
   runSpeed: 2
-  jumpStrengh: 8
+  jumpStrengh: 7
   headReturnDelay: 2
   maxWeaponCharge: 1.5
   throwWeaponSpeed: 10
