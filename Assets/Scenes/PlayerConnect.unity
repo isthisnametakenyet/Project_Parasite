@@ -1121,7 +1121,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: 2
-  skin: 0
   asignerReady: 0
 --- !u!1 &674784645
 GameObject:
@@ -1374,7 +1373,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: 4
-  skin: 0
   asignerReady: 0
 --- !u!1 &875311755
 GameObject:
@@ -1848,7 +1846,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: 1
-  skin: 0
   asignerReady: 0
 --- !u!1 &1089291128
 GameObject:
@@ -3269,7 +3266,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: 3
-  skin: 0
   asignerReady: 0
 --- !u!1 &1752163875
 GameObject:
@@ -4852,7 +4848,6 @@ GameObject:
   - component: {fileID: 2044741786}
   - component: {fileID: 2044741785}
   - component: {fileID: 2044741784}
-  - component: {fileID: 2044741788}
   - component: {fileID: 2044741787}
   m_Layer: 0
   m_Name: Main Camera
@@ -4960,19 +4955,6 @@ MonoBehaviour:
   PressToJoin: {fileID: 1413529999}
   TutorialButton: {fileID: 1207595620}
   PlayButton: {fileID: 1434624499}
---- !u!114 &2044741788
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2044741783}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83a1ada46f8e7d44f987c8763f86f43e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxPlayers: 4
 --- !u!1 &2058754574
 GameObject:
   m_ObjectHideFlags: 0
