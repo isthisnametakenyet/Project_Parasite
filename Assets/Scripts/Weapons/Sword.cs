@@ -56,7 +56,7 @@ public class Sword : MonoBehaviour
 
             Destroy(gameObject); //AUTODESTRUCCION
         }
-        else if (Idle == true && inUse == false && Thrown == false && Landed == false)
+        else if (Idle == true && inUse == false && Thrown == false && Attack == false && Landed == false)
         {
             Debug.Log("Wp: Idle");
             actualAttack = 0f;
@@ -64,7 +64,8 @@ public class Sword : MonoBehaviour
             transform.gameObject.tag = "Weapon";
             //START ANIMATION IDLE
         }
-        else if (Attack == true && inUse == false)
+
+        if (Attack == true && inUse == false)
         {
             Debug.Log("Wp: Attack");
             collider2D.enabled = true;
@@ -75,16 +76,16 @@ public class Sword : MonoBehaviour
             Idle = false;
             Uses--;
         }
-        else if (Charging == true && inUse == false && Thrown == false)
+
+        if (Charging == true && inUse == false && Thrown == false)
         {
-            //Debug.Log("Wp: Charging");
+            Debug.Log("Wp: Charging");
             //BEFORE THIS, IDLE, ALLWAYS
             collider2D.enabled = false;
             //START ANIMATION CHARGING
             inUse = true;
         }
-
-        if (Thrown == true)
+        else if (Thrown == true)
         {
             Debug.Log("Wp: Thrown");
             Charging = false;

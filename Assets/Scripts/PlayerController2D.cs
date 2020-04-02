@@ -221,7 +221,7 @@ public class PlayerController2D : MonoBehaviour
         //ATTACK
         if (player.GetButtonDown("Attack"))
         {
-            //animator.SetBool(AttackedID, true);
+            animator.SetBool(AttackedID, true);
             if (isWeaponed == true)
             {
                 switch (whichWeapon)
