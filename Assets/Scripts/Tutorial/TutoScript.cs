@@ -14,7 +14,6 @@ public class TutoScript : MonoBehaviour
     public bool suicide_7 = false;
 
     public GameObject Dummy;
-    private DummyController DummyScript;
     public GameObject Pickup;
     public GameObject Saw;
 
@@ -168,6 +167,10 @@ public class TutoScript : MonoBehaviour
             //end
             TriggerSuicide.SetActive(false);
             suicide_7 = false;
+            PlayerManager.Instance.ScorePlayer1 = 1; 
+            PlayerManager.Instance.Round = 1;
+            PlayerManager.Instance.GameEnd = true;
+            PlayerManager.Instance.DeleteProps = true;
         }
     }
 }

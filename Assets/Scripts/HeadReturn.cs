@@ -7,13 +7,8 @@ using Rewired;
 public class HeadReturn : MonoBehaviour
 {
     public Controller controller = Controller.NONE;
-    //public Skin skin = Skin.NONE;
 
     private Player player;
-
-    //public Sprite Skin1;
-    //public Sprite Skin2;
-    //public Sprite Skin3;
 
     public GameObject OriginalBody;
     public GameObject PlayerArmless;

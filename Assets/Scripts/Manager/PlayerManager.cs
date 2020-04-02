@@ -60,7 +60,7 @@ public class PlayerManager : Singleton <PlayerManager>
             if (isAlivePlayer3 == true) { ScorePlayer3++; Round = 3; }
             if (isAlivePlayer4 == true) { ScorePlayer4++; Round = 4; }
             Debug.Log("a: RestartRound();");
-            //RestartRound();
+            RestartRound();
         }
 
         if (ScorePlayer1 == 5) { WinGame = true; }
