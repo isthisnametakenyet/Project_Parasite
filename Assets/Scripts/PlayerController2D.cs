@@ -368,12 +368,23 @@ public class PlayerController2D : MonoBehaviour
             emptyBody = body.GetComponent<EmptyBody>();
             emptyBody.controller = this.controller;
             emptyBody.arms = this.arms;
+
             emptyBody.LeftArm = LeftArm;
             LeftArm.transform.parent = emptyBody.transform;
-            Debug.Log("Left-Brazo");
+
             emptyBody.RightArm = RightArm;
             RightArm.transform.parent = emptyBody.transform;
-            Debug.Log("Right-Brazo");
+
+            if (facingright == false) {
+                body.GetComponent<SpriteRenderer>().flipX = true;
+                LeftArm.transform.position = new Vector3(transform.position.x + 0.25f, transform.position.y - 0.38f, 0);
+                RightArm.transform.position = new Vector3(transform.position.x - 0.75f, transform.position.y - 0.35f, 0);
+            }
+            else
+            {
+                LeftArm.transform.position = new Vector3(transform.position.x - 0.25f, transform.position.y - 0.38f, 0);
+                RightArm.transform.position = new Vector3(transform.position.x + 0.75f, transform.position.y - 0.35f, 0);
+            }
 
             headThrow = head.GetComponent<HeadThrow>();
             headThrow.controller = this.controller;

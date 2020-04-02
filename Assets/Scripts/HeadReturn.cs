@@ -16,7 +16,7 @@ public class HeadReturn : MonoBehaviour
     //public Sprite Skin3;
 
     public GameObject OriginalBody;
-    public GameObject PlayerAll;
+    public GameObject PlayerArmless;
     private PlayerController2D playerAll;
 
     public float MaxStun = 2;
@@ -60,19 +60,6 @@ public class HeadReturn : MonoBehaviour
                 isDead = true;
                 break;
         }
-
-        //switch (skin)
-        //{
-        //    case Skin.SKIN1:
-        //        spriteRenderer.sprite = Skin1;
-        //        break;
-        //    case Skin.SKIN2:
-        //        spriteRenderer.sprite = Skin2;
-        //        break;
-        //    case Skin.SKIN3:
-        //        spriteRenderer.sprite = Skin3;
-        //        break;
-        //}
     }
 
     void FixedUpdate()
@@ -109,11 +96,10 @@ public class HeadReturn : MonoBehaviour
             animator.Play(BackID);
 
             this.transform.position = new Vector3(OriginalBody.transform.position.x, OriginalBody.transform.position.y, 0);
-            GameObject player = Instantiate(PlayerAll, new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
+            GameObject player = Instantiate(PlayerArmless, new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
 
             playerAll = player.GetComponent<PlayerController2D>();
             playerAll.controller = this.controller;
-            //playerAll.skin = this.skin;
 
             Destroy(OriginalBody);
             Destroy(gameObject); //AUTODESTRUCCION

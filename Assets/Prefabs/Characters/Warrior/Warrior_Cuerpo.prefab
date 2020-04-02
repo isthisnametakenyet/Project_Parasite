@@ -191,7 +191,7 @@ MonoBehaviour:
   controller: 0
   arms: 0
   Parasite: {fileID: 0}
-  ReturnParasite: {fileID: 6639280174949446922, guid: 35bbdda292f2ad74fbc5b03158ab37bf,
+  ReturnParasite: {fileID: 6639280174949446922, guid: ad9f30ac4d6cc9546b529e2add702ab2,
     type: 3}
   RightArm: {fileID: 0}
   LeftArm: {fileID: 0}
