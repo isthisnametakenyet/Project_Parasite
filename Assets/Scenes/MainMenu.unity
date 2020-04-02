@@ -1478,6 +1478,41 @@ PrefabInstance:
       propertyPath: _userData.inputBehaviors.Array.data[0]._mouseOtherAxisMode
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3388350840785209307, guid: 0281a6991b8a3984493f3154240e1245,
+        type: 3}
+      propertyPath: _userData.inputBehaviors.Array.data[0]._buttonDoublePressSpeed
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 3388350840785209307, guid: 0281a6991b8a3984493f3154240e1245,
+        type: 3}
+      propertyPath: _userData.joystickMaps.Array.data[0].actionElementMaps.Array.data[0]._axisRange
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3388350840785209307, guid: 0281a6991b8a3984493f3154240e1245,
+        type: 3}
+      propertyPath: _userData.joystickMaps.Array.data[0].actionElementMaps.Array.data[0]._axisContribution
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3388350840785209307, guid: 0281a6991b8a3984493f3154240e1245,
+        type: 3}
+      propertyPath: _userData.joystickMaps.Array.data[0].actionElementMaps.Array.data[1]._axisRange
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3388350840785209307, guid: 0281a6991b8a3984493f3154240e1245,
+        type: 3}
+      propertyPath: _userData.joystickMaps.Array.data[0].actionElementMaps.Array.data[1]._elementIdentifierId
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3388350840785209307, guid: 0281a6991b8a3984493f3154240e1245,
+        type: 3}
+      propertyPath: _userData.joystickMaps.Array.data[0].actionElementMaps.Array.data[1]._axisContribution
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3388350840785209307, guid: 0281a6991b8a3984493f3154240e1245,
+        type: 3}
+      propertyPath: _userData.joystickMaps.Array.data[0].actionElementMaps.Array.data[1]._actionId
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0281a6991b8a3984493f3154240e1245, type: 3}
 --- !u!1 &1240800780
