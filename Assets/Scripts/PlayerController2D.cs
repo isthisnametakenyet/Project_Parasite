@@ -132,6 +132,8 @@ public class PlayerController2D : MonoBehaviour
             return;
         };
 
+        if (isWeaponed == false) { animator.SetBool(WeaponingID, false); }
+
         if (pickDelay <= pickTemp && picking == true) { picking = false; pickTemp = 0; }
         else if (picking == true) { pickTemp += Time.deltaTime; }
         
