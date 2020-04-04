@@ -1967,6 +1967,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerManager
       objectReference: {fileID: 0}
+    - target: {fileID: 1631143474041647110, guid: 0a436846a704a5742a438bbbd501cb35,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1631143474041647104, guid: 0a436846a704a5742a438bbbd501cb35,
         type: 3}
       propertyPath: skinPlayers.Array.size

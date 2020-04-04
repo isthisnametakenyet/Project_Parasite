@@ -15,7 +15,7 @@ public class MenuAsignemet : MonoBehaviour
         if (!Rewired.ReInput.isReady) return null;
         if (instance == null)
         {
-            Debug.LogError("Not initialized. Do you have an Assigner in your scene?");
+            Debug.LogError("Not initialized. Do you have a MenuAsignemet in your scene?");
             return null;
         }
         for (int i = 0; i < instance.playerMap.Count; i++)
