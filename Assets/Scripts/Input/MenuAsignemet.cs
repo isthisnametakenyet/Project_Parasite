@@ -38,6 +38,21 @@ public class MenuAsignemet : MonoBehaviour
         instance = this; // set up the singleton
     }
 
+    void Start()
+    {
+        for (int i = 0; i < maxPlayers; i++)
+        {
+            Player rewiredPlayer = ReInput.players.GetPlayer(i);
+
+            // Enable the Assignment map category in Player
+            rewiredPlayer.controllers.maps.SetMapsEnabled(true, "Assignment");
+
+            // Disable Control for this Player
+            rewiredPlayer.controllers.maps.SetMapsEnabled(false, "Default");
+        }
+        
+    }
+
     void Update()
     {
         if (!PlayerManager.Instance) { Debug.LogError("Not initialized. Do you have an PlayerManager in your scene?"); }
