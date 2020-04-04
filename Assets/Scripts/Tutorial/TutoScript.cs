@@ -7,7 +7,6 @@ public class TutoScript : MonoBehaviour
     public int actualStage = 0;
     public bool move_1 = false;
     public bool trespas_2 = false;
-    public bool pickup_3 = false;
     public bool attack_4 = false;
     public bool throw_5 = false;
     public bool parasite_6 = false;
@@ -20,7 +19,6 @@ public class TutoScript : MonoBehaviour
     public GameObject TriggerMove1;
     public GameObject TriggerTres1;
     public GameObject TriggerTres2;
-    public GameObject TriggerPick1;
     public GameObject TriggerAttacknThrow;
     public GameObject TriggerSuicide;
 
@@ -112,7 +110,7 @@ public class TutoScript : MonoBehaviour
             Pickup.SetActive(true);
             trespas_2 = false;
         }
-        if (pickup_3 == true && actualStage == 2)
+        if (!Pickup && actualStage == 2)
         {
             //ESCONDER TEXTO EXPLICANDO COMO PICKUP WEAPONS
             TextPickup1.SetActive(false);
@@ -122,9 +120,7 @@ public class TutoScript : MonoBehaviour
             TextAttack1.SetActive(true);
             TextAttack2.SetActive(true);
             //SET ACTVIVE DUMMY
-            TriggerPick1.SetActive(false);
             Dummy.SetActive(true);
-            pickup_3 = false;
         }
         if (attack_4 == true && actualStage == 3)
         {
