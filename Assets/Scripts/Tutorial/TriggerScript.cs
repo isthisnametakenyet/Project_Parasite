@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum TutoTrigger { MOVE, TRESPASS, PICKUP, SUICIDE };
+public enum TutoTrigger { MOVE, TRESPASS, SUICIDE };
 
 public class TriggerScript : MonoBehaviour
 {
@@ -30,9 +30,6 @@ public class TriggerScript : MonoBehaviour
                 case TutoTrigger.TRESPASS:
                     TutoScript.trespas_2 = true;
                     break;
-                case TutoTrigger.PICKUP:
-                    TutoScript.pickup_3 = true;
-                    break;
                 case TutoTrigger.SUICIDE:
                     TutoScript.suicide_7 = true;
                     break;
@@ -53,10 +50,5 @@ public class TriggerScript : MonoBehaviour
         {
             TutoScript.parasite_6 = true;
         }
-    }
-
-    private void OnCollision(Collision2D collision)
-    {
-
     }
 }
