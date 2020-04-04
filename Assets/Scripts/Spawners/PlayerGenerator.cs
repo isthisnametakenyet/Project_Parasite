@@ -11,6 +11,11 @@ public class PlayerGenerator : MonoBehaviour
     public GameObject spawnSkin3;
     private PlayerController2D playerScript;
 
+    public ScoreHUD scoreHUD;
+    private ScoreHUD scoreScript;
+
+    public float scoreDelay;
+
     Vector3[] positionsMapTut = new[] { new Vector3(-7.4f, -4.2f, 1f), new Vector3(-7.4f, -4.2f, 1f), new Vector3(-7.4f, -4.2f, 1f), new Vector3(-7.4f, -4.2f, 1f), new Vector3(-7.4f, -4.2f, 1f) };
     Vector3[] positionsMap1 = new[] { new Vector3(-5.5f, 1.8f, 1f), new Vector3(5.5f, 1.8f, 0f), new Vector3(3.4f, -2.25f, 0f), new Vector3(-3.4f, -2.25f, 0f), new Vector3(0f, -4.2f, 0f) };
     Vector3[] positionsMap2 = new[] { new Vector3(0f, 0f, 0f), new Vector3(5f, 5f, 5f), new Vector3(-2f, -2f, -2f), new Vector3(-3f, -3f, -3f), new Vector3(-4f, -4f, -4f) };
@@ -18,12 +23,6 @@ public class PlayerGenerator : MonoBehaviour
 
     public Vector3[] actualMap;
     int randPos;
-
-    public ScoreHUD scoreHUD;
-    private ScoreHUD scoreScript;
-
-    public float scoreDelay;
-    
 
     void Start()
     {
@@ -33,6 +32,7 @@ public class PlayerGenerator : MonoBehaviour
 
     void FixedUpdate() 
     {
+        if (!PlayerManager.Instance) { Debug.LogError("Not initialized. Do you have an PlayerManager in your scene?"); }
         if (PlayerManager.Instance.DeleteProps == true)
         {
             PlayerManager.Instance.DeleteProps = false;
@@ -101,6 +101,7 @@ public class PlayerGenerator : MonoBehaviour
                     Debug.LogError("Error, Random Player Generator received skin number that is not inside of the posibilities");
                     break;
             }
+            PlayerManager.Instance.isAlivePlayer1 = true;
 
             if (PlayerManager.Instance.Player2ON == false) { Debug.Log("1 Players Spawned"); return; }
             switch (PlayerManager.Instance.SkinPlayer2)
@@ -124,6 +125,7 @@ public class PlayerGenerator : MonoBehaviour
                     Debug.LogError("Error, Random Player Generator received skin number that is not inside of the posibilities");
                     break;
             }
+            PlayerManager.Instance.isAlivePlayer2 = true;
 
             if (PlayerManager.Instance.Player3ON == false) { Debug.Log("2 Players Spawned"); return; }
             switch (PlayerManager.Instance.SkinPlayer1)
@@ -147,6 +149,7 @@ public class PlayerGenerator : MonoBehaviour
                     Debug.LogError("Error, Random Player Generator received skin number that is not inside of the posibilities");
                     break;
             }
+            PlayerManager.Instance.isAlivePlayer3 = true;
 
             if (PlayerManager.Instance.Player4ON == false) { Debug.Log("3 Players Spawned"); return; }
             switch (PlayerManager.Instance.SkinPlayer4)
@@ -170,8 +173,8 @@ public class PlayerGenerator : MonoBehaviour
                     Debug.LogError("Error, Random Player Generator received skin number that is not inside of the posibilities");
                     break;
             }
+            PlayerManager.Instance.isAlivePlayer4 = true;
         }
         Debug.Log("All Players Spawned");
-        //Destroy(this);
     }
 }
