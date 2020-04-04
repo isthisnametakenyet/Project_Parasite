@@ -109,8 +109,8 @@ MonoBehaviour:
   - {fileID: 7423009611716547593}
   - {fileID: 138096610912818530}
   m_Bounds:
-    m_Center: {x: 1.8132946, y: 0.26006377, z: 0}
-    m_Extent: {x: 5.752325, y: 2.2669609, z: 0}
+    m_Center: {x: 3.1837864, y: -0.12511444, z: 0}
+    m_Extent: {x: 6.0052395, y: 2.404471, z: 0}
 --- !u!114 &6652106776017084884
 MonoBehaviour:
   m_ObjectHideFlags: 0

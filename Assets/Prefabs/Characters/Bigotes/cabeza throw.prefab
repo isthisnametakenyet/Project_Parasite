@@ -10,6 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3110473729281318826}
   - component: {fileID: 5575614712651782007}
+  - component: {fileID: 114083926929559496}
+  - component: {fileID: 7619559506779232106}
+  - component: {fileID: 3115430161606878409}
   m_Layer: 0
   m_Name: cabeza throw
   m_TagString: Untagged
@@ -79,3 +82,63 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &114083926929559496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4469397126892602978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5696b3eee20772c4e9336d45b7dd6ae4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controller: 0
+  OriginalBody: {fileID: 0}
+  PlayerArmless: {fileID: 3514925171028899232, guid: c5461782871e8b94eac12eb62198195f,
+    type: 3}
+  HeadDead: {fileID: 6639280174949446922, guid: 35bbdda292f2ad74fbc5b03158ab37bf,
+    type: 3}
+  floorStunMax: 2
+  expulsedStunMax: 3
+  Expulsed: 0
+  GoBack: 0
+  canReturn: 1
+--- !u!50 &7619559506779232106
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4469397126892602978}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 0
+--- !u!58 &3115430161606878409
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4469397126892602978}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.2772584, y: 0}
+  serializedVersion: 2
+  m_Radius: 2.9354558

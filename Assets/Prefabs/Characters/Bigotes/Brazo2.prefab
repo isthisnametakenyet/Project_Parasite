@@ -42,6 +42,13 @@ GameObject:
   - component: {fileID: 5360871271422266721}
   - component: {fileID: 3732700748390138132}
   - component: {fileID: 3964252341795785348}
+  - component: {fileID: 3322696239318551047}
+  - component: {fileID: 8683908284587292138}
+  - component: {fileID: 3536879822322773640}
+  - component: {fileID: 4010550079130572631}
+  - component: {fileID: 5505494568182971319}
+  - component: {fileID: 8795033558569270381}
+  - component: {fileID: 7262694491573442381}
   m_Layer: 0
   m_Name: Brazo2
   m_TagString: Untagged
@@ -129,8 +136,125 @@ MonoBehaviour:
   - {fileID: 8294418440950968045}
   - {fileID: 2993445853652941694}
   m_Bounds:
-    m_Center: {x: 2.0952172, y: 0.30663586, z: 0}
-    m_Extent: {x: 3.3932276, y: 1.2888882, z: 0}
+    m_Center: {x: 2.1258497, y: 0.33188295, z: 0}
+    m_Extent: {x: 2.8685455, y: 1.1474566, z: 0}
+--- !u!50 &3322696239318551047
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4952704881073145695}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!58 &8683908284587292138
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4952704881073145695}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -1.6487716, y: -1.055106}
+  serializedVersion: 2
+  m_Radius: 0.72558326
+--- !u!58 &3536879822322773640
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4952704881073145695}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -1.0870488, y: -0.5734632}
+  serializedVersion: 2
+  m_Radius: 0.73108155
+--- !u!58 &4010550079130572631
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4952704881073145695}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.51459485, y: -0.07646828}
+  serializedVersion: 2
+  m_Radius: 0.74000955
+--- !u!58 &5505494568182971319
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4952704881073145695}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.3999348, y: 0.46275747}
+  serializedVersion: 2
+  m_Radius: 0.7964625
+--- !u!58 &8795033558569270381
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4952704881073145695}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 1.2403463, y: 0.78648543}
+  serializedVersion: 2
+  m_Radius: 0.75025773
+--- !u!58 &7262694491573442381
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4952704881073145695}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 1.9017953, y: 1.0544453}
+  serializedVersion: 2
+  m_Radius: 0.6772048
 --- !u!1 &8078804488572566739
 GameObject:
   m_ObjectHideFlags: 0
