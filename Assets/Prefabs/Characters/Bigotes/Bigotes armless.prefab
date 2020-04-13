@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 5340402588667937317}
   - component: {fileID: 8803349896068621737}
   m_Layer: 0
-  m_Name: Bigotes Start 1
+  m_Name: Bigotes armless
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -124,7 +124,7 @@ Transform:
   m_GameObject: {fileID: 3514925171028899232}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -30.085648, y: 0.38057184, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.148096, y: 0.148096, z: 0.148096}
   m_Children:
   - {fileID: 5902034165295389025}
   - {fileID: 1660682928830700190}
