@@ -174,14 +174,14 @@ public class EmptyBody : MonoBehaviour
             }
 
             //JUMP
-            if (player.GetButtonDown("Jump") && isGrounded == true && isCharging == false && isDucking == false)
+            if (player.GetAxis("Jump&Duck") > 0 && isGrounded == true && isCharging == false && isDucking == false)
             {
                 //animator.SetTrigger(JumpedID);
                 body2D.velocity = new Vector2(body2D.velocity.x, jumpStrengh);
             }
 
             //DUCK
-            if (player.GetButton("Duck") && isGrounded == true && isCharging == false)
+            if (player.GetAxis("Jump&Duck") < 0 && isGrounded == true && isCharging == false)
             {
                 isDucking = true;
                 Debug.Log("Quack");
@@ -192,7 +192,7 @@ public class EmptyBody : MonoBehaviour
             }
 
             //ATTACK
-            if (player.GetButtonDown("Attack"))
+            if (player.GetAxis("Attack&Charge") > 0)
             {
                 //animator.SetBool(AttackedID, true);
                 if (isWeaponed == true)
@@ -234,7 +234,7 @@ public class EmptyBody : MonoBehaviour
             }
 
             //CHARGED
-            if (player.GetButton("Charge") && isDucking == false && isWeaponed == true)
+            if (player.GetAxis("Attack&Charge") < 0 && isDucking == false && isWeaponed == true)
             {
                 Debug.Log("E-StartCharge");
                 //animator.SetBool(ChargingID, true);
@@ -343,7 +343,7 @@ public class EmptyBody : MonoBehaviour
             }
 
             //HEAD RETURN
-            if (player.GetButton("Head Throw") && isCharging == false && isDucking == false)
+            if (player.GetAxis("HeadThrow&Return") > 0 && isCharging == false && isDucking == false)
             {
                 parasiteScript = Parasite.gameObject.GetComponent<HeadThrow>();
                 Parasite.transform.parent = null;
@@ -386,7 +386,7 @@ public class EmptyBody : MonoBehaviour
     private void OnTriggerStay2D(Collider2D collision)
     {
         //bool isWeaponed = animator.GetBool(WeaponingID);
-        if (collision.gameObject.tag == "PickUp" && player.GetButtonDown("PickUp") && isWeaponed == false)
+        if (collision.gameObject.tag == "PickUp" && player.GetAxis("Pickup") > 0 && isWeaponed == false)
         {
             pickUpScript = collision.GetComponent<PickUpScript>();
             pickUpScript.Picker = this.gameObject;
@@ -422,7 +422,7 @@ public class EmptyBody : MonoBehaviour
                     break;
             }
 
-            if (collision.gameObject.tag == "Stuck" && player.GetButtonDown("PickUp") && isWeaponed == false)
+            if (collision.gameObject.tag == "Stuck" && player.GetAxis("Pickup") > 0 && isWeaponed == false)
             {
                 //PICKUP
             }

@@ -320,45 +320,27 @@ MonoBehaviour:
       _categoryId: 0
     - _id: 6
       _name: PickUp
-      _type: 1
+      _type: 0
       _descriptiveName: PickUp
-      _positiveDescriptiveName: 
+      _positiveDescriptiveName: PickUp
       _negativeDescriptiveName: 
       _behaviorId: 0
       _userAssignable: 1
       _categoryId: 0
     - _id: 7
-      _name: Attack
-      _type: 1
-      _descriptiveName: Attack
-      _positiveDescriptiveName: 
-      _negativeDescriptiveName: 
-      _behaviorId: 0
-      _userAssignable: 1
-      _categoryId: 0
-    - _id: 8
-      _name: Charge
-      _type: 1
-      _descriptiveName: Charge
-      _positiveDescriptiveName: 
-      _negativeDescriptiveName: 
+      _name: Attack&Charge
+      _type: 0
+      _descriptiveName: Attack&Charge
+      _positiveDescriptiveName: Attack
+      _negativeDescriptiveName: Charge
       _behaviorId: 0
       _userAssignable: 1
       _categoryId: 0
     - _id: 9
-      _name: Head Throw
-      _type: 1
-      _descriptiveName: Head Throw
-      _positiveDescriptiveName: 
-      _negativeDescriptiveName: 
-      _behaviorId: 0
-      _userAssignable: 1
-      _categoryId: 0
-    - _id: 10
-      _name: Head Return
-      _type: 1
-      _descriptiveName: Head Return
-      _positiveDescriptiveName: 
+      _name: HeadThrow&Return
+      _type: 0
+      _descriptiveName: HeadThrow&Return
+      _positiveDescriptiveName: Throw&Return
       _negativeDescriptiveName: 
       _behaviorId: 0
       _userAssignable: 1
@@ -377,7 +359,7 @@ MonoBehaviour:
     actionCategoryMap:
       list:
       - categoryId: 0
-        actionIds: 0000000004000000060000000700000008000000090000000a000000
+        actionIds: 0000000004000000060000000700000009000000
       - categoryId: 1
         actionIds: 03000000
     inputBehaviors:
@@ -488,29 +470,18 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: 8
+        _actionId: 7
         _elementType: 1
         _elementIdentifierId: 7
         _axisRange: 0
         _invert: 0
-        _axisContribution: 0
+        _axisContribution: 1
         _keyboardKeyCode: 0
         _modifierKey1: 0
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
         _actionId: 9
-        _elementType: 1
-        _elementIdentifierId: 8
-        _axisRange: 0
-        _invert: 0
-        _axisContribution: 0
-        _keyboardKeyCode: 0
-        _modifierKey1: 0
-        _modifierKey2: 0
-        _modifierKey3: 0
-      - _actionCategoryId: 0
-        _actionId: 10
         _elementType: 1
         _elementIdentifierId: 8
         _axisRange: 0
@@ -693,29 +664,18 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: 8
+        _actionId: 7
         _elementType: 1
         _elementIdentifierId: -1
         _axisRange: 0
         _invert: 0
-        _axisContribution: 0
+        _axisContribution: 1
         _keyboardKeyCode: 113
         _modifierKey1: 0
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
         _actionId: 9
-        _elementType: 1
-        _elementIdentifierId: -1
-        _axisRange: 0
-        _invert: 0
-        _axisContribution: 0
-        _keyboardKeyCode: 118
-        _modifierKey1: 0
-        _modifierKey2: 0
-        _modifierKey3: 0
-      - _actionCategoryId: 0
-        _actionId: 10
         _elementType: 1
         _elementIdentifierId: -1
         _axisRange: 0

@@ -86,7 +86,7 @@ public class HeadReturn : MonoBehaviour
         }
         else { Stunned = false; }
 
-        if (player.GetButtonDown("Head Return") && Stunned == false || Returning == true)
+        if (player.GetAxis("HeadThrow&Return") > 0 && Stunned == false || Returning == true)
         {
             animator.Play(BackID);
 

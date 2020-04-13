@@ -214,7 +214,7 @@ public class PlayerController2D : MonoBehaviour
         }
 
         //ATTACK
-        if (player.GetButtonDown("Attack"))
+        if (player.GetAxis("Attack&Charge") > 0)
         {
             animator.SetBool(AttackedID, true);
             if (isWeaponed == true)
@@ -256,7 +256,7 @@ public class PlayerController2D : MonoBehaviour
         }
 
         //CHARGED
-        if (player.GetButton("Charge") && isHeading == false && isDucking == false && isWeaponed == true)
+        if (player.GetAxis("Attack&Charge") < 0 && isHeading == false && isDucking == false && isWeaponed == true)
         {
             animator.SetBool(ChargingID, true);
             if (weaponCharge < maxWeaponCharge)
@@ -344,7 +344,7 @@ public class PlayerController2D : MonoBehaviour
         }
 
         //HEAD THROW
-        if (player.GetButton("Head Throw") && isCharging == false && isDucking == false)
+        if (player.GetAxis("HeadThrow&Return") > 0 && isCharging == false && isDucking == false)
         { 
             {
                 animator.SetBool(HeadingID, true);
@@ -449,7 +449,7 @@ public class PlayerController2D : MonoBehaviour
     {
         //bool isWeaponed = animator.GetBool(WeaponingID); 
 
-        if (collision.gameObject.tag == "PickUp" && player.GetButtonDown("PickUp") && isWeaponed == false && picking == false)
+        if (collision.gameObject.tag == "PickUp" && player.GetAxis("Pickup") > 0 && isWeaponed == false && picking == false)
         {
             pickUpScript = collision.GetComponent<PickUpScript>();
             pickUpScript.Picker = this.gameObject;
@@ -493,7 +493,7 @@ public class PlayerController2D : MonoBehaviour
                     break;
             }
         }
-        else if (collision.gameObject.tag == "Stuck" && player.GetButtonDown("PickUp") && isWeaponed == false && picking == false)  //RE-PICKUP
+        else if (collision.gameObject.tag == "Stuck" && player.GetAxis("Pickup") > 0 && isWeaponed == false && picking == false)  //RE-PICKUP
         {
             isWeaponed = true;
             switch (collision.gameObject.name)
@@ -528,7 +528,7 @@ public class PlayerController2D : MonoBehaviour
                     break;
             }
         }
-        if (collision.gameObject.tag == "FreeArm" && player.GetButtonDown("PickUp") && picking == false)
+        if (collision.gameObject.tag == "FreeArm" && player.GetAxis("Pickup") > 0 && picking == false)
         {
             switch (arms)
             {
