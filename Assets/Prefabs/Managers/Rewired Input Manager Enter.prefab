@@ -310,20 +310,11 @@ MonoBehaviour:
       _userAssignable: 1
       _categoryId: 1
     - _id: 4
-      _name: Jump
-      _type: 1
-      _descriptiveName: Jump
-      _positiveDescriptiveName: 
-      _negativeDescriptiveName: 
-      _behaviorId: 0
-      _userAssignable: 1
-      _categoryId: 0
-    - _id: 5
-      _name: Duck
-      _type: 1
-      _descriptiveName: Duck
-      _positiveDescriptiveName: 
-      _negativeDescriptiveName: 
+      _name: Jump&Duck
+      _type: 0
+      _descriptiveName: Jump&Duck
+      _positiveDescriptiveName: Jump
+      _negativeDescriptiveName: Duck
       _behaviorId: 0
       _userAssignable: 1
       _categoryId: 0
@@ -386,7 +377,7 @@ MonoBehaviour:
     actionCategoryMap:
       list:
       - categoryId: 0
-        actionIds: 000000000400000005000000060000000700000008000000090000000a000000
+        actionIds: 0000000004000000060000000700000008000000090000000a000000
       - categoryId: 1
         actionIds: 03000000
     inputBehaviors:
@@ -475,6 +466,17 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
+        _actionId: 4
+        _elementType: 1
+        _elementIdentifierId: 10
+        _axisRange: 0
+        _invert: 0
+        _axisContribution: 1
+        _keyboardKeyCode: 0
+        _modifierKey1: 0
+        _modifierKey2: 0
+        _modifierKey3: 0
+      - _actionCategoryId: 0
         _actionId: 7
         _elementType: 1
         _elementIdentifierId: 5
@@ -522,17 +524,6 @@ MonoBehaviour:
         _actionId: 6
         _elementType: 1
         _elementIdentifierId: 12
-        _axisRange: 0
-        _invert: 0
-        _axisContribution: 0
-        _keyboardKeyCode: 0
-        _modifierKey1: 0
-        _modifierKey2: 0
-        _modifierKey3: 0
-      - _actionCategoryId: 0
-        _actionId: 5
-        _elementType: 1
-        _elementIdentifierId: 10
         _axisRange: 0
         _invert: 0
         _axisContribution: 0
@@ -669,7 +660,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: 5
+        _actionId: 4
         _elementType: 1
         _elementIdentifierId: -1
         _axisRange: 0

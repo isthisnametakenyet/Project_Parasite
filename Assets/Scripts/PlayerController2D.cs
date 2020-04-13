@@ -196,14 +196,14 @@ public class PlayerController2D : MonoBehaviour
             transform.localScale = theScale;
         }
         //JUMP
-        if (player.GetButtonDown("Jump") && isGrounded == true && isCharging == false && isDucking == false)
+        if (player.GetAxis("Jump&Duck") > 0 && isGrounded == true && isCharging == false && isDucking == false)
         {
             animator.SetTrigger(JumpedID);
             body2D.velocity = new Vector2(body2D.velocity.x, jumpStrengh);
         }
 
         ////DUCK
-        //if (player.GetButton("Duck") && isGrounded == true && isCharging == false)
+        //if (player.GetAxis("Jump&Duck") < 0 && isGrounded == true && isCharging == false)
         //{
         //    isDucking = true;
         //    Debug.Log("Quack");
