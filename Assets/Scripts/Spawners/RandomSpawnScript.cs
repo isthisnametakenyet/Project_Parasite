@@ -114,7 +114,7 @@ public class RandomSpawnScript : MonoBehaviour
                     PickObject.picktype = PickTypes.Bow;
                     PickObject.RadomSpawner = this.gameObject;
                 }
-                else if (whereToSpawn == 5)
+                else if (whatToSpawn == 5)
                 {
                     GameObject pick = Instantiate(PickUp, actualMap[whereToSpawn], Quaternion.identity);
                     PickObject = pick.GetComponent<PickUpScript>();
