@@ -81,6 +81,7 @@ public class PlayerController2D : MonoBehaviour
 
     void Start()
     {
+        //SoundManager.instance.Play("Shot1");
         animator = GetComponent<Animator>();
         body2D = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();

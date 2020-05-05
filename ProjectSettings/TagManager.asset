@@ -53,9 +53,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: character
+  - name: Character
     uniqueID: 2766913379
     locked: 0
-  - name: New Layer
+  - name: Saw
     uniqueID: 4017847861
     locked: 0
