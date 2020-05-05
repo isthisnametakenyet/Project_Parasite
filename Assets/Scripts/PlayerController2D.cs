@@ -205,6 +205,7 @@ public class PlayerController2D : MonoBehaviour
         //JUMP
         if (player.GetAxis("Jump&Duck") > 0 && jumpTemp > jumpCooldown && isGrounded == true && isCharging == false && isDucking == false)
         {
+            jumpTemp = 0;
             animator.SetTrigger(JumpedID);
             body2D.velocity = new Vector2(body2D.velocity.x, jumpStrengh);
         }
