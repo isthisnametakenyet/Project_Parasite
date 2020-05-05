@@ -35,6 +35,10 @@ public class SoundManager : MonoBehaviour
 
         RegulateAll(MusicVolume, SFXVolume);
     }
+    void Start()
+    {
+        Play("Shot1");
+    }
 
     public void Play(string name)
     {
@@ -103,22 +107,4 @@ public class SoundManager : MonoBehaviour
             }
         }
     }
-}
-
-[System.Serializable]
-public class Sound
-{
-    public string name;
-    public AudioClip clip;
-
-    public enum AudioType { SFX, MUSIC };
-    public AudioType audioType;
-
-    [Range(0f, 1f)]
-    public float volume;
-    [Range(.1f, 3f)]
-    public float pitch;
-    public bool loop;
-    [HideInInspector]
-    public AudioSource source;
 }

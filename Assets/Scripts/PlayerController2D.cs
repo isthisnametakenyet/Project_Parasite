@@ -45,6 +45,7 @@ public class PlayerController2D : MonoBehaviour
 
     //VARIABLES
     public float runSpeed = 2f; 
+    public float jumpCooldown = 2f;
     public float jumpStrengh = 6.5f;
     public float headReturnDelay = 2f;
     public float maxWeaponCharge = 1.5f;
@@ -55,6 +56,7 @@ public class PlayerController2D : MonoBehaviour
     public float pickDelay = 0.2f;
 
     //TEMPORALES
+    float jumpTemp = 0;
     bool facingright = true;
     float headCharge = 0f;
     float weaponCharge = 0f;
@@ -132,11 +134,14 @@ public class PlayerController2D : MonoBehaviour
             return;
         };
 
+        //TEMPS
         if (isWeaponed == false) { animator.SetBool(WeaponingID, false); }
 
         if (pickDelay <= pickTemp && picking == true) { picking = false; pickTemp = 0; }
         else if (picking == true) { pickTemp += Time.deltaTime; }
-        
+
+        if (jumpTemp <= jumpCooldown) { jumpTemp += Time.deltaTime; }
+
         //bool isCondition = animator.GetBool(ConditionID); //animator.SetBool(ConditionID, true);
         bool isGrounded = animator.GetBool(GroundingID);
         bool isMoving = animator.GetBool(MovingID);
@@ -198,8 +203,9 @@ public class PlayerController2D : MonoBehaviour
             transform.localScale = theScale;
         }
         //JUMP
-        if (player.GetAxis("Jump&Duck") > 0 && isGrounded == true && isCharging == false && isDucking == false)
+        if (player.GetButtonDown("Jump&Duck") && jumpTemp > jumpCooldown && isGrounded == true && isCharging == false && isDucking == false)
         {
+            jumpTemp = 0;
             animator.SetTrigger(JumpedID);
             body2D.velocity = new Vector2(body2D.velocity.x, jumpStrengh);
         }
