@@ -45,4 +45,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MusicVolume: 0.2
   SFXVolume: 0.2
-  sounds: []
+  sounds:
+  - name: Shot1
+    clip: {fileID: 8300000, guid: 053d1c11cabc09d4799ab3fc130f3453, type: 3}
+    audioType: 0
+    volume: 0
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
