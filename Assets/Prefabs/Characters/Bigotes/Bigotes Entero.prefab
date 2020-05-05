@@ -30,6 +30,22 @@ Transform:
   m_Father: {fileID: 3765236938358458216}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -8.913}
+--- !u!58 &2882090103965047034
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2731616341238487058}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.51, y: -0.07}
+  serializedVersion: 2
+  m_Radius: 0.65
 --- !u!58 &3075410568229203901
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -60,22 +76,6 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 1.25, y: -0.07}
-  serializedVersion: 2
-  m_Radius: 0.65
---- !u!58 &2882090103965047034
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2731616341238487058}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.51, y: -0.07}
   serializedVersion: 2
   m_Radius: 0.65
 --- !u!1 &3840378227773293278
@@ -236,22 +236,6 @@ CircleCollider2D:
   m_Offset: {x: 0.9, y: -0.07}
   serializedVersion: 2
   m_Radius: 0.65
---- !u!58 &7162953452514237374
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4410220690227216241}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 1.66, y: -0.07}
-  serializedVersion: 2
-  m_Radius: 0.65
 --- !u!58 &4824129612456933483
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -268,22 +252,22 @@ CircleCollider2D:
   m_Offset: {x: 0.97, y: -0.03}
   serializedVersion: 2
   m_Radius: 0.65
---- !u!58 &4384165810289079222
+--- !u!58 &7162953452514237374
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5745822337543267332}
+  m_GameObject: {fileID: 4410220690227216241}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 2.13, y: -0.07}
+  m_Offset: {x: 1.66, y: -0.07}
   serializedVersion: 2
-  m_Radius: 0.69
+  m_Radius: 0.65
 --- !u!58 &693090320042006252
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -298,6 +282,22 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 1.49, y: -0.06}
+  serializedVersion: 2
+  m_Radius: 0.69
+--- !u!58 &4384165810289079222
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5745822337543267332}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 2.13, y: -0.07}
   serializedVersion: 2
   m_Radius: 0.69
 --- !u!58 &6323291008977174737
@@ -364,7 +364,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5911291850111384200}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -30, y: 1.075, z: 0}
+  m_LocalPosition: {x: -30.002, y: 1.104, z: 0}
   m_LocalScale: {x: 0.148096, y: 0.148096, z: 0.148096}
   m_Children:
   - {fileID: 3685802129419392585}
@@ -910,6 +910,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2993445853652941694, guid: 8f26e96b997c49141884053b57b9867d,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.0950086
+      objectReference: {fileID: 0}
+    - target: {fileID: 2993445853652941694, guid: 8f26e96b997c49141884053b57b9867d,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0000006210437
       objectReference: {fileID: 0}
     - target: {fileID: 4952704881073145695, guid: 8f26e96b997c49141884053b57b9867d,
         type: 3}
