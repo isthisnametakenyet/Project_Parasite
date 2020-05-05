@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5175231583499952972
+--- !u!1 &1881590848235089753
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,8 +8,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8095954949078728874}
-  - component: {fileID: 2166191353409172673}
+  - component: {fileID: 3284322033993731263}
+  - component: {fileID: 4882190978551773396}
   m_Layer: 0
   m_Name: Rewired Input Manager Enter
   m_TagString: Untagged
@@ -17,13 +17,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8095954949078728874
+--- !u!4 &3284322033993731263
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5175231583499952972}
+  m_GameObject: {fileID: 1881590848235089753}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -31,13 +31,13 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2166191353409172673
+--- !u!114 &4882190978551773396
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5175231583499952972}
+  m_GameObject: {fileID: 1881590848235089753}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 581b3e3c96df0ef42aef16b63b27b87f, type: 3}
@@ -365,26 +365,26 @@ MonoBehaviour:
     inputBehaviors:
     - _id: 0
       _name: Default
-      _joystickAxisSensitivity: 1
-      _digitalAxisSimulation: 1
-      _digitalAxisSnap: 1
+      _joystickAxisSensitivity: 10
+      _digitalAxisSimulation: 0
+      _digitalAxisSnap: 0
       _digitalAxisInstantReverse: 0
-      _digitalAxisGravity: 3
-      _digitalAxisSensitivity: 3
+      _digitalAxisGravity: 10
+      _digitalAxisSensitivity: 10
       _mouseXYAxisMode: 0
       _mouseOtherAxisMode: 0
-      _mouseXYAxisSensitivity: 1
+      _mouseXYAxisSensitivity: 10
       _mouseXYAxisDeltaCalc: 0
-      _mouseOtherAxisSensitivity: 1
-      _customControllerAxisSensitivity: 1
-      _buttonDoublePressSpeed: 0.3
-      _buttonShortPressTime: 0.25
-      _buttonShortPressExpiresIn: 0
+      _mouseOtherAxisSensitivity: 10
+      _customControllerAxisSensitivity: 10
+      _buttonDoublePressSpeed: 10
+      _buttonShortPressTime: 0.2
+      _buttonShortPressExpiresIn: 0.2
       _buttonLongPressTime: 1
-      _buttonLongPressExpiresIn: 0
-      _buttonDeadZone: 0.5
+      _buttonLongPressExpiresIn: 0.2
+      _buttonDeadZone: 0
       _buttonDownBuffer: 0
-      _buttonRepeatRate: 30
+      _buttonRepeatRate: 50
       _buttonRepeatDelay: 0
     mapCategories:
     - _name: Default
@@ -430,7 +430,7 @@ MonoBehaviour:
         _elementType: 0
         _elementIdentifierId: 0
         _axisRange: 0
-        _invert: 0
+        _invert: 1
         _axisContribution: 0
         _keyboardKeyCode: 0
         _modifierKey1: 0
