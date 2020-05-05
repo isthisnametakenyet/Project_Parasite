@@ -203,7 +203,7 @@ public class PlayerController2D : MonoBehaviour
             transform.localScale = theScale;
         }
         //JUMP
-        if (player.GetAxis("Jump&Duck") > 0 && jumpTemp > jumpCooldown && isGrounded == true && isCharging == false && isDucking == false)
+        if (player.GetButtonDown("Jump&Duck") > 0 && jumpTemp > jumpCooldown && isGrounded == true && isCharging == false && isDucking == false)
         {
             jumpTemp = 0;
             animator.SetTrigger(JumpedID);

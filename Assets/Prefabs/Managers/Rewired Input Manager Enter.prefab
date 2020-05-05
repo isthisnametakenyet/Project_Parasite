@@ -311,7 +311,7 @@ MonoBehaviour:
       _categoryId: 1
     - _id: 4
       _name: Jump&Duck
-      _type: 0
+      _type: 1
       _descriptiveName: Jump&Duck
       _positiveDescriptiveName: Jump
       _negativeDescriptiveName: Duck
