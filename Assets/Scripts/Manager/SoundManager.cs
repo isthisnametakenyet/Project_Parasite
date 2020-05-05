@@ -8,6 +8,7 @@ public class SoundManager : MonoBehaviour
 {
     public float MusicVolume = 0.2f;
     public float SFXVolume = 0.2f;
+    public float PitchGlobal = 1f;
 
     public Sound[] sounds;
     public static SoundManager instance;
@@ -29,7 +30,7 @@ public class SoundManager : MonoBehaviour
             s.source.clip = s.clip;
 
             s.source.volume = s.volume;
-            s.source.pitch = s.pitch;
+            s.source.pitch = PitchGlobal;
             s.source.loop = s.loop;
         }
 
