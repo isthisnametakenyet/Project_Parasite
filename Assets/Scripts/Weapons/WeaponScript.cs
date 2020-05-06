@@ -47,6 +47,9 @@ public class WeaponScript : MonoBehaviour
             if (Picker.gameObject.tag == "Player") { pickerPlayerScript.isWeaponed = false; }
             else if (Picker.gameObject.tag == "EmptyBody") { pickerEmptyScript.isWeaponed = false; }
 
+            transform.gameObject.tag = "Weapon";
+
+            this.gameObject.SetActive(false); //HIDE SELF
             //Destroy(gameObject); //AUTODESTRUCCION
         }
         else if (Attack == true && pastState != 1)
@@ -60,6 +63,7 @@ public class WeaponScript : MonoBehaviour
                     transform.gameObject.tag = "Attacking";
                     break;
                 case WeaponType.RANGED:
+                    transform.gameObject.tag = "Slap";
                     break;
                 case WeaponType.X:
                     break;
@@ -70,12 +74,12 @@ public class WeaponScript : MonoBehaviour
         }
         else if (Charging == true && pastState != 2)
         {
-            collider2D.enabled = false;
+            pastState = 2;
             transform.gameObject.tag = "Weapon";
         }
         else if (Thrown == true && pastState != 3)
         {
-            collider2D.enabled = true;
+            pastState = 3;
             GameObject throwed = Instantiate(prefabWeaponArrow, new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
             switch (this.gameObject.name)
             {
@@ -83,12 +87,36 @@ public class WeaponScript : MonoBehaviour
                     Debug.Log("Axe");
                     axeScript = throwed.GetComponent<Axe>();
                     axeScript.Picker = Picker;
+                    axeScript.Uses = Uses;
+                    break;
+                case "Sword":
+                    Debug.Log("Sword");
+                    swordScript = throwed.GetComponent<Sword>();
+                    swordScript.Picker = Picker;
+                    swordScript.Uses = Uses;
+                    break;
+                case "Spear":
+                    Debug.Log("Spear");
+                    spearScript = throwed.GetComponent<Spear>();
+                    spearScript.Picker = Picker;
+                    spearScript.Uses = Uses;
+                    break;
+                case "Bow":
+                case "CrossBow":
+                    Debug.Log("Arrow");
+                    arrowScript = throwed.GetComponent<Arrow>();
+                    arrowScript.Picker = Picker;
                     break;
                 default:
                     Debug.Log("wut");
                     break;
             }
         }
-        else { pastState = 0; }
+        else if (pastState != 0) { pastState = 0; }
+        else if (Attack== false && Charging == false && Thrown == false)
+        {
+            collider2D.enabled = false;
+            transform.gameObject.tag = "Weapon";
+        }
     }
 }

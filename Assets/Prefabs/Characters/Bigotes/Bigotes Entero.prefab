@@ -361,7 +361,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
-  Picker: {fileID: 0}
+  Picker: {fileID: 5911291850111384200}
   prefabWeaponArrow: {fileID: 4109791825871390401, guid: 34431f682b8fae9449bfd8e2e32a67ef,
     type: 3}
   Attack: 0
