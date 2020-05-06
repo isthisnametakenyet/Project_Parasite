@@ -652,7 +652,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: Weapon
+    path: Axe
   m_PositionCurves:
   - curve:
       serializedVersion: 2
@@ -1332,7 +1332,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: Weapon
+    path: Axe
   m_ScaleCurves: []
   m_FloatCurves:
   - curve:
@@ -1351,7 +1351,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: Weapon
+    path: Axe
     classID: 1
     script: {fileID: 0}
   m_PPtrCurves: []
@@ -1363,7 +1363,7 @@ AnimationClip:
   m_ClipBindingConstant:
     genericBindings:
     - serializedVersion: 2
-      path: 1855955664
+      path: 1411864780
       attribute: 1
       script: {fileID: 0}
       typeID: 4
@@ -1426,14 +1426,14 @@ AnimationClip:
       customType: 4
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 1855955664
+      path: 1411864780
       attribute: 4
       script: {fileID: 0}
       typeID: 4
       customType: 4
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 1855955664
+      path: 1411864780
       attribute: 2086281974
       script: {fileID: 0}
       typeID: 1
@@ -4828,7 +4828,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.x
-    path: Weapon
+    path: Axe
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -5090,7 +5090,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.y
-    path: Weapon
+    path: Axe
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -5352,7 +5352,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.z
-    path: Weapon
+    path: Axe
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -5434,7 +5434,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.x
-    path: Weapon
+    path: Axe
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -5516,7 +5516,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.y
-    path: Weapon
+    path: Axe
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -5598,7 +5598,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.z
-    path: Weapon
+    path: Axe
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -5617,7 +5617,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: Weapon
+    path: Axe
     classID: 1
     script: {fileID: 0}
   m_EulerEditorCurves:
@@ -5868,7 +5868,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: Weapon
+    path: Axe
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -5878,7 +5878,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Weapon
+    path: Axe
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -5888,7 +5888,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Weapon
+    path: Axe
     classID: 4
     script: {fileID: 0}
   m_HasGenericRootTransform: 0
