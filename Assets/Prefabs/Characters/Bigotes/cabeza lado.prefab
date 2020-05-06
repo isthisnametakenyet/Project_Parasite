@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2011683790475668864}
   - component: {fileID: 9052482460327404893}
-  - component: {fileID: 5283807704366454447}
   - component: {fileID: 58100731862068136}
   - component: {fileID: 50310212381511822}
   m_Layer: 0
@@ -82,29 +81,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5283807704366454447
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1064553611131630664}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5696b3eee20772c4e9336d45b7dd6ae4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  controller: 0
-  OriginalBody: {fileID: 0}
-  PlayerArmless: {fileID: 8082525137747852773, guid: f8a6973d084bc01438159599f82f7dab,
-    type: 3}
-  HeadDead: {fileID: 6639280174949446922, guid: 35bbdda292f2ad74fbc5b03158ab37bf,
-    type: 3}
-  floorStunMax: 2
-  expulsedStunMax: 3
-  Expulsed: 0
-  GoBack: 0
-  canReturn: 1
 --- !u!58 &58100731862068136
 CircleCollider2D:
   m_ObjectHideFlags: 0
