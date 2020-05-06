@@ -600,8 +600,8 @@ MonoBehaviour:
   LeftArm: {fileID: 4952704881073145695, guid: 8f26e96b997c49141884053b57b9867d, type: 3}
   PickedWeapon: {fileID: 0}
   runSpeed: 3
-  jumpCooldown: 2
-  jumpStrengh: 8
+  jumpCooldown: 1.2
+  jumpStrengh: 20
   headReturnDelay: 2
   maxWeaponCharge: 2
   throwWeaponSpeed: 8
@@ -688,7 +688,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06dd08b9ff42d48478c755570b1115fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 92953246278691305, guid: 7718e7af9e5924d46a0ed04401eb562c, type: 3}
+  Player: {fileID: 5911291850111384200}
 --- !u!95 &1723982843266635786
 Animator:
   serializedVersion: 3

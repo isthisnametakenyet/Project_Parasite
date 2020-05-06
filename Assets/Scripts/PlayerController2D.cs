@@ -146,7 +146,6 @@ public class PlayerController2D : MonoBehaviour
         //bool isCondition = animator.GetBool(ConditionID); //animator.SetBool(ConditionID, true);
         bool isGrounded = animator.GetBool(GroundingID);
         bool isMoving = animator.GetBool(MovingID);
-        //bool isWeaponed = animator.GetBool(WeaponingID);
         int whichWeapon = animator.GetInteger(whichWeaponID);
         bool isCharging = animator.GetBool(ChargingID);
         bool isHeading = animator.GetBool(HeadingID);
