@@ -286,7 +286,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1315229712380929774
 Transform:
   m_ObjectHideFlags: 0
@@ -295,7 +295,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5059232016660044565}
   m_LocalRotation: {x: -0, y: -0, z: -0.25013033, w: 0.96821225}
-  m_LocalPosition: {x: 2, y: -0.27, z: 2}
+  m_LocalPosition: {x: 4.26, y: -0.73, z: 2}
   m_LocalScale: {x: 6.7523766, y: 6.7523766, z: 6.7523766}
   m_Children: []
   m_Father: {fileID: 3864819673225538102}
@@ -603,7 +603,7 @@ MonoBehaviour:
   PickedWeapon: {fileID: 0}
   runSpeed: 3
   jumpCooldown: 1.2
-  jumpStrengh: 20
+  jumpStrengh: 8
   headReturnDelay: 2
   maxWeaponCharge: 2
   throwWeaponSpeed: 8
@@ -1137,6 +1137,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Radius
       value: 2.66
+      objectReference: {fileID: 0}
+    - target: {fileID: 58100731862068136, guid: d6e177ea75a80044fbc522d1eb771177,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 50310212381511822, guid: d6e177ea75a80044fbc522d1eb771177,
+        type: 3}
+      propertyPath: m_GravityScale
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 50310212381511822, guid: d6e177ea75a80044fbc522d1eb771177,
+        type: 3}
+      propertyPath: m_Mass
+      value: 0.0001
+      objectReference: {fileID: 0}
+    - target: {fileID: 50310212381511822, guid: d6e177ea75a80044fbc522d1eb771177,
+        type: 3}
+      propertyPath: m_BodyType
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d6e177ea75a80044fbc522d1eb771177, type: 3}
