@@ -1068,6 +1068,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: cabeza lado
       objectReference: {fileID: 0}
+    - target: {fileID: 1064553611131630664, guid: d6e177ea75a80044fbc522d1eb771177,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2011683790475668864, guid: d6e177ea75a80044fbc522d1eb771177,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1152,6 +1157,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Brazo1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5664125711589055661, guid: b2a2ead6e389d494dac3a23b909b800a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2586321837110656093, guid: b2a2ead6e389d494dac3a23b909b800a,
         type: 3}
@@ -1290,6 +1300,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Brazo2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4952704881073145695, guid: 8f26e96b997c49141884053b57b9867d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5360871271422266721, guid: 8f26e96b997c49141884053b57b9867d,
         type: 3}
