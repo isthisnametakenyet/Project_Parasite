@@ -58,7 +58,7 @@ public class PlayerController2D : MonoBehaviour
 
     //TEMPORALES
     float jumpTemp = 0;
-    bool facingright = true;
+    public bool facingright = true;
     float headCharge = 0f;
     float weaponCharge = 0f;
     bool picking = false;
@@ -69,7 +69,6 @@ public class PlayerController2D : MonoBehaviour
     private int MovingID;        ///Bool
     private int JumpedID;        ///Trigger
     private int DuckingID;       ///Bool
-    private int WeaponingID;     ///Bool
     private int whichWeaponID;   ///Int
     private int AttackedID;      ///Trigger
     private int ChargingID;      ///Bool
@@ -120,7 +119,6 @@ public class PlayerController2D : MonoBehaviour
         MovingID =      Animator.StringToHash("Moving");
         JumpedID =      Animator.StringToHash("Jumped");
         DuckingID =     Animator.StringToHash("Ducking");
-        WeaponingID =   Animator.StringToHash("Weaponing");
         whichWeaponID = Animator.StringToHash("whichWeapon");
         AttackedID =    Animator.StringToHash("Attacked");
         ChargingID =    Animator.StringToHash("Charging");
@@ -161,8 +159,6 @@ public class PlayerController2D : MonoBehaviour
         };
 
         //TEMPS
-        if (isWeaponed == false) { animator.SetBool(WeaponingID, false); }
-
         if (pickDelay <= pickTemp && picking == true) { picking = false; pickTemp = 0; }
         else if (picking == true) { pickTemp += Time.deltaTime; }
 
@@ -227,36 +223,6 @@ public class PlayerController2D : MonoBehaviour
                 {
                     weaponCharge += Time.deltaTime;
                     Debug.Log(weaponCharge);
-                    if (weaponCharge > forgetWeaponChargeRange)
-                    {
-                        switch (whichWeapon)
-                        {
-                            case 1:
-                                swordScript = PickedWeapon.GetComponent<Sword>();
-                                swordScript.Charging = true;
-                                break;
-                            case 2:
-                                axeScript = PickedWeapon.GetComponent<Axe>();
-                                axeScript.Charging = true;
-                                break;
-                            case 3:
-                                spearScript = PickedWeapon.GetComponent<Spear>();
-                                spearScript.Charging = true;
-                                break;
-                            case 4:
-                                bowScript = PickedWeapon.GetComponent<Bow>();
-                                bowScript.Charging = true;
-                                break;
-                            case 5:
-                                crossbowScript = PickedWeapon.GetComponent<CrossBow>();
-                                crossbowScript.Charging = true;
-                                break;
-                            case 6:
-                                boomerangScript = PickedWeapon.GetComponent<Boomerang>();
-                                boomerangScript.Charging = true;
-                                break;
-                        }
-                    }
                 }
                 else if (weaponCharge >= maxWeaponCharge)
                 {
@@ -266,50 +232,20 @@ public class PlayerController2D : MonoBehaviour
             else if (weaponCharge < forgetWeaponChargeRange) { weaponCharge = 0; animator.SetBool(ChargingID, false); }
             else if (weaponCharge > forgetWeaponChargeRange)
             {
-                Debug.Log("PWeapon: THROW");
-                switch (whichWeapon)
-                {
-                    case 1:
-                        swordScript = PickedWeapon.GetComponent<Sword>();
-                        swordScript.Thrown = true;
-                        break;
-                    case 2:
-                        axeScript = PickedWeapon.GetComponent<Axe>();
-                        axeScript.Thrown = true;
-                        break;
-                    case 3:
-                        spearScript = PickedWeapon.GetComponent<Spear>();
-                        spearScript.Thrown = true;
-                        break;
-                    case 4:
-                        bowScript = PickedWeapon.GetComponent<Bow>();
-                        bowScript.Thrown = true;
-                        break;
-                    case 5:
-                        crossbowScript = PickedWeapon.GetComponent<CrossBow>();
-                        crossbowScript.Thrown = true;
-                        break;
-                    case 6:
-                        boomerangScript = PickedWeapon.GetComponent<Boomerang>();
-                        boomerangScript.Thrown = true;
-                        break;
-                }
-                animator.SetBool(ChargingID, false); //END ANIAMTION, BACK TO IDLE
+                animator.SetTrigger(ThrowedID);
+                
+                //if (facingright == true) //THROW WEAPON with headCharge as force
+                //{
+                //    weaponRigid.velocity = new Vector2(throwWeaponSpeed, 0);
+                //}
+                //else if (facingright == false)
+                //{
+                //    weaponRigid.velocity = new Vector2(-throwWeaponSpeed, 0);
+                //}
 
-                PickedWeapon.transform.parent = null;
-                Rigidbody2D weaponRigid;
-                weaponRigid = PickedWeapon.GetComponent<Rigidbody2D>(); //ASIGN HEAD RIGIDBODY
-
-                if (facingright == true) //THROW WEAPON with headCharge as force
-                {
-                    weaponRigid.velocity = new Vector2(throwWeaponSpeed, 0);
-                }
-                else if (facingright == false)
-                {
-                    weaponRigid.velocity = new Vector2(-throwWeaponSpeed, 0);
-                }
+                animator.SetInteger(whichWeaponID, 0);
+                animator.SetBool(ChargingID, false);
                 weaponCharge = 0;
-                //animator.SetBool(WeaponingID, false);
                 isWeaponed = false;
             }
 
@@ -545,8 +481,6 @@ public class PlayerController2D : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision) //PICKUP
     {
-        //bool isWeaponed = animator.GetBool(WeaponingID); 
-
         if (collision.gameObject.tag == "PickUp" && player.GetButtonDown("Pickup") && isWeaponed == false && picking == false)
         {
             pickUpScript = collision.GetComponent<PickUpScript>();
@@ -554,13 +488,9 @@ public class PlayerController2D : MonoBehaviour
             pickUpScript.picked = true;
             PickedWeapon = collision.gameObject;
 
-            animator.SetBool(WeaponingID, true);
             isWeaponed = true;
 
-            //collision.transform.position = new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y +1, 6);
             Destroy(collision.gameObject);
-
-             animator.SetTrigger(GetWeaponID);
 
             switch (pickUpScript.picktype)
             {
@@ -595,6 +525,8 @@ public class PlayerController2D : MonoBehaviour
                     animator.SetInteger(whichWeaponID, 6);
                     break;
             }
+             animator.SetTrigger(GetWeaponID);
+            Debug.Log("GetWeapon");
         }
         else if (collision.gameObject.tag == "Stuck" && player.GetButtonDown("Pickup") && isWeaponed == false && picking == false)  //RE-PICKUP
         {

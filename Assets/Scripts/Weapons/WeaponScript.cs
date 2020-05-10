@@ -77,7 +77,7 @@ public class WeaponScript : MonoBehaviour
             pastState = 2;
             transform.gameObject.tag = "Weapon";
         }
-        else if (Thrown == true && pastState != 3)
+        else if (Thrown == true && pastState != 3 && Uses != -1)
         {
             pastState = 3;
             GameObject throwed = Instantiate(prefabWeaponArrow, new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
@@ -111,6 +111,9 @@ public class WeaponScript : MonoBehaviour
                     Debug.Log("wut");
                     break;
             }
+            Uses = -1;
+            this.gameObject.SetActive(false);
+            Debug.Log("seted unactive");
         }
         else if (pastState != 0) { pastState = 0; }
         else if (Attack== false && Charging == false && Thrown == false)

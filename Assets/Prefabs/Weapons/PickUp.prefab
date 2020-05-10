@@ -107,7 +107,7 @@ MonoBehaviour:
   Boomerang: {fileID: 1911622075723830657, guid: b3cac058b5486864db272695012c4650,
     type: 3}
   swordSprite: {fileID: 21300000, guid: ffdd31b5e670606409a7f916e8dde518, type: 3}
-  axeSprite: {fileID: 21300000, guid: 9af6f35fa913dfa40a207c3c3d509a79, type: 3}
+  axeSprite: {fileID: 21300000, guid: 2c5676fd3ecafc74691b1983bee3b583, type: 3}
   lanceSprite: {fileID: 21300000, guid: 8b5d166df27d93a438d023f1aa31f19e, type: 3}
   bowSprite: {fileID: 21300000, guid: 8cf2ed2bc07b49d449c2726b1a2fcd42, type: 3}
   crossbowSprite: {fileID: 21300000, guid: de8225342f0d79444909d67f8a0788e1, type: 3}
