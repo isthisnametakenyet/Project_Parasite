@@ -80,6 +80,7 @@ public class PlayerController2D : MonoBehaviour
     private int GetArmID;        ///Trigger
     private int LoseHeadID;      ///Trigger
     private int GetHeadID;       ///Trigger
+    private int StaticID;        ///Bool
 
     Animator animator;
     Rigidbody2D body2D;
@@ -130,6 +131,7 @@ public class PlayerController2D : MonoBehaviour
         GetArmID =      Animator.StringToHash("GetArm");
         LoseHeadID =    Animator.StringToHash("LoseHead");
         GetHeadID =     Animator.StringToHash("GetHead");
+        StaticID =      Animator.StringToHash("Static");
     }
 
     public bool isWeaponed = false;
@@ -167,181 +169,186 @@ public class PlayerController2D : MonoBehaviour
         //BOOLS
         int whichWeapon = animator.GetInteger(whichWeaponID);
         bool isCharging = animator.GetBool(ChargingID);
-        bool isHeading = animator.GetBool(HeadingID);
-        bool isDucking = animator.GetBool(DuckingID);
+        bool isHeading =  animator.GetBool(HeadingID);
+        bool isDucking =  animator.GetBool(DuckingID);
+        bool isStatic =   animator.GetBool(StaticID);
 
-        //ATTACK
-        if (player.GetAxis("Attack&Charge") > 0)
+        if (isStatic == false)
         {
-            animator.SetBool(AttackedID, true);
-            if (isWeaponed == true)
+            //ATTACK
+            if (player.GetAxis("Attack&Charge") > 0)
             {
-                switch (whichWeapon)
-                {
-                    case 1:
-                        swordScript = PickedWeapon.GetComponent<Sword>();
-                        swordScript.Attack = true;
-                        Debug.Log("PWeapon: 1");
-                        break;
-                    case 2:
-                        axeScript = PickedWeapon.GetComponent<Axe>();
-                        axeScript.Attack = true;
-                        Debug.Log("PWeapon: 2");
-                        break;
-                    case 3:
-                        spearScript = PickedWeapon.GetComponent<Spear>();
-                        spearScript.Attack = true;
-                        Debug.Log("PWeapon: 3");
-                        break;
-                    case 4:
-                        bowScript = PickedWeapon.GetComponent<Bow>();
-                        bowScript.Attack = true;
-                        Debug.Log("PWeapon: 4");
-                        break;
-                    case 5:
-                        crossbowScript = PickedWeapon.GetComponent<CrossBow>();
-                        crossbowScript.Attack = true;
-                        Debug.Log("PWeapon: 5");
-                        break;
-                    case 6:
-                        boomerangScript = PickedWeapon.GetComponent<Boomerang>();
-                        boomerangScript.Attack = true;
-                        Debug.Log("PWeapon: 6");
-                        break;
-                }
-            }
-        }
-
-        //CHARGED
-        if (player.GetAxis("Attack&Charge") < 0 && isHeading == false && isDucking == false && isWeaponed == true)
-        {
-            animator.SetBool(ChargingID, true);
-            if (weaponCharge < maxWeaponCharge)
-            {
-                weaponCharge += Time.deltaTime; 
-                Debug.Log(weaponCharge);
-                if(weaponCharge > forgetWeaponChargeRange)
+                animator.SetBool(AttackedID, true);
+                if (isWeaponed == true)
                 {
                     switch (whichWeapon)
                     {
                         case 1:
                             swordScript = PickedWeapon.GetComponent<Sword>();
-                            swordScript.Charging = true;
+                            swordScript.Attack = true;
+                            Debug.Log("PWeapon: 1");
                             break;
                         case 2:
                             axeScript = PickedWeapon.GetComponent<Axe>();
-                            axeScript.Charging = true;
+                            axeScript.Attack = true;
+                            Debug.Log("PWeapon: 2");
                             break;
                         case 3:
                             spearScript = PickedWeapon.GetComponent<Spear>();
-                            spearScript.Charging = true;
+                            spearScript.Attack = true;
+                            Debug.Log("PWeapon: 3");
                             break;
                         case 4:
                             bowScript = PickedWeapon.GetComponent<Bow>();
-                            bowScript.Charging = true;
+                            bowScript.Attack = true;
+                            Debug.Log("PWeapon: 4");
                             break;
                         case 5:
                             crossbowScript = PickedWeapon.GetComponent<CrossBow>();
-                            crossbowScript.Charging = true;
+                            crossbowScript.Attack = true;
+                            Debug.Log("PWeapon: 5");
                             break;
                         case 6:
                             boomerangScript = PickedWeapon.GetComponent<Boomerang>();
-                            boomerangScript.Charging = true;
+                            boomerangScript.Attack = true;
+                            Debug.Log("PWeapon: 6");
                             break;
                     }
                 }
             }
-            else if (weaponCharge >= maxWeaponCharge)
-            {
-                Debug.Log("MaxCharge");
-            }
-        }
-        else if (weaponCharge < forgetWeaponChargeRange) { weaponCharge = 0; animator.SetBool(ChargingID, false); }
-        else if (weaponCharge > forgetWeaponChargeRange)
-        {
-            Debug.Log("PWeapon: THROW");
-            switch (whichWeapon)
-            {
-                case 1:
-                    swordScript.Thrown = true;
-                    break;
-                case 2:
-                    axeScript.Thrown = true;
-                    break;
-                case 3:
-                    spearScript.Thrown = true;
-                    break;
-                case 4:
-                    bowScript.Thrown = true;
-                    break;
-                case 5:
-                    crossbowScript.Thrown = true;
-                    break;
-                case 6:
-                    boomerangScript.Thrown = true;
-                    break;
-            }
-            animator.SetBool(ChargingID, false); //END ANIAMTION, BACK TO IDLE
 
-            PickedWeapon.transform.parent = null;
-            Rigidbody2D weaponRigid;
-            weaponRigid = PickedWeapon.GetComponent<Rigidbody2D>(); //ASIGN HEAD RIGIDBODY
-
-            if (facingright == true) //THROW WEAPON with headCharge as force
+            //CHARGED
+            if (player.GetAxis("Attack&Charge") < 0 && isHeading == false && isDucking == false && isWeaponed == true)
             {
-                weaponRigid.velocity = new Vector2(throwWeaponSpeed, 0);
-            }
-            else if (facingright == false)
-            {
-                weaponRigid.velocity = new Vector2(-throwWeaponSpeed, 0);
-            }
-            weaponCharge = 0;
-            //animator.SetBool(WeaponingID, false);
-            isWeaponed = false;
-        }
-
-        //HEAD THROW
-        if (player.GetAxis("HeadThrow&Return") > 0 && isCharging == false && isDucking == false)
-        { 
-            {
-                animator.SetBool(HeadingID, true);
-                if (headCharge <= headThrowCharge)
+                animator.SetBool(ChargingID, true);
+                if (weaponCharge < maxWeaponCharge)
                 {
-                    headCharge += Time.deltaTime;
-                    Debug.Log(headCharge);
+                    weaponCharge += Time.deltaTime;
+                    Debug.Log(weaponCharge);
+                    if (weaponCharge > forgetWeaponChargeRange)
+                    {
+                        switch (whichWeapon)
+                        {
+                            case 1:
+                                swordScript = PickedWeapon.GetComponent<Sword>();
+                                swordScript.Charging = true;
+                                break;
+                            case 2:
+                                axeScript = PickedWeapon.GetComponent<Axe>();
+                                axeScript.Charging = true;
+                                break;
+                            case 3:
+                                spearScript = PickedWeapon.GetComponent<Spear>();
+                                spearScript.Charging = true;
+                                break;
+                            case 4:
+                                bowScript = PickedWeapon.GetComponent<Bow>();
+                                bowScript.Charging = true;
+                                break;
+                            case 5:
+                                crossbowScript = PickedWeapon.GetComponent<CrossBow>();
+                                crossbowScript.Charging = true;
+                                break;
+                            case 6:
+                                boomerangScript = PickedWeapon.GetComponent<Boomerang>();
+                                boomerangScript.Charging = true;
+                                break;
+                        }
+                    }
                 }
-                else if (headCharge >= headThrowCharge)
+                else if (weaponCharge >= maxWeaponCharge)
                 {
                     Debug.Log("MaxCharge");
                 }
             }
-        }
-        else if (headCharge < forgetHeadThrowRange) { headCharge = 0; animator.SetBool(HeadingID, false); }
-        else if (headCharge > forgetHeadThrowRange) //THROW
-        {
-            animator.SetBool(HeadingID, false);
-            animator.SetTrigger(LoseHeadID);
-            GameObject head = Instantiate(HeadThrowPrefab, new Vector3(transform.position.x, transform.position.y + 0.3f, 0), Quaternion.identity);
-
-            headThrow = head.GetComponent<HeadThrow>();
-            headThrow.ParasiterController = this.controller;
-            //headThrow.skin = this.skin;
-            headThrow.OriginalBody = this.gameObject; //REFERENCE THIS IN HEAD THROW TO KNOW ORIGIN
-
-            Rigidbody2D headRigid;
-            headRigid = head.GetComponent<Rigidbody2D>(); //GET HEAD RIGIDBODY
-
-            if (facingright == true) //THROW HEAD with headCharge as force
+            else if (weaponCharge < forgetWeaponChargeRange) { weaponCharge = 0; animator.SetBool(ChargingID, false); }
+            else if (weaponCharge > forgetWeaponChargeRange)
             {
-             headRigid.velocity = new Vector2(headCharge * 1.8f, 2f);
-            }
-            else if (facingright == false)
-            {
-            headRigid.velocity = new Vector2(-headCharge * 1.8f, 2f);
-            }
-            headCharge = 0;
+                Debug.Log("PWeapon: THROW");
+                switch (whichWeapon)
+                {
+                    case 1:
+                        swordScript.Thrown = true;
+                        break;
+                    case 2:
+                        axeScript.Thrown = true;
+                        break;
+                    case 3:
+                        spearScript.Thrown = true;
+                        break;
+                    case 4:
+                        bowScript.Thrown = true;
+                        break;
+                    case 5:
+                        crossbowScript.Thrown = true;
+                        break;
+                    case 6:
+                        boomerangScript.Thrown = true;
+                        break;
+                }
+                animator.SetBool(ChargingID, false); //END ANIAMTION, BACK TO IDLE
 
-            //Destroy(gameObject); //AUTODESTRUCCION
+                PickedWeapon.transform.parent = null;
+                Rigidbody2D weaponRigid;
+                weaponRigid = PickedWeapon.GetComponent<Rigidbody2D>(); //ASIGN HEAD RIGIDBODY
+
+                if (facingright == true) //THROW WEAPON with headCharge as force
+                {
+                    weaponRigid.velocity = new Vector2(throwWeaponSpeed, 0);
+                }
+                else if (facingright == false)
+                {
+                    weaponRigid.velocity = new Vector2(-throwWeaponSpeed, 0);
+                }
+                weaponCharge = 0;
+                //animator.SetBool(WeaponingID, false);
+                isWeaponed = false;
+            }
+
+            //HEAD THROW
+            if (player.GetAxis("HeadThrow&Return") > 0 && isCharging == false && isDucking == false)
+            {
+                {
+                    animator.SetBool(HeadingID, true);
+                    if (headCharge <= headThrowCharge)
+                    {
+                        headCharge += Time.deltaTime;
+                        Debug.Log(headCharge);
+                    }
+                    else if (headCharge >= headThrowCharge)
+                    {
+                        Debug.Log("MaxCharge");
+                    }
+                }
+            }
+            else if (headCharge < forgetHeadThrowRange) { headCharge = 0; animator.SetBool(HeadingID, false); }
+            else if (headCharge > forgetHeadThrowRange) //THROW
+            {
+                animator.SetBool(HeadingID, false);
+                animator.SetBool(StaticID, true);
+                animator.SetTrigger(LoseHeadID);
+                GameObject head = Instantiate(HeadThrowPrefab, new Vector3(transform.position.x, transform.position.y + 0.3f, 0), Quaternion.identity);
+
+                headThrow = head.GetComponent<HeadThrow>();
+                headThrow.ParasiterController = this.controller;
+                //headThrow.skin = this.skin;
+                headThrow.OriginalBody = this.gameObject; //REFERENCE THIS IN HEAD THROW TO KNOW ORIGIN
+
+                Rigidbody2D headRigid;
+                headRigid = head.GetComponent<Rigidbody2D>(); //GET HEAD RIGIDBODY
+
+                if (facingright == true) //THROW HEAD with headCharge as force
+                {
+                    headRigid.velocity = new Vector2(headCharge * 1.8f, 2f);
+                }
+                else if (facingright == false)
+                {
+                    headRigid.velocity = new Vector2(-headCharge * 1.8f, 2f);
+                }
+                headCharge = 0;
+
+                //Destroy(gameObject); //AUTODESTRUCCION
+            }
         }
     }
 
@@ -357,89 +364,93 @@ public class PlayerController2D : MonoBehaviour
         bool isCharging = animator.GetBool(ChargingID);
         bool isHeading = animator.GetBool(HeadingID);
         bool isDucking = animator.GetBool(DuckingID);
+        bool isStatic = animator.GetBool(StaticID);
 
         float moveInput = Input.GetAxisRaw("Horizontal");
 
-        if (player.GetAxis("Move") > 0)
+        if(isStatic == false)
         {
-            Debug.Log("Moving > 0");
-            if (isCharging == false && isHeading == false && isDucking == false)
+            if (player.GetAxis("Move") > 0)
             {
-                body2D.velocity = new Vector2(runSpeed, body2D.velocity.y);
-                //spriteRenderer.flipX = true;
-                animator.SetBool(MovingID, true);
+                Debug.Log("Moving > 0");
+                if (isCharging == false && isHeading == false && isDucking == false)
+                {
+                    body2D.velocity = new Vector2(runSpeed, body2D.velocity.y);
+                    //spriteRenderer.flipX = true;
+                    animator.SetBool(MovingID, true);
+                }
             }
-        }
-        else if (player.GetAxis("Move") < 0)
-        {
-            Debug.Log("Moving < 0");
-            if (isCharging == false && isHeading == false && isDucking == false)
+            else if (player.GetAxis("Move") < 0)
             {
-                body2D.velocity = new Vector2(-runSpeed, body2D.velocity.y);
-                //spriteRenderer.flipX = false;
-                animator.SetBool(MovingID, true);
+                Debug.Log("Moving < 0");
+                if (isCharging == false && isHeading == false && isDucking == false)
+                {
+                    body2D.velocity = new Vector2(-runSpeed, body2D.velocity.y);
+                    //spriteRenderer.flipX = false;
+                    animator.SetBool(MovingID, true);
+                }
             }
-        }
-        else
-        {
-            animator.SetBool(MovingID, false);
-        }
-
-        if (player.GetAxis("Move") > 0 && !facingright)
-        {
-            Flip();
-            facingright = true;
-        }
-        else if (player.GetAxis("Move") < 0 && facingright)
-        {
-            Flip();
-            facingright = false;
-        }
-
-        //FLIP
-        void Flip()
-        {
-            facingright = !facingright;
-            Vector3 theScale = transform.localScale;
-            theScale.x *= -1;
-            transform.localScale = theScale;
-        }
-        //JUMP
-        if (player.GetButtonDown("Jump&Duck") && jumpTemp > jumpCooldown && isGrounded == true && isCharging == false && isDucking == false)
-        {
-            jumpTemp = 0;
-            animator.SetTrigger(JumpedID);
-            body2D.velocity = new Vector2(body2D.velocity.x, jumpStrengh);
-        }
-
-        ////DUCK
-        //if (player.GetAxis("Jump&Duck") < 0 && isGrounded == true && isCharging == false)
-        //{
-        //    isDucking = true;
-        //    Debug.Log("Quack");
-        //}
-        //else
-        //{
-        //    isDucking = false;
-        //}
-
-        //50% MOVEMENT
-        if (player.GetAxis("Move") > 0)
-        {
-            if (isCharging == true || isHeading == true)
+            else
             {
-                body2D.velocity = new Vector2(runSpeed * 50 / 100, body2D.velocity.y); //(50% de max speed, velocidad actual y)
-                spriteRenderer.flipX = true;
+                animator.SetBool(MovingID, false);
+            }
+
+            if (player.GetAxis("Move") > 0 && !facingright)
+            {
+                Flip();
                 facingright = true;
             }
-        }
-        else if (player.GetAxis("Move") < 0)
-        {
-            if (isCharging == true || isHeading == true)
+            else if (player.GetAxis("Move") < 0 && facingright)
             {
-                body2D.velocity = new Vector2(-runSpeed * 50 / 100, body2D.velocity.y);
-                spriteRenderer.flipX = false;
+                Flip();
                 facingright = false;
+            }
+
+            //FLIP
+            void Flip()
+            {
+                facingright = !facingright;
+                Vector3 theScale = transform.localScale;
+                theScale.x *= -1;
+                transform.localScale = theScale;
+            }
+            //JUMP
+            if (player.GetButtonDown("Jump&Duck") && jumpTemp > jumpCooldown && isGrounded == true && isCharging == false && isDucking == false)
+            {
+                jumpTemp = 0;
+                animator.SetTrigger(JumpedID);
+                body2D.velocity = new Vector2(body2D.velocity.x, jumpStrengh);
+            }
+
+            ////DUCK
+            //if (player.GetAxis("Jump&Duck") < 0 && isGrounded == true && isCharging == false)
+            //{
+            //    isDucking = true;
+            //    Debug.Log("Quack");
+            //}
+            //else
+            //{
+            //    isDucking = false;
+            //}
+
+            //50% MOVEMENT
+            if (player.GetAxis("Move") > 0)
+            {
+                if (isCharging == true || isHeading == true)
+                {
+                    body2D.velocity = new Vector2(runSpeed * 50 / 100, body2D.velocity.y); //(50% de max speed, velocidad actual y)
+                    spriteRenderer.flipX = true;
+                    facingright = true;
+                }
+            }
+            else if (player.GetAxis("Move") < 0)
+            {
+                if (isCharging == true || isHeading == true)
+                {
+                    body2D.velocity = new Vector2(-runSpeed * 50 / 100, body2D.velocity.y);
+                    spriteRenderer.flipX = false;
+                    facingright = false;
+                }
             }
         }
     }
@@ -453,6 +464,7 @@ public class PlayerController2D : MonoBehaviour
         {
             headThrow = Parasiter.GetComponent<HeadThrow>();
             this.Parasitcontroller = headThrow.ParasiterController;
+            Parasited = true;
 
             switch (Parasitcontroller)
             {
@@ -493,7 +505,7 @@ public class PlayerController2D : MonoBehaviour
     {
         Parasitcontroller = Controller.NONE;
         Parasiter = null;
-
+        Parasited = false;
     }
 
 
@@ -501,6 +513,7 @@ public class PlayerController2D : MonoBehaviour
     public void ReturnHead()
     {
         animator.SetTrigger(GetHeadID);
+        animator.SetBool(StaticID, false);
 
     }
 
