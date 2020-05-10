@@ -6,13 +6,11 @@ using Rewired;
 
 //public enum Controller { NONE, PLAYER0, PLAYER1, PLAYER2, PLAYER3 };
 //public enum Skin { NONE, SKIN1, SKIN2 };
-//public enum Arms { NONE, ONE, TWO };
 
 public class EmptyBody : MonoBehaviour
 {
     public Controller controller = Controller.NONE;
     //public Skin skin = Skin.NONE;
-    public Arms arms = Arms.NONE;
 
     private Player player;
 
@@ -20,8 +18,6 @@ public class EmptyBody : MonoBehaviour
     public GameObject ReturnParasite;
     private HeadThrow parasiteScript;
     private HeadReturn headReturn;
-    public GameObject RightArm;
-    public GameObject LeftArm;
     private Arm rightScript;
     private Arm leftScript;
     private Transform ArmParent;
@@ -37,6 +33,7 @@ public class EmptyBody : MonoBehaviour
     private Boomerang boomerangScript;
 
     //VARIABLES
+    public int Arms = 2;
     public float runSpeed = 2f;
     public float jumpStrengh = 6.5f;
     public float maxWeaponCharge = 3f;

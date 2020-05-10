@@ -587,23 +587,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: 1
-  arms: 2
   playerReady: 0
   HeadFall: {fileID: 8364601489975160416, guid: 7185bf4010ebe354e855638434bcac1c,
     type: 3}
+  ArmFall: {fileID: 1545294258946203143, guid: 93d49d7d4525fb0429364ae1f6cd660c, type: 3}
   BodyEmpty: {fileID: 2590790196545953785, guid: 484744e68a01fe340a6100cffc8403b9,
     type: 3}
   HeadThrow: {fileID: 4469397126892602978, guid: 6c8f9bccdb374b04aa6127c668edb2e4,
     type: 3}
-  ActualHead: {fileID: 1064553611131630664, guid: d6e177ea75a80044fbc522d1eb771177,
-    type: 3}
-  RightArm: {fileID: 5664125711589055661, guid: b2a2ead6e389d494dac3a23b909b800a,
-    type: 3}
-  LeftArm: {fileID: 4952704881073145695, guid: 8f26e96b997c49141884053b57b9867d, type: 3}
   PickedWeapon: {fileID: 0}
+  Arms: 2
   runSpeed: 3
   jumpCooldown: 1.2
-  jumpStrengh: 8
+  jumpStrengh: 9
   headReturnDelay: 2
   maxWeaponCharge: 2
   throwWeaponSpeed: 8

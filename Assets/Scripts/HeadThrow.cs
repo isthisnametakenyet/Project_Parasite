@@ -14,7 +14,6 @@ public class HeadThrow : MonoBehaviour
     BoxCollider2D collider2D;
 
     public GameObject OriginalBody;
-    public GameObject PlayerArmless;
     public GameObject HeadDead;
     private PlayerController2D playerScript;
     private EmptyBody collisionScript;
@@ -65,7 +64,7 @@ public class HeadThrow : MonoBehaviour
             Destroy(gameObject); //AUTODESTRUCCION
         }
 
-        //RETURN TO EMPTY
+        //RETURN
         if (BadThrow == true && actualStun < floorStunMax) { actualStun += Time.deltaTime; canReturn = false; }
         else if (actualStun >= floorStunMax) { canReturn = true; }
 
@@ -75,31 +74,12 @@ public class HeadThrow : MonoBehaviour
         if (player.GetAxis("HeadThrow&Return") > 0 && canReturn == true && returnScript.parasited == false || GoBack == true && returnScript.parasited == false) 
         {
             this.transform.position = new Vector3(OriginalBody.transform.position.x, OriginalBody.transform.position.y, 0);
-            GameObject playerBody = Instantiate(PlayerArmless, new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
 
-            playerScript = playerBody.GetComponent<PlayerController2D>();
-            playerScript.controller = this.controller;
-            returnScript = OriginalBody.GetComponent<EmptyBody>();
-            playerScript.arms = returnScript.arms;
-
-            playerScript.LeftArm = returnScript.LeftArm;
-            returnScript.LeftArm.transform.parent = playerScript.transform;
-            playerScript.RightArm = returnScript.RightArm;
-            returnScript.RightArm.transform.parent = playerScript.transform;
-
-            if (OriginalBody.GetComponent<SpriteRenderer>().flipX == true)
-            {
-                playerScript.LeftArm.transform.position = new Vector3(transform.position.x - 0.25f, transform.position.y - 0.1f, 0);
-                playerScript.RightArm.transform.position = new Vector3(transform.position.x + 0.75f, transform.position.y - 0.1f, 0);
-                playerScript.RightArm.GetComponent<SpriteRenderer>().flipX = true;
-                playerScript.LeftArm.GetComponent<SpriteRenderer>().flipX = true;
-            }
-
-            Destroy(OriginalBody);
             Destroy(gameObject); //AUTODESTRUCCION
         }
         else if (player.GetAxis("HeadThrow&Return") > 0 && canReturn == true && returnScript.parasited == true || GoBack == true && returnScript.parasited == true)
-        {//RETURN TO PARASITED
+        {
+            //RETURN TO PARASITED
             Debug.Log("Return to parasited body----");
             returnScript.expulseParasite = true;
         }

@@ -17,6 +17,7 @@ TagManager:
   - Stuck
   - FreeArm
   - Slap
+  - HeadFall
   layers:
   - Default
   - TransparentFX

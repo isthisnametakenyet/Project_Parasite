@@ -5,33 +5,22 @@ using System;
 using Rewired;
 
 public enum Controller { NONE, PLAYER0, PLAYER1, PLAYER2, PLAYER3 };
-public enum Arms { NONE, ONE, TWO };
 
 public class PlayerController2D : MonoBehaviour
 {
     //private Rewired.Player player { get { return PlayerAssignment.GetRewiredPlayer(((int)controller)-1); } }
     private Player player;
-
-    public Controller controller = Controller.NONE;
-    public Arms arms = Arms.NONE;
-
     public bool playerReady = false;
 
+    public Controller controller = Controller.NONE;
+    public Controller Parasitcontroller = Controller.NONE;
+
     public GameObject HeadFall;
-    public GameObject BodyEmpty;
+    public GameObject ArmFall;
+
     public GameObject HeadThrow;
-    public GameObject ActualHead;
-    public GameObject RightArm;
-    public GameObject LeftArm;
     private HeadThrow headThrow;
     private HeadReturn headReturn;
-    private EmptyBody emptyBody;
-    private Arm rightScript;
-    private Arm leftScript;
-    private Transform ArmParent;
-    private SpriteRenderer LArmRenderer;
-    private SpriteRenderer RArmRenderer;
-    private SpriteRenderer HeadRenderer;
 
     //WEAPONS PICKUP
     public GameObject PickedWeapon;
@@ -44,6 +33,7 @@ public class PlayerController2D : MonoBehaviour
     private Boomerang boomerangScript;
 
     //VARIABLES
+    public int Arms = 2;
     public float runSpeed = 2f; 
     public float jumpCooldown = 2f;
     public float jumpStrengh = 6.5f;
@@ -55,6 +45,9 @@ public class PlayerController2D : MonoBehaviour
     public float forgetHeadThrowRange = 0.4f;
     public float pickDelay = 0.2f;
 
+    private bool Parasitable = false;
+    private bool ReturnedHead = false;
+
     //TEMPORALES
     float jumpTemp = 0;
     bool facingright = true;
@@ -64,16 +57,24 @@ public class PlayerController2D : MonoBehaviour
     float pickTemp = 0;
 
     //CONDITIONS
-    private int GroundingID;
-    private int MovingID;
-    private int JumpedID;
-    private int WeaponingID;
-    private int whichWeaponID;
-    private int AttackedID;
-    private int ChargingID;
-    private int HeadingID;
-    private int DamagedID;
-    
+    private int GroundingID;     ///Bool
+    private int MovingID;        ///Bool
+    private int JumpedID;        ///Trigger
+    private int DuckingID;       ///Bool
+    private int WeaponingID;     ///Bool
+    private int whichWeaponID;   ///Int
+    private int AttackedID;      ///Trigger
+    private int ChargingID;      ///Bool
+    private int ThrowedID;       ///Trigger
+    private int HeadingID;       ///Bool
+    private int DamagedID;       ///Trigger
+    private int BreakID;         ///Trigger
+    private int GetWeaponID;     ///Trigger
+    private int LoseArmID;       ///Trigger
+    private int GetArmID;        ///Trigger
+    private int LoseHeadID;      ///Trigger
+    private int GetHeadID;       ///Trigger
+
     Animator animator;
     Rigidbody2D body2D;
     SpriteRenderer spriteRenderer;
@@ -85,9 +86,6 @@ public class PlayerController2D : MonoBehaviour
         animator = GetComponent<Animator>();
         body2D = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        LArmRenderer = LeftArm.GetComponent<SpriteRenderer>();
-        RArmRenderer = RightArm.GetComponent<SpriteRenderer>();
-        HeadRenderer = ActualHead.GetComponent<SpriteRenderer>();
 
         switch (controller)
         {
@@ -109,18 +107,35 @@ public class PlayerController2D : MonoBehaviour
         }
 
         //CONDITIONS
-        GroundingID = Animator.StringToHash("Grounding");
-        MovingID = Animator.StringToHash("Moving");
-        JumpedID = Animator.StringToHash("Jumped");
-        WeaponingID = Animator.StringToHash("Weaponing");
+        GroundingID =   Animator.StringToHash("Grounding");
+        MovingID =      Animator.StringToHash("Moving");
+        JumpedID =      Animator.StringToHash("Jumped");
+        DuckingID =     Animator.StringToHash("Ducking");
+        WeaponingID =   Animator.StringToHash("Weaponing");
         whichWeaponID = Animator.StringToHash("whichWeapon");
-        AttackedID = Animator.StringToHash("Attacked");
-        ChargingID = Animator.StringToHash("Charging");
-        HeadingID = Animator.StringToHash("Heading");
-        DamagedID = Animator.StringToHash("Damaged");
+        AttackedID =    Animator.StringToHash("Attacked");
+        ChargingID =    Animator.StringToHash("Charging");
+        ThrowedID =     Animator.StringToHash("Throwed");
+        HeadingID =     Animator.StringToHash("Heading");
+        DamagedID =     Animator.StringToHash("Damaged");
+        BreakID =       Animator.StringToHash("Break");
+        GetWeaponID =   Animator.StringToHash("GetWeapon");
+        LoseArmID =     Animator.StringToHash("LoseArm");
+        GetArmID =      Animator.StringToHash("GetArm");
+        LoseHeadID =    Animator.StringToHash("LoseHead");
+        GetHeadID =     Animator.StringToHash("GetHead");
     }
 
     public bool isWeaponed = false;
+
+    private void Update()
+    {
+        //IDLE IS AUTOMATIC
+        body2D.velocity = new Vector2(0, body2D.velocity.y);
+
+        //MOVEMENT
+        Movement();
+    }
 
     private void FixedUpdate(){
         if (PlayerManager.Instance.DeleteProps == true) { Destroy(gameObject); } //END ROUND
@@ -135,6 +150,9 @@ public class PlayerController2D : MonoBehaviour
             return;
         };
 
+        //PARASITE
+        Parasite();
+
         //TEMPS
         if (isWeaponed == false) { animator.SetBool(WeaponingID, false); }
 
@@ -143,83 +161,11 @@ public class PlayerController2D : MonoBehaviour
 
         if (jumpTemp <= jumpCooldown) { jumpTemp += Time.deltaTime; }
 
-        //bool isCondition = animator.GetBool(ConditionID); //animator.SetBool(ConditionID, true);
-        bool isGrounded = animator.GetBool(GroundingID);
-        bool isMoving = animator.GetBool(MovingID);
+        //BOOLS
         int whichWeapon = animator.GetInteger(whichWeaponID);
         bool isCharging = animator.GetBool(ChargingID);
         bool isHeading = animator.GetBool(HeadingID);
-        bool isDucking = false;
-
-        //IDLE IS AUTOMATIC
-        body2D.velocity = new Vector2(0, body2D.velocity.y);
-
-        //MOVEMENT
-
-        float moveInput = Input.GetAxisRaw("Horizontal");
-
-        if (player.GetAxis("Move") > 0)
-        {
-            Debug.Log("Moving > 0");
-            if (isCharging == false && isHeading == false && isDucking == false)
-            {
-                body2D.velocity = new Vector2(runSpeed, body2D.velocity.y);
-                //spriteRenderer.flipX = true;
-                animator.SetBool(MovingID, true);
-            }
-        }
-        else if (player.GetAxis("Move") < 0)
-        {
-            Debug.Log("Moving < 0");
-            if (isCharging == false && isHeading == false && isDucking == false)
-            {
-                body2D.velocity = new Vector2(-runSpeed, body2D.velocity.y);
-                //spriteRenderer.flipX = false;
-                animator.SetBool(MovingID, true);
-            }
-        }
-        else
-        {
-            animator.SetBool(MovingID, false);
-        }
-
-        if (player.GetAxis("Move") > 0 && !facingright)
-        {
-            Flip();
-            facingright = true;
-        }
-        else if (player.GetAxis("Move") < 0 && facingright)
-        {
-            Flip();
-            facingright = false;
-        }
-
-        //FLIP
-        void Flip()
-        {
-            facingright = !facingright;
-            Vector3 theScale = transform.localScale;
-            theScale.x *= -1;
-            transform.localScale = theScale;
-        }
-        //JUMP
-        if (player.GetButtonDown("Jump&Duck") && jumpTemp > jumpCooldown && isGrounded == true && isCharging == false && isDucking == false)
-        {
-            jumpTemp = 0;
-            animator.SetTrigger(JumpedID);
-            body2D.velocity = new Vector2(body2D.velocity.x, jumpStrengh);
-        }
-
-        ////DUCK
-        //if (player.GetAxis("Jump&Duck") < 0 && isGrounded == true && isCharging == false)
-        //{
-        //    isDucking = true;
-        //    Debug.Log("Quack");
-        //}
-        else
-        {
-            isDucking = false;
-        }
+        bool isDucking = animator.GetBool(DuckingID);
 
         //ATTACK
         if (player.GetAxis("Attack&Charge") > 0)
@@ -373,33 +319,12 @@ public class PlayerController2D : MonoBehaviour
             animator.SetBool(HeadingID, false);
 
             GameObject head = Instantiate(HeadThrow, new Vector3(transform.position.x, transform.position.y + 0.3f, 0), Quaternion.identity);
-            GameObject body = Instantiate(BodyEmpty, new Vector3(transform.position.x, transform.position.y - 0.22f, 0), Quaternion.identity);
-
-            emptyBody = body.GetComponent<EmptyBody>();
-            emptyBody.controller = this.controller;
-            emptyBody.arms = this.arms;
-
-            emptyBody.LeftArm = LeftArm;
-            LeftArm.transform.parent = emptyBody.transform;
-
-            emptyBody.RightArm = RightArm;
-            RightArm.transform.parent = emptyBody.transform;
-
-            if (facingright == false) {
-                body.GetComponent<SpriteRenderer>().flipX = true;
-                LeftArm.transform.position = new Vector3(transform.position.x + 0.25f, transform.position.y - 0.38f, 0);
-                RightArm.transform.position = new Vector3(transform.position.x - 0.75f, transform.position.y - 0.35f, 0);
-            }
-            else
-            {
-                LeftArm.transform.position = new Vector3(transform.position.x - 0.25f, transform.position.y - 0.38f, 0);
-                RightArm.transform.position = new Vector3(transform.position.x + 0.75f, transform.position.y - 0.35f, 0);
-            }
+            animator.SetTrigger(LoseHeadID);
 
             headThrow = head.GetComponent<HeadThrow>();
             headThrow.controller = this.controller;
             //headThrow.skin = this.skin;
-            headThrow.OriginalBody = body; //REFERENCE EMPTYBODY IN HEAD THROW TO KNOW ORIGIN
+            headThrow.OriginalBody = this.gameObject; //REFERENCE THIS IN HEAD THROW TO KNOW ORIGIN
 
             Rigidbody2D headRigid;
             headRigid = head.GetComponent<Rigidbody2D>(); //GET HEAD RIGIDBODY
@@ -414,8 +339,87 @@ public class PlayerController2D : MonoBehaviour
             }
             headCharge = 0;
 
-            Destroy(gameObject); //AUTODESTRUCCION
+            //Destroy(gameObject); //AUTODESTRUCCION
         }
+    }
+
+
+
+    //MOVEMENT
+    void Movement()
+    {
+        //bool isCondition = animator.GetBool(ConditionID); //animator.SetBool(ConditionID, true);
+        bool isGrounded = animator.GetBool(GroundingID);
+        bool isMoving = animator.GetBool(MovingID);
+        int whichWeapon = animator.GetInteger(whichWeaponID);
+        bool isCharging = animator.GetBool(ChargingID);
+        bool isHeading = animator.GetBool(HeadingID);
+        bool isDucking = animator.GetBool(DuckingID);
+
+        float moveInput = Input.GetAxisRaw("Horizontal");
+
+        if (player.GetAxis("Move") > 0)
+        {
+            Debug.Log("Moving > 0");
+            if (isCharging == false && isHeading == false && isDucking == false)
+            {
+                body2D.velocity = new Vector2(runSpeed, body2D.velocity.y);
+                //spriteRenderer.flipX = true;
+                animator.SetBool(MovingID, true);
+            }
+        }
+        else if (player.GetAxis("Move") < 0)
+        {
+            Debug.Log("Moving < 0");
+            if (isCharging == false && isHeading == false && isDucking == false)
+            {
+                body2D.velocity = new Vector2(-runSpeed, body2D.velocity.y);
+                //spriteRenderer.flipX = false;
+                animator.SetBool(MovingID, true);
+            }
+        }
+        else
+        {
+            animator.SetBool(MovingID, false);
+        }
+
+        if (player.GetAxis("Move") > 0 && !facingright)
+        {
+            Flip();
+            facingright = true;
+        }
+        else if (player.GetAxis("Move") < 0 && facingright)
+        {
+            Flip();
+            facingright = false;
+        }
+
+        //FLIP
+        void Flip()
+        {
+            facingright = !facingright;
+            Vector3 theScale = transform.localScale;
+            theScale.x *= -1;
+            transform.localScale = theScale;
+        }
+        //JUMP
+        if (player.GetButtonDown("Jump&Duck") && jumpTemp > jumpCooldown && isGrounded == true && isCharging == false && isDucking == false)
+        {
+            jumpTemp = 0;
+            animator.SetTrigger(JumpedID);
+            body2D.velocity = new Vector2(body2D.velocity.x, jumpStrengh);
+        }
+
+        ////DUCK
+        //if (player.GetAxis("Jump&Duck") < 0 && isGrounded == true && isCharging == false)
+        //{
+        //    isDucking = true;
+        //    Debug.Log("Quack");
+        //}
+        //else
+        //{
+        //    isDucking = false;
+        //}
 
         //50% MOVEMENT
         if (player.GetAxis("Move") > 0)
@@ -438,6 +442,25 @@ public class PlayerController2D : MonoBehaviour
         }
     }
 
+    //PARASITE
+    void Parasite()
+    {
+        if(Parasitable == true)
+        {
+
+        }
+    }
+
+    //RETURN HEAD
+    public void ReturnHead()
+    {
+        animator.SetTrigger(GetHeadID);
+
+    }
+
+
+
+    //COLISIONS------
     private void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Floor")
@@ -457,7 +480,7 @@ public class PlayerController2D : MonoBehaviour
     {
         //bool isWeaponed = animator.GetBool(WeaponingID); 
 
-        if (collision.gameObject.tag == "PickUp" && player.GetAxis("Pickup") > 0 && isWeaponed == false && picking == false)
+        if (collision.gameObject.tag == "PickUp" && player.GetButtonDown("Pickup") && isWeaponed == false && picking == false)
         {
             pickUpScript = collision.GetComponent<PickUpScript>();
             pickUpScript.Picker = this.gameObject;
@@ -470,65 +493,65 @@ public class PlayerController2D : MonoBehaviour
             switch (pickUpScript.picktype)
             {
                 case PickTypes.Sword:
-                    if (arms == Arms.NONE) { Debug.Log("NONE, cant pick"); break; }
+                    if (Arms == 0) { Debug.Log("NONE, cant pick"); break; }
                     picking = true;
                     animator.SetInteger(whichWeaponID, 1);
                     break;
                 case PickTypes.Axe:
-                    if (arms == Arms.NONE) { break; }
+                    if (Arms == 0) { break; }
                     picking = true;
                     animator.SetInteger(whichWeaponID, 2);
                     break;
                 case PickTypes.Spear:
-                    if (arms == Arms.NONE) { break; }
+                    if (Arms == 0) { break; }
                     picking = true;
                     animator.SetInteger(whichWeaponID, 3);
                     break;
                 case PickTypes.Bow:
-                    if (arms == Arms.NONE || arms == Arms.ONE) { break; }
+                    if (Arms <= 1) { break; }
                     picking = true;
                     animator.SetInteger(whichWeaponID, 4);
                     break;
                 case PickTypes.CrossBow:
-                    if (arms == Arms.NONE || arms == Arms.ONE) { break; }
+                    if (Arms <= 1) { break; }
                     picking = true;
                     animator.SetInteger(whichWeaponID, 5);
                     break;
                 case PickTypes.Boomerang:
-                    if (arms == Arms.NONE || arms == Arms.ONE) { break; }
+                    if (Arms <= 1) { break; }
                     picking = true;
                     animator.SetInteger(whichWeaponID, 6);
                     break;
             }
         }
-        else if (collision.gameObject.tag == "Stuck" && player.GetAxis("Pickup") > 0 && isWeaponed == false && picking == false)  //RE-PICKUP
+        else if (collision.gameObject.tag == "Stuck" && player.GetButtonDown("Pickup") && isWeaponed == false && picking == false)  //RE-PICKUP
         {
             isWeaponed = true;
             switch (collision.gameObject.name)
             {
                 case "place_sword(Clone)":
-                    if (arms == Arms.NONE) { break; }
+                    if (Arms == 0) { break; }
                     picking = true;
                     swordScript = collision.GetComponent<Sword>();
                     swordScript.Picker = this.gameObject;
                     animator.SetInteger(whichWeaponID, 1);
                     break;
                 case "place_axe(Clone)":
-                    if (arms == Arms.NONE) { break; }
+                    if (Arms == 0) { break; }
                     picking = true;
                     axeScript = collision.GetComponent<Axe>();
                     axeScript.Picker = this.gameObject;
                     animator.SetInteger(whichWeaponID, 2);
                     break;
                 case "place_spear(Clone)":
-                    if (arms == Arms.NONE) { break; }
+                    if (Arms == 0) { break; }
                     picking = true;
                     spearScript = collision.GetComponent<Spear>();
                     spearScript.Picker = this.gameObject;
                     animator.SetInteger(whichWeaponID, 3);
                     break;
                 case "place_boomerang(Clone)":
-                    if (arms == Arms.NONE || arms == Arms.ONE) { break; }
+                    if (Arms <= 1) { break; }
                     picking = true;
                     boomerangScript = collision.GetComponent<Boomerang>();
                     boomerangScript.Picker = this.gameObject;
@@ -536,53 +559,51 @@ public class PlayerController2D : MonoBehaviour
                     break;
             }
         }
-        if (collision.gameObject.tag == "FreeArm" && player.GetAxis("Pickup") > 0 && picking == false)
+        if (collision.gameObject.tag == "FreeArm" && player.GetButtonDown("Pickup") && picking == false)
         {
-            switch (arms)
+            switch (Arms)
             {
-                case Arms.NONE: //PICKUP ARM NOT HAVING ANY
+                case 0: //PICKUP ARM NOT HAVING ANY
                     picking = true;
-                    arms = Arms.ONE;
-                    Debug.Log(controller + "Armed:" + arms);
+                    Arms++;
+                    Debug.Log(controller + "Armed:" + Arms);
 
                     collision.gameObject.transform.parent.transform.parent = this.transform;
-                    RightArm = collision.gameObject.transform.parent.gameObject;
                     collision.gameObject.transform.parent.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, 1);
                     collision.gameObject.transform.parent.gameObject.GetComponent<BoxCollider2D>().enabled = true;
                     collision.gameObject.gameObject.GetComponent<BoxCollider2D>().enabled = false;
                     break;
 
-                case Arms.ONE: //PICKUP ARM HAVING ONE
+                case 1: //PICKUP ARM HAVING ONE
                     picking = true;
-                    arms = Arms.TWO;
-                    Debug.Log(controller + "Armed:" + arms);
+                    Arms++;
+                    Debug.Log(controller + "Armed:" + Arms);
 
                     collision.gameObject.transform.parent.transform.parent = this.transform;
-                    LeftArm = collision.gameObject.transform.parent.gameObject;
                     collision.gameObject.transform.parent.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, -1);
                     collision.gameObject.transform.parent.gameObject.GetComponent<BoxCollider2D>().enabled = true;
                     collision.gameObject.gameObject.GetComponent<BoxCollider2D>().enabled = false;
                     break; 
 
-                case Arms.TWO: //CANT PICKUP ARM
+                case 2: //CANT PICKUP ARM
                     Debug.Log("Nope");
                     break;
             }
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision) //DAMAGE
+    private void OnTriggerEnter2D(Collider2D collision) //DAMAGE && PARASITE
     {
         if (collision.gameObject.tag == "Throwing" && collision.gameObject != PickedWeapon)
         {
             //animator.SetTrigger(DamagedID);
             GameObject head = Instantiate(HeadFall, new Vector3(transform.position.x, transform.position.y + 0.3f, 0), Quaternion.identity);
-            GameObject body = Instantiate(BodyEmpty, new Vector3(transform.position.x, transform.position.y - 0.22f, 0), Quaternion.identity);
+            animator.SetTrigger(LoseHeadID);
 
             headReturn = head.GetComponent<HeadReturn>();
             headReturn.controller = this.controller;
             //headReturn.skin = this.skin;
-            headReturn.OriginalBody = body;
+            headReturn.OriginalBody = this.gameObject;
             headReturn.Stunned = true;
 
             Rigidbody2D headRigid;
@@ -599,11 +620,7 @@ public class PlayerController2D : MonoBehaviour
             }
             else { Debug.LogError("Error Detectando Direccion de Collision"); }
 
-            emptyBody = body.GetComponent<EmptyBody>();
-            emptyBody.controller = this.controller;
-            //emptyBody.skin = this.skin;
-
-            Destroy(gameObject); //AUTODESTRUCCION
+            //Destroy(gameObject); //AUTODESTRUCCION
         }
 
         if (collision.gameObject.tag == "Attacking" && collision.gameObject != PickedWeapon)
@@ -612,45 +629,22 @@ public class PlayerController2D : MonoBehaviour
             BoxCollider2D armCollider;
             int whichWeapon = animator.GetInteger(whichWeaponID);
             //LOSE ARM
-            switch (arms)
+            switch (Arms)
             {
-
-                case Arms.NONE:
-                    Debug.Log("boi u stupid"); //WHAT? why?
-                    break;
-
-                case Arms.ONE:
+                case 1:
                     Debug.Log("armles"); //OUT RightArm
-                    arms = Arms.NONE;
+                    Arms--;
 
-                    rightScript = RightArm.GetComponent<Arm>();
-                    //rightScript.armType = ArmType.NONE;
-                    RightArm.transform.parent = null;
-
-                    armCollider = RightArm.GetComponent<BoxCollider2D>();
-                    armCollider.enabled = true;
-                    armCollider.isTrigger = true;
-
-                    armRigid = RightArm.GetComponent<Rigidbody2D>();
-                    armRigid.bodyType = RigidbodyType2D.Dynamic; //CHANGE TO DYNAMIC
-                    RightArm = null;
+                    //ANIAMTOR LOSEARM
+                    animator.SetTrigger(LoseArmID);
                     break;
 
-                case Arms.TWO:
+                case 2:
                     Debug.Log("1 arm left"); //OUT LeftArm
-                    arms = Arms.ONE;
+                    Arms--;
 
-                    leftScript = LeftArm.GetComponent<Arm>();
-                    //leftScript.armType = ArmType.NONE;
-                    LeftArm.transform.parent = null;
-
-                    armCollider = LeftArm.GetComponent<BoxCollider2D>();
-                    armCollider.enabled = true;
-                    armCollider.isTrigger = true;
-
-                    armRigid = LeftArm.GetComponent<Rigidbody2D>();
-                    armRigid.bodyType = RigidbodyType2D.Dynamic; //CHANGE TO DYNAMIC
-                    LeftArm = null;
+                    //ANIAMTOR LOSEARM
+                    animator.SetTrigger(LoseArmID);
                     break;
             }
             if (isWeaponed == true)
@@ -658,7 +652,7 @@ public class PlayerController2D : MonoBehaviour
                 switch (whichWeapon)
                 {
                     case 1:
-                        if (arms == Arms.NONE) { PickedWeapon.transform.parent = null;
+                        if (Arms == 0) { PickedWeapon.transform.parent = null;
                             PickedWeapon.transform.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
                             swordScript = PickedWeapon.GetComponent<Sword>();
                             swordScript.Drop = true;
@@ -666,7 +660,7 @@ public class PlayerController2D : MonoBehaviour
                             isWeaponed = false; }
                         break;
                     case 2:
-                        if (arms == Arms.NONE) { PickedWeapon.transform.parent = null;
+                        if (Arms == 0) { PickedWeapon.transform.parent = null;
                             PickedWeapon.transform.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
                             axeScript = PickedWeapon.GetComponent<Axe>();
                             axeScript.Drop = true;
@@ -675,7 +669,7 @@ public class PlayerController2D : MonoBehaviour
                         }
                         break;
                     case 3:
-                        if (arms == Arms.NONE) { PickedWeapon.transform.parent = null;
+                        if (Arms == 0) { PickedWeapon.transform.parent = null;
                             PickedWeapon.transform.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
                             spearScript = PickedWeapon.GetComponent<Spear>();
                             spearScript.Drop = true;
@@ -684,7 +678,7 @@ public class PlayerController2D : MonoBehaviour
                         }
                         break;
                     case 4:
-                        if (arms == Arms.NONE || arms == Arms.ONE) { PickedWeapon.transform.parent = null;
+                        if (Arms <= 1) { PickedWeapon.transform.parent = null;
                             PickedWeapon.transform.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
                             bowScript = PickedWeapon.GetComponent<Bow>();
                             bowScript.Drop = true;
@@ -693,7 +687,7 @@ public class PlayerController2D : MonoBehaviour
                         }
                         break;
                     case 5:
-                        if (arms == Arms.NONE || arms == Arms.ONE) { PickedWeapon.transform.parent = null;
+                        if (Arms <= 1) { PickedWeapon.transform.parent = null;
                             PickedWeapon.transform.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
                             crossbowScript = PickedWeapon.GetComponent<CrossBow>();
                             spearScript.Drop = true;
@@ -702,7 +696,7 @@ public class PlayerController2D : MonoBehaviour
                         }
                         break;
                     case 6:
-                        if (arms == Arms.NONE || arms == Arms.ONE) { PickedWeapon.transform.parent = null;
+                        if (Arms <= 1) { PickedWeapon.transform.parent = null;
                             PickedWeapon.transform.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
                             PickedWeapon.transform.GetComponent<BoxCollider2D>().enabled = true;
                             boomerangScript = PickedWeapon.GetComponent<Boomerang>();
@@ -718,6 +712,8 @@ public class PlayerController2D : MonoBehaviour
         if (collision.gameObject.tag == "Damage") //DEATH
         {
             Debug.Log("Touch Sierra [DEATH " + controller + "]");
+
+            //LOSE HEAD
             GameObject head = Instantiate(HeadFall, new Vector3(transform.position.x, transform.position.y + 0.3f, 0), Quaternion.identity);
 
             Rigidbody2D headRigid;
@@ -728,64 +724,66 @@ public class PlayerController2D : MonoBehaviour
             headReturn.controller = this.controller;
             headReturn.isDead = true;
 
-            Rigidbody2D armRigid;
-            BoxCollider2D armCollider;
-            //LOSE ARM
-            switch (arms)
-            {
-                case Arms.ONE:
-                    rightScript = RightArm.GetComponent<Arm>();
-                    //rightScript.armType = ArmType.NONE;
-                    RightArm.transform.parent = null;
-
-                    armCollider = RightArm.GetComponent<BoxCollider2D>();
-                    armCollider.enabled = true;
-                    armCollider.isTrigger = true;
-
-                    armRigid = RightArm.GetComponent<Rigidbody2D>();
-                    armRigid.bodyType = RigidbodyType2D.Dynamic; //CHANGE TO DYNAMIC
-                    break;
-
-                case Arms.TWO:
-                    //LEFT ARM DOWN
-                    leftScript = LeftArm.GetComponent<Arm>();
-                    //leftScript.armType = ArmType.NONE;
-                    LeftArm.transform.parent = null;
-
-                    armCollider = LeftArm.GetComponent<BoxCollider2D>();
-                    armCollider.enabled = true;
-                    armCollider.isTrigger = true;
-
-                    armRigid = LeftArm.GetComponent<Rigidbody2D>();
-                    armRigid.bodyType = RigidbodyType2D.Dynamic;
-                    armRigid.velocity = new Vector2(headCharge * 1.8f, 2f);
-
-                    //RIGHT ARM DOWN
-                    rightScript = RightArm.GetComponent<Arm>();
-                    //rightScript.armType = ArmType.NONE;
-                    RightArm.transform.parent = null;
-
-                    armCollider = RightArm.GetComponent<BoxCollider2D>();
-                    armCollider.enabled = true;
-                    armCollider.isTrigger = true;
-
-                    armRigid = RightArm.GetComponent<Rigidbody2D>();
-                    armRigid.bodyType = RigidbodyType2D.Dynamic; 
-                    armRigid.velocity = new Vector2(headCharge * 1.8f, 2f);
-                    break;
-            }
-
             if (transform.position.x > collision.transform.position.x) //RIGHT
             {
-                headRigid.velocity = new Vector2(headCharge * 1.8f, 2f);
+                headRigid.velocity = new Vector2(headCharge, 2f);
             }
             else if (transform.position.x < collision.transform.position.x) //LEFT
             {
-                headRigid.velocity = new Vector2(-headCharge * 1.8f, 2f);
+                headRigid.velocity = new Vector2(-headCharge, 2f);
             }
             else { Debug.LogError("Error Detectando Direccion de Collision"); }
 
+            //LOSE ARM
+            switch (Arms)
+            {
+                case 1:
+                    //LEFT ARM DOWN
+                    GameObject armDead = Instantiate(ArmFall, new Vector3(transform.position.x, transform.position.y - 0.22f, 0), Quaternion.identity);
+                    Rigidbody2D armRigid;
+                    armRigid = armDead.GetComponent<Rigidbody2D>();
+
+                    if (transform.position.x > collision.transform.position.x) //RIGHT
+                    {
+                        armRigid.velocity = new Vector2(headCharge, 2f);
+                    }
+                    else if (transform.position.x < collision.transform.position.x) //LEFT
+                    {
+                        armRigid.velocity = new Vector2(-headCharge, 2f);
+                    }
+                    break;
+
+                case 2:
+                    //LEFT ARM DOWN
+                    GameObject armDead1 = Instantiate(ArmFall, new Vector3(transform.position.x, transform.position.y - 0.22f, 0), Quaternion.identity);
+                    Rigidbody2D armRigid1;
+                    armRigid1 = armDead1.GetComponent<Rigidbody2D>();
+
+                    //RIGHT ARM DOWN
+                    GameObject armDead2 = Instantiate(ArmFall, new Vector3(transform.position.x, transform.position.y - 0.22f, 0), Quaternion.identity);
+                    Rigidbody2D armRigid2;
+                    armRigid2 = armDead2.GetComponent<Rigidbody2D>();
+
+                    if (transform.position.x > collision.transform.position.x) //RIGHT
+                    {
+                        armRigid1.velocity = new Vector2(headCharge, 2f);
+                        armRigid2.velocity = new Vector2(headCharge, 2f);
+                    }
+                    else if (transform.position.x < collision.transform.position.x) //LEFT
+                    {
+                        armRigid1.velocity = new Vector2(-headCharge, 2f);
+                        armRigid2.velocity = new Vector2(-headCharge, 2f);
+                    }
+                    break;
+            }
             Destroy(gameObject); //AUTODESTRUCCION
+        }
+
+        if (collision.gameObject.tag == "FlyingHead" && Parasitable == true) //PARASITE
+        {
+            Parasite();
         }
     }
 }
+
+
