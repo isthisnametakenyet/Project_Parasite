@@ -22,6 +22,8 @@ public class PlayerController2D : MonoBehaviour
     private HeadThrow headThrow;
     private HeadReturn headReturn;
 
+    public GameObject Parasiter;
+
     //WEAPONS PICKUP
     public GameObject PickedWeapon;
     private PickUpScript pickUpScript;
@@ -46,6 +48,7 @@ public class PlayerController2D : MonoBehaviour
     public float pickDelay = 0.2f;
 
     private bool Parasitable = false;
+    public bool Parasited = false;
     private bool ReturnedHead = false;
 
     //TEMPORALES
@@ -149,9 +152,6 @@ public class PlayerController2D : MonoBehaviour
             Debug.Log("player not ready");
             return;
         };
-
-        //PARASITE
-        Parasite();
 
         //TEMPS
         if (isWeaponed == false) { animator.SetBool(WeaponingID, false); }
@@ -317,12 +317,11 @@ public class PlayerController2D : MonoBehaviour
         else if (headCharge > forgetHeadThrowRange) //THROW
         {
             animator.SetBool(HeadingID, false);
-
-            GameObject head = Instantiate(HeadThrow, new Vector3(transform.position.x, transform.position.y + 0.3f, 0), Quaternion.identity);
             animator.SetTrigger(LoseHeadID);
+            GameObject head = Instantiate(HeadThrow, new Vector3(transform.position.x, transform.position.y + 0.3f, 0), Quaternion.identity);
 
             headThrow = head.GetComponent<HeadThrow>();
-            headThrow.controller = this.controller;
+            headThrow.Parasitcontroller = this.controller;
             //headThrow.skin = this.skin;
             headThrow.OriginalBody = this.gameObject; //REFERENCE THIS IN HEAD THROW TO KNOW ORIGIN
 
@@ -443,13 +442,51 @@ public class PlayerController2D : MonoBehaviour
     }
 
     //PARASITE
-    void Parasite()
+    void Parasite(GameObject parasiteObject)
     {
-        if(Parasitable == true)
-        {
+        Parasiter = parasiteObject;
 
+        if (Parasitable == true)
+        {
+            headThrow = Parasiter.GetComponent<HeadThrow>();
+            this.Parasitcontroller = headThrow.ParasiterController;
+
+            switch (ParasiterController)
+            {
+                case Controller.PLAYER0:
+                    player = ReInput.players.GetPlayer(0);
+                    break;
+
+                case Controller.PLAYER1:
+                    player = ReInput.players.GetPlayer(1);
+                    break;
+
+                case Controller.PLAYER2:
+                    player = ReInput.players.GetPlayer(2);
+                    break;
+
+                case Controller.PLAYER3:
+                    player = ReInput.players.GetPlayer(3);
+                    break;
+            }
         }
     }
+
+    //EXPULSE
+    void Expulse()
+    {
+        headThrow = Parasiter.GetComponent<HeadThrow>();
+        headThrow.Expulsed = true;
+
+    }
+
+
+    //UNPARASITED
+    void UnParasited()
+    {
+
+    }
+
 
     //RETURN HEAD
     public void ReturnHead()
@@ -781,7 +818,7 @@ public class PlayerController2D : MonoBehaviour
 
         if (collision.gameObject.tag == "FlyingHead" && Parasitable == true) //PARASITE
         {
-            Parasite();
+            Parasite(collision.gameObject);
         }
     }
 }

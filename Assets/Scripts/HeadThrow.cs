@@ -5,7 +5,7 @@ using Rewired;
 
 public class HeadThrow : MonoBehaviour
 {
-    public Controller controller = Controller.NONE;
+    public Controller ParasiterController = Controller.NONE;
 
     SpriteRenderer spriteRenderer;
 
@@ -16,17 +16,18 @@ public class HeadThrow : MonoBehaviour
     public GameObject OriginalBody;
     public GameObject HeadDead;
     private PlayerController2D playerScript;
-    private EmptyBody collisionScript;
-    private EmptyBody returnScript;
 
-    private bool Parasiting = false;
-    private bool BadThrow = false;
+    //VARIABLES
     public float floorStunMax = 2f;
     public float expulsedStunMax = 3f;
     private float actualStun = 0;
+
+    private bool Parasiting = false;
+    private bool BadThrow = false;
+
     public bool Expulsed = false;
     public bool GoBack = false;
-    public bool canReturn = true;
+    public bool canReturn = false;
 
     void Start()
     {
@@ -34,7 +35,7 @@ public class HeadThrow : MonoBehaviour
         body2D = GetComponent<Rigidbody2D>();
         collider2D = GetComponent<BoxCollider2D>();
 
-        switch (controller)
+        switch (ParasiterController)
         {
             case Controller.PLAYER0:
                 player = ReInput.players.GetPlayer(0);
@@ -53,12 +54,12 @@ public class HeadThrow : MonoBehaviour
                 break;
         }
 
-        returnScript = OriginalBody.gameObject.GetComponent<EmptyBody>();
+        playerScript = OriginalBody.GetComponent<PlayerController2D>();
     }
 
     private void FixedUpdate()
     {
-        if (OriginalBody == null)
+        if (OriginalBody == null) //PLAYER IS DEAD
         {
             GameObject headDead = Instantiate(HeadDead, new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
             Destroy(gameObject); //AUTODESTRUCCION
@@ -71,44 +72,25 @@ public class HeadThrow : MonoBehaviour
         if (Expulsed == true && actualStun < expulsedStunMax) { actualStun += Time.deltaTime; canReturn = false; }
         else if (actualStun >= expulsedStunMax) { canReturn = true; }
 
-        if (player.GetAxis("HeadThrow&Return") > 0 && canReturn == true && returnScript.parasited == false || GoBack == true && returnScript.parasited == false) 
+        if (player.GetAxis("HeadThrow&Return") > 0 && canReturn == true && playerScript.Parasited == false) 
         {
             this.transform.position = new Vector3(OriginalBody.transform.position.x, OriginalBody.transform.position.y, 0);
+            playerScript.ReturnHead();
 
             Destroy(gameObject); //AUTODESTRUCCION
         }
-        else if (player.GetAxis("HeadThrow&Return") > 0 && canReturn == true && returnScript.parasited == true || GoBack == true && returnScript.parasited == true)
+        else if (player.GetAxis("HeadThrow&Return") > 0 && canReturn == true && playerScript.Parasited == true)
         {
             //RETURN TO PARASITED
-            Debug.Log("Return to parasited body----");
-            returnScript.expulseParasite = true;
+            this.transform.position = new Vector3(OriginalBody.transform.position.x, OriginalBody.transform.position.y, 0);
+            playerScript.Expulse();
+
+            Destroy(gameObject); //AUTODESTRUCCION
         }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        collisionScript = collision.gameObject.GetComponent<EmptyBody>();
-
-        if (collision.gameObject.tag == "EmptyBody" && collisionScript.parasited == false && Expulsed == false && Parasiting == false)
-        {
-            if (collisionScript.controller != this.controller)
-            {
-                collisionScript.controller = this.controller;
-                collisionScript.parasited = true;
-                collisionScript.Parasite = this.gameObject;
-
-                Parasiting = true;
-                body2D.isKinematic = true;
-                body2D.Sleep();
-                collider2D.enabled = false;
-
-                this.transform.position = new Vector3(collision.transform.position.x, collision.transform.position.y+0.6f, 0);
-                this.transform.parent = collisionScript.transform;
-                body2D.constraints = RigidbodyConstraints2D.FreezeRotation;
-                transform.rotation = Quaternion.Euler(0, 0, 0);
-            }
-        }
-
         if (collision.gameObject.tag == "Floor" && Parasiting == false)
         {
             BadThrow = true;
