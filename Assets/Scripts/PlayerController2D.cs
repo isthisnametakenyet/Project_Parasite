@@ -321,7 +321,7 @@ public class PlayerController2D : MonoBehaviour
             GameObject head = Instantiate(HeadThrow, new Vector3(transform.position.x, transform.position.y + 0.3f, 0), Quaternion.identity);
 
             headThrow = head.GetComponent<HeadThrow>();
-            headThrow.Parasitcontroller = this.controller;
+            headThrow.ParasiterController = this.controller;
             //headThrow.skin = this.skin;
             headThrow.OriginalBody = this.gameObject; //REFERENCE THIS IN HEAD THROW TO KNOW ORIGIN
 
@@ -451,7 +451,7 @@ public class PlayerController2D : MonoBehaviour
             headThrow = Parasiter.GetComponent<HeadThrow>();
             this.Parasitcontroller = headThrow.ParasiterController;
 
-            switch (ParasiterController)
+            switch (Parasitcontroller)
             {
                 case Controller.PLAYER0:
                     player = ReInput.players.GetPlayer(0);
@@ -473,7 +473,7 @@ public class PlayerController2D : MonoBehaviour
     }
 
     //EXPULSE
-    void Expulse()
+    public void Expulse()
     {
         headThrow = Parasiter.GetComponent<HeadThrow>();
         headThrow.Expulsed = true;
