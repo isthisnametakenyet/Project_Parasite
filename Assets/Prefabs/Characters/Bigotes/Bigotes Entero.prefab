@@ -469,8 +469,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3864819673225538102}
   - component: {fileID: 3316927451207175099}
-  - component: {fileID: 7037919095303476864}
   - component: {fileID: 1085960405480796853}
+  - component: {fileID: 7037919095303476864}
   - component: {fileID: 7705339893150076086}
   - component: {fileID: 4353531031310621378}
   - component: {fileID: 2941499902744349965}
@@ -552,6 +552,43 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1085960405480796853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5911291850111384200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: daa3a9a9ccd92c54a8c746805f23e2d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerReady: 0
+  controller: 1
+  ArmFallPrefab: {fileID: 1545294258946203143, guid: 93d49d7d4525fb0429364ae1f6cd660c,
+    type: 3}
+  HeadFallPrefab: {fileID: 8364601489975160416, guid: 7185bf4010ebe354e855638434bcac1c,
+    type: 3}
+  HeadThrowPrefab: {fileID: 4469397126892602978, guid: 6c8f9bccdb374b04aa6127c668edb2e4,
+    type: 3}
+  HeadThrown: {fileID: 0}
+  Parasiter: {fileID: 0}
+  Parasitcontroller: 0
+  PickedWeapon: {fileID: 0}
+  Arms: 2
+  runSpeed: 3
+  jumpCooldown: 1.2
+  jumpStrengh: 9
+  headReturnDelay: 2
+  maxWeaponCharge: 2
+  throwWeaponSpeed: 8
+  headThrowCharge: 2
+  forgetWeaponChargeRange: 0.4
+  forgetHeadThrowRange: 0.4
+  pickDelay: 0.2
+  Parasited: 0
+  isWeaponed: 0
 --- !u!114 &7037919095303476864
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -574,40 +611,6 @@ MonoBehaviour:
   m_Bounds:
     m_Center: {x: 3.19027, y: -0.058333516, z: 0}
     m_Extent: {x: 5.938495, y: 2.3538003, z: 0}
---- !u!114 &1085960405480796853
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5911291850111384200}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: daa3a9a9ccd92c54a8c746805f23e2d6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  controller: 1
-  playerReady: 0
-  HeadFall: {fileID: 8364601489975160416, guid: 7185bf4010ebe354e855638434bcac1c,
-    type: 3}
-  ArmFall: {fileID: 1545294258946203143, guid: 93d49d7d4525fb0429364ae1f6cd660c, type: 3}
-  BodyEmpty: {fileID: 2590790196545953785, guid: 484744e68a01fe340a6100cffc8403b9,
-    type: 3}
-  HeadThrow: {fileID: 4469397126892602978, guid: 6c8f9bccdb374b04aa6127c668edb2e4,
-    type: 3}
-  PickedWeapon: {fileID: 0}
-  Arms: 2
-  runSpeed: 3
-  jumpCooldown: 1.2
-  jumpStrengh: 9
-  headReturnDelay: 2
-  maxWeaponCharge: 2
-  throwWeaponSpeed: 8
-  headThrowCharge: 2
-  forgetWeaponChargeRange: 0.4
-  forgetHeadThrowRange: 0.4
-  pickDelay: 0.2
-  isWeaponed: 0
 --- !u!50 &7705339893150076086
 Rigidbody2D:
   serializedVersion: 4

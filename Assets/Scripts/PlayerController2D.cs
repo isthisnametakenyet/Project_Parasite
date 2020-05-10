@@ -13,16 +13,19 @@ public class PlayerController2D : MonoBehaviour
     public bool playerReady = false;
 
     public Controller controller = Controller.NONE;
-    public Controller Parasitcontroller = Controller.NONE;
 
-    public GameObject HeadFall;
-    public GameObject ArmFall;
+    public GameObject ArmFallPrefab;
 
-    public GameObject HeadThrow;
-    private HeadThrow headThrow;
+    public GameObject HeadFallPrefab;
     private HeadReturn headReturn;
 
+    public GameObject HeadThrowPrefab;
+    private HeadThrow headThrow;
+
+    public GameObject HeadThrown;
+
     public GameObject Parasiter;
+    public Controller Parasitcontroller = Controller.NONE;
 
     //WEAPONS PICKUP
     public GameObject PickedWeapon;
@@ -318,7 +321,7 @@ public class PlayerController2D : MonoBehaviour
         {
             animator.SetBool(HeadingID, false);
             animator.SetTrigger(LoseHeadID);
-            GameObject head = Instantiate(HeadThrow, new Vector3(transform.position.x, transform.position.y + 0.3f, 0), Quaternion.identity);
+            GameObject head = Instantiate(HeadThrowPrefab, new Vector3(transform.position.x, transform.position.y + 0.3f, 0), Quaternion.identity);
 
             headThrow = head.GetComponent<HeadThrow>();
             headThrow.ParasiterController = this.controller;
@@ -478,12 +481,18 @@ public class PlayerController2D : MonoBehaviour
         headThrow = Parasiter.GetComponent<HeadThrow>();
         headThrow.Expulsed = true;
 
+        Parasitcontroller = Controller.NONE;
+        Parasiter = null;
+
+        animator.SetTrigger(GetHeadID);
     }
 
 
     //UNPARASITED
     void UnParasited()
     {
+        Parasitcontroller = Controller.NONE;
+        Parasiter = null;
 
     }
 
@@ -634,7 +643,7 @@ public class PlayerController2D : MonoBehaviour
         if (collision.gameObject.tag == "Throwing" && collision.gameObject != PickedWeapon)
         {
             //animator.SetTrigger(DamagedID);
-            GameObject head = Instantiate(HeadFall, new Vector3(transform.position.x, transform.position.y + 0.3f, 0), Quaternion.identity);
+            GameObject head = Instantiate(HeadFallPrefab, new Vector3(transform.position.x, transform.position.y + 0.3f, 0), Quaternion.identity);
             animator.SetTrigger(LoseHeadID);
 
             headReturn = head.GetComponent<HeadReturn>();
@@ -751,7 +760,7 @@ public class PlayerController2D : MonoBehaviour
             Debug.Log("Touch Sierra [DEATH " + controller + "]");
 
             //LOSE HEAD
-            GameObject head = Instantiate(HeadFall, new Vector3(transform.position.x, transform.position.y + 0.3f, 0), Quaternion.identity);
+            GameObject head = Instantiate(HeadFallPrefab, new Vector3(transform.position.x, transform.position.y + 0.3f, 0), Quaternion.identity);
 
             Rigidbody2D headRigid;
             headRigid = head.GetComponent<Rigidbody2D>(); //ASIGN HEAD RIGID
@@ -776,7 +785,7 @@ public class PlayerController2D : MonoBehaviour
             {
                 case 1:
                     //LEFT ARM DOWN
-                    GameObject armDead = Instantiate(ArmFall, new Vector3(transform.position.x, transform.position.y - 0.22f, 0), Quaternion.identity);
+                    GameObject armDead = Instantiate(ArmFallPrefab, new Vector3(transform.position.x, transform.position.y - 0.22f, 0), Quaternion.identity);
                     Rigidbody2D armRigid;
                     armRigid = armDead.GetComponent<Rigidbody2D>();
 
@@ -792,12 +801,12 @@ public class PlayerController2D : MonoBehaviour
 
                 case 2:
                     //LEFT ARM DOWN
-                    GameObject armDead1 = Instantiate(ArmFall, new Vector3(transform.position.x, transform.position.y - 0.22f, 0), Quaternion.identity);
+                    GameObject armDead1 = Instantiate(ArmFallPrefab, new Vector3(transform.position.x, transform.position.y - 0.22f, 0), Quaternion.identity);
                     Rigidbody2D armRigid1;
                     armRigid1 = armDead1.GetComponent<Rigidbody2D>();
 
                     //RIGHT ARM DOWN
-                    GameObject armDead2 = Instantiate(ArmFall, new Vector3(transform.position.x, transform.position.y - 0.22f, 0), Quaternion.identity);
+                    GameObject armDead2 = Instantiate(ArmFallPrefab, new Vector3(transform.position.x, transform.position.y - 0.22f, 0), Quaternion.identity);
                     Rigidbody2D armRigid2;
                     armRigid2 = armDead2.GetComponent<Rigidbody2D>();
 
