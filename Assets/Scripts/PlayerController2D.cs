@@ -27,8 +27,10 @@ public class PlayerController2D : MonoBehaviour
     public GameObject Parasiter;
     public Controller Parasitcontroller = Controller.NONE;
 
-    //WEAPONS PICKUP
+
     public GameObject PickedWeapon;
+    
+    //WEAPONS PICKUP
     private PickUpScript pickUpScript;
     private Sword swordScript;
     private Axe axeScript;
@@ -146,8 +148,8 @@ public class PlayerController2D : MonoBehaviour
     }
 
     private void FixedUpdate(){
+        //PLAYER / ROUND MANAGER
         if (PlayerManager.Instance.DeleteProps == true) { Destroy(gameObject); } //END ROUND
-
         if(!ReInput.isReady || player == null) {
             Debug.Log("not set or Disconnected"); //TODO: MESSAGE IN SCREEN
             return;
@@ -268,21 +270,27 @@ public class PlayerController2D : MonoBehaviour
                 switch (whichWeapon)
                 {
                     case 1:
+                        swordScript = PickedWeapon.GetComponent<Sword>();
                         swordScript.Thrown = true;
                         break;
                     case 2:
+                        axeScript = PickedWeapon.GetComponent<Axe>();
                         axeScript.Thrown = true;
                         break;
                     case 3:
+                        spearScript = PickedWeapon.GetComponent<Spear>();
                         spearScript.Thrown = true;
                         break;
                     case 4:
+                        bowScript = PickedWeapon.GetComponent<Bow>();
                         bowScript.Thrown = true;
                         break;
                     case 5:
+                        crossbowScript = PickedWeapon.GetComponent<CrossBow>();
                         crossbowScript.Thrown = true;
                         break;
                     case 6:
+                        boomerangScript = PickedWeapon.GetComponent<Boomerang>();
                         boomerangScript.Thrown = true;
                         break;
                 }
@@ -545,9 +553,14 @@ public class PlayerController2D : MonoBehaviour
             pickUpScript.Picker = this.gameObject;
             pickUpScript.picked = true;
             PickedWeapon = collision.gameObject;
+
             animator.SetBool(WeaponingID, true);
-            collision.transform.position = new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y +1, 6);
             isWeaponed = true;
+
+            //collision.transform.position = new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y +1, 6);
+            Destroy(collision.gameObject);
+
+             animator.SetTrigger(GetWeaponID);
 
             switch (pickUpScript.picktype)
             {
