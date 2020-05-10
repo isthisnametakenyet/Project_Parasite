@@ -72,14 +72,14 @@ public class HeadThrow : MonoBehaviour
         if (Expulsed == true && actualStun < expulsedStunMax) { actualStun += Time.deltaTime; canReturn = false; }
         else if (actualStun >= expulsedStunMax) { canReturn = true; }
 
-        if (player.GetAxis("HeadThrow&Return") > 0 && canReturn == true && playerScript.Parasited == false) 
+        if (player.GetAxis("HeadThrow&Return") > 0 && canReturn == true && playerScript.Parasited == false || GoBack == true && canReturn == true && playerScript.Parasited == false) 
         {
             this.transform.position = new Vector3(OriginalBody.transform.position.x, OriginalBody.transform.position.y, 0);
             playerScript.ReturnHead();
 
             Destroy(gameObject); //AUTODESTRUCCION
         }
-        else if (player.GetAxis("HeadThrow&Return") > 0 && canReturn == true && playerScript.Parasited == true)
+        else if (player.GetAxis("HeadThrow&Return") > 0 && canReturn == true && playerScript.Parasited == true || GoBack == true && canReturn == true && playerScript.Parasited == true)
         {
             //RETURN TO PARASITED
             this.transform.position = new Vector3(OriginalBody.transform.position.x, OriginalBody.transform.position.y, 0);
