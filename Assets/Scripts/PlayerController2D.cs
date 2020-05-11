@@ -400,10 +400,10 @@ public class PlayerController2D : MonoBehaviour
     //PARASITE
     void Parasite(GameObject parasiteObject)
     {
-        Parasiter = parasiteObject;
-
         if (Parasitable == true)
         {
+            Parasiter = parasiteObject;
+
             headThrow = Parasiter.GetComponent<HeadThrow>();
             this.Parasitcontroller = headThrow.ParasiterController;
             Parasited = true;
@@ -427,6 +427,9 @@ public class PlayerController2D : MonoBehaviour
                     player = ReInput.players.GetPlayer(3);
                     break;
             }
+
+            Parasiter.transform.parent = this.gameObject.transform;
+            Parasiter.transform.position = new Vector3(this.gameObject.transform.position.y, this.gameObject.transform.position.x, 0);
         }
     }
 
