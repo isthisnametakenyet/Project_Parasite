@@ -318,7 +318,7 @@ public class PlayerController2D : MonoBehaviour
         {
             if (player.GetAxis("Move") > 0)
             {
-                Debug.Log("Moving > 0");
+                //Debug.Log("Moving > 0");
                 if (isCharging == false && isHeading == false && isDucking == false)
                 {
                     body2D.velocity = new Vector2(runSpeed, body2D.velocity.y);
@@ -328,7 +328,7 @@ public class PlayerController2D : MonoBehaviour
             }
             else if (player.GetAxis("Move") < 0)
             {
-                Debug.Log("Moving < 0");
+                //Debug.Log("Moving < 0");
                 if (isCharging == false && isHeading == false && isDucking == false)
                 {
                     body2D.velocity = new Vector2(-runSpeed, body2D.velocity.y);
@@ -361,7 +361,7 @@ public class PlayerController2D : MonoBehaviour
                 transform.localScale = theScale;
             }
             //JUMP
-            if (player.GetButtonDown("Jump&Duck") && jumpTemp > jumpCooldown && isGrounded == true && isCharging == false && isDucking == false)
+            if (player.GetButtonDown("Jump&Duck") && jumpTemp > jumpCooldown && isGrounded == true && isDucking == false)
             {
                 jumpTemp = 0;
                 animator.SetTrigger(JumpedID);

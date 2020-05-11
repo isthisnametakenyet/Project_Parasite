@@ -65,12 +65,12 @@ public class MeleeScript : MonoBehaviour
     {
         if (collision.gameObject.tag == "Floor" && Thrown == true)
         {
-            Debug.Log("Wp: Landed");
+            Debug.Log("Wp: Landad");
             actualStuck += Time.deltaTime * 10;
             transform.position = new Vector3(transform.position.x, transform.position.y, 1);
         }
 
-        if (collision.gameObject.tag == "Player" && collision.gameObject != Picker && Thrown == true )
+        if (collision.gameObject.tag == "Player" /*&& collision.gameObject != Picker*/ && Thrown == true )
         {
             Debug.Log("Wp: HitTri");
             playerScript = collision.GetComponent<PlayerController2D>();

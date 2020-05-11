@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 1923074605961954617}
   - component: {fileID: 6374306891089271172}
   - component: {fileID: 3644234320331052338}
-  - component: {fileID: 7591388127453001819}
   m_Layer: 12
   m_Name: place_sword
   m_TagString: Weapon
@@ -109,13 +108,13 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3040493000438626130}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0030212663, y: 0.081576586}
+  m_Offset: {x: -0.0030212663, y: 0.22077365}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5000004, y: 0.40284356}
@@ -126,7 +125,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.099636145, y: 1.1631532}
+  m_Size: {x: 0.099636145, y: 0.88475907}
   m_EdgeRadius: 0
 --- !u!50 &3644234320331052338
 Rigidbody2D:
@@ -149,22 +148,3 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &7591388127453001819
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3040493000438626130}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e2b5442d6443364ba5ab1fb53680987, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Picker: {fileID: 0}
-  Idle: 1
-  Thrown: 0
-  Landed: 0
-  Uses: 2
-  stuckTime: 0.5
-  actualStuck: 0
