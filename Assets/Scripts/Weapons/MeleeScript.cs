@@ -70,7 +70,7 @@ public class MeleeScript : MonoBehaviour
             transform.position = new Vector3(transform.position.x, transform.position.y, 1);
         }
 
-        if (collision.gameObject.tag == "Player" /*&& collision.gameObject != Picker*/ && Thrown == true )
+        if (collision.gameObject.tag == "Player" && collision.gameObject != Picker && Thrown == true )
         {
             Debug.Log("Wp: HitTri");
             playerScript = collision.GetComponent<PlayerController2D>();

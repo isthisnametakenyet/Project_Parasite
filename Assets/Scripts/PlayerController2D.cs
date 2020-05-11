@@ -80,11 +80,8 @@ public class PlayerController2D : MonoBehaviour
     private int whichWeaponID;   ///Int
     private int AttackedID;      ///Trigger
     private int ChargingID;      ///Bool
-    private int ThrowedID;       ///Trigger
     private int HeadingID;       ///Bool
     private int DamagedID;       ///Trigger
-    private int BreakID;         ///Trigger
-    private int GetWeaponID;     ///Trigger
     private int LoseArmID;       ///Trigger
     private int GetArmID;        ///Trigger
     private int LoseHeadID;      ///Trigger
@@ -130,11 +127,8 @@ public class PlayerController2D : MonoBehaviour
         whichWeaponID = Animator.StringToHash("whichWeapon");
         AttackedID =    Animator.StringToHash("Attacked");
         ChargingID =    Animator.StringToHash("Charging");
-        ThrowedID =     Animator.StringToHash("Throwed");
         HeadingID =     Animator.StringToHash("Heading");
         DamagedID =     Animator.StringToHash("Damaged");
-        BreakID =       Animator.StringToHash("Break");
-        GetWeaponID =   Animator.StringToHash("GetWeapon");
         LoseArmID =     Animator.StringToHash("LoseArm");
         GetArmID =      Animator.StringToHash("GetArm");
         LoseHeadID =    Animator.StringToHash("LoseHead");
@@ -240,7 +234,6 @@ public class PlayerController2D : MonoBehaviour
             else if (weaponCharge < forgetWeaponChargeRange) { weaponCharge = 0; animator.SetBool(ChargingID, false); }
             else if (weaponCharge > forgetWeaponChargeRange)
             {
-                animator.SetTrigger(ThrowedID);
                 animator.SetInteger(whichWeaponID, 0);
                 animator.SetBool(ChargingID, false);
 
@@ -626,7 +619,6 @@ public class PlayerController2D : MonoBehaviour
                     weaponScript.Pickup();
                     break;
             }
-             animator.SetTrigger(GetWeaponID);
             Debug.Log("GetWeapon");
         }
         else if (collision.gameObject.tag == "Stuck" && player.GetButtonDown("Pickup") && isWeaponed == false && picking == false)  //RE-PICKUP

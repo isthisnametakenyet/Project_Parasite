@@ -373,7 +373,7 @@ MonoBehaviour:
   Thrown: 0
   originalUses: 2
   Uses: 0
-  throwWeaponSpeed: 10
+  throwWeaponSpeed: 15
 --- !u!61 &2947153771891345277
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -987,7 +987,7 @@ MonoBehaviour:
   Thrown: 0
   originalUses: 2
   Uses: 0
-  throwWeaponSpeed: 10
+  throwWeaponSpeed: 15
 --- !u!61 &1233967745217055114
 BoxCollider2D:
   m_ObjectHideFlags: 0
