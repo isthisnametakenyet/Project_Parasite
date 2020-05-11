@@ -516,10 +516,10 @@ public class PlayerController2D : MonoBehaviour
         {
             animator.SetBool(GroundingID, true);
         }
-        if (collision.gameObject.tag == "FlyingHead") //PARASITE
-        {
-            Debug.LogError("Colision ENTER3");
-        }
+        //if (collision.gameObject.tag == "FlyingHead") //PARASITE
+        //{
+        //    Debug.LogError("Colision ENTER3");
+        //}
     }
     private void OnCollisionExit2D(Collision2D collision)
     {
