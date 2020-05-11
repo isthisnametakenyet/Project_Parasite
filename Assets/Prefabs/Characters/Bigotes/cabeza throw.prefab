@@ -96,7 +96,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ParasiterController: 0
   OriginalBody: {fileID: 0}
-  HeadDead: {fileID: 6639280174949446922, guid: 35bbdda292f2ad74fbc5b03158ab37bf,
+  HeadDead: {fileID: 8364601489975160416, guid: 7185bf4010ebe354e855638434bcac1c,
     type: 3}
   floorStunMax: 2
   expulsedStunMax: 3
