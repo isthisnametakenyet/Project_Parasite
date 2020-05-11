@@ -47,7 +47,7 @@ public class MeleeScript : MonoBehaviour
             //START ANIMATION THROW
         }
 
-        //SI GOLPEA ALGO SE PARA Y SE QUEDA PEGADO
+        //TODO: SI GOLPEA ALGO SE PARA Y SE QUEDA PEGADO
         if (actualStuck >= stuckTime)
         {
             Debug.Log("Wp: Stuck");
@@ -74,6 +74,25 @@ public class MeleeScript : MonoBehaviour
         {
             playerScript = collision.GetComponent<PlayerController2D>();
             Debug.Log("Wp: Hit");
+            actualStuck += Time.deltaTime * 10;
+            transform.position = new Vector3(transform.position.x, transform.position.y, 1);
+            this.transform.parent = collision.transform;
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Floor" && Thrown == true)
+        {
+            Debug.Log("Wp: Landed2");
+            actualStuck += Time.deltaTime * 10;
+            transform.position = new Vector3(transform.position.x, transform.position.y, 1);
+        }
+
+        if (collision.gameObject.tag == "Player" && collision.gameObject != Picker && Thrown == true)
+        {
+            playerScript = collision.GetComponent<PlayerController2D>();
+            Debug.Log("Wp: Hit2");
             actualStuck += Time.deltaTime * 10;
             transform.position = new Vector3(transform.position.x, transform.position.y, 1);
             this.transform.parent = collision.transform;
