@@ -83,32 +83,77 @@ public class WeaponScript : MonoBehaviour
         }
         else if (Thrown == true && Uses != -1)
         {
-            pastState = 3;
             GameObject throwed = Instantiate(prefabThrow, new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
+
+            int flipDir = 0;
+            //Configure initial Position && Rotation
+            switch (this.gameObject.name)
+            {
+                case "Sword":
+                    throwed.transform.Rotate(0.0f, 0.0f, -90.0f, Space.Self);
+                    if (pickerPlayerScript.facingright == true)
+                    {
+                        throwed.transform.position = new Vector3(transform.position.x + 0.07f, transform.position.y + 0.2f, 0f);
+                    }
+                    else if (pickerPlayerScript.facingright == false)
+                    {
+                        throwed.transform.position = new Vector3(transform.position.x - 0.07f, transform.position.y + 0.2f, 0f);
+                    }
+                    flipDir = 2;
+                    break;
+                case "Axe":
+                    if (pickerPlayerScript.facingright == true)
+                    {
+                        throwed.transform.position = new Vector3(transform.position.x + 0.37f, transform.position.y, 0f);
+                        throwed.transform.Rotate(0.0f, 0.0f, -30.0f, Space.Self);
+                    }
+                    else if (pickerPlayerScript.facingright == false)
+                    {
+                        throwed.transform.position = new Vector3(transform.position.x - 0.37f, transform.position.y, 0f);
+                        throwed.transform.Rotate(0.0f, 0.0f, 30.0f, Space.Self);
+                    }
+                    flipDir = 1;
+                    break;
+                case "Spear":
+                    //throwed.transform.position = new Vector3(transform.position.x + 0.37f, transform.position.y + 0.2f, 0f);
+                    //throwed.transform.Rotate(0.0f, 0.0f, -90.0f, Space.Self);
+                    //flipDir = 1;
+                    break;
+                case "Bow":
+                    break;
+                case "CrossBow":
+                    break;
+                case "Boomerang":
+                    break;
+                default:
+                    Debug.Log("wut");
+                    break;
+            }
+
             body2D = throwed.GetComponent<Rigidbody2D>();
             renderer = throwed.GetComponent<SpriteRenderer>();
-
-            if (pickerPlayerScript.facingright == true) //THROW WEAPON with headCharge as force
+            if (pickerPlayerScript.facingright == true)
             {
                 body2D.velocity = new Vector2(throwWeaponSpeed, 0);
             }
             else if (pickerPlayerScript.facingright == false)
             {
                 body2D.velocity = new Vector2(-throwWeaponSpeed, 0);
-                renderer.flipX = true;
+                if (flipDir == 1) { renderer.flipX = true; } //FLIP X
+                else if (flipDir == 2) { renderer.flipY = true; } //FLIP Y
             }
 
             switch (type)
             {
                 case WeaponType.MELEE:
-                    Debug.Log("Melee");
+                    Debug.Log("WeaponScrp: Throw Melee");
                     meleeScript = throwed.GetComponent<MeleeScript>();
                     meleeScript.Picker = Picker;
                     meleeScript.Uses = Uses;
                     meleeScript.Thrown = true;
                     break;
                 case WeaponType.RANGED:
-                    Debug.Log("Arrow");
+                    Debug.Log("WeaponScrp: Throw Arrow");
                     arrowScript = throwed.GetComponent<Arrow>();
                     arrowScript.Picker = Picker;
                     break;

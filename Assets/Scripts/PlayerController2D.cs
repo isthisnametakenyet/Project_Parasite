@@ -498,6 +498,40 @@ public class PlayerController2D : MonoBehaviour
         }
     }
 
+    //COLLISION THROW
+    public void ThrowCollision(GameObject collision)
+    {
+        if (Parasitable != true)
+        {
+            Debug.Log("ThrowCollision()");
+
+            //animator.SetTrigger(DamagedID);
+            GameObject head = Instantiate(HeadFallPrefab, new Vector3(transform.position.x, transform.position.y + 0.3f, 0), Quaternion.identity);
+            animator.SetTrigger(LoseHeadID);
+
+            headReturn = head.GetComponent<HeadReturn>();
+            headReturn.controller = this.controller;
+            headReturn.OriginalBody = this.gameObject;
+            headReturn.Stunned = true;
+
+            Rigidbody2D headRigid;
+            headRigid = head.GetComponent<Rigidbody2D>(); //ASIGN ITS RIGID
+            headCharge = 2f;
+
+            if (transform.position.x > collision.transform.position.x) //RIGHT
+            {
+                headRigid.velocity = new Vector2(headCharge * 1.8f, 2f);
+            }
+            else if (transform.position.x < collision.transform.position.x) //LEFT
+            {
+                headRigid.velocity = new Vector2(-headCharge * 1.8f, 2f);
+            }
+            else { Debug.LogError("Error Detectando Direccion de Collision"); }
+
+            Parasitable = true;
+        }
+    }
+
 
      
     //COLISIONS
@@ -678,35 +712,6 @@ public class PlayerController2D : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision) //DAMAGE && PARASITE
     {
-        if (collision.gameObject.tag == "Throwing" && Parasitable != true)
-        {
-            //animator.SetTrigger(DamagedID);
-            GameObject head = Instantiate(HeadFallPrefab, new Vector3(transform.position.x, transform.position.y + 0.3f, 0), Quaternion.identity);
-            animator.SetTrigger(LoseHeadID);
-
-            headReturn = head.GetComponent<HeadReturn>();
-            headReturn.controller = this.controller;
-            //headReturn.skin = this.skin;
-            headReturn.OriginalBody = this.gameObject;
-            headReturn.Stunned = true;
-
-            Rigidbody2D headRigid;
-            headRigid = head.GetComponent<Rigidbody2D>(); //ASIGN ITS RIGID
-            headCharge = 2f;
-            
-            if (transform.position.x > collision.transform.position.x) //RIGHT
-            {
-                headRigid.velocity = new Vector2(headCharge * 1.8f, 2f);
-            }
-            else if (transform.position.x < collision.transform.position.x) //LEFT
-            {
-                headRigid.velocity = new Vector2(-headCharge * 1.8f, 2f);
-            }
-            else { Debug.LogError("Error Detectando Direccion de Collision"); }
-
-            Parasitable = true;
-        }
-
         if (collision.gameObject.tag == "Attacking"/* && collision.gameObject != PickedWeapon*/)
         {
             Rigidbody2D armRigid;

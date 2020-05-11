@@ -70,25 +70,20 @@ public class MeleeScript : MonoBehaviour
             transform.position = new Vector3(transform.position.x, transform.position.y, 1);
         }
 
-        if (collision.gameObject.tag == "Player" && /*collision.gameObject != Picker &&*/ Thrown == true )
+        if (collision.gameObject.tag == "Player" && collision.gameObject != Picker && Thrown == true )
         {
             playerScript = collision.GetComponent<PlayerController2D>();
             Debug.Log("Wp: Hit");
             actualStuck += Time.deltaTime * 10;
-            transform.position = new Vector3(transform.position.x, transform.position.y, 1);
-            this.transform.parent = collision.transform;
         }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Player" && /*collision.gameObject != Picker &&*/ Thrown == true)
+        if (collision.gameObject.tag == "Player" && collision.gameObject != Picker && Thrown == true)
         {
-            //playerScript = collision.GetComponent<PlayerController2D>();
-            Debug.Log("Wp: Hit2");
-            actualStuck += Time.deltaTime * 10;
-            transform.position = new Vector3(transform.position.x, transform.position.y, 1);
-            this.transform.parent = collision.transform;
+            playerScript = collision.gameObject.GetComponent<PlayerController2D>();
+            playerScript.ThrowCollision(collision.gameObject);
         }
     }
 }
