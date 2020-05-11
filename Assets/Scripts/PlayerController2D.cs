@@ -58,15 +58,17 @@ public class PlayerController2D : MonoBehaviour
     public float forgetHeadThrowRange = 0.4f;
     public float pickDelay = 0.2f;
 
-    private bool Parasitable = false;
-    public bool Parasited = false;
+    public bool Parasitable = false;
+    private bool Parasited = false;
     private bool ReturnedHead = false;
 
     //TEMPORALES
     float jumpTemp = 0;
+
     public bool facingright = true;
     float headCharge = 0f;
     float weaponCharge = 0f;
+
     bool picking = false;
     float pickTemp = 0;
 
@@ -287,8 +289,7 @@ public class PlayerController2D : MonoBehaviour
                     headRigid.velocity = new Vector2(-headCharge * 1.8f, 2f);
                 }
                 headCharge = 0;
-
-                //Destroy(gameObject); //AUTODESTRUCCION
+                Parasitable = true;
             }
         }
     }
@@ -406,6 +407,7 @@ public class PlayerController2D : MonoBehaviour
             headThrow = Parasiter.GetComponent<HeadThrow>();
             this.Parasitcontroller = headThrow.ParasiterController;
             Parasited = true;
+            Parasitable = false;
 
             switch (Parasitcontroller)
             {
@@ -429,41 +431,22 @@ public class PlayerController2D : MonoBehaviour
     }
 
     //EXPULSE
-    public void Expulse()
+    void Expulse()
     {
+        Debug.Log("Expulse()");
         headThrow = Parasiter.GetComponent<HeadThrow>();
         headThrow.Expulsed = true;
+        //body2D = Parasiter.GetComponent<Rigidbody2D>();
+        //throw expulsed
 
-        Parasitcontroller = Controller.NONE;
-        Parasiter = null;
-
-        switch (controller)
-        {
-            case Controller.PLAYER0:
-                player = ReInput.players.GetPlayer(0);
-                break;
-
-            case Controller.PLAYER1:
-                player = ReInput.players.GetPlayer(1);
-                break;
-
-            case Controller.PLAYER2:
-                player = ReInput.players.GetPlayer(2);
-                break;
-
-            case Controller.PLAYER3:
-                player = ReInput.players.GetPlayer(3);
-                break;
-        }
-
-        animator.SetTrigger(GetHeadID);
-        Parasitable = true;
+        UnParasited();
     }
 
 
     //UNPARASITED
     void UnParasited()
     {
+        Debug.Log("UnParasited()");
         Parasitcontroller = Controller.NONE;
         Parasiter = null;
         Parasited = false;
@@ -488,16 +471,24 @@ public class PlayerController2D : MonoBehaviour
         }
 
         animator.SetTrigger(GetHeadID);
-        Parasitable = true;
     }
 
 
     //RETURN HEAD
     public void ReturnHead()
     {
+        Debug.Log("ReturnHead()");
         animator.SetTrigger(GetHeadID);
         animator.SetBool(StaticID, false);
-
+        Parasitable = false;
+        if (Parasited == true)
+        {
+            Expulse();
+        }
+        else
+        {
+            UnParasited();
+        }
     }
 
 
@@ -686,7 +677,7 @@ public class PlayerController2D : MonoBehaviour
             }
             else { Debug.LogError("Error Detectando Direccion de Collision"); }
 
-            //Destroy(gameObject); //AUTODESTRUCCION
+            Parasitable = true;
         }
 
         if (collision.gameObject.tag == "Attacking"/* && collision.gameObject != PickedWeapon*/)

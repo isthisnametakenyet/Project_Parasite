@@ -14,8 +14,9 @@ public class HeadThrow : MonoBehaviour
     BoxCollider2D collider2D;
 
     public GameObject OriginalBody;
-    public GameObject HeadDead;
     private PlayerController2D playerScript;
+    public GameObject HeadDead;
+    private HeadReturn headFall;
 
     //VARIABLES
     public float floorStunMax = 2f;
@@ -62,6 +63,8 @@ public class HeadThrow : MonoBehaviour
         if (OriginalBody == null) //PLAYER IS DEAD
         {
             GameObject headDead = Instantiate(HeadDead, new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
+            headFall = headDead.GetComponent<HeadReturn>();
+            headFall.isDead = true;
             Destroy(gameObject); //AUTODESTRUCCION
         }
 
@@ -72,18 +75,11 @@ public class HeadThrow : MonoBehaviour
         if (Expulsed == true && actualStun < expulsedStunMax) { actualStun += Time.deltaTime; canReturn = false; }
         else if (actualStun >= expulsedStunMax) { canReturn = true; }
 
-        if (player.GetAxis("HeadThrow&Return") > 0 && canReturn == true && playerScript.Parasited == false || GoBack == true && canReturn == true && playerScript.Parasited == false) 
+        if (player.GetAxis("HeadThrow&Return") > 0 && canReturn == true || GoBack == true && canReturn == true) 
         {
-            this.transform.position = new Vector3(OriginalBody.transform.position.x, OriginalBody.transform.position.y, 0);
+            Debug.Log("Head Throw: Return");
+            //this.transform.position = new Vector3(OriginalBody.transform.position.x, OriginalBody.transform.position.y, 0);
             playerScript.ReturnHead();
-
-            Destroy(gameObject); //AUTODESTRUCCION
-        }
-        else if (player.GetAxis("HeadThrow&Return") > 0 && canReturn == true && playerScript.Parasited == true || GoBack == true && canReturn == true && playerScript.Parasited == true)
-        {
-            //RETURN TO PARASITED
-            this.transform.position = new Vector3(OriginalBody.transform.position.x, OriginalBody.transform.position.y, 0);
-            playerScript.Expulse();
 
             Destroy(gameObject); //AUTODESTRUCCION
         }

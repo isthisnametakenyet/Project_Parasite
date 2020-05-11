@@ -10,10 +10,11 @@ public class HeadReturn : MonoBehaviour
 
     private Player player;
 
+    //GAME OBJECTS
     public GameObject OriginalBody;
-    public GameObject PlayerArmless;
     private PlayerController2D playerAll;
 
+    //VARAIBLES
     public float MaxStun = 2;
     float Wait = 0;
     public bool Stunned = false;
@@ -24,14 +25,10 @@ public class HeadReturn : MonoBehaviour
     private int BackID;
 
     Animator animator;
-    Rigidbody2D body2D;
-    SpriteRenderer spriteRenderer;
 
     void Start()
     {
         animator = GetComponent<Animator>();
-        body2D = GetComponent<Rigidbody2D>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
 
         switch (controller)
         {
@@ -88,15 +85,11 @@ public class HeadReturn : MonoBehaviour
 
         if (player.GetAxis("HeadThrow&Return") > 0 && Stunned == false || Returning == true)
         {
-            animator.Play(BackID);
+            //animator.Play(BackID);
 
-            this.transform.position = new Vector3(OriginalBody.transform.position.x, OriginalBody.transform.position.y, 0);
-            GameObject player = Instantiate(PlayerArmless, new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
+            playerAll = OriginalBody.GetComponent<PlayerController2D>();
+            playerAll.ReturnHead();
 
-            playerAll = player.GetComponent<PlayerController2D>();
-            playerAll.controller = this.controller;
-
-            Destroy(OriginalBody);
             Destroy(gameObject); //AUTODESTRUCCION
         }
     }
