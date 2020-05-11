@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1127133775173162235}
   - component: {fileID: 2716534412659438494}
+  - component: {fileID: 1112404127596976353}
   - component: {fileID: 7073445862110367866}
   - component: {fileID: 5803057810198495129}
-  - component: {fileID: 3893103222167882299}
   m_Layer: 12
   m_Name: place_axe
   m_TagString: Weapon
@@ -82,6 +82,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1112404127596976353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4109791825871390401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 625b1f6ccd4a91d4592535c1f2d036a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Picker: {fileID: 0}
+  Idle: 0
+  Thrown: 0
+  Landed: 0
+  Uses: 2
+  stuckTime: 0.5
+  actualStuck: 0
 --- !u!61 &7073445862110367866
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -129,27 +148,3 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &3893103222167882299
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4109791825871390401}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a3d56584b41c6d43adad858ccf7bdac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Picker: {fileID: 0}
-  axeSprite: {fileID: 21300000, guid: 9af6f35fa913dfa40a207c3c3d509a79, type: 3}
-  Idle: 0
-  Attack: 0
-  Charging: 0
-  Thrown: 0
-  Landed: 0
-  Stuck: 0
-  Drop: 0
-  Uses: 2
-  AttackTime: 2
-  stuckTime: 0.3

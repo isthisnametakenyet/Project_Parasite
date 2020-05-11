@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Sword : MonoBehaviour
+public class MeleeScript : MonoBehaviour
 {
     public GameObject Picker;
-    private PlayerController2D pickerPlayerScript;
     private PlayerController2D playerScript;
 
-    //STATE
+    //STATES
     public bool Idle = false;
     public bool Thrown = false;
     public bool Landed = false;
@@ -17,6 +16,8 @@ public class Sword : MonoBehaviour
     public int Uses = 2;
     public float stuckTime = 0.5f;
     public float actualStuck = 0f;
+
+    //GETTERS
     BoxCollider2D collider2D;
     Rigidbody2D body2D;
 
@@ -67,26 +68,13 @@ public class Sword : MonoBehaviour
             transform.position = new Vector3(transform.position.x, transform.position.y, 1);
         }
 
-        if (collision.gameObject.tag == "Player" && Thrown == true)
+        if (collision.gameObject.tag == "Player" && collision.gameObject != Picker && Thrown == true )
         {
             playerScript = collision.GetComponent<PlayerController2D>();
-            if (Picker.gameObject.tag == "Player" && playerScript.controller != pickerPlayerScript.controller)
-            {
-                Debug.Log("Wp: Hit");
-                actualStuck += Time.deltaTime * 10;
-                transform.position = new Vector3(transform.position.x, transform.position.y, 1);
-                this.transform.parent = collision.transform;
-            }
+            Debug.Log("Wp: Hit");
+            actualStuck += Time.deltaTime * 10;
+            transform.position = new Vector3(transform.position.x, transform.position.y, 1);
+            this.transform.parent = collision.transform;
         }
     }
-
-    //private void OnCollisionEnter2D(Collision2D collision)
-    //{
-    //    if (collision.gameObject.tag == "Floor" && Thrown == true)
-    //    {
-    //        Debug.Log("Wp: Landed");
-    //        actualStuck += Time.deltaTime * 10;
-    //        transform.position = new Vector3(transform.position.x, transform.position.y, 1);
-    //    }
-    //}
 }

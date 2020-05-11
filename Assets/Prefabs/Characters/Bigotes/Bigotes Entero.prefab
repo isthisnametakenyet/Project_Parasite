@@ -363,12 +363,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   Picker: {fileID: 5911291850111384200}
-  prefabWeaponArrow: {fileID: 4109791825871390401, guid: 34431f682b8fae9449bfd8e2e32a67ef,
+  pickerPlayerScript: {fileID: 0}
+  prefabDrop: {fileID: 4109791825871390401, guid: 34431f682b8fae9449bfd8e2e32a67ef,
+    type: 3}
+  prefabThrow: {fileID: 4109791825871390401, guid: 34431f682b8fae9449bfd8e2e32a67ef,
     type: 3}
   Attack: 0
   Charging: 0
   Thrown: 0
-  Uses: 2
+  originalUses: 2
+  Uses: 0
+  throwWeaponSpeed: 10
 --- !u!61 &2947153771891345277
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -577,10 +582,16 @@ MonoBehaviour:
   Parasitcontroller: 0
   Sword: {fileID: 7646740427913938385}
   Axe: {fileID: 5059232016660044565}
+  Spear: {fileID: 0}
   Bow: {fileID: 6967214711028334208}
   CrossBow: {fileID: 0}
   Boomerang: {fileID: 0}
-  PickedWeapon: {fileID: 0}
+  swordPrefab: {fileID: 0}
+  axePrefab: {fileID: 0}
+  spearPrefab: {fileID: 0}
+  bowPrefab: {fileID: 0}
+  crossBowPrefab: {fileID: 0}
+  boomerangPrefab: {fileID: 0}
   Arms: 2
   runSpeed: 3
   jumpCooldown: 1.2
@@ -810,12 +821,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 1
   Picker: {fileID: 5911291850111384200}
-  prefabWeaponArrow: {fileID: 7382603600782899059, guid: 60dffed7062884b4faed5b9b199217e1,
+  pickerPlayerScript: {fileID: 0}
+  prefabDrop: {fileID: 8543419847265760279, guid: 9ff26bafdd5dcc044837cfbe62cf4f84,
+    type: 3}
+  prefabThrow: {fileID: 7382603600782899059, guid: 60dffed7062884b4faed5b9b199217e1,
     type: 3}
   Attack: 0
   Charging: 0
   Thrown: 0
-  Uses: 1
+  originalUses: 1
+  Uses: 0
+  throwWeaponSpeed: 10
 --- !u!61 &5444811467426565309
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -967,12 +983,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   Picker: {fileID: 5911291850111384200}
-  prefabWeaponArrow: {fileID: 3040493000438626130, guid: b48adec35004cc94fb8878b2f83c61b9,
+  pickerPlayerScript: {fileID: 0}
+  prefabDrop: {fileID: 3040493000438626130, guid: b48adec35004cc94fb8878b2f83c61b9,
+    type: 3}
+  prefabThrow: {fileID: 3040493000438626130, guid: b48adec35004cc94fb8878b2f83c61b9,
     type: 3}
   Attack: 0
   Charging: 0
   Thrown: 0
-  Uses: 2
+  originalUses: 2
+  Uses: 0
+  throwWeaponSpeed: 10
 --- !u!61 &1233967745217055114
 BoxCollider2D:
   m_ObjectHideFlags: 0

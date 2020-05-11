@@ -9,16 +9,15 @@ public class WeaponScript : MonoBehaviour
     public WeaponType type = WeaponType.X;
 
     public GameObject Picker;
-    private PlayerController2D pickerPlayerScript;
-    private EmptyBody pickerEmptyScript;
+    public PlayerController2D pickerPlayerScript;
     private PlayerController2D playerScript;
-    private EmptyBody emptyScript;
 
-    public GameObject prefabWeaponArrow;
+    //PREFABS
+    public GameObject prefabDrop;
+    public GameObject prefabThrow;
 
-    private Sword swordScript;
-    private Axe axeScript;
-    private Spear spearScript;
+    //WEAPON SCRIPTS
+    private MeleeScript meleeScript;
     private Arrow arrowScript;
 
     //STATE
@@ -28,8 +27,8 @@ public class WeaponScript : MonoBehaviour
     private int pastState = 0;
 
     //VARIABLES
-    public int Uses = 2;
-    private int originalUses;
+    public int originalUses;
+    public int Uses;
     public float throwWeaponSpeed = 10f;
 
     //GETTERS
@@ -43,15 +42,15 @@ public class WeaponScript : MonoBehaviour
         pickerPlayerScript = Picker.GetComponent<PlayerController2D>();
         //collider2D.isTrigger = true;
         originalUses = Uses;
+
+        Uses = originalUses;
     }
 
     void FixedUpdate()
     {
         if (Uses == 0)
         {
-            if (Picker.gameObject.tag == "Player") { pickerPlayerScript.isWeaponed = false; }
-            else if (Picker.gameObject.tag == "EmptyBody") { pickerEmptyScript.isWeaponed = false; }
-
+            pickerPlayerScript.isWeaponed = false;
             transform.gameObject.tag = "Weapon";
 
             this.gameObject.SetActive(false); //HIDE SELF
@@ -85,7 +84,7 @@ public class WeaponScript : MonoBehaviour
         else if (Thrown == true && Uses != -1)
         {
             pastState = 3;
-            GameObject throwed = Instantiate(prefabWeaponArrow, new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
+            GameObject throwed = Instantiate(prefabThrow, new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
             body2D = throwed.GetComponent<Rigidbody2D>();
             renderer = throwed.GetComponent<SpriteRenderer>();
 
@@ -99,31 +98,21 @@ public class WeaponScript : MonoBehaviour
                 renderer.flipX = true;
             }
 
-        switch (this.gameObject.name)
+            switch (type)
             {
-                case "Axe":
-                    Debug.Log("Axe");
-                    axeScript = throwed.GetComponent<Axe>();
-                    axeScript.Picker = Picker;
-                    axeScript.Uses = Uses;
+                case WeaponType.MELEE:
+                    Debug.Log("Melee");
+                    meleeScript = throwed.GetComponent<MeleeScript>();
+                    meleeScript.Picker = Picker;
+                    meleeScript.Uses = Uses;
+                    meleeScript.Thrown = true;
                     break;
-                case "Sword":
-                    Debug.Log("Sword");
-                    swordScript = throwed.GetComponent<Sword>();
-                    swordScript.Picker = Picker;
-                    swordScript.Uses = Uses;
-                    break;
-                case "Spear":
-                    Debug.Log("Spear");
-                    spearScript = throwed.GetComponent<Spear>();
-                    spearScript.Picker = Picker;
-                    spearScript.Uses = Uses;
-                    break;
-                case "Bow":
-                case "CrossBow":
+                case WeaponType.RANGED:
                     Debug.Log("Arrow");
                     arrowScript = throwed.GetComponent<Arrow>();
                     arrowScript.Picker = Picker;
+                    break;
+                case WeaponType.X:
                     break;
                 default:
                     Debug.Log("wut");
@@ -143,5 +132,26 @@ public class WeaponScript : MonoBehaviour
     public void Pickup()
     {
         Uses = originalUses;
+    }
+
+    public void Drop()
+    {
+        GameObject dropped = Instantiate(prefabDrop, new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
+
+        switch (type)
+        {
+            case WeaponType.MELEE:
+                meleeScript = dropped.GetComponent<MeleeScript>();
+                meleeScript.Uses = Uses;
+                meleeScript.Idle = true;
+                break;
+            case WeaponType.RANGED:
+                break;
+            case WeaponType.X:
+                break;
+            default:
+                Debug.Log("wut");
+                break;
+        }
     }
 }

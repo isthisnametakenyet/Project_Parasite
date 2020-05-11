@@ -27,23 +27,21 @@ public class PlayerController2D : MonoBehaviour
     public GameObject Parasiter;
     public Controller Parasitcontroller = Controller.NONE;
 
+    //WEAPONS ATTACHED
+    ///melee
     public GameObject Sword;
     public GameObject Axe;
     public GameObject Spear;
+    private MeleeScript meleeScript;
+    ///ranged
     public GameObject Bow;
     public GameObject CrossBow;
+    ///boomerang
     public GameObject Boomerang;
 
-    //WEAPONS PICKUP
+    //PICKUP
     private PickUpScript pickUpScript;
     private WeaponScript weaponScript;
-
-    private Sword swordScript;
-    private Axe axeScript;
-    private Spear spearScript;
-    private Bow bowScript;
-    private CrossBow crossbowScript;
-    private Boomerang boomerangScript;
 
     //VARIABLES
     public int Arms = 2;
@@ -494,36 +492,48 @@ public class PlayerController2D : MonoBehaviour
                     picking = true;
                     animator.SetInteger(whichWeaponID, 1);
                     Sword.SetActive(true); //ACTIVATE
+                    weaponScript = Sword.GetComponent<WeaponScript>();
+                    weaponScript.Pickup();
                     break;
                 case PickTypes.Axe:
                     if (Arms == 0) { break; }
                     picking = true;
                     animator.SetInteger(whichWeaponID, 2);
                     Axe.SetActive(true); //ACTIVATE
+                    weaponScript = Axe.GetComponent<WeaponScript>();
+                    weaponScript.Pickup();
                     break;
                 case PickTypes.Spear:
                     if (Arms == 0) { break; }
                     picking = true;
                     animator.SetInteger(whichWeaponID, 3);
                     Spear.SetActive(true); //ACTIVATE
+                    weaponScript = Spear.GetComponent<WeaponScript>();
+                    weaponScript.Pickup();
                     break;
                 case PickTypes.Bow:
                     if (Arms <= 1) { break; }
                     picking = true;
                     animator.SetInteger(whichWeaponID, 4);
                     Bow.SetActive(true); //ACTIVATE
+                    weaponScript = Bow.GetComponent<WeaponScript>();
+                    weaponScript.Pickup();
                     break;
                 case PickTypes.CrossBow:
                     if (Arms <= 1) { break; }
                     picking = true;
                     animator.SetInteger(whichWeaponID, 5);
                     CrossBow.SetActive(true); //ACTIVATE
+                    weaponScript = CrossBow.GetComponent<WeaponScript>();
+                    weaponScript.Pickup();
                     break;
                 case PickTypes.Boomerang:
                     if (Arms <= 1) { break; }
                     picking = true;
                     animator.SetInteger(whichWeaponID, 6);
                     Boomerang.SetActive(true); //ACTIVATE
+                    weaponScript = Boomerang.GetComponent<WeaponScript>();
+                    weaponScript.Pickup();
                     break;
             }
              animator.SetTrigger(GetWeaponID);
@@ -537,35 +547,38 @@ public class PlayerController2D : MonoBehaviour
                 case "place_sword(Clone)":
                     if (Arms == 0) { break; }
                     picking = true;
-                    swordScript = collision.GetComponent<Sword>();
-                    swordScript.Picker = this.gameObject;
                     animator.SetInteger(whichWeaponID, 1);
                     Sword.SetActive(true); //ACTIVATE
+                    weaponScript = Sword.GetComponent<WeaponScript>();
+                    meleeScript = collision.gameObject.GetComponent<MeleeScript>();
+                    weaponScript.Uses = meleeScript.Uses;
                     break;
                 case "place_axe(Clone)":
                     if (Arms == 0) { break; }
                     picking = true;
-                    axeScript = collision.GetComponent<Axe>();
-                    axeScript.Picker = this.gameObject;
-                    animator.SetInteger(whichWeaponID, 2);
+                    animator.SetInteger(whichWeaponID, 1);
                     Axe.SetActive(true); //ACTIVATE
+                    weaponScript = Sword.GetComponent<WeaponScript>();
+                    meleeScript = collision.gameObject.GetComponent<MeleeScript>();
+                    weaponScript.Uses = meleeScript.Uses;
                     break;
                 case "place_spear(Clone)":
                     if (Arms == 0) { break; }
                     picking = true;
-                    spearScript = collision.GetComponent<Spear>();
-                    spearScript.Picker = this.gameObject;
-                    animator.SetInteger(whichWeaponID, 3);
+                    animator.SetInteger(whichWeaponID, 1);
                     Spear.SetActive(true); //ACTIVATE
+                    weaponScript = Sword.GetComponent<WeaponScript>();
+                    meleeScript = collision.gameObject.GetComponent<MeleeScript>();
+                    weaponScript.Uses = meleeScript.Uses;
                     break;
-                case "place_boomerang(Clone)":
-                    if (Arms <= 1) { break; }
-                    picking = true;
-                    boomerangScript = collision.GetComponent<Boomerang>();
-                    boomerangScript.Picker = this.gameObject;
-                    animator.SetInteger(whichWeaponID, 6);
-                    Boomerang.SetActive(true); //ACTIVATE
-                    break;
+                //case "place_boomerang(Clone)":
+                //    if (Arms <= 1) { break; }
+                //    picking = true;
+                //    boomerangScript = collision.GetComponent<Boomerang>();
+                //    boomerangScript.Picker = this.gameObject;
+                //    animator.SetInteger(whichWeaponID, 6);
+                //    Boomerang.SetActive(true); //ACTIVATE
+                //    break;
             }
         }
         if (collision.gameObject.tag == "FreeArm" && player.GetButtonDown("Pickup") && picking == false)
@@ -658,63 +671,70 @@ public class PlayerController2D : MonoBehaviour
             }
             if (isWeaponed == true)
             {
-                //switch (whichWeapon)
-                //{
-                //    case 1:
-                //        if (Arms == 0) { PickedWeapon.transform.parent = null;
-                //            PickedWeapon.transform.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
-                //            swordScript = PickedWeapon.GetComponent<Sword>();
-                //            swordScript.Drop = true;
-                //            PickedWeapon = null;
-                //            isWeaponed = false; }
-                //        break;
-                //    case 2:
-                //        if (Arms == 0) { PickedWeapon.transform.parent = null;
-                //            PickedWeapon.transform.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
-                //            axeScript = PickedWeapon.GetComponent<Axe>();
-                //            axeScript.Drop = true;
-                //            PickedWeapon = null;
-                //            isWeaponed = false;
-                //        }
-                //        break;
-                //    case 3:
-                //        if (Arms == 0) { PickedWeapon.transform.parent = null;
-                //            PickedWeapon.transform.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
-                //            spearScript = PickedWeapon.GetComponent<Spear>();
-                //            spearScript.Drop = true;
-                //            PickedWeapon = null;
-                //            isWeaponed = false;
-                //        }
-                //        break;
-                //    case 4:
-                //        if (Arms <= 1) { PickedWeapon.transform.parent = null;
-                //            PickedWeapon.transform.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
-                //            bowScript = PickedWeapon.GetComponent<Bow>();
-                //            bowScript.Drop = true;
-                //            PickedWeapon = null;
-                //            isWeaponed = false;
-                //        }
-                //        break;
-                //    case 5:
-                //        if (Arms <= 1) { PickedWeapon.transform.parent = null;
-                //            PickedWeapon.transform.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
-                //            crossbowScript = PickedWeapon.GetComponent<CrossBow>();
-                //            spearScript.Drop = true;
-                //            PickedWeapon = null;
-                //            isWeaponed = false;
-                //        }
-                //        break;
-                //    case 6:
-                //        if (Arms <= 1) { PickedWeapon.transform.parent = null;
-                //            PickedWeapon.transform.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
-                //            PickedWeapon.transform.GetComponent<BoxCollider2D>().enabled = true;
-                //            boomerangScript = PickedWeapon.GetComponent<Boomerang>();
-                //            boomerangScript.Drop = true;
-                //            PickedWeapon = null;
-                //            isWeaponed = false;
-                //        }
-                //        break;
-                //}
+                switch (whichWeapon)
+                {
+                    case 1:
+                        if (Arms == 0)
+                        {
+                            weaponScript = Sword.GetComponent<WeaponScript>();
+                            weaponScript.Drop();
+                            Sword.SetActive(false);
+                            isWeaponed = false;
+                        }
+                        break;
+                    case 2:
+                        if (Arms == 0)
+                        {
+                            weaponScript = Axe.GetComponent<WeaponScript>();
+                            weaponScript.Drop();
+                            Axe.SetActive(false);
+                            isWeaponed = false;
+                        }
+                        break;
+                    case 3:
+                        if (Arms == 0)
+                        {
+                            weaponScript = Spear.GetComponent<WeaponScript>();
+                            weaponScript.Drop();
+                            Spear.SetActive(false);
+                            isWeaponed = false;
+                        }
+                        break;
+                    //case 4:
+                    //    if (Arms <= 1)
+                    //    {
+                    //        PickedWeapon.transform.parent = null;
+                    //        PickedWeapon.transform.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+                    //        bowScript = PickedWeapon.GetComponent<Bow>();
+                    //        bowScript.Drop = true;
+                    //        PickedWeapon = null;
+                    //        isWeaponed = false;
+                    //    }
+                    //    break;
+                    //case 5:
+                    //    if (Arms <= 1)
+                    //    {
+                    //        PickedWeapon.transform.parent = null;
+                    //        PickedWeapon.transform.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+                    //        crossbowScript = PickedWeapon.GetComponent<CrossBow>();
+                    //        spearScript.Drop = true;
+                    //        PickedWeapon = null;
+                    //        isWeaponed = false;
+                    //    }
+                    //    break;
+                    //case 6:
+                    //    if (Arms <= 1)
+                    //    {
+                    //        PickedWeapon.transform.parent = null;
+                    //        PickedWeapon.transform.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+                    //        PickedWeapon.transform.GetComponent<BoxCollider2D>().enabled = true;
+                    //        boomerangScript = PickedWeapon.GetComponent<Boomerang>();
+                    //        boomerangScript.Drop = true;
+                    //        PickedWeapon = null;
+                    //        isWeaponed = false;
+                    //    }
+                    //    break;
+                }
             }
         }
 

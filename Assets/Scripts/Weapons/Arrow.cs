@@ -6,10 +6,7 @@ public class Arrow : MonoBehaviour
 {
     public GameObject Picker;
     private PlayerController2D pickerPlayerScript;
-    private EmptyBody pickerEmptyScript;
     private PlayerController2D playerScript;
-    private EmptyBody emptyScript;
-    public Sprite arrowSprite;
 
     //VARIABLES
     private float actualStuck = 0f;
@@ -23,7 +20,7 @@ public class Arrow : MonoBehaviour
         collider2D = GetComponent<BoxCollider2D>();
         body2D = GetComponent<Rigidbody2D>();
         render = GetComponent<SpriteRenderer>();
-        if (body2D.velocity.x < 0) { render.flipX = true; }
+        //if (body2D.velocity.x < 0) { render.flipX = true; }
     }
 
     void FixedUpdate()
@@ -51,21 +48,7 @@ public class Arrow : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             playerScript = collision.GetComponent<PlayerController2D>();
-            if (Picker.gameObject.tag == "Player" && playerScript.controller != pickerPlayerScript.controller
-                || Picker.gameObject.tag == "EmptyBody" && playerScript.controller != pickerEmptyScript.controller)
-            {
-                Debug.LogError("Wp: Hit");
-                actualStuck += Time.deltaTime * 10;
-                transform.position = new Vector3(transform.position.x, transform.position.y, 1);
-                this.transform.parent = collision.transform;
-            }
-        }
-
-        if (collision.gameObject.tag == "EmptyBody")
-        {
-            emptyScript = collision.GetComponent<EmptyBody>();
-            if (Picker.gameObject.tag == "Player" && emptyScript.controller != pickerPlayerScript.controller
-                || Picker.gameObject.tag == "EmptyBody" && emptyScript.controller != pickerEmptyScript.controller)
+            if (Picker.gameObject.tag == "Player" && playerScript.controller != pickerPlayerScript.controller)
             {
                 Debug.LogError("Wp: Hit");
                 actualStuck += Time.deltaTime * 10;
