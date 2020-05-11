@@ -55,6 +55,8 @@ public class MeleeScript : MonoBehaviour
             body2D.velocity = new Vector2(0, 0);
             Uses--;
             actualStuck = 0f;
+
+            Destroy(gameObject); //AUTODESTRUCCION
         }
     }
 
