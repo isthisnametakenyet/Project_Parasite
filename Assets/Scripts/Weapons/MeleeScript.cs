@@ -91,7 +91,7 @@ public class MeleeScript : MonoBehaviour
 
         if (collision.gameObject.tag == "Player" && collision.gameObject != Picker && Thrown == true)
         {
-            playerScript = collision.GetComponent<PlayerController2D>();
+            //playerScript = collision.GetComponent<PlayerController2D>();
             Debug.Log("Wp: Hit2");
             actualStuck += Time.deltaTime * 10;
             transform.position = new Vector3(transform.position.x, transform.position.y, 1);
