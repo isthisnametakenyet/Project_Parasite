@@ -72,7 +72,7 @@ public class RandomSpawnScript : MonoBehaviour
         if (numSpawned < maxNumSpawned) {
             if (Time.time > nextSpawn) // if time has come
             {
-                whatToSpawn = Random.Range(1, 7); //define random value between 1 and 6 (7 is exclusive)
+                whatToSpawn = Random.Range(1, 3); //define random value between 1 and 6 (7 is exclusive)
 
                 whereToSpawn = Random.Range(0, 5); // define random value between 0 and 4 (5 is exclusive) TODO:ArrayList.Length
 
@@ -80,7 +80,7 @@ public class RandomSpawnScript : MonoBehaviour
 
                 while (whatToSpawn == lastSpawned)
                 {
-                    whatToSpawn = Random.Range(1, 7);
+                    whatToSpawn = Random.Range(1, 3);
                 }
                 lastSpawned = whatToSpawn;
 

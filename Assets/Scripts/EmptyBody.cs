@@ -386,7 +386,6 @@ public class EmptyBody : MonoBehaviour
         if (collision.gameObject.tag == "PickUp" && player.GetAxis("Pickup") > 0 && isWeaponed == false)
         {
             pickUpScript = collision.GetComponent<PickUpScript>();
-            pickUpScript.Picker = this.gameObject;
             pickUpScript.picked = true;
             //animator.SetBool(WeaponingID, true);
             isWeaponed = true;

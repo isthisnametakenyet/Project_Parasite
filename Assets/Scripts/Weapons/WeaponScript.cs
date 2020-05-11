@@ -29,15 +29,20 @@ public class WeaponScript : MonoBehaviour
 
     //VARIABLES
     public int Uses = 2;
+    private int originalUses;
+    public float throwWeaponSpeed = 10f;
+
+    //GETTERS
     BoxCollider2D collider2D;
     Rigidbody2D body2D;
+    SpriteRenderer renderer;
 
     void Start()
     {
         collider2D = GetComponent<BoxCollider2D>();
-        if (Picker.gameObject.tag == "Player") { pickerPlayerScript = Picker.GetComponent<PlayerController2D>(); }
-        else if (Picker.gameObject.tag == "EmptyBody") { pickerEmptyScript = Picker.GetComponent<EmptyBody>(); }
-        collider2D.isTrigger = true;
+        pickerPlayerScript = Picker.GetComponent<PlayerController2D>();
+        //collider2D.isTrigger = true;
+        originalUses = Uses;
     }
 
     void FixedUpdate()
@@ -77,11 +82,24 @@ public class WeaponScript : MonoBehaviour
             pastState = 2;
             transform.gameObject.tag = "Weapon";
         }
-        else if (Thrown == true && pastState != 3 && Uses != -1)
+        else if (Thrown == true && Uses != -1)
         {
             pastState = 3;
             GameObject throwed = Instantiate(prefabWeaponArrow, new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
-            switch (this.gameObject.name)
+            body2D = throwed.GetComponent<Rigidbody2D>();
+            renderer = throwed.GetComponent<SpriteRenderer>();
+
+            if (pickerPlayerScript.facingright == true) //THROW WEAPON with headCharge as force
+            {
+                body2D.velocity = new Vector2(throwWeaponSpeed, 0);
+            }
+            else if (pickerPlayerScript.facingright == false)
+            {
+                body2D.velocity = new Vector2(-throwWeaponSpeed, 0);
+                renderer.flipX = true;
+            }
+
+        switch (this.gameObject.name)
             {
                 case "Axe":
                     Debug.Log("Axe");
@@ -112,8 +130,7 @@ public class WeaponScript : MonoBehaviour
                     break;
             }
             Uses = -1;
-            this.gameObject.SetActive(false);
-            Debug.Log("seted unactive");
+            this.gameObject.SetActive(false); //DESACTIVATE
         }
         else if (pastState != 0) { pastState = 0; }
         else if (Attack== false && Charging == false && Thrown == false)
@@ -121,5 +138,10 @@ public class WeaponScript : MonoBehaviour
             collider2D.enabled = false;
             transform.gameObject.tag = "Weapon";
         }
+    }
+
+    public void Pickup()
+    {
+        Uses = originalUses;
     }
 }
