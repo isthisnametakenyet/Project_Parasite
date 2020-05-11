@@ -92,5 +92,11 @@ public class HeadThrow : MonoBehaviour
             BadThrow = true;
             Debug.Log("Head Thrown Hits Ground");
         }
+
+        if (collision.gameObject.tag == "Player" && Parasiting == false)
+        {
+            BadThrow = true;
+            Debug.Log("Head Thrown Hits Player");
+        }
     }
 }

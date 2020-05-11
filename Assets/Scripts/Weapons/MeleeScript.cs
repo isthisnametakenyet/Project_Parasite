@@ -14,7 +14,7 @@ public class MeleeScript : MonoBehaviour
 
     //VARIABLES
     public int Uses = 2;
-    public float stuckTime = 0.5f;
+    public float stuckTime = 0.3f;
     public float actualStuck = 0f;
 
     //GETTERS
