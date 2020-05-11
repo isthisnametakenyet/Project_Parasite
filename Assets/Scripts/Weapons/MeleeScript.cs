@@ -70,7 +70,7 @@ public class MeleeScript : MonoBehaviour
             transform.position = new Vector3(transform.position.x, transform.position.y, 1);
         }
 
-        if (collision.gameObject.tag == "Player" && collision.gameObject != Picker && Thrown == true )
+        if (collision.gameObject.tag == "Player" && /*collision.gameObject != Picker &&*/ Thrown == true )
         {
             playerScript = collision.GetComponent<PlayerController2D>();
             Debug.Log("Wp: Hit");
@@ -82,14 +82,7 @@ public class MeleeScript : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Floor" && Thrown == true)
-        {
-            Debug.Log("Wp: Landed2");
-            actualStuck += Time.deltaTime * 10;
-            transform.position = new Vector3(transform.position.x, transform.position.y, 1);
-        }
-
-        if (collision.gameObject.tag == "Player" && collision.gameObject != Picker && Thrown == true)
+        if (collision.gameObject.tag == "Player" && /*collision.gameObject != Picker &&*/ Thrown == true)
         {
             //playerScript = collision.GetComponent<PlayerController2D>();
             Debug.Log("Wp: Hit2");
