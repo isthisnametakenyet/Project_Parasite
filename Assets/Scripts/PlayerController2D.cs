@@ -14,6 +14,7 @@ public class PlayerController2D : MonoBehaviour
 
     public Controller controller = Controller.NONE;
 
+    //PREFABS
     public GameObject ArmFallPrefab;
 
     public GameObject HeadFallPrefab;
@@ -22,6 +23,7 @@ public class PlayerController2D : MonoBehaviour
     public GameObject HeadThrowPrefab;
     private HeadThrow headThrow;
 
+    //TEMPORAL GAMEOBJECT
     public GameObject HeadThrown;
 
     public GameObject Parasiter;
@@ -435,7 +437,27 @@ public class PlayerController2D : MonoBehaviour
         Parasitcontroller = Controller.NONE;
         Parasiter = null;
 
+        switch (controller)
+        {
+            case Controller.PLAYER0:
+                player = ReInput.players.GetPlayer(0);
+                break;
+
+            case Controller.PLAYER1:
+                player = ReInput.players.GetPlayer(1);
+                break;
+
+            case Controller.PLAYER2:
+                player = ReInput.players.GetPlayer(2);
+                break;
+
+            case Controller.PLAYER3:
+                player = ReInput.players.GetPlayer(3);
+                break;
+        }
+
         animator.SetTrigger(GetHeadID);
+        Parasitable = true;
     }
 
 
@@ -445,6 +467,28 @@ public class PlayerController2D : MonoBehaviour
         Parasitcontroller = Controller.NONE;
         Parasiter = null;
         Parasited = false;
+
+        switch (controller)
+        {
+            case Controller.PLAYER0:
+                player = ReInput.players.GetPlayer(0);
+                break;
+
+            case Controller.PLAYER1:
+                player = ReInput.players.GetPlayer(1);
+                break;
+
+            case Controller.PLAYER2:
+                player = ReInput.players.GetPlayer(2);
+                break;
+
+            case Controller.PLAYER3:
+                player = ReInput.players.GetPlayer(3);
+                break;
+        }
+
+        animator.SetTrigger(GetHeadID);
+        Parasitable = true;
     }
 
 

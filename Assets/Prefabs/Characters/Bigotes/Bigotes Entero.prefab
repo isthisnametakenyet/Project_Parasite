@@ -586,12 +586,6 @@ MonoBehaviour:
   Bow: {fileID: 6967214711028334208}
   CrossBow: {fileID: 0}
   Boomerang: {fileID: 0}
-  swordPrefab: {fileID: 0}
-  axePrefab: {fileID: 0}
-  spearPrefab: {fileID: 0}
-  bowPrefab: {fileID: 0}
-  crossBowPrefab: {fileID: 0}
-  boomerangPrefab: {fileID: 0}
   Arms: 2
   runSpeed: 3
   jumpCooldown: 1.2
@@ -603,7 +597,7 @@ MonoBehaviour:
   forgetWeaponChargeRange: 0.4
   forgetHeadThrowRange: 0.4
   pickDelay: 0.2
-  Parasited: 0
+  Parasited: 1
   facingright: 1
   isWeaponed: 0
 --- !u!114 &7037919095303476864
