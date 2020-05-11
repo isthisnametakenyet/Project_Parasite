@@ -270,8 +270,9 @@ public class PlayerController2D : MonoBehaviour
                 animator.SetBool(HeadingID, false);
                 animator.SetBool(StaticID, true);
                 animator.SetTrigger(LoseHeadID);
-                GameObject head = Instantiate(HeadThrowPrefab, new Vector3(transform.position.x, transform.position.y + 0.3f, 0), Quaternion.identity);
 
+                GameObject head = Instantiate(HeadThrowPrefab, new Vector3(transform.position.x, transform.position.y + 0.5f, 0), Quaternion.identity);
+                
                 headThrow = head.GetComponent<HeadThrow>();
                 headThrow.ParasiterController = this.controller;
                 //headThrow.skin = this.skin;
@@ -280,14 +281,17 @@ public class PlayerController2D : MonoBehaviour
                 Rigidbody2D headRigid;
                 headRigid = head.GetComponent<Rigidbody2D>(); //GET HEAD RIGIDBODY
 
+                Physics2D.IgnoreCollision(head.GetComponent<Collider2D>(), GetComponent<Collider2D>()); //IGNORE COLLISION WITH THIS OBJECT
+
                 if (facingright == true) //THROW HEAD with headCharge as force
                 {
-                    headRigid.velocity = new Vector2(headCharge * 1.8f, 2f);
+                    headRigid.velocity = new Vector2(headCharge * 4f, 3f);
                 }
                 else if (facingright == false)
                 {
-                    headRigid.velocity = new Vector2(-headCharge * 1.8f, 2f);
+                    headRigid.velocity = new Vector2(-headCharge * 4f, 3f);
                 }
+
                 headCharge = 0;
                 Parasitable = true;
             }
