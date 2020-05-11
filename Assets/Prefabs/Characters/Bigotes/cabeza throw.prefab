@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 114083926929559496}
   - component: {fileID: 7619559506779232106}
   - component: {fileID: 3115430161606878409}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: cabeza throw
   m_TagString: FlyingHead
   m_Icon: {fileID: 0}
