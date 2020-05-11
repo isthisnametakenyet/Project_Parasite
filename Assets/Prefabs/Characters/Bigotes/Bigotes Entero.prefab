@@ -587,7 +587,7 @@ MonoBehaviour:
   CrossBow: {fileID: 0}
   Boomerang: {fileID: 0}
   Arms: 2
-  runSpeed: 4
+  runSpeed: 5
   jumpCooldown: 1.2
   jumpStrengh: 9
   headReturnDelay: 2

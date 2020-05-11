@@ -322,7 +322,6 @@ public class PlayerController2D : MonoBehaviour
                 if (isCharging == false && isHeading == false && isDucking == false)
                 {
                     body2D.velocity = new Vector2(runSpeed, body2D.velocity.y);
-                    //spriteRenderer.flipX = true;
                     animator.SetBool(MovingID, true);
                 }
             }
@@ -332,7 +331,6 @@ public class PlayerController2D : MonoBehaviour
                 if (isCharging == false && isHeading == false && isDucking == false)
                 {
                     body2D.velocity = new Vector2(-runSpeed, body2D.velocity.y);
-                    //spriteRenderer.flipX = false;
                     animator.SetBool(MovingID, true);
                 }
             }
@@ -385,7 +383,6 @@ public class PlayerController2D : MonoBehaviour
                 if (isCharging == true || isHeading == true)
                 {
                     body2D.velocity = new Vector2(runSpeed * 50 / 100, body2D.velocity.y); //(50% de max speed, velocidad actual y)
-                    spriteRenderer.flipX = true;
                     facingright = true;
                 }
             }
@@ -394,7 +391,6 @@ public class PlayerController2D : MonoBehaviour
                 if (isCharging == true || isHeading == true)
                 {
                     body2D.velocity = new Vector2(-runSpeed * 50 / 100, body2D.velocity.y);
-                    spriteRenderer.flipX = false;
                     facingright = false;
                 }
             }
