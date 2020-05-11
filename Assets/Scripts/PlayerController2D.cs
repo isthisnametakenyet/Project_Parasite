@@ -230,7 +230,7 @@ public class PlayerController2D : MonoBehaviour
                 if (weaponCharge < maxWeaponCharge)
                 {
                     weaponCharge += Time.deltaTime;
-                    Debug.Log(weaponCharge);
+                    //Debug.Log(weaponCharge);
                 }
                 else if (weaponCharge >= maxWeaponCharge)
                 {
@@ -256,7 +256,7 @@ public class PlayerController2D : MonoBehaviour
                     if (headCharge <= headThrowCharge)
                     {
                         headCharge += Time.deltaTime;
-                        Debug.Log(headCharge);
+                        //Debug.Log(headCharge);
                     }
                     else if (headCharge >= headThrowCharge)
                     {
@@ -515,6 +515,10 @@ public class PlayerController2D : MonoBehaviour
         if (collision.gameObject.tag == "Floor")
         {
             animator.SetBool(GroundingID, true);
+        }
+        if (collision.gameObject.tag == "FlyingHead") //PARASITE
+        {
+            Debug.LogError("Colision ENTER3");
         }
     }
     private void OnCollisionExit2D(Collision2D collision)
