@@ -589,7 +589,7 @@ MonoBehaviour:
   Arms: 2
   runSpeed: 5
   jumpCooldown: 1.2
-  jumpStrengh: 9
+  jumpStrengh: 10
   headReturnDelay: 2
   maxWeaponCharge: 2
   throwWeaponSpeed: 8
