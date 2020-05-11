@@ -502,6 +502,7 @@ public class PlayerController2D : MonoBehaviour
         if (collision.gameObject.tag == "FlyingHead" && Parasitable == true) //PARASITE
         {
             Parasite(collision.gameObject);
+            Debug.Log("Colision ENTER");
         }
     }
     private void OnCollisionStay2D(Collision2D collision)

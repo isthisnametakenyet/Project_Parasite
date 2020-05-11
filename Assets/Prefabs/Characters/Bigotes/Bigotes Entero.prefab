@@ -597,7 +597,7 @@ MonoBehaviour:
   forgetWeaponChargeRange: 0.4
   forgetHeadThrowRange: 0.4
   pickDelay: 0.2
-  Parasitable: 1
+  Parasitable: 0
   facingright: 1
   isWeaponed: 0
 --- !u!114 &7037919095303476864
