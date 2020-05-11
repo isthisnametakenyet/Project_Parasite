@@ -495,8 +495,15 @@ public class PlayerController2D : MonoBehaviour
     }
 
 
-
-    //COLISIONS------
+     
+    //COLISIONS
+    private void OnCollisioEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "FlyingHead" && Parasitable == true) //PARASITE
+        {
+            Parasite(collision.gameObject);
+        }
+    }
     private void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Floor")
@@ -512,6 +519,7 @@ public class PlayerController2D : MonoBehaviour
         }
     }
 
+    //TRIGGERS
     private void OnTriggerStay2D(Collider2D collision) //PICKUP
     {
         if (collision.gameObject.tag == "PickUp" && player.GetButtonDown("Pickup") && isWeaponed == false && picking == false)
@@ -651,6 +659,8 @@ public class PlayerController2D : MonoBehaviour
             }
         }
     }
+
+
 
     private void OnTriggerEnter2D(Collider2D collision) //DAMAGE && PARASITE
     {
