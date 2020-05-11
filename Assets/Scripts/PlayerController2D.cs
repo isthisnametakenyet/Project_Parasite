@@ -670,7 +670,7 @@ public class PlayerController2D : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision) //DAMAGE && PARASITE
     {
-        if (collision.gameObject.tag == "Throwing"/* && collision.gameObject != PickedWeapon*/)
+        if (collision.gameObject.tag == "Throwing" && Parasitable != true)
         {
             //animator.SetTrigger(DamagedID);
             GameObject head = Instantiate(HeadFallPrefab, new Vector3(transform.position.x, transform.position.y + 0.3f, 0), Quaternion.identity);
