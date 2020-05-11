@@ -72,8 +72,8 @@ public class MeleeScript : MonoBehaviour
 
         if (collision.gameObject.tag == "Player" && collision.gameObject != Picker && Thrown == true )
         {
+            Debug.Log("Wp: HitTri");
             playerScript = collision.GetComponent<PlayerController2D>();
-            Debug.Log("Wp: Hit");
             actualStuck += Time.deltaTime * 10;
         }
     }
@@ -82,6 +82,7 @@ public class MeleeScript : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player" && collision.gameObject != Picker && Thrown == true)
         {
+            Debug.Log("Wp: HitCol2");
             playerScript = collision.gameObject.GetComponent<PlayerController2D>();
             playerScript.ThrowCollision(collision.gameObject);
         }
