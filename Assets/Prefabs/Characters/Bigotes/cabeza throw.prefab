@@ -96,12 +96,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ParasiterController: 0
   OriginalBody: {fileID: 0}
-  HeadDead: {fileID: 8364601489975160416, guid: 7185bf4010ebe354e855638434bcac1c,
+  ParasitedBody: {fileID: 0}
+  HeadFallPrefab: {fileID: 8364601489975160416, guid: 7185bf4010ebe354e855638434bcac1c,
     type: 3}
   floorStunMax: 2
   expulsedStunMax: 3
   Expulsed: 0
-  GoBack: 0
   canReturn: 1
 --- !u!50 &7619559506779232106
 Rigidbody2D:
@@ -134,7 +134,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.2772584, y: 0}

@@ -10,12 +10,17 @@ public class HeadThrow : MonoBehaviour
     SpriteRenderer spriteRenderer;
 
     private Player player;
-    Rigidbody2D body2D;
-    BoxCollider2D collider2D;
 
+    Rigidbody2D body2D;
+    CircleCollider2D collider2D;
+
+    //GAMEOBJECTS
     public GameObject OriginalBody;
+    public GameObject ParasitedBody;
+    public GameObject HeadFallPrefab;
+
+    //SCRIPTS
     private PlayerController2D playerScript;
-    public GameObject HeadDead;
     private HeadReturn headFall;
 
     //VARIABLES
@@ -24,17 +29,16 @@ public class HeadThrow : MonoBehaviour
     private float actualStun = 0;
 
     private bool Parasiting = false;
-    private bool BadThrow = false;
 
+    private bool BadThrow = false;
     public bool Expulsed = false;
-    public bool GoBack = false;
     public bool canReturn = false;
 
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         body2D = GetComponent<Rigidbody2D>();
-        collider2D = GetComponent<BoxCollider2D>();
+        collider2D = GetComponent<CircleCollider2D>();
 
         switch (ParasiterController)
         {
@@ -62,34 +66,60 @@ public class HeadThrow : MonoBehaviour
     {
         if (OriginalBody == null) //PLAYER IS DEAD
         {
-            GameObject headDead = Instantiate(HeadDead, new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
+            Debug.Log("Player" + ParasiterController + "is Dead");
+            GameObject headDead = Instantiate(HeadFallPrefab, new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
             headFall = headDead.GetComponent<HeadReturn>();
             headFall.isDead = true;
             Destroy(gameObject); //AUTODESTRUCCION
         }
 
-        //RETURN
+        //TEMPS
         if (BadThrow == true && actualStun < floorStunMax) { actualStun += Time.deltaTime; canReturn = false; }
         else if (actualStun >= floorStunMax) { canReturn = true; }
 
         if (Expulsed == true && actualStun < expulsedStunMax) { actualStun += Time.deltaTime; canReturn = false; }
         else if (actualStun >= expulsedStunMax) { canReturn = true; }
 
-        if (player.GetAxis("HeadThrow&Return") > 0 && canReturn == true || GoBack == true && canReturn == true) 
+        if (player.GetAxis("HeadThrow&Return") > 0 && canReturn == true)
         {
-            Debug.Log("Head Throw: Return");
-            //this.transform.position = new Vector3(OriginalBody.transform.position.x, OriginalBody.transform.position.y, 0);
-            playerScript.ReturnHead();
-
-            Destroy(gameObject); //AUTODESTRUCCION
+                GoBack();
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+
+
+    //EXPULSE
+    /// Function executed if this HeadThrow is parasiting an enemy and the enemy gets back to their body
+    public void Expulse()
+    {
+        Debug.Log("Head Expulsed");
+        actualStun = 0;
+
+    }
+
+    //GOBACK
+    /// Function executed if this HeadThrow gets back to their original body
+    public void GoBack()
+    {
+        Debug.Log("Head Throw: Return");
+        playerScript = ParasitedBody.GetComponent<PlayerController2D>();
+        playerScript.GoBack();
+
+        playerScript = OriginalBody.GetComponent<PlayerController2D>();
+        playerScript.ReturnHead();
+
+        Destroy(gameObject); //AUTODESTRUCCION
+    }
+
+
+
+    //COLLISIONS
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Floor" && Parasiting == false)
         {
             BadThrow = true;
+            collider2D.isTrigger = false;
             Debug.Log("Head Thrown Hits Ground");
         }
 
@@ -101,6 +131,7 @@ public class HeadThrow : MonoBehaviour
             {
                 Debug.Log("Head Thrown Parasites Player");
                 playerScript.Parasite(this.gameObject);
+                ParasitedBody = collision.gameObject;
             }
         }
     }

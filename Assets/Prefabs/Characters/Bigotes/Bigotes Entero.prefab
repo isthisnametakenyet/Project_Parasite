@@ -577,15 +577,8 @@ MonoBehaviour:
     type: 3}
   HeadThrowPrefab: {fileID: 4469397126892602978, guid: 6c8f9bccdb374b04aa6127c668edb2e4,
     type: 3}
-  HeadThrown: {fileID: 0}
   Parasiter: {fileID: 0}
   Parasitcontroller: 0
-  Sword: {fileID: 7646740427913938385}
-  Axe: {fileID: 5059232016660044565}
-  Spear: {fileID: 0}
-  Bow: {fileID: 6967214711028334208}
-  CrossBow: {fileID: 0}
-  Boomerang: {fileID: 0}
   Arms: 2
   runSpeed: 5
   jumpCooldown: 1.2
@@ -598,6 +591,12 @@ MonoBehaviour:
   forgetHeadThrowRange: 0.4
   pickDelay: 0.2
   Parasitable: 0
+  Sword: {fileID: 7646740427913938385}
+  Axe: {fileID: 5059232016660044565}
+  Spear: {fileID: 0}
+  Bow: {fileID: 6967214711028334208}
+  CrossBow: {fileID: 0}
+  Boomerang: {fileID: 0}
   facingright: 1
   isWeaponed: 0
 --- !u!114 &7037919095303476864

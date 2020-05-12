@@ -153,17 +153,17 @@ public class PlayerController2D : MonoBehaviour
     }
 
     private void FixedUpdate(){
-        //PLAYER / ROUND MANAGER
+        //PLAYER - ROUND MANAGEMENT
         if (PlayerManager.Instance.DeleteProps == true) { Destroy(gameObject); } //END ROUND
         if(!ReInput.isReady || player == null) {
             Debug.Log("not set or Disconnected"); //TODO: MESSAGE IN SCREEN
             return;
         }
-        else if (playerReady == false)
-        {
-            Debug.Log("player not ready");
-            return;
-        };
+        //else if (playerReady == false)
+        //{
+        //    Debug.Log("player not ready" + controller);
+        //    return;
+        //};
 
         //TEMPS
         if (pickDelay <= pickTemp && picking == true) { picking = false; pickTemp = 0; }
@@ -246,59 +246,64 @@ public class PlayerController2D : MonoBehaviour
                 isWeaponed = false;
             }
 
-            //HEAD THROW
-            if (player.GetAxis("HeadThrow&Return") > 0 && isCharging == false && isDucking == false)
+            if(Parasited == false)
             {
+                //HEAD THROW
+                if (player.GetAxis("HeadThrow&Return") > 0 && isCharging == false && isDucking == false)
                 {
-                    animator.SetBool(HeadingID, true);
-                    if (headCharge <= headThrowCharge)
                     {
-                        headCharge += Time.deltaTime;
-                        //Debug.Log(headCharge);
+                        animator.SetBool(HeadingID, true);
+                        if (headCharge <= headThrowCharge)
+                        {
+                            headCharge += Time.deltaTime;
+                            //Debug.Log(headCharge);
+                        }
+                        else if (headCharge >= headThrowCharge)
+                        {
+                            Debug.Log("MaxCharge");
+                        }
                     }
-                    else if (headCharge >= headThrowCharge)
+                }
+                else if (headCharge < forgetHeadThrowRange) { headCharge = 0; animator.SetBool(HeadingID, false); }
+                else if (headCharge > forgetHeadThrowRange) //THROW
+                {
+                    animator.SetBool(HeadingID, false);
+                    animator.SetBool(StaticID, true);
+                    animator.SetTrigger(LoseHeadID);
+
+                    GameObject head = Instantiate(HeadThrowPrefab, new Vector3(transform.position.x, transform.position.y + 0.5f, 0), Quaternion.identity);
+
+                    headThrow = head.GetComponent<HeadThrow>();
+                    headThrow.ParasiterController = this.controller;
+                    //headThrow.skin = this.skin;
+                    headThrow.OriginalBody = this.gameObject; //REFERENCE THIS IN HEAD THROW TO KNOW ORIGIN
+
+                    Rigidbody2D headRigid;
+                    headRigid = head.GetComponent<Rigidbody2D>(); //GET HEAD RIGIDBODY
+
+                    Physics2D.IgnoreCollision(head.GetComponent<Collider2D>(), GetComponent<Collider2D>()); //IGNORE COLLISION WITH THIS OBJECT
+
+                    if (facingright == true) //THROW HEAD with headCharge as force
                     {
-                        Debug.Log("MaxCharge");
+                        headRigid.velocity = new Vector2(headCharge * 4f, 3f);
                     }
+                    else if (facingright == false)
+                    {
+                        headRigid.velocity = new Vector2(-headCharge * 4f, 3f);
+                    }
+
+                    headCharge = 0;
+                    Parasitable = true;
                 }
             }
-            else if (headCharge < forgetHeadThrowRange) { headCharge = 0; animator.SetBool(HeadingID, false); }
-            else if (headCharge > forgetHeadThrowRange) //THROW
-            {
-                animator.SetBool(HeadingID, false);
-                animator.SetBool(StaticID, true);
-                animator.SetTrigger(LoseHeadID);
-
-                GameObject head = Instantiate(HeadThrowPrefab, new Vector3(transform.position.x, transform.position.y + 0.5f, 0), Quaternion.identity);
-                
-                headThrow = head.GetComponent<HeadThrow>();
-                headThrow.ParasiterController = this.controller;
-                //headThrow.skin = this.skin;
-                headThrow.OriginalBody = this.gameObject; //REFERENCE THIS IN HEAD THROW TO KNOW ORIGIN
-
-                Rigidbody2D headRigid;
-                headRigid = head.GetComponent<Rigidbody2D>(); //GET HEAD RIGIDBODY
-
-                Physics2D.IgnoreCollision(head.GetComponent<Collider2D>(), GetComponent<Collider2D>()); //IGNORE COLLISION WITH THIS OBJECT
-
-                if (facingright == true) //THROW HEAD with headCharge as force
-                {
-                    headRigid.velocity = new Vector2(headCharge * 4f, 3f);
-                }
-                else if (facingright == false)
-                {
-                    headRigid.velocity = new Vector2(-headCharge * 4f, 3f);
-                }
-
-                headCharge = 0;
-                Parasitable = true;
-            }
+            //IF PARASITED LO HACE EL HEAD THROW JUNTO CON LA FUNCION HeadReturn()
         }
     }
 
 
 
     //MOVEMENT
+    /// Movement (Left, Right, Jump, Duck, SlowLeft, SlowRight)
     void Movement()
     {
         //bool isCondition = animator.GetBool(ConditionID); //animator.SetBool(ConditionID, true);
@@ -395,12 +400,17 @@ public class PlayerController2D : MonoBehaviour
         }
     }
 
+
     //PARASITE
+    /// Function executed when this body gets parasited by enemy HeadThrow
     public void Parasite(GameObject parasiteObject)
     {
         if (Parasitable == true)
         {
+            //SET FROM THROW
             Parasiter = parasiteObject;
+            animator.SetBool(StaticID, false);
+            animator.SetTrigger(GetHeadID);
 
             headThrow = Parasiter.GetComponent<HeadThrow>();
             this.Parasitcontroller = headThrow.ParasiterController;
@@ -426,33 +436,69 @@ public class PlayerController2D : MonoBehaviour
                     break;
             }
 
-            //Parasiter.transform.position = new Vector3(transform.position.y, transform.position.x, 0);
+
+            //SET THROW
+            spriteRenderer = Parasiter.GetComponent<SpriteRenderer>();
+            spriteRenderer.enabled = false;
+
             Parasiter.transform.parent = this.gameObject.transform;
+            Parasiter.transform.position = new Vector3(transform.position.x, transform.position.y + 0.8f, 0);
             Parasiter.transform.Rotate(0.0f, 0.0f, 0.0f, Space.Self);
 
             body2D = Parasiter.GetComponent<Rigidbody2D>();
             //body2D.bodyType = RigidbodyType2D.Static;
             body2D.bodyType = RigidbodyType2D.Kinematic;
+            body2D.velocity = Vector3.zero;
+            body2D.angularVelocity = 0;
 
             circle2D = Parasiter.GetComponent<CircleCollider2D>();
             circle2D.isTrigger = true;
         }
     }
 
-    //EXPULSE
+
+    //RETURN HEAD -> EXPULSE
+    /// Function executed when Headthrow of this body returns back
+    public void ReturnHead()
+    {
+        Debug.Log("ReturnHead()");
+        animator.SetTrigger(GetHeadID);
+        animator.SetBool(StaticID, false);
+        Parasitable = false;
+        if (Parasited == true)
+        {
+            Expulse();
+        }
+        else
+        {
+            UnParasited();
+        }
+    }
+
+
+    //RUN HEAD -> UNPARASITED
+    /// Function executed if the Parasiter goes back to their original body
+    public void RunHead()
+    {
+        animator.SetTrigger(LoseHeadID);
+        animator.SetBool(StaticID, true);
+        UnParasited();
+    }
+
+
+    //EXPULSE -> UNPARASITED
+    /// Function executed when Headthrow of this body returns back and this body is parasited
     void Expulse()
     {
         Debug.Log("Expulse()");
         headThrow = Parasiter.GetComponent<HeadThrow>();
-        headThrow.Expulsed = true;
-        //body2D = Parasiter.GetComponent<Rigidbody2D>();
-        //throw expulsed
-
+        headThrow.Expulse();
         UnParasited();
     }
 
 
     //UNPARASITED
+    /// Function executed to clean Parasiter && ParasiterController varaibles and make the controller this body's original controller
     void UnParasited()
     {
         Debug.Log("UnParasited()");
@@ -483,33 +529,18 @@ public class PlayerController2D : MonoBehaviour
     }
 
 
-    //RETURN HEAD
-    public void ReturnHead()
-    {
-        Debug.Log("ReturnHead()");
-        animator.SetTrigger(GetHeadID);
-        animator.SetBool(StaticID, false);
-        Parasitable = false;
-        if (Parasited == true)
-        {
-            Expulse();
-        }
-        else
-        {
-            UnParasited();
-        }
-    }
-
     //COLLISION THROW
+    /// Function executed when Throw Weapon collides with player
     public void ThrowCollision(GameObject collision)
     {
-        if (Parasitable != true)
+        if (Parasitable != true && Parasited == false)
         {
             Debug.Log("ThrowCollision()");
 
             //animator.SetTrigger(DamagedID);
             GameObject head = Instantiate(HeadFallPrefab, new Vector3(transform.position.x, transform.position.y + 0.3f, 0), Quaternion.identity);
             animator.SetTrigger(LoseHeadID);
+            animator.SetBool(StaticID, true);
 
             headReturn = head.GetComponent<HeadReturn>();
             headReturn.controller = this.controller;
@@ -531,6 +562,11 @@ public class PlayerController2D : MonoBehaviour
             else { Debug.LogError("Error Detectando Direccion de Collision"); }
 
             Parasitable = true;
+        }
+        else if (Parasited == true)
+        {
+            headThrow = Parasiter.GetComponent<HeadThrow>();
+            headThrow.Expulse();
         }
     }
 
@@ -806,32 +842,17 @@ public class PlayerController2D : MonoBehaviour
             }
         }
 
+
+
         if (collision.gameObject.tag == "Damage") //DEATH
         {
             Debug.Log("Touch Sierra [DEATH " + controller + "]");
 
-            //LOSE HEAD
-            GameObject head = Instantiate(HeadFallPrefab, new Vector3(transform.position.x, transform.position.y + 0.3f, 0), Quaternion.identity);
+            //RETURN PARASITE
+            headThrow = Parasiter.GetComponent<HeadThrow>();
+            headThrow.GoBack();
 
-            Rigidbody2D headRigid;
-            headRigid = head.GetComponent<Rigidbody2D>(); //ASIGN HEAD RIGID
-            headCharge = 2f;
-            headReturn = head.GetComponent<HeadReturn>();
-            //headReturn.skin = this.skin;
-            headReturn.controller = this.controller;
-            headReturn.isDead = true;
-
-            if (transform.position.x > collision.transform.position.x) //RIGHT
-            {
-                headRigid.velocity = new Vector2(headCharge, 2f);
-            }
-            else if (transform.position.x < collision.transform.position.x) //LEFT
-            {
-                headRigid.velocity = new Vector2(-headCharge, 2f);
-            }
-            else { Debug.LogError("Error Detectando Direccion de Collision"); }
-
-            //LOSE ARM
+            //LOSE ARM/S
             switch (Arms)
             {
                 case 1:
