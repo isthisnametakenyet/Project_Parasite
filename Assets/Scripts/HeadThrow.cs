@@ -7,13 +7,10 @@ public class HeadThrow : MonoBehaviour
 {
     public Controller ParasiterController = Controller.NONE;
 
-    SpriteRenderer spriteRenderer;
 
     private Player player;
 
-    Rigidbody2D body2D;
-    CircleCollider2D collider2D;
-
+    #region InstanceVariables
     //GAMEOBJECTS
     public GameObject OriginalBody;
     public GameObject ParasitedBody;
@@ -33,12 +30,18 @@ public class HeadThrow : MonoBehaviour
     private bool BadThrow = false;
     public bool Expulsed = false;
     public bool canReturn = false;
+    #endregion
+
+    //COMPONENTS
+    SpriteRenderer thisspriteRenderer;
+    Rigidbody2D thisbody2D;
+    CircleCollider2D thiscollider2D;
 
     void Start()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        body2D = GetComponent<Rigidbody2D>();
-        collider2D = GetComponent<CircleCollider2D>();
+        thisspriteRenderer = GetComponent<SpriteRenderer>();
+        thisbody2D = GetComponent<Rigidbody2D>();
+        thiscollider2D = GetComponent<CircleCollider2D>();
 
         switch (ParasiterController)
         {
@@ -102,8 +105,12 @@ public class HeadThrow : MonoBehaviour
     public void GoBack()
     {
         Debug.Log("Head Throw: Return");
-        playerScript = ParasitedBody.GetComponent<PlayerController2D>();
-        playerScript.RunHead();
+
+        if (Parasiting == true)
+        {
+            playerScript = ParasitedBody.GetComponent<PlayerController2D>();
+            playerScript.RunHead();
+        }
 
         playerScript = OriginalBody.GetComponent<PlayerController2D>();
         playerScript.ReturnHead();
@@ -119,7 +126,7 @@ public class HeadThrow : MonoBehaviour
         if (collision.gameObject.tag == "Floor" && Parasiting == false)
         {
             BadThrow = true;
-            collider2D.isTrigger = false;
+            thiscollider2D.isTrigger = false;
             Debug.Log("Head Thrown Hits Ground");
         }
 
@@ -132,6 +139,12 @@ public class HeadThrow : MonoBehaviour
                 Debug.Log("Head Thrown Parasites Player");
                 playerScript.Parasite(this.gameObject);
                 ParasitedBody = collision.gameObject;
+                Parasiting = true;
+
+                ///Remove unnecesary components
+                Destroy(thisspriteRenderer);
+                Destroy(thisbody2D);
+                Destroy(thiscollider2D);
             }
         }
     }

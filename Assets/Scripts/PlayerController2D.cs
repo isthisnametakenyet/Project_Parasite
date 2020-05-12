@@ -92,10 +92,11 @@ public class PlayerController2D : MonoBehaviour
     private int LoseHeadID;      ///Trigger
     private int GetHeadID;       ///Trigger
     private int StaticID;        ///Bool
-
+    
+    //COMPONENTS
     Animator animator;
     Rigidbody2D body2D;
-    SpriteRenderer spriteRenderer;
+    Rigidbody2D thisbody2D;
     BoxCollider2D box2D;
     CircleCollider2D circle2D;
 
@@ -103,8 +104,7 @@ public class PlayerController2D : MonoBehaviour
     {
         //SoundManager.instance.Play("Shot1");
         animator = GetComponent<Animator>();
-        body2D = GetComponent<Rigidbody2D>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        thisbody2D = GetComponent<Rigidbody2D>();
 
         switch (controller)
         {
@@ -146,7 +146,7 @@ public class PlayerController2D : MonoBehaviour
     private void Update()
     {
         //IDLE IS AUTOMATIC
-        body2D.velocity = new Vector2(0, body2D.velocity.y);
+        thisbody2D.velocity = new Vector2(0, thisbody2D.velocity.y);
 
         //MOVEMENT
         Movement();
@@ -324,7 +324,7 @@ public class PlayerController2D : MonoBehaviour
                 //Debug.Log("Moving > 0");
                 if (isCharging == false && isHeading == false && isDucking == false)
                 {
-                    body2D.velocity = new Vector2(runSpeed, body2D.velocity.y);
+                    thisbody2D.velocity = new Vector2(runSpeed, thisbody2D.velocity.y);
                     animator.SetBool(MovingID, true);
                 }
             }
@@ -333,7 +333,7 @@ public class PlayerController2D : MonoBehaviour
                 //Debug.Log("Moving < 0");
                 if (isCharging == false && isHeading == false && isDucking == false)
                 {
-                    body2D.velocity = new Vector2(-runSpeed, body2D.velocity.y);
+                    thisbody2D.velocity = new Vector2(-runSpeed, thisbody2D.velocity.y);
                     animator.SetBool(MovingID, true);
                 }
             }
@@ -366,7 +366,7 @@ public class PlayerController2D : MonoBehaviour
             {
                 jumpTemp = 0;
                 animator.SetTrigger(JumpedID);
-                body2D.velocity = new Vector2(body2D.velocity.x, jumpStrengh);
+                thisbody2D.velocity = new Vector2(thisbody2D.velocity.x, jumpStrengh);
             }
 
             ////DUCK
@@ -385,7 +385,7 @@ public class PlayerController2D : MonoBehaviour
             {
                 if (isCharging == true || isHeading == true)
                 {
-                    body2D.velocity = new Vector2(runSpeed * 50 / 100, body2D.velocity.y); //(50% de max speed, velocidad actual y)
+                    thisbody2D.velocity = new Vector2(runSpeed * 50 / 100, thisbody2D.velocity.y); //(50% de max speed, velocidad actual y)
                     facingright = true;
                 }
             }
@@ -393,7 +393,7 @@ public class PlayerController2D : MonoBehaviour
             {
                 if (isCharging == true || isHeading == true)
                 {
-                    body2D.velocity = new Vector2(-runSpeed * 50 / 100, body2D.velocity.y);
+                    thisbody2D.velocity = new Vector2(-runSpeed * 50 / 100, thisbody2D.velocity.y);
                     facingright = false;
                 }
             }
@@ -438,9 +438,6 @@ public class PlayerController2D : MonoBehaviour
 
 
             //SET THROW
-            spriteRenderer = Parasiter.GetComponent<SpriteRenderer>();
-            spriteRenderer.enabled = false;
-
             Parasiter.transform.parent = this.gameObject.transform;
             Parasiter.transform.position = new Vector3(transform.position.x, transform.position.y + 0.8f, 0);
             Parasiter.transform.Rotate(0.0f, 0.0f, 0.0f, Space.Self);
