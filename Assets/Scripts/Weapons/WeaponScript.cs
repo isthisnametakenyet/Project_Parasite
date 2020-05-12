@@ -93,23 +93,23 @@ public class WeaponScript : MonoBehaviour
                     throwed.transform.Rotate(0.0f, 0.0f, -90.0f, Space.Self);
                     if (pickerPlayerScript.facingright == true)
                     {
-                        throwed.transform.position = new Vector3(transform.position.x + 0.4f, transform.position.y, 0f);
+                        throwed.transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
                     }
                     else if (pickerPlayerScript.facingright == false)
                     {
-                        throwed.transform.position = new Vector3(transform.position.x - 0.4f, transform.position.y, 0f);
+                        throwed.transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
                     }
                     flipDir = 2;
                     break;
                 case "Axe":
                     if (pickerPlayerScript.facingright == true)
                     {
-                        throwed.transform.position = new Vector3(transform.position.x + 0.45f, transform.position.y, 0f);
+                        //throwed.transform.position = new Vector3(transform.position.x + 0.45f, transform.position.y, 0f);
                         throwed.transform.Rotate(0.0f, 0.0f, -30.0f, Space.Self);
                     }
                     else if (pickerPlayerScript.facingright == false)
                     {
-                        throwed.transform.position = new Vector3(transform.position.x - 0.45f, transform.position.y, 0f);
+                        //throwed.transform.position = new Vector3(transform.position.x - 0.45f, transform.position.y, 0f);
                         throwed.transform.Rotate(0.0f, 0.0f, 30.0f, Space.Self);
                     }
                     flipDir = 1;

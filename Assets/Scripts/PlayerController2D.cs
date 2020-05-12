@@ -14,7 +14,9 @@ public class PlayerController2D : MonoBehaviour
 
     public Controller controller = Controller.NONE;
 
+    #region InstanceVariables
     //PREFABS
+    [Header("Prefabs")]
     public GameObject ArmFallPrefab;
 
     public GameObject HeadFallPrefab;
@@ -23,13 +25,31 @@ public class PlayerController2D : MonoBehaviour
     public GameObject HeadThrowPrefab;
     private HeadThrow headThrow;
 
-    //TEMPORAL GAMEOBJECT
-    public GameObject HeadThrown;
-
+    //PARASITER
+    [Header("Parasiter")]
     public GameObject Parasiter;
     public Controller Parasitcontroller = Controller.NONE;
 
+    //VARIABLES
+    [Header("Variables")]
+    public int Arms = 2;
+    public float runSpeed = 2f;
+    public float jumpCooldown = 2f;
+    public float jumpStrengh = 6.5f;
+    public float headReturnDelay = 2f;
+    public float maxWeaponCharge = 1.5f;
+    public float throwWeaponSpeed = 10f;
+    public float headThrowCharge = 2f;
+    public float forgetWeaponChargeRange = 0.3f;
+    public float forgetHeadThrowRange = 0.4f;
+    public float pickDelay = 0.2f;
+
+    public bool Parasitable = false;
+    private bool Parasited = false;
+    private bool ReturnedHead = false;
+
     //WEAPONS ATTACHED
+    [Header("Weapons")]
     ///melee
     public GameObject Sword;
     public GameObject Axe;
@@ -45,32 +65,17 @@ public class PlayerController2D : MonoBehaviour
     private PickUpScript pickUpScript;
     private WeaponScript weaponScript;
 
-    //VARIABLES
-    public int Arms = 2;
-    public float runSpeed = 2f; 
-    public float jumpCooldown = 2f;
-    public float jumpStrengh = 6.5f;
-    public float headReturnDelay = 2f;
-    public float maxWeaponCharge = 1.5f;
-    public float throwWeaponSpeed = 10f;
-    public float headThrowCharge = 2f;
-    public float forgetWeaponChargeRange = 0.3f;
-    public float forgetHeadThrowRange = 0.4f;
-    public float pickDelay = 0.2f;
-
-    public bool Parasitable = false;
-    private bool Parasited = false;
-    private bool ReturnedHead = false;
-
     //TEMPORALES
     float jumpTemp = 0;
 
-    public bool facingright = true;
+    [HideInInspector] public bool facingright = true;
     float headCharge = 0f;
     float weaponCharge = 0f;
+    [HideInInspector] public bool isWeaponed = false;
 
     bool picking = false;
     float pickTemp = 0;
+    #endregion
 
     //CONDITIONS
     private int GroundingID;     ///Bool
@@ -92,6 +97,7 @@ public class PlayerController2D : MonoBehaviour
     Rigidbody2D body2D;
     SpriteRenderer spriteRenderer;
     BoxCollider2D box2D;
+    CircleCollider2D circle2D;
 
     void Start()
     {
@@ -136,7 +142,6 @@ public class PlayerController2D : MonoBehaviour
         StaticID =      Animator.StringToHash("Static");
     }
 
-    public bool isWeaponed = false;
 
     private void Update()
     {
@@ -391,7 +396,7 @@ public class PlayerController2D : MonoBehaviour
     }
 
     //PARASITE
-    void Parasite(GameObject parasiteObject)
+    public void Parasite(GameObject parasiteObject)
     {
         if (Parasitable == true)
         {
@@ -421,8 +426,16 @@ public class PlayerController2D : MonoBehaviour
                     break;
             }
 
+            //Parasiter.transform.position = new Vector3(transform.position.y, transform.position.x, 0);
             Parasiter.transform.parent = this.gameObject.transform;
-            Parasiter.transform.position = new Vector3(this.gameObject.transform.position.y, this.gameObject.transform.position.x, 0);
+            Parasiter.transform.Rotate(0.0f, 0.0f, 0.0f, Space.Self);
+
+            body2D = Parasiter.GetComponent<Rigidbody2D>();
+            //body2D.bodyType = RigidbodyType2D.Static;
+            body2D.bodyType = RigidbodyType2D.Kinematic;
+
+            circle2D = Parasiter.GetComponent<CircleCollider2D>();
+            circle2D.isTrigger = true;
         }
     }
 
@@ -861,11 +874,6 @@ public class PlayerController2D : MonoBehaviour
                     break;
             }
             Destroy(gameObject); //AUTODESTRUCCION
-        }
-
-        if (collision.gameObject.tag == "FlyingHead" && Parasitable == true) //PARASITE
-        {
-            Parasite(collision.gameObject);
         }
     }
 }
