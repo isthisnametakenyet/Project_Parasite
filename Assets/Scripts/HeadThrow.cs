@@ -103,7 +103,7 @@ public class HeadThrow : MonoBehaviour
     {
         Debug.Log("Head Throw: Return");
         playerScript = ParasitedBody.GetComponent<PlayerController2D>();
-        playerScript.GoBack();
+        playerScript.RunHead();
 
         playerScript = OriginalBody.GetComponent<PlayerController2D>();
         playerScript.ReturnHead();
