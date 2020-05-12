@@ -101,7 +101,7 @@ public class HeadThrow : MonoBehaviour
     }
 
     //GOBACK
-    /// Function executed if this HeadThrow gets back to their original body
+    /// Function executed if this HeadThrow gets back to their original body 
     public void GoBack()
     {
         Debug.Log("Head Throw: Return");
