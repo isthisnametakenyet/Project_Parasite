@@ -18,17 +18,15 @@ public class HeadReturn : MonoBehaviour
     public float MaxStun = 2;
     float Wait = 0;
     public bool Stunned = false;
-    public bool ParasiteReturn = false;
     public bool isDead = false;
-    public bool Returning = false;
 
-    private int BackID;
+    //private int BackID;
 
-    Animator animator;
+    //Animator animator;
 
     void Start()
     {
-        animator = GetComponent<Animator>();
+        //animator = GetComponent<Animator>();
 
         switch (controller)
         {
@@ -76,14 +74,10 @@ public class HeadReturn : MonoBehaviour
             this.enabled = false;
         }
 
-        if (Stunned == true && Wait < MaxStun)
-        {
-            Wait += Time.deltaTime * 1f;
-            Debug.Log("Stun:" + Wait);
-        }
+        if (Stunned == true && Wait < MaxStun) { Wait += Time.deltaTime * 1f; }
         else { Stunned = false; }
 
-        if (player.GetAxis("HeadThrow&Return") > 0 && Stunned == false || Returning == true)
+        if (player.GetAxis("HeadThrow&Return") > 0 && Stunned == false)
         {
             //animator.Play(BackID);
 
