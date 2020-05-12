@@ -20,10 +20,18 @@ public class PlayerController2D : MonoBehaviour
     public GameObject ArmFallPrefab;
 
     public GameObject HeadFallPrefab;
-    private HeadReturn headReturn;
 
     public GameObject HeadThrowPrefab;
+
+    //SCRIPTS
+    private HeadReturn headReturn;
     private HeadThrow headThrow;
+
+    private PickUpScript pickUpScript;
+
+    private WeaponScript weaponScript;
+    private MeleeScript meleeScript;
+
 
     //PARASITER
     [Header("Parasiter")]
@@ -44,9 +52,8 @@ public class PlayerController2D : MonoBehaviour
     public float forgetHeadThrowRange = 0.4f;
     public float pickDelay = 0.2f;
 
-    public bool Parasitable = false;
+    [HideInInspector] public bool Parasitable = false;
     private bool Parasited = false;
-    private bool ReturnedHead = false;
 
     //WEAPONS ATTACHED
     [Header("Weapons")]
@@ -54,16 +61,11 @@ public class PlayerController2D : MonoBehaviour
     public GameObject Sword;
     public GameObject Axe;
     public GameObject Spear;
-    private MeleeScript meleeScript;
     ///ranged
     public GameObject Bow;
     public GameObject CrossBow;
     ///boomerang
     public GameObject Boomerang;
-
-    //PICKUP
-    private PickUpScript pickUpScript;
-    private WeaponScript weaponScript;
 
     //TEMPORALES
     float jumpTemp = 0;

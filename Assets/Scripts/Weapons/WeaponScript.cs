@@ -84,6 +84,7 @@ public class WeaponScript : MonoBehaviour
         else if (Thrown == true && Uses != -1)
         {
             GameObject throwed = Instantiate(prefabThrow, new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
+            //throwed.transform.Rotate(0.0f, 0.0f, this.transform.rotation.z, Space.Self);
 
             int flipDir = 0;
             //Configure initial Position && Rotation
@@ -91,31 +92,20 @@ public class WeaponScript : MonoBehaviour
             {
                 case "Sword":
                     throwed.transform.Rotate(0.0f, 0.0f, -90.0f, Space.Self);
-                    if (pickerPlayerScript.facingright == true)
-                    {
-                        throwed.transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
-                    }
-                    else if (pickerPlayerScript.facingright == false)
-                    {
-                        throwed.transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
-                    }
                     flipDir = 2;
                     break;
                 case "Axe":
                     if (pickerPlayerScript.facingright == true)
                     {
-                        //throwed.transform.position = new Vector3(transform.position.x + 0.45f, transform.position.y, 0f);
-                        throwed.transform.Rotate(0.0f, 0.0f, -30.0f, Space.Self);
+                        throwed.transform.Rotate(0.0f, 0.0f, this.transform.rotation.z, Space.Self);
                     }
                     else if (pickerPlayerScript.facingright == false)
                     {
-                        //throwed.transform.position = new Vector3(transform.position.x - 0.45f, transform.position.y, 0f);
-                        throwed.transform.Rotate(0.0f, 0.0f, 30.0f, Space.Self);
+                        throwed.transform.Rotate(0.0f, 0.0f, this.transform.rotation.z, Space.Self);
                     }
                     flipDir = 1;
                     break;
                 case "Spear":
-                    //throwed.transform.position = new Vector3(transform.position.x + 0.37f, transform.position.y + 0.2f, 0f);
                     //throwed.transform.Rotate(0.0f, 0.0f, -90.0f, Space.Self);
                     //flipDir = 1;
                     break;

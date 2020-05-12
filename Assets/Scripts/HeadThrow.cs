@@ -18,12 +18,15 @@ public class HeadThrow : MonoBehaviour
 
     //SCRIPTS
     private PlayerController2D playerScript;
+    private PlayerController2D parasitedScript;
     private HeadReturn headFall;
 
     //VARIABLES
     public float floorStunMax = 2f;
     public float expulsedStunMax = 3f;
     private float actualStun = 0;
+
+    public float expulsedStrengh = 3f;
 
     private bool Parasiting = false;
 
@@ -83,9 +86,11 @@ public class HeadThrow : MonoBehaviour
         if (Expulsed == true && actualStun < expulsedStunMax) { actualStun += Time.deltaTime; canReturn = false; }
         else if (actualStun >= expulsedStunMax) { canReturn = true; }
 
+
+        //GOBACK
         if (player.GetAxis("HeadThrow&Return") > 0 && canReturn == true)
         {
-                GoBack();
+            GoBack();
         }
     }
 
@@ -98,6 +103,17 @@ public class HeadThrow : MonoBehaviour
         Debug.Log("Head Expulsed");
         actualStun = 0;
 
+        thisspriteRenderer.enabled = true;
+        thiscollider2D.enabled = true;
+
+        if (playerScript.facingright == true) //THROW HEAD with headCharge as force
+        {
+            thisbody2D.velocity = new Vector2(expulsedStrengh * 4f, 3f);
+        }
+        else if (playerScript.facingright == false)
+        {
+            thisbody2D.velocity = new Vector2(-expulsedStrengh * 4f, 3f);
+        }
     }
 
     //GOBACK
@@ -108,11 +124,10 @@ public class HeadThrow : MonoBehaviour
 
         if (Parasiting == true)
         {
-            playerScript = ParasitedBody.GetComponent<PlayerController2D>();
-            playerScript.RunHead();
+            parasitedScript = ParasitedBody.GetComponent<PlayerController2D>();
+            parasitedScript.RunHead();
         }
 
-        playerScript = OriginalBody.GetComponent<PlayerController2D>();
         playerScript.ReturnHead();
 
         Destroy(gameObject); //AUTODESTRUCCION
@@ -133,18 +148,17 @@ public class HeadThrow : MonoBehaviour
         if (collision.gameObject.tag == "Player" && Parasiting == false)
         {
             Debug.Log("Head Thrown Hits Player");
-            playerScript = collision.gameObject.GetComponent<PlayerController2D>();
-            if (playerScript.Parasitable == true)
+            parasitedScript = collision.gameObject.GetComponent<PlayerController2D>();
+            if (parasitedScript.Parasitable == true)
             {
                 Debug.Log("Head Thrown Parasites Player");
-                playerScript.Parasite(this.gameObject);
+                parasitedScript.Parasite(this.gameObject);
                 ParasitedBody = collision.gameObject;
                 Parasiting = true;
 
-                ///Remove unnecesary components
-                Destroy(thisspriteRenderer);
-                Destroy(thisbody2D);
-                Destroy(thiscollider2D);
+                ///Pause unnecesary components
+                thisspriteRenderer.enabled = false;
+                thiscollider2D.enabled = false;
             }
         }
     }
