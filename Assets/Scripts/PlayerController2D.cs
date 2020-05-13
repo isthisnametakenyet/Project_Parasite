@@ -111,19 +111,19 @@ public class PlayerController2D : MonoBehaviour
         switch (controller)
         {
             case Controller.PLAYER0:
-                if (PlayerManager.Instance.Player1ON == true) { playerReady = true; player = ReInput.players.GetPlayer(0); }
+                if (PlayerManager.Instance.Player1ON == true) { playerReady = true; player = ReInput.players.GetPlayer(0); PlayerManager.Instance.isAlivePlayer1 = true; }
                 break;
 
             case Controller.PLAYER1:
-                if (PlayerManager.Instance.Player2ON == true) { playerReady = true; player = ReInput.players.GetPlayer(1); }
+                if (PlayerManager.Instance.Player2ON == true) { playerReady = true; player = ReInput.players.GetPlayer(1); PlayerManager.Instance.isAlivePlayer2 = true; }
                 break;
 
             case Controller.PLAYER2:
-                if (PlayerManager.Instance.Player2ON == true) { playerReady = true; player = ReInput.players.GetPlayer(2); }
+                if (PlayerManager.Instance.Player2ON == true) { playerReady = true; player = ReInput.players.GetPlayer(2); PlayerManager.Instance.isAlivePlayer3 = true; }
                 break;
 
             case Controller.PLAYER3:
-                if (PlayerManager.Instance.Player2ON == true) { playerReady = true; player = ReInput.players.GetPlayer(3); }
+                if (PlayerManager.Instance.Player2ON == true) { playerReady = true; player = ReInput.players.GetPlayer(3); PlayerManager.Instance.isAlivePlayer4 = true; }
                 break;
         }
 
@@ -156,7 +156,7 @@ public class PlayerController2D : MonoBehaviour
 
     private void FixedUpdate(){
         //PLAYER - ROUND MANAGEMENT
-        if (PlayerManager.Instance.DeleteProps == true) { Destroy(gameObject); } //END ROUND
+        if (PlayerManager.Instance.DeleteProps == true) { Destroy(gameObject); Debug.Log("Player: DeletedProp"); } //END ROUND
         if(!ReInput.isReady || player == null) {
             Debug.Log("not set or Disconnected"); //TODO: MESSAGE IN SCREEN
             return;
@@ -180,7 +180,8 @@ public class PlayerController2D : MonoBehaviour
         bool isDucking =  animator.GetBool(DuckingID);
         bool isStatic =   animator.GetBool(StaticID);
 
-        if (isStatic == false) //ATTACK, CHARGE, HEAD THROW
+        //ATTACK, CHARGE, HEAD THROW
+        if (isStatic == false)
         {
             //ATTACK
             if (player.GetAxis("Attack&Charge") > 0)
@@ -887,22 +888,21 @@ public class PlayerController2D : MonoBehaviour
             switch (controller)
             {
                 case Controller.PLAYER0:
-                    if (PlayerManager.Instance.Player1ON == true) { PlayerManager.Instance.isAlivePlayer1 = false; }
+                    PlayerManager.Instance.isAlivePlayer1 = false;
                     break;
 
                 case Controller.PLAYER1:
-                    if (PlayerManager.Instance.Player2ON == true) { PlayerManager.Instance.isAlivePlayer2 = false; }
+                    PlayerManager.Instance.isAlivePlayer2 = false;
                     break;
 
                 case Controller.PLAYER2:
-                    if (PlayerManager.Instance.Player2ON == true) { PlayerManager.Instance.isAlivePlayer3 = false; }
+                    PlayerManager.Instance.isAlivePlayer3 = false;
                     break;
 
                 case Controller.PLAYER3:
-                    if (PlayerManager.Instance.Player2ON == true) { PlayerManager.Instance.isAlivePlayer4 = false; }
+                    PlayerManager.Instance.isAlivePlayer4 = false;
                     break;
             }
-
             Destroy(gameObject); //AUTODESTRUCCION
         }
     }

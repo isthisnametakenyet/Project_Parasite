@@ -6,14 +6,16 @@ public class PlayerGenerator : MonoBehaviour
 {
     public Maps maps;
 
+    [Header("Prefabs")]
     public GameObject spawnSkin1;
     public GameObject spawnSkin2;
     public GameObject spawnSkin3;
+
+    [Header("Scripts")]
+    public ScoreHUD scoreScript;
     private PlayerController2D playerScript;
 
-    public ScoreHUD scoreHUD;
-    private ScoreHUD scoreScript;
-
+    [Header("Delay")]
     public float scoreDelay;
 
     Vector3[] positionsMapTut = new[] { new Vector3(-7.4f, -4.2f, 1f), new Vector3(-7.4f, -4.2f, 1f), new Vector3(-7.4f, -4.2f, 1f), new Vector3(-7.4f, -4.2f, 1f), new Vector3(-7.4f, -4.2f, 1f) };
@@ -21,24 +23,28 @@ public class PlayerGenerator : MonoBehaviour
     Vector3[] positionsMap2 = new[] { new Vector3(0f, 0f, 0f), new Vector3(5f, 5f, 5f), new Vector3(-2f, -2f, -2f), new Vector3(-3f, -3f, -3f), new Vector3(-4f, -4f, -4f) };
     Vector3[] positionsMap3 = new[] { new Vector3(0f, 0f, 0f), new Vector3(10f, 10f, 10f), new Vector3(-2f, -2f, -2f), new Vector3(3f, 3f, 3f), new Vector3(-4f, -4f, -4f) };
 
+    [Header("Spawn Points")]
     public Vector3[] actualMap;
     int randPos;
+
+    bool once = false;
 
     void Start()
     {
         Spawn();
-        scoreScript = scoreHUD.GetComponent<ScoreHUD>();
         if (!PlayerManager.Instance) { Debug.LogError("Not initialized. Do you have an PlayerManager in your scene?"); }
+        PlayerManager.Instance.StartGame();
     }
 
     void FixedUpdate() 
     {
-        if (PlayerManager.Instance.DeleteProps == true)
+        //END ROUND
+        if (PlayerManager.Instance.DeleteProps == true && once == false)
         {
-            PlayerManager.Instance.DeleteProps = false;
+            once = true;
             scoreScript.Activate();
             scoreScript.Round(PlayerManager.Instance.RoundWinner);
-            if (PlayerManager.Instance.WinGame == false) { StartCoroutine("DelayHUD"); }
+            if (PlayerManager.Instance.WinGame == false) { StartCoroutine("DelayHUD"); Debug.Log("PGenerator: Start DelayHUD()"); }
         }
 
         //END GAME
@@ -54,7 +60,10 @@ public class PlayerGenerator : MonoBehaviour
     IEnumerator DelayHUD()
     {
         yield return new WaitForSeconds(scoreDelay);
+        Debug.Log("PGenerator: End DelayHUD()");
+        once = false;
         scoreScript.Desactivate();
+        PlayerManager.Instance.DeleteProps = false;
         Spawn();
     }
 
@@ -76,7 +85,7 @@ public class PlayerGenerator : MonoBehaviour
                 break;
         }
 
-        Debug.Log("Spawning Players");
+        Debug.Log("PGenerator: Spawning Players");
 
         for (int i = 0; i < PlayerManager.Instance.numPlayers; i++)
         {
@@ -105,7 +114,7 @@ public class PlayerGenerator : MonoBehaviour
             }
             PlayerManager.Instance.isAlivePlayer1 = true;
 
-            if (PlayerManager.Instance.Player2ON == false) { Debug.Log("1 Players Spawned"); return; }
+            if (PlayerManager.Instance.Player2ON == false) { Debug.Log("PGenerator: 1 Players Spawned"); return; }
             switch (PlayerManager.Instance.SkinPlayer2)
             {
                 case 1:
@@ -129,7 +138,7 @@ public class PlayerGenerator : MonoBehaviour
             }
             PlayerManager.Instance.isAlivePlayer2 = true;
 
-            if (PlayerManager.Instance.Player3ON == false) { Debug.Log("2 Players Spawned"); return; }
+            if (PlayerManager.Instance.Player3ON == false) { Debug.Log("PGenerator: 2 Players Spawned"); return; }
             switch (PlayerManager.Instance.SkinPlayer1)
             {
                 case 1:
@@ -153,7 +162,7 @@ public class PlayerGenerator : MonoBehaviour
             }
             PlayerManager.Instance.isAlivePlayer3 = true;
 
-            if (PlayerManager.Instance.Player4ON == false) { Debug.Log("3 Players Spawned"); return; }
+            if (PlayerManager.Instance.Player4ON == false) { Debug.Log("PGenerator: 3 Players Spawned"); return; }
             switch (PlayerManager.Instance.SkinPlayer4)
             {
                 case 1:
@@ -177,6 +186,6 @@ public class PlayerGenerator : MonoBehaviour
             }
             PlayerManager.Instance.isAlivePlayer4 = true;
         }
-        Debug.Log("All Players Spawned");
+        Debug.Log("PGenerator: All Players Spawned");
     }
 }

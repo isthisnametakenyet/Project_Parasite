@@ -25,19 +25,19 @@ public class RandomSpawnScript : MonoBehaviour
     Vector3[] actualMap;
 
     // variable to set next spawn time
-    public float nextSpawn = 0f;
+    private float nextSpawn = 0f;
 
     // variable to contain random value
-    public int whatToSpawn;
+    private int whatToSpawn;
 
     // variable to contain random value
-    public int whereToSpawn;
+    private int whereToSpawn;
 
     // temporal variable to save what we spawned
     int lastSpawned;
 
     // variable to declare when to spawn
-    public float whenToSpawn;
+    private float whenToSpawn;
 
     //nuemro de objetos espawneados
     public int numSpawned = 0;

@@ -11,7 +11,7 @@ public class PlayerManager : Singleton <PlayerManager>
     private bool WinRound = false;
     private bool RestartingRound = false;
     [HideInInspector] public bool DeleteProps = false;
-    public int RoundWinner = 0;
+    [HideInInspector] public int RoundWinner = 0;
 
     //GAME
     [HideInInspector] public bool gameON = false;
@@ -52,33 +52,29 @@ public class PlayerManager : Singleton <PlayerManager>
 
     private void FixedUpdate()
     {
-        if (gameON == true)
+        //Debug.Log("PManager: GameON? " + gameON);
+        if (gameON == true && WinRound == false)
         {
             tmpInt = 0;
             if(isAlivePlayer1 == true) { tmpInt++; }
             if(isAlivePlayer2 == true) { tmpInt++; }
             if(isAlivePlayer3 == true) { tmpInt++; }
             if(isAlivePlayer4 == true) { tmpInt++; }
-            if (tmpInt == 1) { WinRound = true; } //1 ALIVE
-        }
-        if (WinRound == true)
-        {
-            if (isAlivePlayer1 == true) { ScorePlayer1++; RoundWinner = 1; }
-            if (isAlivePlayer2 == true) { ScorePlayer2++; RoundWinner = 2; }
-            if (isAlivePlayer3 == true) { ScorePlayer3++; RoundWinner = 3; }
-            if (isAlivePlayer4 == true) { ScorePlayer4++; RoundWinner = 4; }
-            Debug.Log("PManager: RestartRound();");
-            RestartRound();
-
-            if (ScorePlayer1 == 5 || ScorePlayer2 == 5 || ScorePlayer3 == 5 || ScorePlayer4 == 5) { EndGame(); } //PLAYER WIN
+            if (tmpInt == 1) { WinRound = true; RestartRound(); } //1 ALIVE
         }
     }
 
+    //RESTART ROUND
     private void RestartRound()
     {
+        if (isAlivePlayer1 == true) { ScorePlayer1++; RoundWinner = 1; isAlivePlayer1 = false; }
+        if (isAlivePlayer2 == true) { ScorePlayer2++; RoundWinner = 2; isAlivePlayer2 = false; }
+        if (isAlivePlayer3 == true) { ScorePlayer3++; RoundWinner = 3; isAlivePlayer3 = false; }
+        if (isAlivePlayer4 == true) { ScorePlayer4++; RoundWinner = 4; isAlivePlayer4 = false; }
         Debug.Log("PManager: RestartRound();");
         DeleteProps = true;
-        //DeleteProps = false; //PlayerGenerator lo pone en false y re-Spawnea los jugadores
+
+        if (ScorePlayer1 == 5 || ScorePlayer2 == 5 || ScorePlayer3 == 5 || ScorePlayer4 == 5) { EndGame(); } //PLAYER WIN
     }
 
     private void EndGame()

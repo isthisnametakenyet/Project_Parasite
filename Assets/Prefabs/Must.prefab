@@ -906,12 +906,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maps: 0
   PickUp: {fileID: 2503348166692240421, guid: c0ebb2942ef3a574bb401d5c06434664, type: 3}
-  spawnMaxRate: 20
-  spawnMinRate: 10
-  nextSpawn: 0
-  whatToSpawn: 0
-  whereToSpawn: 0
-  whenToSpawn: 0
+  spawnMaxRate: 14
+  spawnMinRate: 7
   numSpawned: 0
   maxNumSpawned: 6
 --- !u!114 &2663445263931596960
@@ -927,12 +923,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maps: 0
-  spawnSkin1: {fileID: 1164842668750402546, guid: 4f754537c38517247a1dd25e83c48c79,
+  spawnSkin1: {fileID: 5911291850111384200, guid: 5676ccb59b1a02143afbb837e408980b,
     type: 3}
   spawnSkin2: {fileID: 5911291850111384200, guid: 5676ccb59b1a02143afbb837e408980b,
     type: 3}
-  spawnSkin3: {fileID: 0}
-  scoreHUD: {fileID: 2663445264601094970}
+  spawnSkin3: {fileID: 5911291850111384200, guid: 5676ccb59b1a02143afbb837e408980b,
+    type: 3}
+  scoreScript: {fileID: 2663445264601094970}
   scoreDelay: 3
   actualMap: []
 --- !u!1 &2663445264027376775

@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class PlayerisAlive : MonoBehaviour
 {
-    public GameObject Player;
-    private PlayerController2D PlayerScript;
+    public PlayerController2D PlayerScript;
+
+    ///este script no sirve para nada mas que para mandarle al PlayerManager la señal
+    ///de que el player a sido creado y/o esta listo para jugar TODO: IMPLEMENTARLO EN PaterController2D SCRIPT
 
     void Start()
     {
-        PlayerScript = Player.gameObject.GetComponent<PlayerController2D>();
-
         switch (PlayerScript.controller)
         {
             case Controller.PLAYER0:
