@@ -107,25 +107,24 @@ public class PlayerController2D : MonoBehaviour
         animator = GetComponent<Animator>();
         thisbody2D = GetComponent<Rigidbody2D>();
 
-        ////doesnt work, no idea why
-        //switch (controller)
-        //{
-        //    case Controller.PLAYER0:
-        //        if (PlayerManager.Instance.Player1ON == true) { playerReady = true; player = ReInput.players.GetPlayer(0); PlayerManager.Instance.isAlivePlayer1 = true; }
-        //        break;
+        switch (controller)
+        {
+            case Controller.PLAYER0:
+                if (PlayerManager.Instance.Player1ON == true) { playerReady = true; player = ReInput.players.GetPlayer(0); PlayerManager.Instance.isAlivePlayer1 = true; }
+                break;
 
-        //    case Controller.PLAYER1:
-        //        if (PlayerManager.Instance.Player2ON == true) { playerReady = true; player = ReInput.players.GetPlayer(1); PlayerManager.Instance.isAlivePlayer2 = true; }
-        //        break;
+            case Controller.PLAYER1:
+                if (PlayerManager.Instance.Player2ON == true) { playerReady = true; player = ReInput.players.GetPlayer(1); PlayerManager.Instance.isAlivePlayer2 = true; }
+                break;
 
-        //    case Controller.PLAYER2:
-        //        if (PlayerManager.Instance.Player2ON == true) { playerReady = true; player = ReInput.players.GetPlayer(2); PlayerManager.Instance.isAlivePlayer3 = true; }
-        //        break;
+            case Controller.PLAYER2:
+                if (PlayerManager.Instance.Player2ON == true) { playerReady = true; player = ReInput.players.GetPlayer(2); PlayerManager.Instance.isAlivePlayer3 = true; }
+                break;
 
-        //    case Controller.PLAYER3:
-        //        if (PlayerManager.Instance.Player2ON == true) { playerReady = true; player = ReInput.players.GetPlayer(3); PlayerManager.Instance.isAlivePlayer4 = true; }
-        //        break;
-        //}
+            case Controller.PLAYER3:
+                if (PlayerManager.Instance.Player2ON == true) { playerReady = true; player = ReInput.players.GetPlayer(3); PlayerManager.Instance.isAlivePlayer4 = true; }
+                break;
+        }
 
         //CONDITIONS
         GroundingID =   Animator.StringToHash("Grounding");
