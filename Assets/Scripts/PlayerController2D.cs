@@ -107,6 +107,7 @@ public class PlayerController2D : MonoBehaviour
         animator = GetComponent<Animator>();
         thisbody2D = GetComponent<Rigidbody2D>();
 
+        //CONTROLLER
         switch (controller)
         {
             case Controller.PLAYER0:
