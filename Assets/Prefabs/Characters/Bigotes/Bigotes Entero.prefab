@@ -240,9 +240,9 @@ MonoBehaviour:
     type: 3}
   prefabThrow: {fileID: 4109791825871390401, guid: 34431f682b8fae9449bfd8e2e32a67ef,
     type: 3}
-  Attack: 0
-  Charging: 0
+  Attacking: 0
   Thrown: 0
+  Off: 0
   originalUses: 2
   Uses: 0
   throwWeaponSpeed: 15
@@ -641,9 +641,9 @@ MonoBehaviour:
     type: 3}
   prefabThrow: {fileID: 7382603600782899059, guid: 60dffed7062884b4faed5b9b199217e1,
     type: 3}
-  Attack: 0
-  Charging: 0
+  Attacking: 0
   Thrown: 0
+  Off: 0
   originalUses: 1
   Uses: 0
   throwWeaponSpeed: 10
@@ -803,9 +803,9 @@ MonoBehaviour:
     type: 3}
   prefabThrow: {fileID: 3040493000438626130, guid: b48adec35004cc94fb8878b2f83c61b9,
     type: 3}
-  Attack: 0
-  Charging: 0
+  Attacking: 0
   Thrown: 0
+  Off: 0
   originalUses: 2
   Uses: 0
   throwWeaponSpeed: 15
@@ -1042,7 +1042,7 @@ PrefabInstance:
     - target: {fileID: 2586321837110656093, guid: b2a2ead6e389d494dac3a23b909b800a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.074803
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2586321837110656093, guid: b2a2ead6e389d494dac3a23b909b800a,
         type: 3}
@@ -1062,12 +1062,12 @@ PrefabInstance:
     - target: {fileID: 2586321837110656093, guid: b2a2ead6e389d494dac3a23b909b800a,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0.0049925316
       objectReference: {fileID: 0}
     - target: {fileID: 2586321837110656093, guid: b2a2ead6e389d494dac3a23b909b800a,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.99998754
       objectReference: {fileID: 0}
     - target: {fileID: 2586321837110656093, guid: b2a2ead6e389d494dac3a23b909b800a,
         type: 3}
@@ -1087,7 +1087,7 @@ PrefabInstance:
     - target: {fileID: 2586321837110656093, guid: b2a2ead6e389d494dac3a23b909b800a,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: 0.572
       objectReference: {fileID: 0}
     - target: {fileID: 2586321837110656093, guid: b2a2ead6e389d494dac3a23b909b800a,
         type: 3}

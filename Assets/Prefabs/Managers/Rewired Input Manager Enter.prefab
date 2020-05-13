@@ -328,9 +328,9 @@ MonoBehaviour:
       _userAssignable: 1
       _categoryId: 0
     - _id: 7
-      _name: Attack&Charge
-      _type: 0
-      _descriptiveName: Attack&Charge
+      _name: Attack
+      _type: 1
+      _descriptiveName: Attack
       _positiveDescriptiveName: Attack
       _negativeDescriptiveName: Charge
       _behaviorId: 0
@@ -341,6 +341,15 @@ MonoBehaviour:
       _type: 0
       _descriptiveName: HeadThrow&Return
       _positiveDescriptiveName: Throw&Return
+      _negativeDescriptiveName: 
+      _behaviorId: 0
+      _userAssignable: 1
+      _categoryId: 0
+    - _id: 11
+      _name: Charge
+      _type: 1
+      _descriptiveName: Charge
+      _positiveDescriptiveName: 
       _negativeDescriptiveName: 
       _behaviorId: 0
       _userAssignable: 1
@@ -359,7 +368,7 @@ MonoBehaviour:
     actionCategoryMap:
       list:
       - categoryId: 0
-        actionIds: 0000000004000000060000000700000009000000
+        actionIds: 000000000400000006000000070000000b00000009000000
       - categoryId: 1
         actionIds: 03000000
     inputBehaviors:
@@ -470,7 +479,7 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: 7
+        _actionId: 11
         _elementType: 1
         _elementIdentifierId: 5
         _axisRange: 0
@@ -486,7 +495,7 @@ MonoBehaviour:
         _elementIdentifierId: 7
         _axisRange: 0
         _invert: 0
-        _axisContribution: 1
+        _axisContribution: 0
         _keyboardKeyCode: 0
         _modifierKey1: 0
         _modifierKey2: 0
@@ -664,12 +673,12 @@ MonoBehaviour:
         _modifierKey2: 0
         _modifierKey3: 0
       - _actionCategoryId: 0
-        _actionId: 7
+        _actionId: 11
         _elementType: 1
         _elementIdentifierId: -1
         _axisRange: 0
         _invert: 0
-        _axisContribution: 1
+        _axisContribution: 0
         _keyboardKeyCode: 113
         _modifierKey1: 0
         _modifierKey2: 0
@@ -709,7 +718,7 @@ MonoBehaviour:
     controllerMapLayoutManagerRuleSets: []
     controllerMapEnablerRuleSets: []
     playerIdCounter: 5
-    actionIdCounter: 11
+    actionIdCounter: 12
     actionCategoryIdCounter: 2
     inputBehaviorIdCounter: 1
     mapCategoryIdCounter: 2
