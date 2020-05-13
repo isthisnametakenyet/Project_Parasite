@@ -701,7 +701,7 @@ public class PlayerController2D : MonoBehaviour
             Arms++;
             animator.SetTrigger(GetArmID);
 
-            Destroy(collision.gameObject);
+            Destroy(collision.gameObject.transform.parent.gameObject);
         }
     }
 
