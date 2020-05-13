@@ -245,7 +245,7 @@ MonoBehaviour:
   Off: 0
   originalUses: 2
   Uses: 0
-  throwWeaponSpeed: 15
+  throwWeaponSpeed: 20
 --- !u!61 &2947153771891345277
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -256,7 +256,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0.40205026}
@@ -657,7 +657,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -808,7 +808,7 @@ MonoBehaviour:
   Off: 0
   originalUses: 2
   Uses: 0
-  throwWeaponSpeed: 15
+  throwWeaponSpeed: 20
 --- !u!61 &1233967745217055114
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -819,7 +819,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0.4}

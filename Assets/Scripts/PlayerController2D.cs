@@ -729,9 +729,10 @@ public class PlayerController2D : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision) //DAMAGE, ATTACKING
     {
-        if (collision.gameObject.tag == "Attacking"/* && collision.gameObject != PickedWeapon*/)
+        if (collision.gameObject.tag == "Attacking")
         {
             int whichWeapon = animator.GetInteger(whichWeaponID);
+            Debug.Log("Player: Attacked");
 
             //LOSE ARM
             if (Arms > 0) { DropArm(collision.gameObject); }
