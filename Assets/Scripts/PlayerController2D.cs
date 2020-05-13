@@ -598,6 +598,7 @@ public class PlayerController2D : MonoBehaviour
             {
                 case PickTypes.Sword:
                     if (Arms == 0) { Debug.Log("NONE, cant pick"); break; }
+                    Debug.Log("and yet");
                     picking = true;
                     animator.SetInteger(whichWeaponID, 1);
                     Sword.SetActive(true); //ACTIVATE
@@ -605,7 +606,8 @@ public class PlayerController2D : MonoBehaviour
                     weaponScript.Pickup();
                     break;
                 case PickTypes.Axe:
-                    if (Arms == 0) { break; }
+                    if (Arms == 0) { Debug.Log("NONE, cant pick"); break; }
+                    Debug.Log("and yet");
                     picking = true;
                     animator.SetInteger(whichWeaponID, 2);
                     Axe.SetActive(true); //ACTIVATE
@@ -645,7 +647,6 @@ public class PlayerController2D : MonoBehaviour
                     weaponScript.Pickup();
                     break;
             }
-            Debug.Log("GetWeapon");
         }
 
         //STUCK
@@ -693,36 +694,14 @@ public class PlayerController2D : MonoBehaviour
         //}
 
         //FREEARM
-        if (collision.gameObject.tag == "FreeArm" && player.GetButtonDown("Pickup") && picking == false)
+        if (collision.gameObject.tag == "FreeArm" && player.GetButtonDown("Pickup") && picking == false && Arms < 2)
         {
-            switch (Arms)
-            {
-                case 0: //PICKUP ARM NOT HAVING ANY
-                    picking = true;
-                    Arms++;
-                    Debug.Log(controller + "Armed:" + Arms);
+            picking = true;
 
-                    collision.gameObject.transform.parent.transform.parent = this.transform;
-                    collision.gameObject.transform.parent.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, 1);
-                    collision.gameObject.transform.parent.gameObject.GetComponent<BoxCollider2D>().enabled = true;
-                    collision.gameObject.gameObject.GetComponent<BoxCollider2D>().enabled = false;
-                    break;
+            Arms++;
+            animator.SetTrigger(GetArmID);
 
-                case 1: //PICKUP ARM HAVING ONE
-                    picking = true;
-                    Arms++;
-                    Debug.Log(controller + "Armed:" + Arms);
-
-                    collision.gameObject.transform.parent.transform.parent = this.transform;
-                    collision.gameObject.transform.parent.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, -1);
-                    collision.gameObject.transform.parent.gameObject.GetComponent<BoxCollider2D>().enabled = true;
-                    collision.gameObject.gameObject.GetComponent<BoxCollider2D>().enabled = false;
-                    break; 
-
-                case 2: //CANT PICKUP ARM
-                    Debug.Log("Nope");
-                    break;
-            }
+            Destroy(collision.gameObject);
         }
     }
 
@@ -732,7 +711,6 @@ public class PlayerController2D : MonoBehaviour
         if (collision.gameObject.tag == "Attacking")
         {
             int whichWeapon = animator.GetInteger(whichWeaponID);
-            Debug.Log("Player: Attacked");
 
             //LOSE ARM
             if (Arms > 0) { DropArm(collision.gameObject); }
