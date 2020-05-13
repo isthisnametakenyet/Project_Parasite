@@ -10,6 +10,7 @@ public class HeadReturn : MonoBehaviour
 
     private Player player;
 
+    #region InstanceVariables
     //GAME OBJECTS
     public GameObject OriginalBody;
     private PlayerController2D playerAll;
@@ -17,11 +18,14 @@ public class HeadReturn : MonoBehaviour
     //VARAIBLES
     public float MaxStun = 2;
     float Wait = 0;
-    public bool Stunned = false;
-    public bool isDead = false;
+    [HideInInspector] public bool Stunned = false;
+    [HideInInspector] public bool isDead = false;
+    #endregion
 
+    //CONDITIONS
     //private int BackID;
 
+    //COMPONENTS
     //Animator animator;
 
     void Start()

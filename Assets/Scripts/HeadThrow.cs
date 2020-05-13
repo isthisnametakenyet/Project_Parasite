@@ -31,8 +31,8 @@ public class HeadThrow : MonoBehaviour
     private bool Parasiting = false;
 
     private bool BadThrow = false;
-    public bool Expulsed = false;
-    public bool canReturn = false;
+    [HideInInspector] public bool Expulsed = false;
+    [HideInInspector] public bool canReturn = false;
     #endregion
 
     //COMPONENTS
