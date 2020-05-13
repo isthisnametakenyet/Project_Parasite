@@ -166,8 +166,8 @@ public class TutoScript : MonoBehaviour
             TriggerSuicide.SetActive(false);
             suicide_7 = false;
             PlayerManager.Instance.ScorePlayer1 = 1; 
-            PlayerManager.Instance.Round = 1;
-            PlayerManager.Instance.GameEnd = true;
+            PlayerManager.Instance.RoundWinner = 1;
+            PlayerManager.Instance.WinGame = true;
             PlayerManager.Instance.DeleteProps = true;
             TextBlock3.SetActive(true);
         }

@@ -180,7 +180,7 @@ public class PlayerController2D : MonoBehaviour
         bool isDucking =  animator.GetBool(DuckingID);
         bool isStatic =   animator.GetBool(StaticID);
 
-        if (isStatic == false)
+        if (isStatic == false) //ATTACK, CHARGE, HEAD THROW
         {
             //ATTACK
             if (player.GetAxis("Attack&Charge") > 0)
@@ -572,31 +572,14 @@ public class PlayerController2D : MonoBehaviour
 
      
     //COLISIONS
-    private void OnCollisioEnter2D(Collision2D collision)
-    {
-        Debug.Log("ALGO A COLISIONADO");
-        if (collision.gameObject.tag == "FlyingHead") //PARASITE
-        {
-            Debug.LogError("Colision ENTER2");
-        }
-        if (collision.gameObject.tag == "FlyingHead" && Parasitable == true) //PARASITE
-        {
-            Debug.Log("Colision ENTER");
-            Parasite(collision.gameObject);
-        }
-    }
-    private void OnCollisionStay2D(Collision2D collision)
+    private void OnCollisionStay2D(Collision2D collision) //GROUNDING TRUE
     {
         if (collision.gameObject.tag == "Floor")
         {
             animator.SetBool(GroundingID, true);
         }
-        //if (collision.gameObject.tag == "FlyingHead") //PARASITE
-        //{
-        //    Debug.LogError("Colision ENTER3");
-        //}
     }
-    private void OnCollisionExit2D(Collision2D collision)
+    private void OnCollisionExit2D(Collision2D collision) //GROUNDING FALSE
     {
         if (collision.gameObject.tag == "Floor")
         {
@@ -604,9 +587,11 @@ public class PlayerController2D : MonoBehaviour
         }
     }
 
+
     //TRIGGERS
-    private void OnTriggerStay2D(Collider2D collision) //PICKUP
+    private void OnTriggerStay2D(Collider2D collision) //PICKUP, STUCK, FREEARM
     {
+        //PICKUP
         if (collision.gameObject.tag == "PickUp" && player.GetButtonDown("Pickup") && isWeaponed == false && picking == false)
         {
             pickUpScript = collision.GetComponent<PickUpScript>();
@@ -669,48 +654,52 @@ public class PlayerController2D : MonoBehaviour
             }
             Debug.Log("GetWeapon");
         }
-        else if (collision.gameObject.tag == "Stuck" && player.GetButtonDown("Pickup") && isWeaponed == false && picking == false)  //RE-PICKUP
-        {
-            isWeaponed = true;
-            switch (collision.gameObject.name)
-            {
-                case "place_sword(Clone)":
-                    if (Arms == 0) { break; }
-                    picking = true;
-                    animator.SetInteger(whichWeaponID, 1);
-                    Sword.SetActive(true); //ACTIVATE
-                    weaponScript = Sword.GetComponent<WeaponScript>();
-                    meleeScript = collision.gameObject.GetComponent<MeleeScript>();
-                    weaponScript.Uses = meleeScript.Uses;
-                    break;
-                case "place_axe(Clone)":
-                    if (Arms == 0) { break; }
-                    picking = true;
-                    animator.SetInteger(whichWeaponID, 1);
-                    Axe.SetActive(true); //ACTIVATE
-                    weaponScript = Sword.GetComponent<WeaponScript>();
-                    meleeScript = collision.gameObject.GetComponent<MeleeScript>();
-                    weaponScript.Uses = meleeScript.Uses;
-                    break;
-                case "place_spear(Clone)":
-                    if (Arms == 0) { break; }
-                    picking = true;
-                    animator.SetInteger(whichWeaponID, 1);
-                    Spear.SetActive(true); //ACTIVATE
-                    weaponScript = Sword.GetComponent<WeaponScript>();
-                    meleeScript = collision.gameObject.GetComponent<MeleeScript>();
-                    weaponScript.Uses = meleeScript.Uses;
-                    break;
-                //case "place_boomerang(Clone)":
-                //    if (Arms <= 1) { break; }
-                //    picking = true;
-                //    boomerangScript = collision.GetComponent<Boomerang>();
-                //    boomerangScript.Picker = this.gameObject;
-                //    animator.SetInteger(whichWeaponID, 6);
-                //    Boomerang.SetActive(true); //ACTIVATE
-                //    break;
-            }
-        }
+
+        //STUCK
+        //else if (collision.gameObject.tag == "Stuck" && player.GetButtonDown("Pickup") && isWeaponed == false && picking == false)  //RE-PICKUP
+        //{
+        //    isWeaponed = true;
+        //    switch (collision.gameObject.name)
+        //    {
+        //        case "place_sword(Clone)":
+        //            if (Arms == 0) { break; }
+        //            picking = true;
+        //            animator.SetInteger(whichWeaponID, 1);
+        //            Sword.SetActive(true); //ACTIVATE
+        //            weaponScript = Sword.GetComponent<WeaponScript>();
+        //            meleeScript = collision.gameObject.GetComponent<MeleeScript>();
+        //            weaponScript.Uses = meleeScript.Uses;
+        //            break;
+        //        case "place_axe(Clone)":
+        //            if (Arms == 0) { break; }
+        //            picking = true;
+        //            animator.SetInteger(whichWeaponID, 1);
+        //            Axe.SetActive(true); //ACTIVATE
+        //            weaponScript = Sword.GetComponent<WeaponScript>();
+        //            meleeScript = collision.gameObject.GetComponent<MeleeScript>();
+        //            weaponScript.Uses = meleeScript.Uses;
+        //            break;
+        //        case "place_spear(Clone)":
+        //            if (Arms == 0) { break; }
+        //            picking = true;
+        //            animator.SetInteger(whichWeaponID, 1);
+        //            Spear.SetActive(true); //ACTIVATE
+        //            weaponScript = Sword.GetComponent<WeaponScript>();
+        //            meleeScript = collision.gameObject.GetComponent<MeleeScript>();
+        //            weaponScript.Uses = meleeScript.Uses;
+        //            break;
+        //        //case "place_boomerang(Clone)":
+        //        //    if (Arms <= 1) { break; }
+        //        //    picking = true;
+        //        //    boomerangScript = collision.GetComponent<Boomerang>();
+        //        //    boomerangScript.Picker = this.gameObject;
+        //        //    animator.SetInteger(whichWeaponID, 6);
+        //        //    Boomerang.SetActive(true); //ACTIVATE
+        //        //    break;
+        //    }
+        //}
+
+        //FREEARM
         if (collision.gameObject.tag == "FreeArm" && player.GetButtonDown("Pickup") && picking == false)
         {
             switch (Arms)
@@ -745,8 +734,7 @@ public class PlayerController2D : MonoBehaviour
     }
 
 
-
-    private void OnTriggerEnter2D(Collider2D collision) //DAMAGE && PARASITE
+    private void OnTriggerEnter2D(Collider2D collision) //DAMAGE, ATTACKING
     {
         if (collision.gameObject.tag == "Attacking"/* && collision.gameObject != PickedWeapon*/)
         {
@@ -849,6 +837,7 @@ public class PlayerController2D : MonoBehaviour
 
             //RETURN PARASITE
             headThrow = Parasiter.GetComponent<HeadThrow>();
+            headThrow.Parasiting = false;
             headThrow.GoBack();
 
             //LOSE ARM/S
@@ -893,6 +882,27 @@ public class PlayerController2D : MonoBehaviour
                     }
                     break;
             }
+
+            //LOSE ROUND
+            switch (controller)
+            {
+                case Controller.PLAYER0:
+                    if (PlayerManager.Instance.Player1ON == true) { PlayerManager.Instance.isAlivePlayer1 = false; }
+                    break;
+
+                case Controller.PLAYER1:
+                    if (PlayerManager.Instance.Player2ON == true) { PlayerManager.Instance.isAlivePlayer2 = false; }
+                    break;
+
+                case Controller.PLAYER2:
+                    if (PlayerManager.Instance.Player2ON == true) { PlayerManager.Instance.isAlivePlayer3 = false; }
+                    break;
+
+                case Controller.PLAYER3:
+                    if (PlayerManager.Instance.Player2ON == true) { PlayerManager.Instance.isAlivePlayer4 = false; }
+                    break;
+            }
+
             Destroy(gameObject); //AUTODESTRUCCION
         }
     }

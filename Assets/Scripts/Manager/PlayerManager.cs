@@ -6,14 +6,23 @@ using Rewired;
 
 public class PlayerManager : Singleton <PlayerManager>
 {
-    public int numPlayers = 4;
-    public bool gameON = false;
+    #region InstanceVariables
+    //ROUND
     private bool WinRound = false;
     private bool RestartingRound = false;
-    private bool WinGame = false;
-    public int Round = 0;
-    public bool DeleteProps = false;
-    public bool GameEnd = false;
+    [HideInInspector] public bool DeleteProps = false;
+    public int RoundWinner = 0;
+
+    //GAME
+    [HideInInspector] public bool gameON = false;
+    [HideInInspector] public bool WinGame = false;
+
+    //TEMPS
+    [HideInInspector] public int tempskin;
+    int tmpInt = 0;
+
+    //PLAYERS
+    public int numPlayers = 4;
 
     //public bool[] onPlayers;
     public bool Player1ON;
@@ -39,8 +48,8 @@ public class PlayerManager : Singleton <PlayerManager>
     public bool isAlivePlayer2;
     public bool isAlivePlayer3;
     public bool isAlivePlayer4;
+    #endregion
 
-    int tmpInt = 0;
     private void FixedUpdate()
     {
         if (gameON == true)
@@ -54,36 +63,31 @@ public class PlayerManager : Singleton <PlayerManager>
         }
         if (WinRound == true)
         {
-
-            if (isAlivePlayer1 == true) { ScorePlayer1++; Round = 1; }
-            if (isAlivePlayer2 == true) { ScorePlayer2++; Round = 2; }
-            if (isAlivePlayer3 == true) { ScorePlayer3++; Round = 3; }
-            if (isAlivePlayer4 == true) { ScorePlayer4++; Round = 4; }
-            Debug.Log("a: RestartRound();");
+            if (isAlivePlayer1 == true) { ScorePlayer1++; RoundWinner = 1; }
+            if (isAlivePlayer2 == true) { ScorePlayer2++; RoundWinner = 2; }
+            if (isAlivePlayer3 == true) { ScorePlayer3++; RoundWinner = 3; }
+            if (isAlivePlayer4 == true) { ScorePlayer4++; RoundWinner = 4; }
+            Debug.Log("PManager: RestartRound();");
             RestartRound();
-        }
 
-        if (ScorePlayer1 == 5) { WinGame = true; }
-        else if (ScorePlayer2 == 5) { WinGame = true; }
-        else if (ScorePlayer3 == 5) { WinGame = true; }
-        else if (ScorePlayer4 == 5) { WinGame = true; }
+            if (ScorePlayer1 == 5 || ScorePlayer2 == 5 || ScorePlayer3 == 5 || ScorePlayer4 == 5) { EndGame(); } //PLAYER WIN
+        }
     }
 
     private void RestartRound()
     {
-        Debug.Log("PlayerManager: RestartRound();");
+        Debug.Log("PManager: RestartRound();");
         DeleteProps = true;
         //DeleteProps = false; //PlayerGenerator lo pone en false y re-Spawnea los jugadores
     }
 
     private void EndGame()
     {
-        Debug.Log("PlayerManager: EndGame();");
-        DeleteProps = true;
+        Debug.Log("PManager: EndGame();");
+        WinGame = true;
         gameON = false;
     }
 
-    public int tempskin;
     public void SetSkin (int temp) { tempskin = temp; }
     public void SetSkinTOPlayer(int player)
     {
@@ -113,13 +117,14 @@ public class PlayerManager : Singleton <PlayerManager>
         PlayerManager.Instance.ScorePlayer3 = 0;
         PlayerManager.Instance.ScorePlayer4 = 0;
 
-        if (Player1ON == true) { isAlivePlayer1 = true; Debug.Log("PlayerManager: FKU();"); }
+        if (Player1ON == true) { isAlivePlayer1 = true; }
         if (Player2ON == true) { isAlivePlayer2 = true; }
         if (Player3ON == true) { isAlivePlayer3 = true; }
         if (Player4ON == true) { isAlivePlayer4 = true; }
 
         DeleteProps = false;
         gameON = true;
-        Debug.Log("PlayerManager: Startgame();");
+        RoundWinner = 0;
+        Debug.Log("PManager: Startgame();");
     }
 }

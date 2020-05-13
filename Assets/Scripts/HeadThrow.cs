@@ -28,7 +28,7 @@ public class HeadThrow : MonoBehaviour
 
     public float expulsedStrengh = 3f;
 
-    private bool Parasiting = false;
+    [HideInInspector] public bool Parasiting = false;
 
     private bool BadThrow = false;
     [HideInInspector] public bool Expulsed = false;

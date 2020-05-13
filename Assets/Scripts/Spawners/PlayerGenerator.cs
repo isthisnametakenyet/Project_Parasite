@@ -28,25 +28,27 @@ public class PlayerGenerator : MonoBehaviour
     {
         Spawn();
         scoreScript = scoreHUD.GetComponent<ScoreHUD>();
+        if (!PlayerManager.Instance) { Debug.LogError("Not initialized. Do you have an PlayerManager in your scene?"); }
     }
 
     void FixedUpdate() 
     {
-        if (!PlayerManager.Instance) { Debug.LogError("Not initialized. Do you have an PlayerManager in your scene?"); }
         if (PlayerManager.Instance.DeleteProps == true)
         {
             PlayerManager.Instance.DeleteProps = false;
             scoreScript.Activate();
-            scoreScript.Round(PlayerManager.Instance.Round);
-            if (PlayerManager.Instance.GameEnd == false) { StartCoroutine("DelayHUD"); }
+            scoreScript.Round(PlayerManager.Instance.RoundWinner);
+            if (PlayerManager.Instance.WinGame == false) { StartCoroutine("DelayHUD"); }
         }
 
-        //PLAYER ANYKEYPRESS && GAMEEND == TRUE
-        //if (PlayerManager.Instance.ScorePlayer1 == 5) { scoreScript.End(1); }
-        //else if (PlayerManager.Instance.ScorePlayer2 == 5) { scoreScript.End(2); }
-        //else if (PlayerManager.Instance.ScorePlayer3 == 5) { scoreScript.End(3); }
-        //else if (PlayerManager.Instance.ScorePlayer4 == 5) { scoreScript.End(4); }
-
+        //END GAME
+        if (PlayerManager.Instance.WinGame == true)
+        {
+            if (PlayerManager.Instance.ScorePlayer1 == 5) { scoreScript.End(1); }
+            else if (PlayerManager.Instance.ScorePlayer2 == 5) { scoreScript.End(2); }
+            else if (PlayerManager.Instance.ScorePlayer3 == 5) { scoreScript.End(3); }
+            else if (PlayerManager.Instance.ScorePlayer4 == 5) { scoreScript.End(4); }
+        }
     }
 
     IEnumerator DelayHUD()

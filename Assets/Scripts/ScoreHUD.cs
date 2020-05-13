@@ -15,6 +15,7 @@ public class ScoreHUD : MonoBehaviour
     public GameObject P2B;
     public GameObject P3B;
     public GameObject P4B;
+
     public GameObject P1H;
     public GameObject P2H;
     public GameObject P3H;
@@ -65,11 +66,12 @@ public class ScoreHUD : MonoBehaviour
     private Animator animP4_3;
     private Animator animP4_4;
     private Animator animP4_5; 
+
     private int OldID;
     private int WinID;
     private int EndID;
 
-
+    ///ScoreHUD solo tiene funciones, estas funciones se activan desde PlayerGenerator
     void Start()
     {
         animP1_1 = P1_1.GetComponent<Animator>();
@@ -323,7 +325,6 @@ public class ScoreHUD : MonoBehaviour
                         break;
                     case 5:
                         animP1_5.SetBool(WinID, true);
-                        PlayerManager.Instance.GameEnd = true;
                         break;
                 }
                 break;
@@ -344,7 +345,6 @@ public class ScoreHUD : MonoBehaviour
                         break;
                     case 5:
                         animP2_5.SetBool(WinID, true);
-                        PlayerManager.Instance.GameEnd = true;
                         break;
                 }
                 break;
@@ -365,7 +365,6 @@ public class ScoreHUD : MonoBehaviour
                         break;
                     case 5:
                         animP3_5.SetBool(WinID, true);
-                        PlayerManager.Instance.GameEnd = true;
                         break;
                 }
                 break;
@@ -386,7 +385,6 @@ public class ScoreHUD : MonoBehaviour
                         break;
                     case 5:
                         animP4_5.SetBool(WinID, true);
-                        PlayerManager.Instance.GameEnd = true;
                         break;
                 }
                 break;
@@ -394,7 +392,7 @@ public class ScoreHUD : MonoBehaviour
                 Debug.LogError("Round Winner received number not from 0 to 4");
                 break;
         }
-        PlayerManager.Instance.Round = 0;
+        //PlayerManager.Instance.Round = 0;
     }
 
     public void End(int winner)
