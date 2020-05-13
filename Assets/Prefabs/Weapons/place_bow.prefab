@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1947854526900297370}
   - component: {fileID: 599510520671853798}
   - component: {fileID: 4416291337725197103}
+  - component: {fileID: 3603428739482794158}
   m_Layer: 12
   m_Name: place_bow
   m_TagString: Weapon
@@ -152,3 +153,15 @@ MonoBehaviour:
   Uses: 1
   AttackTime: 2
   arrowSpeed: 2
+--- !u!114 &3603428739482794158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8543419847265760279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0d5fa0ab5ea89440bb6f9ff4ffca65e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 6437416906173347177}
   - component: {fileID: 5190000970350755677}
   - component: {fileID: 5350576223027023950}
+  - component: {fileID: 1122696376596779146}
   m_Layer: 0
   m_Name: BrazoFall
   m_TagString: FreeArm
@@ -75,7 +76,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1528053917
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: a2ceb845d78230445ab911ad99a8ff66, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -224,6 +225,18 @@ CircleCollider2D:
   m_Offset: {x: 1.8755944, y: 1.0200379}
   serializedVersion: 2
   m_Radius: 0.66508365
+--- !u!114 &1122696376596779146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1545294258946203143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0d5fa0ab5ea89440bb6f9ff4ffca65e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8028647653500718801
 GameObject:
   m_ObjectHideFlags: 0

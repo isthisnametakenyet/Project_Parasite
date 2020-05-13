@@ -480,6 +480,7 @@ GameObject:
   - component: {fileID: 4353531031310621378}
   - component: {fileID: 2941499902744349965}
   - component: {fileID: 1723982843266635786}
+  - component: {fileID: 970158251391388573}
   - component: {fileID: 4486613231511775649}
   m_Layer: 9
   m_Name: Bigotes Entero
@@ -577,6 +578,7 @@ MonoBehaviour:
     type: 3}
   HeadThrowPrefab: {fileID: 4469397126892602978, guid: 6c8f9bccdb374b04aa6127c668edb2e4,
     type: 3}
+  PickUpPrefab: {fileID: 0}
   Parasiter: {fileID: 0}
   Parasitcontroller: 0
   Arms: 2
@@ -706,6 +708,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &970158251391388573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5911291850111384200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0d5fa0ab5ea89440bb6f9ff4ffca65e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &4486613231511775649
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -18,10 +18,9 @@ public class PlayerController2D : MonoBehaviour
     //PREFABS
     [Header("Prefabs")]
     public GameObject ArmFallPrefab;
-
     public GameObject HeadFallPrefab;
-
     public GameObject HeadThrowPrefab;
+    public GameObject PickUpPrefab;
 
     //SCRIPTS
     private HeadReturn headReturn;
@@ -108,24 +107,25 @@ public class PlayerController2D : MonoBehaviour
         animator = GetComponent<Animator>();
         thisbody2D = GetComponent<Rigidbody2D>();
 
-        switch (controller)
-        {
-            case Controller.PLAYER0:
-                if (PlayerManager.Instance.Player1ON == true) { playerReady = true; player = ReInput.players.GetPlayer(0); PlayerManager.Instance.isAlivePlayer1 = true; }
-                break;
+        ////doesnt work, no idea why
+        //switch (controller)
+        //{
+        //    case Controller.PLAYER0:
+        //        if (PlayerManager.Instance.Player1ON == true) { playerReady = true; player = ReInput.players.GetPlayer(0); PlayerManager.Instance.isAlivePlayer1 = true; }
+        //        break;
 
-            case Controller.PLAYER1:
-                if (PlayerManager.Instance.Player2ON == true) { playerReady = true; player = ReInput.players.GetPlayer(1); PlayerManager.Instance.isAlivePlayer2 = true; }
-                break;
+        //    case Controller.PLAYER1:
+        //        if (PlayerManager.Instance.Player2ON == true) { playerReady = true; player = ReInput.players.GetPlayer(1); PlayerManager.Instance.isAlivePlayer2 = true; }
+        //        break;
 
-            case Controller.PLAYER2:
-                if (PlayerManager.Instance.Player2ON == true) { playerReady = true; player = ReInput.players.GetPlayer(2); PlayerManager.Instance.isAlivePlayer3 = true; }
-                break;
+        //    case Controller.PLAYER2:
+        //        if (PlayerManager.Instance.Player2ON == true) { playerReady = true; player = ReInput.players.GetPlayer(2); PlayerManager.Instance.isAlivePlayer3 = true; }
+        //        break;
 
-            case Controller.PLAYER3:
-                if (PlayerManager.Instance.Player2ON == true) { playerReady = true; player = ReInput.players.GetPlayer(3); PlayerManager.Instance.isAlivePlayer4 = true; }
-                break;
-        }
+        //    case Controller.PLAYER3:
+        //        if (PlayerManager.Instance.Player2ON == true) { playerReady = true; player = ReInput.players.GetPlayer(3); PlayerManager.Instance.isAlivePlayer4 = true; }
+        //        break;
+        //}
 
         //CONDITIONS
         GroundingID =   Animator.StringToHash("Grounding");
@@ -155,17 +155,16 @@ public class PlayerController2D : MonoBehaviour
     }
 
     private void FixedUpdate(){
-        //PLAYER - ROUND MANAGEMENT
-        if (PlayerManager.Instance.DeleteProps == true) { Destroy(gameObject); Debug.Log("Player: DeletedProp"); } //END ROUND
+        //PLAYER MANAGEMENT
         if(!ReInput.isReady || player == null) {
             Debug.Log("not set or Disconnected"); //TODO: MESSAGE IN SCREEN
             return;
         }
-        //else if (playerReady == false)
-        //{
-        //    Debug.Log("player not ready" + controller);
-        //    return;
-        //};
+        else if (playerReady == false)
+        {
+            Debug.Log("player not ready" + controller);
+            return;
+        };
 
         //TEMPS
         if (pickDelay <= pickTemp && picking == true) { picking = false; pickTemp = 0; }
@@ -571,6 +570,28 @@ public class PlayerController2D : MonoBehaviour
     }
 
 
+    //DROP ARM
+    /// Function used every time player loses an arm, instantiate FreeArm & hides player arm
+    public void DropArm(GameObject collision)
+    {
+        Arms--;
+        animator.SetTrigger(LoseArmID);
+
+        GameObject armDead = Instantiate(ArmFallPrefab, new Vector3(transform.position.x, transform.position.y - 0.22f, 0), Quaternion.identity);
+        Rigidbody2D armRigid;
+        armRigid = armDead.GetComponent<Rigidbody2D>();
+
+        if (transform.position.x > collision.transform.position.x) //RIGHT
+        {
+            armRigid.velocity = new Vector2(headCharge, 2f);
+        }
+        else if (transform.position.x < collision.transform.position.x) //LEFT
+        {
+            armRigid.velocity = new Vector2(-headCharge, 2f);
+        }
+    }
+
+
      
     //COLISIONS
     private void OnCollisionStay2D(Collision2D collision) //GROUNDING TRUE
@@ -739,28 +760,12 @@ public class PlayerController2D : MonoBehaviour
     {
         if (collision.gameObject.tag == "Attacking"/* && collision.gameObject != PickedWeapon*/)
         {
-            Rigidbody2D armRigid;
-            BoxCollider2D armCollider;
             int whichWeapon = animator.GetInteger(whichWeaponID);
+
             //LOSE ARM
-            switch (Arms)
-            {
-                case 1:
-                    Debug.Log("armles"); //OUT RightArm
-                    Arms--;
+            if (Arms > 0) { DropArm(collision.gameObject); }
 
-                    //ANIAMTOR LOSEARM
-                    animator.SetTrigger(LoseArmID);
-                    break;
-
-                case 2:
-                    Debug.Log("1 arm left"); //OUT LeftArm
-                    Arms--;
-
-                    //ANIAMTOR LOSEARM
-                    animator.SetTrigger(LoseArmID);
-                    break;
-            }
+            //DROP WEAPON
             if (isWeaponed == true)
             {
                 switch (whichWeapon)
@@ -844,48 +849,10 @@ public class PlayerController2D : MonoBehaviour
                 headThrow.GoBack();
             }
 
-            //LOSE ARM/S
-            switch (Arms)
-            {
-                case 1:
-                    //LEFT ARM DOWN
-                    GameObject armDead = Instantiate(ArmFallPrefab, new Vector3(transform.position.x, transform.position.y - 0.22f, 0), Quaternion.identity);
-                    Rigidbody2D armRigid;
-                    armRigid = armDead.GetComponent<Rigidbody2D>();
+            //LOSE ARMS
+            if (Arms > 0) { DropArm(collision.gameObject); }
+            if (Arms > 0) { DropArm(collision.gameObject); }
 
-                    if (transform.position.x > collision.transform.position.x) //RIGHT
-                    {
-                        armRigid.velocity = new Vector2(headCharge, 2f);
-                    }
-                    else if (transform.position.x < collision.transform.position.x) //LEFT
-                    {
-                        armRigid.velocity = new Vector2(-headCharge, 2f);
-                    }
-                    break;
-
-                case 2:
-                    //LEFT ARM DOWN
-                    GameObject armDead1 = Instantiate(ArmFallPrefab, new Vector3(transform.position.x, transform.position.y - 0.22f, 0), Quaternion.identity);
-                    Rigidbody2D armRigid1;
-                    armRigid1 = armDead1.GetComponent<Rigidbody2D>();
-
-                    //RIGHT ARM DOWN
-                    GameObject armDead2 = Instantiate(ArmFallPrefab, new Vector3(transform.position.x, transform.position.y - 0.22f, 0), Quaternion.identity);
-                    Rigidbody2D armRigid2;
-                    armRigid2 = armDead2.GetComponent<Rigidbody2D>();
-
-                    if (transform.position.x > collision.transform.position.x) //RIGHT
-                    {
-                        armRigid1.velocity = new Vector2(headCharge, 2f);
-                        armRigid2.velocity = new Vector2(headCharge, 2f);
-                    }
-                    else if (transform.position.x < collision.transform.position.x) //LEFT
-                    {
-                        armRigid1.velocity = new Vector2(-headCharge, 2f);
-                        armRigid2.velocity = new Vector2(-headCharge, 2f);
-                    }
-                    break;
-            }
 
             //LOSE ROUND
             switch (controller)

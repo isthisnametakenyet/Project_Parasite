@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1112404127596976353}
   - component: {fileID: 7073445862110367866}
   - component: {fileID: 5803057810198495129}
+  - component: {fileID: 3708241855408404092}
   m_Layer: 12
   m_Name: place_axe
   m_TagString: Weapon
@@ -148,3 +149,15 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
+--- !u!114 &3708241855408404092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4109791825871390401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0d5fa0ab5ea89440bb6f9ff4ffca65e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

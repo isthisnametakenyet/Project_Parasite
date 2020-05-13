@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7318133114865083191}
   - component: {fileID: 9088197939313482958}
   - component: {fileID: 8831372511099708657}
+  - component: {fileID: 1549281849669071263}
   m_Layer: 12
   m_Name: place_boomerang
   m_TagString: Weapon
@@ -141,15 +142,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4adab1e75d8143c439fa921e66ae9042, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Picker: {fileID: 0}
-  boomerangSprite: {fileID: 21300000, guid: 0479df66668190f4594b3d071079935b, type: 3}
-  Idle: 0
-  Attack: 0
-  Charging: 0
-  Thrown: 0
-  Landed: 0
-  Stuck: 0
-  Drop: 0
-  Uses: 2
-  AttackTime: 2
-  stuckTime: 0.5
+--- !u!114 &1549281849669071263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1911622075723830657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0d5fa0ab5ea89440bb6f9ff4ffca65e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

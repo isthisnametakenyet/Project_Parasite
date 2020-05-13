@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7459224276291917681}
   - component: {fileID: 6405456081518844668}
   - component: {fileID: 58832459918143868}
+  - component: {fileID: 2807497761639547667}
   m_Layer: 9
   m_Name: cabeza fall
   m_TagString: HeadFall
@@ -98,9 +99,7 @@ MonoBehaviour:
   OriginalBody: {fileID: 0}
   MaxStun: 2
   Stunned: 0
-  ParasiteReturn: 0
   isDead: 0
-  Returning: 0
 --- !u!50 &6405456081518844668
 Rigidbody2D:
   serializedVersion: 4
@@ -138,3 +137,15 @@ CircleCollider2D:
   m_Offset: {x: -0.2772584, y: 0}
   serializedVersion: 2
   m_Radius: 2.9354558
+--- !u!114 &2807497761639547667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8364601489975160416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0d5fa0ab5ea89440bb6f9ff4ffca65e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

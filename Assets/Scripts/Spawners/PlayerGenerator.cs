@@ -27,7 +27,7 @@ public class PlayerGenerator : MonoBehaviour
     public Vector3[] actualMap;
     int randPos;
 
-    bool once = false;
+    public bool once = false;
 
     void Start()
     {

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1923074605961954617}
   - component: {fileID: 6374306891089271172}
   - component: {fileID: 3644234320331052338}
+  - component: {fileID: 6537519743449092814}
   m_Layer: 12
   m_Name: place_sword
   m_TagString: Weapon
@@ -148,3 +149,15 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
+--- !u!114 &6537519743449092814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3040493000438626130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0d5fa0ab5ea89440bb6f9ff4ffca65e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

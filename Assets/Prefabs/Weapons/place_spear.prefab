@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7763512846226828945}
   - component: {fileID: 6398896560322348906}
   - component: {fileID: 3024966086372023493}
+  - component: {fileID: 2551029422881373190}
   m_Layer: 12
   m_Name: place_spear
   m_TagString: Weapon
@@ -148,3 +149,15 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &2551029422881373190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2345261996967496709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0d5fa0ab5ea89440bb6f9ff4ffca65e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

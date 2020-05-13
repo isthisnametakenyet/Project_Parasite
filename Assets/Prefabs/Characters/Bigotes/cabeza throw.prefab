@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 114083926929559496}
   - component: {fileID: 7619559506779232106}
   - component: {fileID: 3115430161606878409}
+  - component: {fileID: 8439032713622925673}
   m_Layer: 13
   m_Name: cabeza throw
   m_TagString: FlyingHead
@@ -101,6 +102,8 @@ MonoBehaviour:
     type: 3}
   floorStunMax: 2
   expulsedStunMax: 3
+  expulsedStrengh: 3
+  Parasiting: 0
   Expulsed: 0
   canReturn: 1
 --- !u!50 &7619559506779232106
@@ -140,3 +143,15 @@ CircleCollider2D:
   m_Offset: {x: -0.2772584, y: 0}
   serializedVersion: 2
   m_Radius: 2.9354558
+--- !u!114 &8439032713622925673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4469397126892602978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0d5fa0ab5ea89440bb6f9ff4ffca65e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

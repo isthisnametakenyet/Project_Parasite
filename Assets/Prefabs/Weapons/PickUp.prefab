@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2503348166692240423}
   - component: {fileID: 2503348166692240420}
   - component: {fileID: 4837911121375504654}
+  - component: {fileID: 5219353638143026213}
   m_Layer: 8
   m_Name: PickUp
   m_TagString: PickUp
@@ -97,15 +98,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   picktype: 0
   RadomSpawner: {fileID: 0}
-  Picker: {fileID: 0}
-  Sword: {fileID: 3040493000438626130, guid: b48adec35004cc94fb8878b2f83c61b9, type: 3}
-  Axe: {fileID: 4109791825871390401, guid: 34431f682b8fae9449bfd8e2e32a67ef, type: 3}
-  Spear: {fileID: 2345261996967496709, guid: b0bb9be49655bb74cbc385e989cf2c95, type: 3}
-  Bow: {fileID: 8543419847265760279, guid: 9ff26bafdd5dcc044837cfbe62cf4f84, type: 3}
-  CrossBow: {fileID: 9170290620089918391, guid: 6aa5178614c21ec49ad7ea3b11b5bb66,
-    type: 3}
-  Boomerang: {fileID: 1911622075723830657, guid: b3cac058b5486864db272695012c4650,
-    type: 3}
   swordSprite: {fileID: 21300000, guid: ffdd31b5e670606409a7f916e8dde518, type: 3}
   axeSprite: {fileID: 21300000, guid: 2c5676fd3ecafc74691b1983bee3b583, type: 3}
   lanceSprite: {fileID: 21300000, guid: 8b5d166df27d93a438d023f1aa31f19e, type: 3}
@@ -179,3 +171,15 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &5219353638143026213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2503348166692240421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0d5fa0ab5ea89440bb6f9ff4ffca65e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
