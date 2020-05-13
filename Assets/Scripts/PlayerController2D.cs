@@ -190,7 +190,7 @@ public class PlayerController2D : MonoBehaviour
             }
 
             //CHARGED
-            if (player.GetButtonDown("Charge") && isHeading == false && isDucking == false && isWeaponed == true)
+            if (player.GetButton("Charge") && isHeading == false && isDucking == false && isWeaponed == true)
             {
                 animator.SetBool(ChargingID, true);
                 if (weaponCharge < maxWeaponCharge)

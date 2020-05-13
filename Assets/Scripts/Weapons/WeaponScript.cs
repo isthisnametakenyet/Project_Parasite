@@ -170,6 +170,8 @@ public class WeaponScript : MonoBehaviour
             else if (flipDir == 2) { renderer.flipY = true; } //FLIP Y
         }
 
+        pickerPlayerScript.isWeaponed = false;
+
         switch (type)
         {
             case WeaponType.MELEE:
