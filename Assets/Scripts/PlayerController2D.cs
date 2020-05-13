@@ -107,6 +107,7 @@ public class PlayerController2D : MonoBehaviour
         animator = GetComponent<Animator>();
         thisbody2D = GetComponent<Rigidbody2D>();
 
+        //CONTROLLER
         switch (controller)
         {
             case Controller.PLAYER0:
@@ -182,49 +183,14 @@ public class PlayerController2D : MonoBehaviour
         if (isStatic == false)
         {
             //ATTACK
-            if (player.GetAxis("Attack&Charge") > 0)
+            if (player.GetButtonDown("Attack"))
             {
                 animator.SetBool(AttackedID, true);
-                if (isWeaponed == true)
-                {
-                    switch (whichWeapon)
-                    {
-                        case 1:
-                            weaponScript = Sword.GetComponent<WeaponScript>();
-                            weaponScript.Attack = true;
-                            Debug.Log("PWeapon: 1");
-                            break;
-                        case 2:
-                            weaponScript = Axe.GetComponent<WeaponScript>();
-                            weaponScript.Attack = true;
-                            Debug.Log("PWeapon: 2");
-                            break;
-                        case 3:
-                            weaponScript = Spear.GetComponent<WeaponScript>();
-                            weaponScript.Attack = true;
-                            Debug.Log("PWeapon: 3");
-                            break;
-                        case 4:
-                            weaponScript = Bow.GetComponent<WeaponScript>();
-                            weaponScript.Attack = true;
-                            Debug.Log("PWeapon: 4");
-                            break;
-                        case 5:
-                            weaponScript = CrossBow.GetComponent<WeaponScript>();
-                            weaponScript.Attack = true;
-                            Debug.Log("PWeapon: 5");
-                            break;
-                        case 6:
-                            weaponScript = Boomerang.GetComponent<WeaponScript>();
-                            weaponScript.Attack = true;
-                            Debug.Log("PWeapon: 6");
-                            break;
-                    }
-                }
+                Debug.Log("Player: Attack");
             }
 
             //CHARGED
-            if (player.GetAxis("Attack&Charge") < 0 && isHeading == false && isDucking == false && isWeaponed == true)
+            if (player.GetButton("Charge") && isHeading == false && isDucking == false && isWeaponed == true)
             {
                 animator.SetBool(ChargingID, true);
                 if (weaponCharge < maxWeaponCharge)
@@ -297,7 +263,7 @@ public class PlayerController2D : MonoBehaviour
                     Parasitable = true;
                 }
             }
-            //IF PARASITED LO HACE EL HEAD THROW JUNTO CON LA FUNCION HeadReturn()
+            //IF PARASITED == TRUE, LO HACE EL HEAD THROW JUNTO CON LA FUNCION HeadReturn()
         }
     }
 
@@ -591,7 +557,13 @@ public class PlayerController2D : MonoBehaviour
     }
 
 
-     
+    //WEAPON BREAK
+    /// Function used when uses of the current weapon reach 0
+    public void WeaponBreak()
+    {
+        animator.SetInteger(whichWeaponID, 0);
+    }
+
     //COLISIONS
     private void OnCollisionStay2D(Collision2D collision) //GROUNDING TRUE
     {

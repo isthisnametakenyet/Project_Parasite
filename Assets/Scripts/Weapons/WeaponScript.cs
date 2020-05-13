@@ -21,9 +21,9 @@ public class WeaponScript : MonoBehaviour
     private Arrow arrowScript;
 
     //STATE
-    public bool Attack = false;
-    public bool Charging = false;
+    public bool Attacking = false;
     public bool Thrown = false;
+    public bool Off = false;
     private int pastState = 0;
 
     //VARIABLES
@@ -40,7 +40,7 @@ public class WeaponScript : MonoBehaviour
     {
         collider2D = GetComponent<BoxCollider2D>();
         pickerPlayerScript = Picker.GetComponent<PlayerController2D>();
-        //collider2D.isTrigger = true;
+
         originalUses = Uses;
 
         Uses = originalUses;
@@ -48,127 +48,162 @@ public class WeaponScript : MonoBehaviour
 
     void FixedUpdate()
     {
+        //BREAK
         if (Uses == 0)
         {
             pickerPlayerScript.isWeaponed = false;
+            pickerPlayerScript.WeaponBreak();
             transform.gameObject.tag = "Weapon";
 
             this.gameObject.SetActive(false); //HIDE SELF
-            //Destroy(gameObject); //AUTODESTRUCCION
         }
-        else if (Attack == true && pastState != 1)
+
+        //THROW
+        else if (Thrown == true && Uses > 0)
         {
-            pastState = 1;
-            collider2D.enabled = true;
+            Thrown = false;
+            Throw();
+        }
+
+        //ATTACK
+        else if(Attacking == true && Uses > 0)
+        {
+            Attacking = false;
+            Attack();
+        }
+
+        //DISABLE
+        else if (Off == true)
+        {
+            Off = false;
+
+            collider2D.enabled = false;
+            transform.gameObject.tag = "Weapon";
+
+            Debug.Log("Weapon Off");
             switch (type)
             {
                 case WeaponType.MELEE:
                     Uses--;
-                    transform.gameObject.tag = "Attacking";
                     break;
                 case WeaponType.RANGED:
-                    transform.gameObject.tag = "Slap";
                     break;
                 case WeaponType.X:
                     break;
                 default:
                     break;
             }
-
-        }
-        else if (Charging == true && pastState != 2)
-        {
-            pastState = 2;
-            transform.gameObject.tag = "Weapon";
-        }
-        else if (Thrown == true && Uses != -1)
-        {
-            GameObject throwed = Instantiate(prefabThrow, new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
-            //throwed.transform.Rotate(0.0f, 0.0f, this.transform.rotation.z, Space.Self);
-
-            int flipDir = 0;
-            //Configure initial Position && Rotation
-            switch (this.gameObject.name)
-            {
-                case "Sword":
-                    throwed.transform.Rotate(0.0f, 0.0f, -90.0f, Space.Self);
-                    flipDir = 2;
-                    break;
-                case "Axe":
-                    if (pickerPlayerScript.facingright == true)
-                    {
-                        throwed.transform.Rotate(0.0f, 0.0f, this.transform.rotation.z, Space.Self);
-                    }
-                    else if (pickerPlayerScript.facingright == false)
-                    {
-                        throwed.transform.Rotate(0.0f, 0.0f, this.transform.rotation.z, Space.Self);
-                    }
-                    flipDir = 1;
-                    break;
-                case "Spear":
-                    //throwed.transform.Rotate(0.0f, 0.0f, -90.0f, Space.Self);
-                    //flipDir = 1;
-                    break;
-                case "Bow":
-                    break;
-                case "CrossBow":
-                    break;
-                case "Boomerang":
-                    break;
-                default:
-                    Debug.Log("wut");
-                    break;
-            }
-
-            body2D = throwed.GetComponent<Rigidbody2D>();
-            renderer = throwed.GetComponent<SpriteRenderer>();
-            if (pickerPlayerScript.facingright == true)
-            {
-                body2D.velocity = new Vector2(throwWeaponSpeed, 0);
-            }
-            else if (pickerPlayerScript.facingright == false)
-            {
-                body2D.velocity = new Vector2(-throwWeaponSpeed, 0);
-                if (flipDir == 1) { renderer.flipX = true; } //FLIP X
-                else if (flipDir == 2) { renderer.flipY = true; } //FLIP Y
-            }
-
-            switch (type)
-            {
-                case WeaponType.MELEE:
-                    Debug.Log("WeaponScrp: Throw Melee");
-                    meleeScript = throwed.GetComponent<MeleeScript>();
-                    meleeScript.Picker = Picker;
-                    meleeScript.Uses = Uses;
-                    meleeScript.Thrown = true;
-                    break;
-                case WeaponType.RANGED:
-                    Debug.Log("WeaponScrp: Throw Arrow");
-                    arrowScript = throwed.GetComponent<Arrow>();
-                    arrowScript.Picker = Picker;
-                    break;
-                case WeaponType.X:
-                    break;
-                default:
-                    Debug.Log("wut");
-                    break;
-            }
-            Uses = -1;
-            this.gameObject.SetActive(false); //DESACTIVATE
-        }
-        else if (pastState != 0) { pastState = 0; }
-        else if (Attack== false && Charging == false && Thrown == false)
-        {
-            collider2D.enabled = false;
-            transform.gameObject.tag = "Weapon";
         }
     }
 
+
+
+    //ATTACK
+    public void Attack()
+    {
+        collider2D.enabled = true;
+        switch (type)
+        {
+            case WeaponType.MELEE:
+                transform.gameObject.tag = "Attacking";
+                break;
+            case WeaponType.RANGED:
+                transform.gameObject.tag = "Slap";
+                break;
+            case WeaponType.X:
+                break;
+            default:
+                break;
+        }
+    }
+
+    //THROW
+    public void Throw()
+    {
+        GameObject throwed = Instantiate(prefabThrow, new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
+        //throwed.transform.Rotate(0.0f, 0.0f, this.transform.rotation.z, Space.Self);
+
+        int flipDir = 0;
+        //Configure initial Position && Rotation
+        switch (this.gameObject.name)
+        {
+            case "Sword":
+                throwed.transform.Rotate(0.0f, 0.0f, -90.0f, Space.Self);
+                flipDir = 2;
+                break;
+            case "Axe":
+                if (pickerPlayerScript.facingright == true)
+                {
+                    throwed.transform.Rotate(0.0f, 0.0f, this.transform.rotation.z, Space.Self);
+                }
+                else if (pickerPlayerScript.facingright == false)
+                {
+                    throwed.transform.Rotate(0.0f, 0.0f, this.transform.rotation.z, Space.Self);
+                }
+                flipDir = 1;
+                break;
+            case "Spear":
+                //throwed.transform.Rotate(0.0f, 0.0f, -90.0f, Space.Self);
+                //flipDir = 1;
+                break;
+            case "Bow":
+                break;
+            case "CrossBow":
+                break;
+            case "Boomerang":
+                break;
+            default:
+                Debug.Log("wut");
+                break;
+        }
+
+        body2D = throwed.GetComponent<Rigidbody2D>();
+        renderer = throwed.GetComponent<SpriteRenderer>();
+        if (pickerPlayerScript.facingright == true)
+        {
+            body2D.velocity = new Vector2(throwWeaponSpeed, 0);
+        }
+        else if (pickerPlayerScript.facingright == false)
+        {
+            body2D.velocity = new Vector2(-throwWeaponSpeed, 0);
+            if (flipDir == 1) { renderer.flipX = true; } //FLIP X
+            else if (flipDir == 2) { renderer.flipY = true; } //FLIP Y
+        }
+
+        pickerPlayerScript.isWeaponed = false;
+
+        switch (type)
+        {
+            case WeaponType.MELEE:
+                Debug.Log("WeaponScrp: Throw Melee");
+                meleeScript = throwed.GetComponent<MeleeScript>();
+                meleeScript.Picker = Picker;
+                meleeScript.Uses = Uses;
+                meleeScript.Thrown = true;
+                break;
+            case WeaponType.RANGED:
+                Debug.Log("WeaponScrp: Throw Arrow");
+                arrowScript = throwed.GetComponent<Arrow>();
+                arrowScript.Picker = Picker;
+                break;
+            case WeaponType.X:
+                break;
+            default:
+                Debug.Log("wut");
+                break;
+        }
+
+        Uses = -1;
+        this.gameObject.SetActive(false); //DESACTIVATE
+    }
+
+    //PICKUP
     public void Pickup()
     {
         Uses = originalUses;
     }
 
+    //DROP
     public void Drop()
     {
         GameObject dropped = Instantiate(prefabDrop, new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
