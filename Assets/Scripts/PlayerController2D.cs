@@ -837,9 +837,12 @@ public class PlayerController2D : MonoBehaviour
             Debug.Log("Touch Sierra [DEATH " + controller + "]");
 
             //RETURN PARASITE
-            headThrow = Parasiter.GetComponent<HeadThrow>();
-            headThrow.Parasiting = false;
-            headThrow.GoBack();
+            if (Parasited == true)
+            {
+                headThrow = Parasiter.GetComponent<HeadThrow>();
+                headThrow.Parasiting = false;
+                headThrow.GoBack();
+            }
 
             //LOSE ARM/S
             switch (Arms)
