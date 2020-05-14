@@ -909,7 +909,7 @@ MonoBehaviour:
   spawnMaxRate: 12
   spawnMinRate: 6
   numSpawned: 0
-  maxNumSpawned: 6
+  maxNumSpawned: 999
 --- !u!114 &2663445263931596960
 MonoBehaviour:
   m_ObjectHideFlags: 0
