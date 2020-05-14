@@ -47,7 +47,7 @@ public class SoundManager : MonoBehaviour
         Sound s = Array.Find(sounds, sound => sound.name == name);
         if (s == null)
             return;
-        Debug.Log("Sound Playing: " + name);
+        //Debug.Log("Sound Playing: " + name);
         s.source.Play();
     }
     public void Stop(string name)
@@ -55,7 +55,7 @@ public class SoundManager : MonoBehaviour
         Sound s = Array.Find(sounds, sound => sound.name == name);
         if (s == null)
             return;
-        Debug.Log("Sound Stopped: " + name);
+        //Debug.Log("Sound Stopped: " + name);
         s.source.Stop();
     }
     public void StopAll()
@@ -68,7 +68,7 @@ public class SoundManager : MonoBehaviour
     }
     public void RegulateAll(float Musicvolume, float SFXvolume)
     {
-        Debug.Log("Regulate All Audios");
+        //Debug.Log("Regulate All Audios");
         for (int i = 0; i < sounds.Length; i++)
         {
             if (sounds[i].audioType == Sound.AudioType.MUSIC)

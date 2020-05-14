@@ -31,36 +31,50 @@ public class PlayerGenerator : MonoBehaviour
 
     void Start()
     {
-        Spawn();
         if (!PlayerManager.Instance) { Debug.LogError("Not initialized. Do you have an PlayerManager in your scene?"); }
+        Spawn();
         PlayerManager.Instance.StartGame();
+
+        //TODO
+        //switch (maps)
+        //{
+        //    case Maps.MapTut:
+        //        actualMap = positionsMapTut;
+        //        break;
+        //    case Maps.Map1:
+        //        actualMap = positionsMap1;
+        //        break;
+        //    case Maps.Map2:
+        //        actualMap = positionsMap2;
+        //        break;
+        //    case Maps.Map3:
+        //        actualMap = positionsMap3;
+        //        break;
+        //}
     }
 
     void FixedUpdate() 
     {
         //END ROUND
-        if (PlayerManager.Instance.DeleteProps == true && once == false)
+        if (PlayerManager.Instance.WinRound == true && once == false)
         {
             once = true;
             scoreScript.Activate();
-            scoreScript.Round(PlayerManager.Instance.RoundWinner);
-            if (PlayerManager.Instance.WinGame == false) { StartCoroutine("DelayHUD"); Debug.Log("PGenerator: Start DelayHUD()"); }
+            scoreScript.Round();
+            if (PlayerManager.Instance.WinGame == false) { StartCoroutine("DelayHUD"); /*Debug.Log("PGenerator: Start DelayHUD()");*/ }
         }
 
         //END GAME
         if (PlayerManager.Instance.WinGame == true)
         {
-            if (PlayerManager.Instance.ScorePlayer1 == 5) { scoreScript.End(1); }
-            else if (PlayerManager.Instance.ScorePlayer2 == 5) { scoreScript.End(2); }
-            else if (PlayerManager.Instance.ScorePlayer3 == 5) { scoreScript.End(3); }
-            else if (PlayerManager.Instance.ScorePlayer4 == 5) { scoreScript.End(4); }
+            scoreScript.End();
         }
     }
 
     IEnumerator DelayHUD()
     {
         yield return new WaitForSeconds(scoreDelay);
-        Debug.Log("PGenerator: End DelayHUD()");
+        //Debug.Log("PGenerator: End DelayHUD()");
         once = false;
         scoreScript.Desactivate();
         PlayerManager.Instance.DeleteProps = false;
@@ -74,7 +88,7 @@ public class PlayerGenerator : MonoBehaviour
         {
             case Maps.MapTut:
                 actualMap = positionsMapTut;
-            break;
+                break;
             case Maps.Map1:
                 actualMap = positionsMap1;
                 break;
@@ -85,9 +99,6 @@ public class PlayerGenerator : MonoBehaviour
                 actualMap = positionsMap3;
                 break;
         }
-
-        Debug.Log("PGenerator: Spawning Players");
-
         for (int i = 0; i < PlayerManager.Instance.numPlayers; i++)
         {
             randPos = Random.Range(1, actualMap.Length);

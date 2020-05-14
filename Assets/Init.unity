@@ -300,6 +300,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5175231583499952972, guid: 0281a6991b8a3984493f3154240e1245,
+        type: 3}
+      propertyPath: m_Name
+      value: Rewired Input Manager Enter
+      objectReference: {fileID: 0}
     - target: {fileID: 2166191353409172673, guid: 0281a6991b8a3984493f3154240e1245,
         type: 3}
       propertyPath: _userData.actions.Array.data[3]._type
@@ -309,11 +314,6 @@ PrefabInstance:
         type: 3}
       propertyPath: _userData.actions.Array.data[5]._type
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5175231583499952972, guid: 0281a6991b8a3984493f3154240e1245,
-        type: 3}
-      propertyPath: m_Name
-      value: Rewired Input Manager Enter
       objectReference: {fileID: 0}
     - target: {fileID: 8095954949078728874, guid: 0281a6991b8a3984493f3154240e1245,
         type: 3}
@@ -387,17 +387,17 @@ PrefabInstance:
     - target: {fileID: 7329869756413798568, guid: 3b9d8ce8dd7df7549bb8d5597998f0fe,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.80383223
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7329869756413798568, guid: 3b9d8ce8dd7df7549bb8d5597998f0fe,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.72925705
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7329869756413798568, guid: 3b9d8ce8dd7df7549bb8d5597998f0fe,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 14.199219
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7329869756413798568, guid: 3b9d8ce8dd7df7549bb8d5597998f0fe,
         type: 3}
@@ -668,6 +668,16 @@ PrefabInstance:
         type: 3}
       propertyPath: sounds.Array.data[20].loop
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8206236031193015248, guid: 3b9d8ce8dd7df7549bb8d5597998f0fe,
+        type: 3}
+      propertyPath: MusicVolume
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8206236031193015248, guid: 3b9d8ce8dd7df7549bb8d5597998f0fe,
+        type: 3}
+      propertyPath: SFXVolume
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 8216401737413306022, guid: 3b9d8ce8dd7df7549bb8d5597998f0fe,
         type: 3}

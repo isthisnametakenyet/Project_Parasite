@@ -105,7 +105,6 @@ public class ScoreHUD : MonoBehaviour
         WinID = Animator.StringToHash("Win");
         EndID = Animator.StringToHash("End");
 
-        Debug.Log("ScoreHUD ON");
         P1B.SetActive(false);
         P1H.SetActive(false);
         P2B.SetActive(false);
@@ -138,7 +137,7 @@ public class ScoreHUD : MonoBehaviour
 
     public void Activate()
     {
-        Debug.Log("ScoreHUD:  Activate()");
+        //Debug.Log("ScoreHUD:  Activate()");
         P1B.SetActive(true);
         P1H.SetActive(true);
         switch (PlayerManager.Instance.ScorePlayer1)
@@ -274,7 +273,7 @@ public class ScoreHUD : MonoBehaviour
 
     public void Desactivate()
     {
-        Debug.Log("ScoreHUD:  Desactivate()");
+        //Debug.Log("ScoreHUD:  Desactivate()");
         P1B.SetActive(false);
         P1H.SetActive(false);
         P1_1.SetActive(false);
@@ -308,9 +307,10 @@ public class ScoreHUD : MonoBehaviour
         P4_5.SetActive(false);
     }
 
-    public void Round(int winner)
+    public void Round()
     {
-        switch (winner)
+        Debug.Log("ScoreHUD: Round(" + PlayerManager.Instance.RoundWinner + ")");
+        switch (PlayerManager.Instance.RoundWinner)
         {
             case 0:
                 Debug.LogError("Round Winner not set in PlayerManager");
@@ -399,12 +399,11 @@ public class ScoreHUD : MonoBehaviour
                 Debug.LogError("Round Winner received number not from 0 to 4");
                 break;
         }
-        //PlayerManager.Instance.Round = 0;
     }
 
-    public void End(int winner)
+    public void End()
     {
-        switch (winner)
+        switch (PlayerManager.Instance.RoundWinner)
         {
             case 1:
                 animP1_5.SetBool(EndID, true);
@@ -428,7 +427,9 @@ public class ScoreHUD : MonoBehaviour
     IEnumerator EndGame()
     {
         yield return new WaitForSeconds(delayEnd);
-        //CARGAR MAIN MENU
+        PlayerManager.Instance.gameON = false;
+        PlayerManager.Instance.WinRound = false;
+        PlayerManager.Instance.WinGame = false;
         SceneManager.LoadScene("MainMenu");
     }
 }
