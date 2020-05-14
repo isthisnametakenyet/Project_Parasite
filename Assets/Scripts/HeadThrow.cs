@@ -122,7 +122,7 @@ public class HeadThrow : MonoBehaviour
     public void GoBack()
     {
         Debug.Log("Head Throw: Return");
-
+        SoundManager.instance.Play("Parasit");
         if (Parasiting == true)
         {
             parasitedScript = ParasitedBody.GetComponent<PlayerController2D>();

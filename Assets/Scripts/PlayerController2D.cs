@@ -251,10 +251,12 @@ public class PlayerController2D : MonoBehaviour
 
                     if (facingright == true) //THROW HEAD with headCharge as force
                     {
+                        SoundManager.instance.Play("Parasit");
                         headRigid.velocity = new Vector2(headCharge * 4f, 3f);
                     }
                     else if (facingright == false)
                     {
+                        SoundManager.instance.Play("Parasit");
                         headRigid.velocity = new Vector2(-headCharge * 4f, 3f);
                     }
 
