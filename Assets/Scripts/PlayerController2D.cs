@@ -489,7 +489,6 @@ public class PlayerController2D : MonoBehaviour
                 break;
         }
 
-        animator.SetTrigger(GetHeadID);
     }
 
 
