@@ -20,21 +20,17 @@ public class PlayerManager : Singleton <PlayerManager>
     [HideInInspector] public int tempskin;
     int tmpInt = 0;
 
+    [Header("Players")]
     //PLAYERS
     public int numPlayers = 4;
+    [Space(10)]
 
     //public bool[] onPlayers;
     public bool Player1ON;
     public bool Player2ON;
     public bool Player3ON;
     public bool Player4ON;
-
-    //public int[] scorePlayers = new int[4];
-    //public IList<int> scorePlayersList = new List<int>(4);
-    public int ScorePlayer1;
-    public int ScorePlayer2;
-    public int ScorePlayer3;
-    public int ScorePlayer4;
+    [Space(5)]
 
     //public int[] skinPlayers = new int[4];
     public int SkinPlayer1;
@@ -42,11 +38,20 @@ public class PlayerManager : Singleton <PlayerManager>
     public int SkinPlayer3;
     public int SkinPlayer4;
 
+    [Header("Game")]
     //public bool[] isAlivePlayers;
     public bool isAlivePlayer1;
     public bool isAlivePlayer2;
     public bool isAlivePlayer3;
     public bool isAlivePlayer4;
+    [Space(5)]
+
+    //public int[] scorePlayers = new int[4];
+    //public IList<int> scorePlayersList = new List<int>(4);
+    public int ScorePlayer1;
+    public int ScorePlayer2;
+    public int ScorePlayer3;
+    public int ScorePlayer4;
     #endregion
 
     private void FixedUpdate()
@@ -112,10 +117,10 @@ public class PlayerManager : Singleton <PlayerManager>
         PlayerManager.Instance.ScorePlayer3 = 0;
         PlayerManager.Instance.ScorePlayer4 = 0;
 
-        if (Player1ON == true) { isAlivePlayer1 = true; }
-        if (Player2ON == true) { isAlivePlayer2 = true; }
-        if (Player3ON == true) { isAlivePlayer3 = true; }
-        if (Player4ON == true) { isAlivePlayer4 = true; }
+        //if (Player1ON == true) { isAlivePlayer1 = true; }
+        //if (Player2ON == true) { isAlivePlayer2 = true; }
+        //if (Player3ON == true) { isAlivePlayer3 = true; }
+        //if (Player4ON == true) { isAlivePlayer4 = true; }
 
         DeleteProps = false;
         gameON = true;

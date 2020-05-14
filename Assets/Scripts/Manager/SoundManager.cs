@@ -9,6 +9,7 @@ public class SoundManager : MonoBehaviour
     public float MusicVolume = 0.2f;
     public float SFXVolume = 0.2f;
     public float PitchGlobal = 1f;
+    [Space(10)]
 
     public Sound[] sounds;
     public static SoundManager instance;
@@ -65,32 +66,6 @@ public class SoundManager : MonoBehaviour
             sounds[i].source.Stop();
         }
     }
-    //public void Regulate(string name, float volume)
-    //{
-    //    Sound s = Array.Find(sounds, sound => sound.name == name);
-    //    if (s == null)
-    //        return;
-    //    s.source.volume = volume;
-    //}
-    //public float GetVolume(string name)
-    //{
-    //    Sound s = Array.Find(sounds, sound => sound.name == name);
-    //    if (s == null)
-    //        return 0;
-
-    //    return s.source.volume;
-    //}
-    //public void RegulateType(Sound.AudioType type, float volume)
-    //{
-    //    Debug.Log("Regulate Type Audios");
-    //    for (int i = 0; i < sounds.Length; i++)
-    //    {
-    //        if (sounds[i].audioType == type)
-    //        {
-    //            sounds[i].volume = volume;
-    //        }
-    //    }
-    //}
     public void RegulateAll(float Musicvolume, float SFXvolume)
     {
         Debug.Log("Regulate All Audios");
