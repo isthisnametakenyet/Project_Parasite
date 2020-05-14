@@ -588,17 +588,10 @@ public class PlayerController2D : MonoBehaviour
         if (collision.gameObject.tag == "PickUp" && player.GetButtonDown("Pickup") && isWeaponed == false && picking == false)
         {
             pickUpScript = collision.GetComponent<PickUpScript>();
-            pickUpScript.picked = true;
-
-            isWeaponed = true;
-
-            Destroy(collision.gameObject);
-
             switch (pickUpScript.picktype)
             {
                 case PickTypes.Sword:
-                    if (Arms == 0) { Debug.Log("NONE, cant pick"); break; }
-                    Debug.Log("and yet");
+                    if (Arms == 0) { Debug.Log("NONE, cant pick"); return; }
                     picking = true;
                     animator.SetInteger(whichWeaponID, 1);
                     Sword.SetActive(true); //ACTIVATE
@@ -606,8 +599,7 @@ public class PlayerController2D : MonoBehaviour
                     weaponScript.Pickup();
                     break;
                 case PickTypes.Axe:
-                    if (Arms == 0) { Debug.Log("NONE, cant pick"); break; }
-                    Debug.Log("and yet");
+                    if (Arms == 0) { Debug.Log("NONE, cant pick"); return; }
                     picking = true;
                     animator.SetInteger(whichWeaponID, 2);
                     Axe.SetActive(true); //ACTIVATE
@@ -647,6 +639,11 @@ public class PlayerController2D : MonoBehaviour
                     weaponScript.Pickup();
                     break;
             }
+
+            pickUpScript.picked = true;
+            isWeaponed = true;
+
+            Destroy(collision.gameObject);
         }
 
         //STUCK
