@@ -767,6 +767,7 @@ public class PlayerController2D : MonoBehaviour
                             animator.SetInteger(whichWeaponID, 0);
                         }
                         break;
+
                     //case 4:
                     //    if (Arms <= 1)
                     //    {

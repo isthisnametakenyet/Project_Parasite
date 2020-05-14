@@ -152,7 +152,7 @@ GameObject:
   - component: {fileID: 775932471139602054}
   - component: {fileID: 5503607736519540817}
   - component: {fileID: 2947153771891345277}
-  m_Layer: 9
+  m_Layer: 12
   m_Name: Axe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -553,7 +553,7 @@ GameObject:
   - component: {fileID: 4161998842401330787}
   - component: {fileID: 6214513853728869467}
   - component: {fileID: 5444811467426565309}
-  m_Layer: 9
+  m_Layer: 12
   m_Name: Bow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -715,7 +715,7 @@ GameObject:
   - component: {fileID: 3046394094822947997}
   - component: {fileID: 8759294032544185673}
   - component: {fileID: 1233967745217055114}
-  m_Layer: 9
+  m_Layer: 12
   m_Name: Sword
   m_TagString: Untagged
   m_Icon: {fileID: 0}
