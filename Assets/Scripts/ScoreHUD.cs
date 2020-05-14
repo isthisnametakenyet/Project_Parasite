@@ -319,15 +319,12 @@ public class ScoreHUD : MonoBehaviour
                 switch (PlayerManager.Instance.ScorePlayer1)
                 {
                     case 1:
-                        Debug.Log("1-1");
                         animP1_1.SetBool(WinID, true);
                         break;
                     case 2:
-                        Debug.Log("1-2");
                         animP1_2.SetBool(WinID, true);
                         break;
                     case 3:
-                        Debug.Log("1-3");
                         animP1_3.SetBool(WinID, true);
                         break;
                     case 4:
@@ -342,11 +339,9 @@ public class ScoreHUD : MonoBehaviour
                 switch (PlayerManager.Instance.ScorePlayer2)
                 {
                     case 1:
-                        Debug.Log("yes");
                         animP2_1.SetBool(WinID, true);
                         break;
                     case 2:
-                        Debug.Log("yes2");
                         animP2_2.SetBool(WinID, true);
                         break;
                     case 3:
