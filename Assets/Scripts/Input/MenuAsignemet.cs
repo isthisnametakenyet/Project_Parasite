@@ -63,6 +63,7 @@ public class MenuAsignemet : MonoBehaviour
         {
             if (ReInput.players.GetPlayer(i).GetButtonDown("JoinGame"))
             {
+                SoundManager.instance.Play("JoinSFX");
                 AssignNextPlayer(i);
             }
         }

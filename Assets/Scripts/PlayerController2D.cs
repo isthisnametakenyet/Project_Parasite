@@ -185,6 +185,7 @@ public class PlayerController2D : MonoBehaviour
             //ATTACK
             if (player.GetButtonDown("Attack"))
             {
+                SoundManager.instance.Play("AttackSFX");
                 animator.SetBool(AttackedID, true);
                 Debug.Log("Player: Attack");
             }
@@ -208,7 +209,7 @@ public class PlayerController2D : MonoBehaviour
             {
                 animator.SetInteger(whichWeaponID, 0);
                 animator.SetBool(ChargingID, false);
-
+                SoundManager.instance.Play("Throw");
                 weaponCharge = 0;
                 isWeaponed = false;
             }
@@ -293,6 +294,7 @@ public class PlayerController2D : MonoBehaviour
                 {
                     thisbody2D.velocity = new Vector2(runSpeed, thisbody2D.velocity.y);
                     animator.SetBool(MovingID, true);
+                    SoundManager.instance.Play("WalkSFX");
                 }
             }
             else if (player.GetAxis("Move") < 0)
@@ -302,10 +304,13 @@ public class PlayerController2D : MonoBehaviour
                 {
                     thisbody2D.velocity = new Vector2(-runSpeed, thisbody2D.velocity.y);
                     animator.SetBool(MovingID, true);
+                    SoundManager.instance.Play("WalkSFX");
                 }
             }
             else
             {
+                SoundManager.instance.Stop("WalkSFX");
+
                 animator.SetBool(MovingID, false);
             }
 
@@ -333,6 +338,7 @@ public class PlayerController2D : MonoBehaviour
             {
                 jumpTemp = 0;
                 animator.SetTrigger(JumpedID);
+                SoundManager.instance.Play("JumpSFX");
                 thisbody2D.velocity = new Vector2(thisbody2D.velocity.x, jumpStrengh);
             }
 
@@ -540,7 +546,7 @@ public class PlayerController2D : MonoBehaviour
     {
         Arms--;
         animator.SetTrigger(LoseArmID);
-
+        SoundManager.instance.Play("ArmLoseSFX");
         GameObject armDead = Instantiate(ArmFallPrefab, new Vector3(transform.position.x, transform.position.y - 0.22f, 0), Quaternion.identity);
         Rigidbody2D armRigid;
         armRigid = armDead.GetComponent<Rigidbody2D>();
@@ -588,6 +594,7 @@ public class PlayerController2D : MonoBehaviour
         //PICK WEAPON
         if (collision.gameObject.tag == "PickUp" && player.GetButtonDown("Pickup") && isWeaponed == false && picking == false)
         {
+            SoundManager.instance.Play("PickWeaponSFX");
             pickUpScript = collision.GetComponent<PickUpScript>();
             switch (pickUpScript.picktype)
             {
@@ -651,6 +658,7 @@ public class PlayerController2D : MonoBehaviour
         else if (collision.gameObject.tag == "Stuck" && player.GetButtonDown("Pickup") && isWeaponed == false && picking == false)
         {
             meleeScript = collision.GetComponent<MeleeScript>();
+            SoundManager.instance.Play("PickWeaponSFX");
             switch (pickUpScript.picktype)
             {
                 case PickTypes.Sword:
@@ -810,7 +818,7 @@ public class PlayerController2D : MonoBehaviour
         if (collision.gameObject.tag == "Damage") 
         {
             Debug.Log("Touch Sierra [DEATH " + controller + "]");
-
+            SoundManager.instance.Play("Death");
             //RETURN PARASITE
             if (Parasited == true)
             {

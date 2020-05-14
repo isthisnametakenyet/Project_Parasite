@@ -100,6 +100,7 @@ public class HeadThrow : MonoBehaviour
     /// Function executed if this HeadThrow is parasiting an enemy and the enemy gets back to their body
     public void Expulse()
     {
+        SoundManager.instance.Play("Parasit");
         Debug.Log("Head Expulsed");
         actualStun = 0;
 
