@@ -48,77 +48,77 @@ MonoBehaviour:
   PitchGlobal: 1
   sounds:
   - name: MenuMusic
-    clip: {fileID: 0}
+    clip: {fileID: 8300000, guid: feeb600f7c1ea584a995f42d41047e79, type: 3}
     audioType: 1
     volume: 0.3
     pitch: 1
     loop: 1
     source: {fileID: 0}
   - name: GameMusic
-    clip: {fileID: 0}
+    clip: {fileID: 8300000, guid: f7800f666491dd04f842487ceedbce6f, type: 3}
     audioType: 1
     volume: 0.3
     pitch: 1
     loop: 1
     source: {fileID: 0}
   - name: ButtonSFX
-    clip: {fileID: 0}
+    clip: {fileID: 8300000, guid: 584f8d105cbd69740ba105025076c1ba, type: 3}
     audioType: 0
     volume: 0.3
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: JoinSFX
-    clip: {fileID: 0}
+    clip: {fileID: 8300000, guid: 08e6e2265bcf32044adf2d109283df34, type: 3}
     audioType: 0
     volume: 0.3
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: WalkSFX
-    clip: {fileID: 0}
+    clip: {fileID: 8300000, guid: 125c26e2e42f3f24097f44d5c225f9d3, type: 3}
     audioType: 0
     volume: 0.3
     pitch: 1
     loop: 1
     source: {fileID: 0}
   - name: JumpSFX
-    clip: {fileID: 0}
+    clip: {fileID: 8300000, guid: e157b9d7121965c43b157ad6a7644cd6, type: 3}
     audioType: 0
     volume: 0.3
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: PickWeaponSFX
-    clip: {fileID: 0}
+    clip: {fileID: 8300000, guid: 2f6c1f2726a15ff47bd21966077fec3c, type: 3}
     audioType: 0
     volume: 0.3
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: AttackSFX
-    clip: {fileID: 0}
+    clip: {fileID: 8300000, guid: cb2d64a72f2b81d4b8b8f09447a69134, type: 3}
     audioType: 0
     volume: 0.3
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: Death
-    clip: {fileID: 0}
+    clip: {fileID: 8300000, guid: 4d75f23cfa7e8ca48badfec770776ea5, type: 3}
     audioType: 0
     volume: 0.3
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: Parasit
-    clip: {fileID: 0}
+    clip: {fileID: 8300000, guid: 9f53048f01a0ebb4eb9e11510945a9b7, type: 3}
     audioType: 0
     volume: 0.3
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: Throw
-    clip: {fileID: 0}
+    clip: {fileID: 8300000, guid: 9be00faf6c73bfd4db31c60b35a21348, type: 3}
     audioType: 0
     volume: 0.3
     pitch: 1
@@ -132,14 +132,14 @@ MonoBehaviour:
     loop: 0
     source: {fileID: 0}
   - name: ArmLoseSFX
-    clip: {fileID: 0}
+    clip: {fileID: 8300000, guid: 8eddc8cd6a12fb14aa79963cce6fa3fb, type: 3}
     audioType: 0
     volume: 0.3
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: PushSFX
-    clip: {fileID: 0}
+    clip: {fileID: 8300000, guid: b26f06f9751dac646ab3b2c06bd0812a, type: 3}
     audioType: 0
     volume: 0.3
     pitch: 1

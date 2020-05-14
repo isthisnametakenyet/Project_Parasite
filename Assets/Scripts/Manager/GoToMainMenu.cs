@@ -8,6 +8,7 @@ public class GoToMainMenu : MonoBehaviour
     
     void Start()
     {
+        SoundManager.instance.Play("MenuMusic");
         SceneManager.LoadScene("MainMenu");
     }
 

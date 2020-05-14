@@ -5,9 +5,38 @@ using UnityEngine;
 
 public class SceneController : MonoBehaviour
 {
-    public void ChangeScene(string name)
+    public static SceneController instance;
+
+    void Awake()
     {
-        SceneManager.LoadScene(name);
+        DontDestroyOnLoad(gameObject);
+        if (instance == null)
+            instance = this;
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+    }
+
+        public void ChangeScene(string name)
+    {
+        switch (name)
+        {
+            case "MainMenu":
+                SoundManager.instance.Stop("GameMusic");
+                SceneManager.LoadScene(name);
+                break;
+            case "Cave":
+                SoundManager.instance.Stop("MenuMusic");
+                SoundManager.instance.Play("GameMusic");
+                SceneManager.LoadScene(name);
+                break;
+            default:
+                SceneManager.LoadScene(name);
+                break;
+        }
+        
     }
 
     public void Quit()

@@ -38,7 +38,7 @@ public class SoundManager : MonoBehaviour
     }
     void Start()
     {
-        Play("Shot1");
+        //Play("Shot1");
     }
 
     public void Play(string name)
