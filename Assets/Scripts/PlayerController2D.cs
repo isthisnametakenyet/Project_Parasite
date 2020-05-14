@@ -72,7 +72,7 @@ public class PlayerController2D : MonoBehaviour
     [HideInInspector] public bool facingright = true;
     float headCharge = 0f;
     float weaponCharge = 0f;
-    /*[HideInInspector]*/ public bool isWeaponed = false;
+    [HideInInspector] public bool isWeaponed = false;
 
     bool picking = false;
     float pickTemp = 0;
