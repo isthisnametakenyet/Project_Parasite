@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class PlayerGenerator : MonoBehaviour
 {
-    public Maps maps;
-
     [Header("Prefabs")]
     public GameObject spawnSkin1;
     public GameObject spawnSkin2;
@@ -18,16 +16,12 @@ public class PlayerGenerator : MonoBehaviour
     [Header("Delay")]
     public float scoreDelay;
 
-    Vector3[] positionsMapTut = new[] { new Vector3(-7.4f, -4.2f, 1f), new Vector3(-7.4f, -4.2f, 1f), new Vector3(-7.4f, -4.2f, 1f), new Vector3(-7.4f, -4.2f, 1f), new Vector3(-7.4f, -4.2f, 1f) };
-    Vector3[] positionsMap1 = new[] { new Vector3(-5.5f, 1.8f, 1f), new Vector3(5.5f, 1.8f, 0f), new Vector3(3.4f, -2.25f, 0f), new Vector3(-3.4f, -2.25f, 0f), new Vector3(0f, -4.2f, 0f) };
-    Vector3[] positionsMap2 = new[] { new Vector3(0f, 0f, 0f), new Vector3(5f, 5f, 5f), new Vector3(-2f, -2f, -2f), new Vector3(-3f, -3f, -3f), new Vector3(-4f, -4f, -4f) };
-    Vector3[] positionsMap3 = new[] { new Vector3(0f, 0f, 0f), new Vector3(10f, 10f, 10f), new Vector3(-2f, -2f, -2f), new Vector3(3f, 3f, 3f), new Vector3(-4f, -4f, -4f) };
-
-    [Header("Spawn Points")]
-    public Vector3[] actualMap;
+    [Space(10)]
+    public GameObject[] spawnPoints;
     int randPos;
+    private int whereToSpawn;
 
-    public bool once = false;
+    private bool once = false;
 
     void Start()
     {
@@ -35,22 +29,7 @@ public class PlayerGenerator : MonoBehaviour
         Spawn();
         PlayerManager.Instance.StartGame();
 
-        //TODO
-        //switch (maps)
-        //{
-        //    case Maps.MapTut:
-        //        actualMap = positionsMapTut;
-        //        break;
-        //    case Maps.Map1:
-        //        actualMap = positionsMap1;
-        //        break;
-        //    case Maps.Map2:
-        //        actualMap = positionsMap2;
-        //        break;
-        //    case Maps.Map3:
-        //        actualMap = positionsMap3;
-        //        break;
-        //}
+        
     }
 
     void FixedUpdate() 
@@ -84,39 +63,23 @@ public class PlayerGenerator : MonoBehaviour
 
     void Spawn()
     {
-        switch (maps)
-        {
-            case Maps.MapTut:
-                actualMap = positionsMapTut;
-                break;
-            case Maps.Map1:
-                actualMap = positionsMap1;
-                break;
-            case Maps.Map2:
-                actualMap = positionsMap2;
-                break;
-            case Maps.Map3:
-                actualMap = positionsMap3;
-                break;
-        }
         for (int i = 0; i < PlayerManager.Instance.numPlayers; i++)
         {
-            randPos = Random.Range(1, actualMap.Length);
-
+            whereToSpawn = Random.Range(0, spawnPoints.Length + 1);
             switch (PlayerManager.Instance.SkinPlayer1)
             {
                 case 1:
-                    GameObject Skin1 = Instantiate(spawnSkin1, actualMap[randPos], Quaternion.identity);
+                    GameObject Skin1 = Instantiate(spawnSkin1, spawnPoints[whereToSpawn].transform.position, Quaternion.identity);
                     playerScript = Skin1.GetComponent<PlayerController2D>();
                     playerScript.controller = Controller.PLAYER0;
                     break;
                 case 2:
-                    GameObject Skin2 = Instantiate(spawnSkin2, actualMap[randPos], Quaternion.identity);
+                    GameObject Skin2 = Instantiate(spawnSkin2, spawnPoints[whereToSpawn].transform.position, Quaternion.identity);
                     playerScript = Skin2.GetComponent<PlayerController2D>();
                     playerScript.controller = Controller.PLAYER0;
                     break;
                 case 3:
-                    GameObject Skin3 = Instantiate(spawnSkin3, actualMap[randPos], Quaternion.identity);
+                    GameObject Skin3 = Instantiate(spawnSkin3, spawnPoints[whereToSpawn].transform.position, Quaternion.identity);
                     playerScript = Skin3.GetComponent<PlayerController2D>();
                     playerScript.controller = Controller.PLAYER0;
                     break;
@@ -127,20 +90,21 @@ public class PlayerGenerator : MonoBehaviour
             PlayerManager.Instance.isAlivePlayer1 = true;
 
             if (PlayerManager.Instance.Player2ON == false) { Debug.Log("PGenerator: 1 Players Spawned"); return; }
+            whereToSpawn = Random.Range(0, spawnPoints.Length + 1);
             switch (PlayerManager.Instance.SkinPlayer2)
             {
                 case 1:
-                    GameObject Skin0 = Instantiate(spawnSkin1, actualMap[randPos], Quaternion.identity);
+                    GameObject Skin0 = Instantiate(spawnSkin1, spawnPoints[whereToSpawn].transform.position, Quaternion.identity);
                     playerScript = Skin0.GetComponent<PlayerController2D>();
                     playerScript.controller = Controller.PLAYER1;
                     break;
                 case 2:
-                    GameObject Skin1 = Instantiate(spawnSkin2, actualMap[randPos], Quaternion.identity);
+                    GameObject Skin1 = Instantiate(spawnSkin2, spawnPoints[whereToSpawn].transform.position, Quaternion.identity);
                     playerScript = Skin1.GetComponent<PlayerController2D>();
                     playerScript.controller = Controller.PLAYER1;
                     break;
                 case 3:
-                    GameObject Skin2 = Instantiate(spawnSkin3, actualMap[randPos], Quaternion.identity);
+                    GameObject Skin2 = Instantiate(spawnSkin3, spawnPoints[whereToSpawn].transform.position, Quaternion.identity);
                     playerScript = Skin2.GetComponent<PlayerController2D>();
                     playerScript.controller = Controller.PLAYER1;
                     break;
@@ -151,20 +115,21 @@ public class PlayerGenerator : MonoBehaviour
             PlayerManager.Instance.isAlivePlayer2 = true;
 
             if (PlayerManager.Instance.Player3ON == false) { Debug.Log("PGenerator: 2 Players Spawned"); return; }
+            whereToSpawn = Random.Range(0, spawnPoints.Length + 1);
             switch (PlayerManager.Instance.SkinPlayer1)
             {
                 case 1:
-                    GameObject Skin0 = Instantiate(spawnSkin1, actualMap[randPos], Quaternion.identity);
+                    GameObject Skin0 = Instantiate(spawnSkin1, spawnPoints[whereToSpawn].transform.position, Quaternion.identity);
                     playerScript = Skin0.GetComponent<PlayerController2D>();
                     playerScript.controller = Controller.PLAYER2;
                     break;
                 case 2:
-                    GameObject Skin1 = Instantiate(spawnSkin2, actualMap[randPos], Quaternion.identity);
+                    GameObject Skin1 = Instantiate(spawnSkin2, spawnPoints[whereToSpawn].transform.position, Quaternion.identity);
                     playerScript = Skin1.GetComponent<PlayerController2D>();
                     playerScript.controller = Controller.PLAYER2;
                     break;
                 case 3:
-                    GameObject Skin2 = Instantiate(spawnSkin3, actualMap[randPos], Quaternion.identity);
+                    GameObject Skin2 = Instantiate(spawnSkin3, spawnPoints[whereToSpawn].transform.position, Quaternion.identity);
                     playerScript = Skin2.GetComponent<PlayerController2D>();
                     playerScript.controller = Controller.PLAYER2;
                     break;
@@ -175,20 +140,21 @@ public class PlayerGenerator : MonoBehaviour
             PlayerManager.Instance.isAlivePlayer3 = true;
 
             if (PlayerManager.Instance.Player4ON == false) { Debug.Log("PGenerator: 3 Players Spawned"); return; }
+            whereToSpawn = Random.Range(0, spawnPoints.Length + 1);
             switch (PlayerManager.Instance.SkinPlayer4)
             {
                 case 1:
-                    GameObject Skin0 = Instantiate(spawnSkin1, actualMap[randPos], Quaternion.identity);
+                    GameObject Skin0 = Instantiate(spawnSkin1, spawnPoints[whereToSpawn].transform.position, Quaternion.identity);
                     playerScript = Skin0.GetComponent<PlayerController2D>();
                     playerScript.controller = Controller.PLAYER3;
                     break;
                 case 2:
-                    GameObject Skin1 = Instantiate(spawnSkin2, actualMap[randPos], Quaternion.identity);
+                    GameObject Skin1 = Instantiate(spawnSkin2, spawnPoints[whereToSpawn].transform.position, Quaternion.identity);
                     playerScript = Skin1.GetComponent<PlayerController2D>();
                     playerScript.controller = Controller.PLAYER3;
                     break;
                 case 3:
-                    GameObject Skin2 = Instantiate(spawnSkin3, actualMap[randPos], Quaternion.identity);
+                    GameObject Skin2 = Instantiate(spawnSkin3, spawnPoints[whereToSpawn].transform.position, Quaternion.identity);
                     playerScript = Skin2.GetComponent<PlayerController2D>();
                     playerScript.controller = Controller.PLAYER3;
                     break;

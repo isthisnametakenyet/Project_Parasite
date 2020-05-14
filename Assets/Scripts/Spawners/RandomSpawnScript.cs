@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Maps { MapTut, Map1, Map2, Map3 };
 public enum PickTypes { Sword, Axe, Spear, Bow, CrossBow, Boomerang };
 
 public class RandomSpawnScript : MonoBehaviour
@@ -54,7 +53,7 @@ public class RandomSpawnScript : MonoBehaviour
             {
                 whatToSpawn = Random.Range(1, 3); 
 
-                whereToSpawn = Random.Range(0, 5); 
+                whereToSpawn = Random.Range(0, spawnPoints.Length + 1); 
 
                 whenToSpawn = Random.Range(spawnMinRate, spawnMaxRate); 
 
