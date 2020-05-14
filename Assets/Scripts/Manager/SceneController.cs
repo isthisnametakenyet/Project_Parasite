@@ -24,10 +24,12 @@ public class SceneController : MonoBehaviour
         switch (name)
         {
             case "MainMenu":
+                SoundManager.instance.Stop("sawIdle");
                 SoundManager.instance.Stop("GameMusic");
                 SceneManager.LoadScene(name);
                 break;
             case "Cave":
+                SoundManager.instance.Play("sawIdle");
                 SoundManager.instance.Stop("MenuMusic");
                 SoundManager.instance.Play("GameMusic");
                 SceneManager.LoadScene(name);

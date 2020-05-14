@@ -185,7 +185,6 @@ public class PlayerController2D : MonoBehaviour
             //ATTACK
             if (player.GetButtonDown("Attack"))
             {
-                SoundManager.instance.Play("AttackSFX");
                 animator.SetBool(AttackedID, true);
                 Debug.Log("Player: Attack");
             }
@@ -238,7 +237,6 @@ public class PlayerController2D : MonoBehaviour
                     animator.SetBool(HeadingID, false);
                     animator.SetBool(StaticID, true);
                     animator.SetTrigger(LoseHeadID);
-
                     GameObject head = Instantiate(HeadThrowPrefab, new Vector3(transform.position.x, transform.position.y + 0.5f, 0), Quaternion.identity);
 
                     headThrow = head.GetComponent<HeadThrow>();
@@ -289,22 +287,24 @@ public class PlayerController2D : MonoBehaviour
         {
             if (player.GetAxis("Move") > 0)
             {
+                SoundManager.instance.Play("WalkSFX");
                 //Debug.Log("Moving > 0");
                 if (isCharging == false && isHeading == false && isDucking == false)
                 {
                     thisbody2D.velocity = new Vector2(runSpeed, thisbody2D.velocity.y);
                     animator.SetBool(MovingID, true);
-                    SoundManager.instance.Play("WalkSFX");
+                    
                 }
             }
             else if (player.GetAxis("Move") < 0)
             {
+
+                SoundManager.instance.Play("WalkSFX");
                 //Debug.Log("Moving < 0");
                 if (isCharging == false && isHeading == false && isDucking == false)
                 {
                     thisbody2D.velocity = new Vector2(-runSpeed, thisbody2D.velocity.y);
                     animator.SetBool(MovingID, true);
-                    SoundManager.instance.Play("WalkSFX");
                 }
             }
             else
@@ -356,6 +356,7 @@ public class PlayerController2D : MonoBehaviour
             //50% MOVEMENT
             if (player.GetAxis("Move") > 0)
             {
+                SoundManager.instance.Play("WalkSFX");
                 if (isCharging == true || isHeading == true)
                 {
                     thisbody2D.velocity = new Vector2(runSpeed * 50 / 100, thisbody2D.velocity.y); //(50% de max speed, velocidad actual y)
@@ -364,6 +365,7 @@ public class PlayerController2D : MonoBehaviour
             }
             else if (player.GetAxis("Move") < 0)
             {
+                SoundManager.instance.Play("WalkSFX");
                 if (isCharging == true || isHeading == true)
                 {
                     thisbody2D.velocity = new Vector2(-runSpeed * 50 / 100, thisbody2D.velocity.y);
@@ -432,6 +434,7 @@ public class PlayerController2D : MonoBehaviour
     public void ReturnHead()
     {
         Debug.Log("ReturnHead()");
+        SoundManager.instance.Play("Parasit");
         animator.SetTrigger(GetHeadID);
         animator.SetBool(StaticID, false);
         Parasitable = false;
@@ -452,6 +455,7 @@ public class PlayerController2D : MonoBehaviour
     {
         animator.SetTrigger(LoseHeadID);
         animator.SetBool(StaticID, true);
+        SoundManager.instance.Play("Parasit");
         UnParasited();
     }
 
@@ -463,6 +467,7 @@ public class PlayerController2D : MonoBehaviour
         Debug.Log("Expulse()");
         headThrow = Parasiter.GetComponent<HeadThrow>();
         headThrow.Expulse();
+        SoundManager.instance.Play("PushSFX");
         UnParasited();
     }
 
@@ -510,7 +515,7 @@ public class PlayerController2D : MonoBehaviour
             GameObject head = Instantiate(HeadFallPrefab, new Vector3(transform.position.x, transform.position.y + 0.3f, 0), Quaternion.identity);
             animator.SetTrigger(LoseHeadID);
             animator.SetBool(StaticID, true);
-
+            SoundManager.instance.Play("ArmLoseSFX");
             headReturn = head.GetComponent<HeadReturn>();
             headReturn.controller = this.controller;
             headReturn.OriginalBody = this.gameObject;
@@ -546,7 +551,7 @@ public class PlayerController2D : MonoBehaviour
     {
         Arms--;
         animator.SetTrigger(LoseArmID);
-        SoundManager.instance.Play("ArmLoseSFX");
+        SoundManager.instance.Play("loosearm");
         GameObject armDead = Instantiate(ArmFallPrefab, new Vector3(transform.position.x, transform.position.y - 0.22f, 0), Quaternion.identity);
         Rigidbody2D armRigid;
         armRigid = armDead.GetComponent<Rigidbody2D>();
@@ -566,6 +571,7 @@ public class PlayerController2D : MonoBehaviour
     /// Function used when uses of the current weapon reach 0
     public void WeaponBreak()
     {
+        SoundManager.instance.Play("BreakWeapon");
         animator.SetInteger(whichWeaponID, 0);
     }
 
@@ -594,13 +600,14 @@ public class PlayerController2D : MonoBehaviour
         //PICK WEAPON
         if (collision.gameObject.tag == "PickUp" && player.GetButtonDown("Pickup") && isWeaponed == false && picking == false)
         {
-            SoundManager.instance.Play("PickWeaponSFX");
+            
             pickUpScript = collision.GetComponent<PickUpScript>();
             switch (pickUpScript.picktype)
             {
                 case PickTypes.Sword:
                     if (Arms == 0) { Debug.Log("NONE, cant pick"); return; }
                     picking = true;
+                    SoundManager.instance.Play("PickSword");
                     animator.SetInteger(whichWeaponID, 1);
                     Sword.SetActive(true); //ACTIVATE
                     weaponScript = Sword.GetComponent<WeaponScript>();
@@ -609,6 +616,7 @@ public class PlayerController2D : MonoBehaviour
                 case PickTypes.Axe:
                     if (Arms == 0) { Debug.Log("NONE, cant pick"); return; }
                     picking = true;
+                    SoundManager.instance.Play("PickAxe");
                     animator.SetInteger(whichWeaponID, 2);
                     Axe.SetActive(true); //ACTIVATE
                     weaponScript = Axe.GetComponent<WeaponScript>();
@@ -658,12 +666,12 @@ public class PlayerController2D : MonoBehaviour
         else if (collision.gameObject.tag == "Stuck" && player.GetButtonDown("Pickup") && isWeaponed == false && picking == false)
         {
             meleeScript = collision.GetComponent<MeleeScript>();
-            SoundManager.instance.Play("PickWeaponSFX");
             switch (pickUpScript.picktype)
             {
                 case PickTypes.Sword:
                     if (Arms == 0) { Debug.Log("NONE, cant pick"); return; }
                     picking = true;
+                    SoundManager.instance.Play("PickSword");
                     animator.SetInteger(whichWeaponID, 1);
                     Sword.SetActive(true); //ACTIVATE
                     weaponScript = Sword.GetComponent<WeaponScript>();
@@ -672,6 +680,7 @@ public class PlayerController2D : MonoBehaviour
                 case PickTypes.Axe:
                     if (Arms == 0) { Debug.Log("NONE, cant pick"); return; }
                     picking = true;
+                    SoundManager.instance.Play("PickAxe");
                     animator.SetInteger(whichWeaponID, 2);
                     Axe.SetActive(true); //ACTIVATE
                     weaponScript = Axe.GetComponent<WeaponScript>();
@@ -720,7 +729,7 @@ public class PlayerController2D : MonoBehaviour
         if (collision.gameObject.tag == "FreeArm" && player.GetButtonDown("Pickup") && picking == false && Arms < 2)
         {
             picking = true;
-
+            SoundManager.instance.Play("PickArm");
             Arms++;
             animator.SetTrigger(GetArmID);
 
@@ -737,7 +746,7 @@ public class PlayerController2D : MonoBehaviour
             int whichWeapon = animator.GetInteger(whichWeaponID);
 
             //LOSE ARM
-            if (Arms > 0) { DropArm(collision.gameObject); }
+            if (Arms > 0) { DropArm(collision.gameObject); SoundManager.instance.Play("FallWeapon"); }
 
             //DROP WEAPON
             if (isWeaponed == true)
