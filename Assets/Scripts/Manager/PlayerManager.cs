@@ -116,15 +116,11 @@ public class PlayerManager : Singleton <PlayerManager>
         PlayerManager.Instance.ScorePlayer2 = 0;
         PlayerManager.Instance.ScorePlayer3 = 0;
         PlayerManager.Instance.ScorePlayer4 = 0;
-
-        //if (Player1ON == true) { isAlivePlayer1 = true; }
-        //if (Player2ON == true) { isAlivePlayer2 = true; }
-        //if (Player3ON == true) { isAlivePlayer3 = true; }
-        //if (Player4ON == true) { isAlivePlayer4 = true; }
-
+       
         DeleteProps = false;
         gameON = true;
         RoundWinner = 0;
+
         Debug.Log("PManager: Startgame();");
     }
 }
