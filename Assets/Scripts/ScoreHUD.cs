@@ -5,22 +5,27 @@ using UnityEngine.SceneManagement;
 
 public class ScoreHUD : MonoBehaviour
 {
+    [Header("Variables")]
     public float delayEnd;
 
+    [Header("Skins")]
     public Sprite HeadSkin1;
     public Sprite HeadSkin2;
     public Sprite HeadSkin3;
 
+    [Header("Backgrounds")]
     public GameObject P1B;
     public GameObject P2B;
     public GameObject P3B;
     public GameObject P4B;
 
+    [Header("Heads")]
     public GameObject P1H;
     public GameObject P2H;
     public GameObject P3H;
     public GameObject P4H;
 
+    [Header("Stickers")]
     //P1
     public GameObject P1_1;
     public GameObject P1_2;
@@ -46,6 +51,7 @@ public class ScoreHUD : MonoBehaviour
     public GameObject P4_4;
     public GameObject P4_5;
 
+    //ANIMATORS
     private Animator animP1_1;
     private Animator animP1_2;
     private Animator animP1_3;
@@ -67,6 +73,7 @@ public class ScoreHUD : MonoBehaviour
     private Animator animP4_4;
     private Animator animP4_5; 
 
+    //CONDITIONS
     private int OldID;
     private int WinID;
     private int EndID;
@@ -131,7 +138,7 @@ public class ScoreHUD : MonoBehaviour
 
     public void Activate()
     {
-        Debug.Log("Hiding ScoreHUD");
+        Debug.Log("ScoreHUD:  Activate()");
         P1B.SetActive(true);
         P1H.SetActive(true);
         switch (PlayerManager.Instance.ScorePlayer1)
@@ -267,7 +274,7 @@ public class ScoreHUD : MonoBehaviour
 
     public void Desactivate()
     {
-        Debug.Log("Revealing ScoreHUD");
+        Debug.Log("ScoreHUD:  Desactivate()");
         P1B.SetActive(false);
         P1H.SetActive(false);
         P1_1.SetActive(false);

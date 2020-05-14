@@ -64,6 +64,7 @@ public class PlayerGenerator : MonoBehaviour
         once = false;
         scoreScript.Desactivate();
         PlayerManager.Instance.DeleteProps = false;
+        PlayerManager.Instance.WinRound = false;
         Spawn();
     }
 
