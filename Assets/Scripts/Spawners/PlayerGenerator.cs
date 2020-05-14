@@ -67,7 +67,7 @@ public class PlayerGenerator : MonoBehaviour
     {
         for (int i = 0; i < PlayerManager.Instance.numPlayers; i++)
         {
-            whereToSpawn = Random.Range(0, spawnPoints.Length + 1);
+            whereToSpawn = Random.Range(0, spawnPoints.Length);
             switch (PlayerManager.Instance.SkinPlayer1)
             {
                 case 1:

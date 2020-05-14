@@ -53,7 +53,7 @@ public class RandomSpawnScript : MonoBehaviour
             {
                 whatToSpawn = Random.Range(1, 3); 
 
-                whereToSpawn = Random.Range(0, spawnPoints.Length + 1); 
+                whereToSpawn = Random.Range(0, spawnPoints.Length); 
 
                 whenToSpawn = Random.Range(spawnMinRate, spawnMaxRate); 
 
