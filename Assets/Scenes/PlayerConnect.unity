@@ -1004,6 +1004,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1595156197}
+        m_MethodName: selected
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 4
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &296691420
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3463,6 +3474,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1595156197}
+        m_MethodName: selected
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1454164133
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3621,6 +3643,57 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1460122612}
   m_CullTransparentMesh: 0
+--- !u!1 &1595156196
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1595156198}
+  - component: {fileID: 1595156197}
+  m_Layer: 0
+  m_Name: buttonmanager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1595156197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1595156196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7da97a337cb2b18449874a0da091335c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  red: {fileID: 1982649600}
+  green: {fileID: 1833185063}
+  yelow: {fileID: 1454164132}
+  blue: {fileID: 296691419}
+  redsp: {fileID: 21300000, guid: a2bfdddeb1a92b746bd98d57eaeb11b7, type: 3}
+  greensp: {fileID: 21300000, guid: 8f183455202d6f340828a8c3ffd5f3e1, type: 3}
+  yelowsp: {fileID: 21300000, guid: 53fe79248a5c3df45902ee4d98c1b1f3, type: 3}
+  bluesp: {fileID: 21300000, guid: 62cc79bb303cdb7459ac28c133f50372, type: 3}
+--- !u!4 &1595156198
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1595156196}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.9495582, y: -0.57241714, z: 25.457638}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1630901845
 GameObject:
   m_ObjectHideFlags: 0
@@ -4262,6 +4335,17 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 4
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1595156197}
+        m_MethodName: selected
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -5018,6 +5102,17 @@ MonoBehaviour:
       - m_Target: {fileID: 1631143474041647104, guid: 0a436846a704a5742a438bbbd501cb35,
           type: 3}
         m_MethodName: SetSkinTOPlayer
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1595156197}
+        m_MethodName: selected
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
