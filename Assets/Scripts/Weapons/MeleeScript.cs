@@ -35,14 +35,12 @@ public class MeleeScript : MonoBehaviour
         else if (Idle == true && Thrown == false && Landed == false)
         {
             Debug.Log("Wp: Idle");
-            collider2D.enabled = false;
             transform.gameObject.tag = "Stuck";
             //START ANIMATION IDLE
         }
         else if (Thrown == true)
         {
             Debug.Log("Wp: Thrown");
-            collider2D.enabled = true;
             transform.gameObject.tag = "Throwing";
             //START ANIMATION THROW
         }

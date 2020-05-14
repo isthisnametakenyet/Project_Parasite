@@ -72,7 +72,7 @@ public class PlayerController2D : MonoBehaviour
     [HideInInspector] public bool facingright = true;
     float headCharge = 0f;
     float weaponCharge = 0f;
-    [HideInInspector] public bool isWeaponed = false;
+    /*[HideInInspector]*/ public bool isWeaponed = false;
 
     bool picking = false;
     float pickTemp = 0;
@@ -564,6 +564,8 @@ public class PlayerController2D : MonoBehaviour
         animator.SetInteger(whichWeaponID, 0);
     }
 
+
+
     //COLISIONS
     private void OnCollisionStay2D(Collision2D collision) //GROUNDING TRUE
     {
@@ -584,7 +586,7 @@ public class PlayerController2D : MonoBehaviour
     //TRIGGERS
     private void OnTriggerStay2D(Collider2D collision) //PICKUP, STUCK, FREEARM
     {
-        //PICKUP
+        //PICK WEAPON
         if (collision.gameObject.tag == "PickUp" && player.GetButtonDown("Pickup") && isWeaponed == false && picking == false)
         {
             pickUpScript = collision.GetComponent<PickUpScript>();
@@ -646,51 +648,68 @@ public class PlayerController2D : MonoBehaviour
             Destroy(collision.gameObject);
         }
 
-        //STUCK
-        //else if (collision.gameObject.tag == "Stuck" && player.GetButtonDown("Pickup") && isWeaponed == false && picking == false)  //RE-PICKUP
-        //{
-        //    isWeaponed = true;
-        //    switch (collision.gameObject.name)
-        //    {
-        //        case "place_sword(Clone)":
-        //            if (Arms == 0) { break; }
-        //            picking = true;
-        //            animator.SetInteger(whichWeaponID, 1);
-        //            Sword.SetActive(true); //ACTIVATE
-        //            weaponScript = Sword.GetComponent<WeaponScript>();
-        //            meleeScript = collision.gameObject.GetComponent<MeleeScript>();
-        //            weaponScript.Uses = meleeScript.Uses;
-        //            break;
-        //        case "place_axe(Clone)":
-        //            if (Arms == 0) { break; }
-        //            picking = true;
-        //            animator.SetInteger(whichWeaponID, 1);
-        //            Axe.SetActive(true); //ACTIVATE
-        //            weaponScript = Sword.GetComponent<WeaponScript>();
-        //            meleeScript = collision.gameObject.GetComponent<MeleeScript>();
-        //            weaponScript.Uses = meleeScript.Uses;
-        //            break;
-        //        case "place_spear(Clone)":
-        //            if (Arms == 0) { break; }
-        //            picking = true;
-        //            animator.SetInteger(whichWeaponID, 1);
-        //            Spear.SetActive(true); //ACTIVATE
-        //            weaponScript = Sword.GetComponent<WeaponScript>();
-        //            meleeScript = collision.gameObject.GetComponent<MeleeScript>();
-        //            weaponScript.Uses = meleeScript.Uses;
-        //            break;
-        //        //case "place_boomerang(Clone)":
-        //        //    if (Arms <= 1) { break; }
-        //        //    picking = true;
-        //        //    boomerangScript = collision.GetComponent<Boomerang>();
-        //        //    boomerangScript.Picker = this.gameObject;
-        //        //    animator.SetInteger(whichWeaponID, 6);
-        //        //    Boomerang.SetActive(true); //ACTIVATE
-        //        //    break;
-        //    }
-        //}
+        //PICK STUCK
+        else if (collision.gameObject.tag == "Stuck" && player.GetButtonDown("Pickup") && isWeaponed == false && picking == false)
+        {
+            meleeScript = collision.GetComponent<MeleeScript>();
+            switch (pickUpScript.picktype)
+            {
+                case PickTypes.Sword:
+                    if (Arms == 0) { Debug.Log("NONE, cant pick"); return; }
+                    picking = true;
+                    animator.SetInteger(whichWeaponID, 1);
+                    Sword.SetActive(true); //ACTIVATE
+                    weaponScript = Sword.GetComponent<WeaponScript>();
+                    weaponScript.Uses = meleeScript.Uses;
+                    break;
+                case PickTypes.Axe:
+                    if (Arms == 0) { Debug.Log("NONE, cant pick"); return; }
+                    picking = true;
+                    animator.SetInteger(whichWeaponID, 2);
+                    Axe.SetActive(true); //ACTIVATE
+                    weaponScript = Axe.GetComponent<WeaponScript>();
+                    weaponScript.Uses = meleeScript.Uses;
+                    break;
+                case PickTypes.Spear:
+                    if (Arms == 0) { break; }
+                    picking = true;
+                    animator.SetInteger(whichWeaponID, 3);
+                    Spear.SetActive(true); //ACTIVATE
+                    weaponScript = Spear.GetComponent<WeaponScript>();
+                    weaponScript.Uses = meleeScript.Uses;
+                    break;
+                case PickTypes.Bow:
+                    if (Arms <= 1) { break; }
+                    picking = true;
+                    animator.SetInteger(whichWeaponID, 4);
+                    Bow.SetActive(true); //ACTIVATE
+                    weaponScript = Bow.GetComponent<WeaponScript>();
+                    weaponScript.Uses = meleeScript.Uses;
+                    break;
+                case PickTypes.CrossBow:
+                    if (Arms <= 1) { break; }
+                    picking = true;
+                    animator.SetInteger(whichWeaponID, 5);
+                    CrossBow.SetActive(true); //ACTIVATE
+                    weaponScript = CrossBow.GetComponent<WeaponScript>();
+                    weaponScript.Uses = meleeScript.Uses;
+                    break;
+                case PickTypes.Boomerang:
+                    if (Arms <= 1) { break; }
+                    picking = true;
+                    animator.SetInteger(whichWeaponID, 6);
+                    Boomerang.SetActive(true); //ACTIVATE
+                    weaponScript = Boomerang.GetComponent<WeaponScript>();
+                    weaponScript.Uses = meleeScript.Uses;
+                    break;
+            }
 
-        //FREEARM
+            isWeaponed = true;
+
+            Destroy(collision.gameObject);
+        }
+
+        //PICK FREEARM
         if (collision.gameObject.tag == "FreeArm" && player.GetButtonDown("Pickup") && picking == false && Arms < 2)
         {
             picking = true;
@@ -705,6 +724,7 @@ public class PlayerController2D : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision) //DAMAGE, ATTACKING
     {
+        //LOSE ARM
         if (collision.gameObject.tag == "Attacking")
         {
             int whichWeapon = animator.GetInteger(whichWeaponID);
@@ -724,6 +744,7 @@ public class PlayerController2D : MonoBehaviour
                             weaponScript.Drop();
                             Sword.SetActive(false);
                             isWeaponed = false;
+                            animator.SetInteger(whichWeaponID, 0);
                         }
                         break;
                     case 2:
@@ -733,6 +754,7 @@ public class PlayerController2D : MonoBehaviour
                             weaponScript.Drop();
                             Axe.SetActive(false);
                             isWeaponed = false;
+                            animator.SetInteger(whichWeaponID, 0);
                         }
                         break;
                     case 3:
@@ -742,6 +764,7 @@ public class PlayerController2D : MonoBehaviour
                             weaponScript.Drop();
                             Spear.SetActive(false);
                             isWeaponed = false;
+                            animator.SetInteger(whichWeaponID, 0);
                         }
                         break;
                     //case 4:
@@ -783,8 +806,8 @@ public class PlayerController2D : MonoBehaviour
         }
 
 
-
-        if (collision.gameObject.tag == "Damage") //DEATH
+        //DEATH
+        if (collision.gameObject.tag == "Damage") 
         {
             Debug.Log("Touch Sierra [DEATH " + controller + "]");
 
