@@ -28,8 +28,10 @@ public class PlayerGenerator : MonoBehaviour
         if (!PlayerManager.Instance) { Debug.LogError("Not initialized. Do you have an PlayerManager in your scene?"); }
         Spawn();
         PlayerManager.Instance.StartGame();
-
-        
+        for (int i = 0; i < spawnPoints.Length; i++)
+        {
+            spawnPoints[i].SetActive(false);
+        }
     }
 
     void FixedUpdate() 
