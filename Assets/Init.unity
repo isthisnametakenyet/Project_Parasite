@@ -222,7 +222,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1317738297
 PrefabInstance:
@@ -274,7 +274,7 @@ PrefabInstance:
     - target: {fileID: 8170837581592041144, guid: 2ad44cbf21a9f70498758463d62849f5,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8170837581592041144, guid: 2ad44cbf21a9f70498758463d62849f5,
         type: 3}
@@ -300,6 +300,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5175231583499952972, guid: 0281a6991b8a3984493f3154240e1245,
+        type: 3}
+      propertyPath: m_Name
+      value: Rewired Input Manager Enter
+      objectReference: {fileID: 0}
     - target: {fileID: 2166191353409172673, guid: 0281a6991b8a3984493f3154240e1245,
         type: 3}
       propertyPath: _userData.actions.Array.data[3]._type
@@ -309,11 +314,6 @@ PrefabInstance:
         type: 3}
       propertyPath: _userData.actions.Array.data[5]._type
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5175231583499952972, guid: 0281a6991b8a3984493f3154240e1245,
-        type: 3}
-      propertyPath: m_Name
-      value: Rewired Input Manager Enter
       objectReference: {fileID: 0}
     - target: {fileID: 8095954949078728874, guid: 0281a6991b8a3984493f3154240e1245,
         type: 3}
