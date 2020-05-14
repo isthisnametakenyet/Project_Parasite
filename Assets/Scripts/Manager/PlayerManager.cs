@@ -7,15 +7,14 @@ using Rewired;
 public class PlayerManager : Singleton <PlayerManager>
 {
     #region InstanceVariables
-    //ROUND
-    private bool WinRound = false;
-    private bool RestartingRound = false;
-    [HideInInspector] public bool DeleteProps = false;
-    [HideInInspector] public int RoundWinner = 0;
-
     //GAME
     [HideInInspector] public bool gameON = false;
     [HideInInspector] public bool WinGame = false;
+
+    //ROUND
+    [HideInInspector] public bool WinRound = false;
+    [HideInInspector] public int RoundWinner = 0;
+    [HideInInspector] public bool DeleteProps = false;
 
     //TEMPS
     [HideInInspector] public int tempskin;
