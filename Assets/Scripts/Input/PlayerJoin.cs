@@ -5,8 +5,37 @@ using Rewired;
 
 public class PlayerJoin : MonoBehaviour
 {
+    //SCRIPTS
+    [Header("Scripts")]
     private MenuAsignemet assignementScript;
 
+    //VARIABLES
+    [Header("Delay")]
+    public float maxDelay = 3;
+    private float animDelay;
+
+    //COLORS
+    [Header("Colors")]
+    public string SelectedRed;
+    public string UnselectedRed;
+    public string SelectedPurple;
+    public string UnselectedPurple;
+    public string SelectedYellow;
+    public string UnselectedYellow;
+    public string SelectedGreen;
+    public string UnselectedGreen;
+
+    Color selectRed;
+    Color disconectRed;
+    Color selectPurple;
+    Color disconectPurple;
+    Color selectYellow;
+    Color disconectYellow;
+    Color selectGreen;
+    Color disconectGreen;
+
+    //GAMEOBJECTS
+    [Header("GameObjects")]
     public GameObject Player1;
     private AsignerController Player1Asigner;
     public GameObject Player2;
@@ -36,20 +65,12 @@ public class PlayerJoin : MonoBehaviour
     public GameObject PressToJoin;
     public GameObject TutorialButton;
     public GameObject PlayButton;
-
-    Color selectRed;
-    Color disconectRed;
-    Color selectPurple;
-    Color disconectPurple;
-    Color selectYellow;
-    Color disconectYellow;
-    Color selectGreen;
-    Color disconectGreen;
+     
+    
 
     string playerNumString;
 
-    float animDelay;
-    float maxDelay = 100;
+    
     int colorAnim = 0;
 
     void Start()
@@ -70,25 +91,21 @@ public class PlayerJoin : MonoBehaviour
         Player3Asigner = Player3.GetComponent<AsignerController>();
         Player4Asigner = Player4.GetComponent<AsignerController>();
 
-        ColorUtility.TryParseHtmlString("#FF0000", out selectRed);
-        ColorUtility.TryParseHtmlString("#8C0000", out disconectRed);
-        ColorUtility.TryParseHtmlString("#7700E7", out selectPurple);
-        ColorUtility.TryParseHtmlString("#4E0098", out disconectPurple);
-        ColorUtility.TryParseHtmlString("#FFFF00", out selectYellow);
-        ColorUtility.TryParseHtmlString("#828200", out disconectYellow);
-        ColorUtility.TryParseHtmlString("#00FF00", out selectGreen);
-        ColorUtility.TryParseHtmlString("#006A00", out disconectGreen);
+        ColorUtility.TryParseHtmlString(SelectedRed, out selectRed);
+        ColorUtility.TryParseHtmlString(UnselectedRed, out disconectRed);
+        ColorUtility.TryParseHtmlString(SelectedPurple, out selectPurple);
+        ColorUtility.TryParseHtmlString(UnselectedPurple, out disconectPurple);
+        ColorUtility.TryParseHtmlString(SelectedYellow, out selectYellow);
+        ColorUtility.TryParseHtmlString(UnselectedYellow, out disconectYellow);
+        ColorUtility.TryParseHtmlString(SelectedGreen, out selectGreen);
+        ColorUtility.TryParseHtmlString(UnselectedGreen, out disconectGreen);
     }
 
     void Update()
     {
-        if (animDelay > 0)
-        {
-            animDelay--;
-        }
+        if (animDelay <= maxDelay) { animDelay += Time.deltaTime; }
         else {
-            animDelay = maxDelay;
-            colorAnim++;
+            animDelay = 0;
             if (colorAnim == 5) { colorAnim = 1; }
         }
     }
