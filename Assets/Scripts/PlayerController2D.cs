@@ -152,32 +152,13 @@ public class PlayerController2D : MonoBehaviour
 
         //MOVEMENT
         Movement();
-    }
-
-    private void FixedUpdate(){
-        //PLAYER MANAGEMENT
-        if(!ReInput.isReady || player == null) {
-            Debug.Log("not set or Disconnected"); //TODO: MESSAGE IN SCREEN
-            return;
-        }
-        else if (playerReady == false)
-        {
-            Debug.Log("player not ready" + controller);
-            return;
-        };
-
-        //TEMPS
-        if (pickDelay <= pickTemp && picking == true) { picking = false; pickTemp = 0; }
-        else if (picking == true) { pickTemp += Time.deltaTime; }
-
-        if (jumpTemp <= jumpCooldown) { jumpTemp += Time.deltaTime; }
 
         //BOOLS
         int whichWeapon = animator.GetInteger(whichWeaponID);
         bool isCharging = animator.GetBool(ChargingID);
-        bool isHeading =  animator.GetBool(HeadingID);
-        bool isDucking =  animator.GetBool(DuckingID);
-        bool isStatic =   animator.GetBool(StaticID);
+        bool isHeading = animator.GetBool(HeadingID);
+        bool isDucking = animator.GetBool(DuckingID);
+        bool isStatic = animator.GetBool(StaticID);
 
         //ATTACK, CHARGE, HEAD THROW
         if (isStatic == false)
@@ -213,7 +194,7 @@ public class PlayerController2D : MonoBehaviour
                 isWeaponed = false;
             }
 
-            if(Parasited == false)
+            if (Parasited == false)
             {
                 //HEAD THROW
                 if (player.GetAxis("HeadThrow&Return") > 0 && isCharging == false && isDucking == false)
@@ -266,6 +247,25 @@ public class PlayerController2D : MonoBehaviour
             }
             //IF PARASITED == TRUE, LO HACE EL HEAD THROW JUNTO CON LA FUNCION HeadReturn()
         }
+    }
+
+    private void FixedUpdate(){
+        //PLAYER MANAGEMENT
+        if(!ReInput.isReady || player == null) {
+            Debug.Log("not set or Disconnected"); //TODO: MESSAGE IN SCREEN
+            return;
+        }
+        else if (playerReady == false)
+        {
+            Debug.Log("player not ready" + controller);
+            return;
+        };
+
+        //TEMPS
+        if (pickDelay <= pickTemp && picking == true) { picking = false; pickTemp = 0; }
+        else if (picking == true) { pickTemp += Time.deltaTime; }
+
+        if (jumpTemp <= jumpCooldown) { jumpTemp += Time.deltaTime; }
     }
 
 

@@ -391,7 +391,7 @@ MonoBehaviour:
   Parasitcontroller: 0
   Arms: 2
   runSpeed: 5
-  jumpCooldown: 1.2
+  jumpCooldown: 1.1
   jumpStrengh: 10
   headReturnDelay: 2
   maxWeaponCharge: 2
@@ -1024,6 +1024,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3864819673225538102}
     m_Modifications:
+    - target: {fileID: 4670302433585574822, guid: 7b95556025a43774d9dcc3ff39c64ac4,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5913732490714000450, guid: 7b95556025a43774d9dcc3ff39c64ac4,
         type: 3}
       propertyPath: m_Name
@@ -1083,11 +1088,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0.572
-      objectReference: {fileID: 0}
-    - target: {fileID: 4670302433585574822, guid: 7b95556025a43774d9dcc3ff39c64ac4,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7b95556025a43774d9dcc3ff39c64ac4, type: 3}

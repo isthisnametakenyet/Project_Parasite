@@ -65,8 +65,7 @@ public class PlayerJoin : MonoBehaviour
     public GameObject PressToJoin;
     public GameObject TutorialButton;
     public GameObject PlayButton;
-     
-    
+
 
     string playerNumString;
 
