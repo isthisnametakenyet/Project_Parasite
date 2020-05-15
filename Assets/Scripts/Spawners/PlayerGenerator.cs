@@ -92,7 +92,8 @@ public class PlayerGenerator : MonoBehaviour
             PlayerManager.Instance.isAlivePlayer1 = true;
 
             if (PlayerManager.Instance.Player2ON == false) { Debug.Log("PGenerator: 1 Players Spawned"); return; }
-            whereToSpawn = Random.Range(0, spawnPoints.Length + 1);
+
+            whereToSpawn = Random.Range(0, spawnPoints.Length);
             switch (PlayerManager.Instance.SkinPlayer2)
             {
                 case 1:
@@ -117,7 +118,7 @@ public class PlayerGenerator : MonoBehaviour
             PlayerManager.Instance.isAlivePlayer2 = true;
 
             if (PlayerManager.Instance.Player3ON == false) { Debug.Log("PGenerator: 2 Players Spawned"); return; }
-            whereToSpawn = Random.Range(0, spawnPoints.Length + 1);
+            whereToSpawn = Random.Range(0, spawnPoints.Length);
             switch (PlayerManager.Instance.SkinPlayer1)
             {
                 case 1:
@@ -142,7 +143,7 @@ public class PlayerGenerator : MonoBehaviour
             PlayerManager.Instance.isAlivePlayer3 = true;
 
             if (PlayerManager.Instance.Player4ON == false) { Debug.Log("PGenerator: 3 Players Spawned"); return; }
-            whereToSpawn = Random.Range(0, spawnPoints.Length + 1);
+            whereToSpawn = Random.Range(0, spawnPoints.Length);
             switch (PlayerManager.Instance.SkinPlayer4)
             {
                 case 1:

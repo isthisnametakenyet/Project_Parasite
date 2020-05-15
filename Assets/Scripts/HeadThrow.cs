@@ -146,7 +146,7 @@ public class HeadThrow : MonoBehaviour
             Debug.Log("Head Thrown Hits Ground");
         }
 
-        if (collision.gameObject.tag == "Player" && Parasiting == false)
+        if (collision.gameObject.tag == "Player" && Parasiting == false && collision.gameObject != OriginalBody)
         {
             Debug.Log("Head Thrown Hits Player");
             parasitedScript = collision.gameObject.GetComponent<PlayerController2D>();

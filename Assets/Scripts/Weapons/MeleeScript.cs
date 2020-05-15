@@ -34,13 +34,13 @@ public class MeleeScript : MonoBehaviour
         if (Uses == 0) { Destroy(gameObject); } //AUTODESTRUCCION
         else if (Idle == true && Thrown == false && Landed == false)
         {
-            Debug.Log("Wp: Idle");
+            //Debug.Log("MeleeSrp: Idle");
             transform.gameObject.tag = "Stuck";
             //START ANIMATION IDLE
         }
         else if (Thrown == true)
         {
-            Debug.Log("Wp: Thrown");
+            //Debug.Log("MeleeSrp: Thrown");
             transform.gameObject.tag = "Throwing";
             //START ANIMATION THROW
         }
@@ -48,7 +48,7 @@ public class MeleeScript : MonoBehaviour
         //TODO: SI GOLPEA ALGO SE PARA Y SE QUEDA PEGADO
         if (actualStuck >= stuckTime)
         {
-            Debug.Log("Wp: Stuck");
+            //Debug.Log("MeleeSrp: Stuck");
             Thrown = false;
             body2D.velocity = new Vector2(0, 0);
             Uses--;
@@ -63,16 +63,16 @@ public class MeleeScript : MonoBehaviour
     {
         if (collision.gameObject.tag == "Floor" && Thrown == true)
         {
-            Debug.Log("Wp: Landad");
+            //Debug.Log("MeleeSrp: Landad");
             actualStuck += Time.deltaTime * 10;
             transform.position = new Vector3(transform.position.x, transform.position.y, 1);
         }
 
         if (collision.gameObject.tag == "Player" && collision.gameObject != Picker && Thrown == true )
         {
-            Debug.Log("Wp: HitTri");
-            playerScript = collision.GetComponent<PlayerController2D>();
+            //Debug.Log("MeleeSrp: HitTri");
             actualStuck += Time.deltaTime * 10;
+            playerScript = collision.GetComponent<PlayerController2D>();
 
             playerScript.ThrowCollision(this.gameObject);
         }

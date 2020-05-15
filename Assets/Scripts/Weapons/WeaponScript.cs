@@ -80,7 +80,6 @@ public class WeaponScript : MonoBehaviour
             collider2D.enabled = false;
             transform.gameObject.tag = "Weapon";
 
-            Debug.Log("Weapon Off");
             switch (type)
             {
                 case WeaponType.MELEE:
@@ -175,14 +174,14 @@ public class WeaponScript : MonoBehaviour
         switch (type)
         {
             case WeaponType.MELEE:
-                Debug.Log("WeaponScrp: Throw Melee");
+                //Debug.Log("WeaponScrp: Throw Melee");
                 meleeScript = throwed.GetComponent<MeleeScript>();
                 meleeScript.Picker = Picker;
                 meleeScript.Uses = Uses;
                 meleeScript.Thrown = true;
                 break;
             case WeaponType.RANGED:
-                Debug.Log("WeaponScrp: Throw Arrow");
+                //Debug.Log("WeaponScrp: Throw Arrow");
                 arrowScript = throwed.GetComponent<Arrow>();
                 arrowScript.Picker = Picker;
                 break;
