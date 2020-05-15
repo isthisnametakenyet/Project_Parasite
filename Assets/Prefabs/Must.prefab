@@ -1722,7 +1722,6 @@ GameObject:
   - component: {fileID: 2663445264601094975}
   - component: {fileID: 2663445264601094974}
   - component: {fileID: 2663445264601094970}
-  - component: {fileID: 6971815118281992916}
   m_Layer: 5
   m_Name: Score
   m_TagString: Untagged
@@ -1881,25 +1880,6 @@ MonoBehaviour:
   P4_3: {fileID: 2663445265330143702}
   P4_4: {fileID: 2663445265404681043}
   P4_5: {fileID: 2663445263519773800}
---- !u!95 &6971815118281992916
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2663445264601094973}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2663445264650888887
 GameObject:
   m_ObjectHideFlags: 0
