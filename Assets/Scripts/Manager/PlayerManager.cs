@@ -10,6 +10,7 @@ public class PlayerManager : Singleton <PlayerManager>
     //GAME
     [HideInInspector] public bool gameON = false;
     [HideInInspector] public bool WinGame = false;
+    [HideInInspector] public bool Paused = false;
 
     //ROUND
     [HideInInspector] public bool WinRound = false;
