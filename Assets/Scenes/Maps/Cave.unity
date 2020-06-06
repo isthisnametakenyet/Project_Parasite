@@ -419,6 +419,11 @@ PrefabInstance:
       propertyPath: delayEnd
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 5437216099267204773, guid: 0bc77cfc5100dc345845fb7bb47b40dd,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0bc77cfc5100dc345845fb7bb47b40dd, type: 3}
 --- !u!1 &96641327
@@ -970,7 +975,7 @@ PrefabInstance:
     - target: {fileID: 5911291850111384200, guid: 5676ccb59b1a02143afbb837e408980b,
         type: 3}
       propertyPath: m_Name
-      value: Bigotes Entero
+      value: Bigotes Dummy
       objectReference: {fileID: 0}
     - target: {fileID: 5911291850111384200, guid: 5676ccb59b1a02143afbb837e408980b,
         type: 3}
