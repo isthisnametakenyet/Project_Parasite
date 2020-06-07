@@ -22,6 +22,9 @@ public class PlayerController2D : MonoBehaviour
     public GameObject HeadThrowPrefab;
     public GameObject PickUpPrefab;
 
+    //PAUSE MENU
+    private PauseBehavior pauseBehavior;
+
     //SCRIPTS
     private HeadReturn headReturn;
     private HeadThrow headThrow;
@@ -30,7 +33,6 @@ public class PlayerController2D : MonoBehaviour
 
     private WeaponScript weaponScript;
     private MeleeScript meleeScript;
-
 
     //PARASITER
     [Header("Parasiter")]
@@ -103,9 +105,12 @@ public class PlayerController2D : MonoBehaviour
 
     void Start()
     {
-        //SoundManager.instance.Play("Shot1");
+        //SETTERS
         animator = GetComponent<Animator>();
         thisbody2D = GetComponent<Rigidbody2D>();
+
+        //PAUSE
+        pauseBehavior = GameObject.Find("Must").GetComponent<PauseBehavior>();
 
         //CONTROLLER
         switch (controller)
@@ -147,105 +152,114 @@ public class PlayerController2D : MonoBehaviour
 
     private void Update()
     {
-        //IDLE IS AUTOMATIC
-        thisbody2D.velocity = new Vector2(0, thisbody2D.velocity.y);
-
-        //MOVEMENT
-        Movement();
-
-        //BOOLS
-        int whichWeapon = animator.GetInteger(whichWeaponID);
-        bool isCharging = animator.GetBool(ChargingID);
-        bool isHeading = animator.GetBool(HeadingID);
-        bool isDucking = animator.GetBool(DuckingID);
-        bool isStatic = animator.GetBool(StaticID);
-
-        //ATTACK, CHARGE, HEAD THROW
-        if (isStatic == false)
+        if (PlayerManager.Instance.Paused == false)
         {
-            //ATTACK
-            if (player.GetButtonDown("Attack"))
+            if (player.GetButtonDown("Pause"))
             {
-                animator.SetBool(AttackedID, true);
-                Debug.Log("Player: Attack");
+                pauseBehavior.ActivatePause();
+                Debug.Log("Player: Pause");
             }
 
-            //CHARGED
-            if (player.GetButton("Charge") && isHeading == false && isDucking == false && isWeaponed == true)
-            {
-                animator.SetBool(ChargingID, true);
-                if (weaponCharge < maxWeaponCharge)
-                {
-                    weaponCharge += Time.deltaTime;
-                    //Debug.Log(weaponCharge);
-                }
-                else if (weaponCharge >= maxWeaponCharge)
-                {
-                    Debug.Log("MaxCharge");
-                }
-            }
-            else if (weaponCharge < forgetWeaponChargeRange) { weaponCharge = 0; animator.SetBool(ChargingID, false); }
-            else if (weaponCharge > forgetWeaponChargeRange)
-            {
-                animator.SetInteger(whichWeaponID, 0);
-                animator.SetBool(ChargingID, false);
-                SoundManager.instance.Play("Throw");
-                weaponCharge = 0;
-                isWeaponed = false;
-            }
+            //IDLE IS AUTOMATIC
+            thisbody2D.velocity = new Vector2(0, thisbody2D.velocity.y);
 
-            if (Parasited == false)
+            //MOVEMENT
+            Movement();
+
+            //BOOLS
+            int whichWeapon = animator.GetInteger(whichWeaponID);
+            bool isCharging = animator.GetBool(ChargingID);
+            bool isHeading = animator.GetBool(HeadingID);
+            bool isDucking = animator.GetBool(DuckingID);
+            bool isStatic = animator.GetBool(StaticID);
+
+            //ATTACK, CHARGE, HEAD THROW
+            if (isStatic == false)
             {
-                //HEAD THROW
-                if (player.GetAxis("HeadThrow&Return") > 0 && isCharging == false && isDucking == false)
+                //ATTACK
+                if (player.GetButtonDown("Attack"))
                 {
+                    animator.SetBool(AttackedID, true);
+                    Debug.Log("Player: Attack");
+                }
+
+                //CHARGED
+                if (player.GetButton("Charge") && isHeading == false && isDucking == false && isWeaponed == true)
+                {
+                    animator.SetBool(ChargingID, true);
+                    if (weaponCharge < maxWeaponCharge)
                     {
-                        animator.SetBool(HeadingID, true);
-                        if (headCharge <= headThrowCharge)
+                        weaponCharge += Time.deltaTime;
+                        //Debug.Log(weaponCharge);
+                    }
+                    else if (weaponCharge >= maxWeaponCharge)
+                    {
+                        Debug.Log("MaxCharge");
+                    }
+                }
+                else if (weaponCharge < forgetWeaponChargeRange) { weaponCharge = 0; animator.SetBool(ChargingID, false); }
+                else if (weaponCharge > forgetWeaponChargeRange)
+                {
+                    animator.SetInteger(whichWeaponID, 0);
+                    animator.SetBool(ChargingID, false);
+                    SoundManager.instance.Play("Throw");
+                    weaponCharge = 0;
+                    isWeaponed = false;
+                }
+
+                if (Parasited == false)
+                {
+                    //HEAD THROW
+                    if (player.GetAxis("HeadThrow&Return") > 0 && isCharging == false && isDucking == false)
+                    {
                         {
-                            headCharge += Time.deltaTime;
-                            //Debug.Log(headCharge);
+                            animator.SetBool(HeadingID, true);
+                            if (headCharge <= headThrowCharge)
+                            {
+                                headCharge += Time.deltaTime;
+                                //Debug.Log(headCharge);
+                            }
+                            else if (headCharge >= headThrowCharge)
+                            {
+                                Debug.Log("MaxCharge");
+                            }
                         }
-                        else if (headCharge >= headThrowCharge)
+                    }
+                    else if (headCharge < forgetHeadThrowRange) { headCharge = 0; animator.SetBool(HeadingID, false); }
+                    else if (headCharge > forgetHeadThrowRange) //THROW
+                    {
+                        animator.SetBool(HeadingID, false);
+                        animator.SetBool(StaticID, true);
+                        animator.SetTrigger(LoseHeadID);
+                        GameObject head = Instantiate(HeadThrowPrefab, new Vector3(transform.position.x, transform.position.y + 0.5f, 0), Quaternion.identity);
+
+                        headThrow = head.GetComponent<HeadThrow>();
+                        headThrow.ParasiterController = this.controller;
+                        //headThrow.skin = this.skin;
+                        headThrow.OriginalBody = this.gameObject; //REFERENCE THIS IN HEAD THROW TO KNOW ORIGIN
+
+                        Rigidbody2D headRigid;
+                        headRigid = head.GetComponent<Rigidbody2D>(); //GET HEAD RIGIDBODY
+
+                        Physics2D.IgnoreCollision(head.GetComponent<Collider2D>(), GetComponent<Collider2D>()); //IGNORE COLLISION WITH THIS OBJECT
+
+                        if (facingright == true) //THROW HEAD with headCharge as force
                         {
-                            Debug.Log("MaxCharge");
+                            SoundManager.instance.Play("Parasit");
+                            headRigid.velocity = new Vector2(headCharge * 4f, 3f);
                         }
+                        else if (facingright == false)
+                        {
+                            SoundManager.instance.Play("Parasit");
+                            headRigid.velocity = new Vector2(-headCharge * 4f, 3f);
+                        }
+
+                        headCharge = 0;
+                        Parasitable = true;
                     }
                 }
-                else if (headCharge < forgetHeadThrowRange) { headCharge = 0; animator.SetBool(HeadingID, false); }
-                else if (headCharge > forgetHeadThrowRange) //THROW
-                {
-                    animator.SetBool(HeadingID, false);
-                    animator.SetBool(StaticID, true);
-                    animator.SetTrigger(LoseHeadID);
-                    GameObject head = Instantiate(HeadThrowPrefab, new Vector3(transform.position.x, transform.position.y + 0.5f, 0), Quaternion.identity);
-
-                    headThrow = head.GetComponent<HeadThrow>();
-                    headThrow.ParasiterController = this.controller;
-                    //headThrow.skin = this.skin;
-                    headThrow.OriginalBody = this.gameObject; //REFERENCE THIS IN HEAD THROW TO KNOW ORIGIN
-
-                    Rigidbody2D headRigid;
-                    headRigid = head.GetComponent<Rigidbody2D>(); //GET HEAD RIGIDBODY
-
-                    Physics2D.IgnoreCollision(head.GetComponent<Collider2D>(), GetComponent<Collider2D>()); //IGNORE COLLISION WITH THIS OBJECT
-
-                    if (facingright == true) //THROW HEAD with headCharge as force
-                    {
-                        SoundManager.instance.Play("Parasit");
-                        headRigid.velocity = new Vector2(headCharge * 4f, 3f);
-                    }
-                    else if (facingright == false)
-                    {
-                        SoundManager.instance.Play("Parasit");
-                        headRigid.velocity = new Vector2(-headCharge * 4f, 3f);
-                    }
-
-                    headCharge = 0;
-                    Parasitable = true;
-                }
+                //IF PARASITED == TRUE, LO HACE EL HEAD THROW JUNTO CON LA FUNCION HeadReturn()
             }
-            //IF PARASITED == TRUE, LO HACE EL HEAD THROW JUNTO CON LA FUNCION HeadReturn()
         }
     }
 
