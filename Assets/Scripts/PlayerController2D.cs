@@ -150,7 +150,7 @@ public class PlayerController2D : MonoBehaviour
     }
 
 
-    private void Update()
+    private void Update() //todo en el update para q no hayan delays de ningun tipo
     {
         if (PlayerManager.Instance.Paused == false)
         {

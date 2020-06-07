@@ -19,14 +19,22 @@ public class PauseBehavior : MonoBehaviour
 
     public void ActivatePause()
     {
+        //ESENTIAL
         PauseMenu.active = true;
         PlayerManager.Instance.Paused = true;
         PauseMenuAnimator.SetBool(ActiveMenuID, true);
+
+        //EXTRA
+
     }
 
     public void DesactivatePause()
     {
+        //ESENTIAL
         PlayerManager.Instance.Paused = false;
         PauseMenuAnimator.SetBool(ActiveMenuID, false);
+
+        //EXTRA
+
     }
 }
