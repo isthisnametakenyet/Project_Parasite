@@ -170,7 +170,7 @@ public class PlayerJoin : MonoBehaviour
 
         Text actualTxt = playerTxt.GetComponent<Text>();
         playerNumString = numPlayer.ToString();
-        actualTxt.text = "Player " + playerNumString + " Joined";
+        //actualTxt.text = "PLAYER   CONNECTED"; //TEXTMESH PRO NOT TEXT
 
         switch (numPlayer)
         {
@@ -196,7 +196,7 @@ public class PlayerJoin : MonoBehaviour
 
         Text actualTxt = playerTxt.GetComponent<Text>();
         playerNumString = numPlayer.ToString();
-        actualTxt.text = "Player " + playerNumString + " Disconnected";
+        //actualTxt.text = "PLAYER DISCONNECTED"; //TEXTMESH PRO NOT TEXT
 
         switch (numPlayer)
         {
