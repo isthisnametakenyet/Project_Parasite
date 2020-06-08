@@ -68,6 +68,11 @@ public class PlayerController2D : MonoBehaviour
     ///boomerang
     public GameObject Boomerang;
 
+    //PARTICLES
+    [Header("Particles")]
+    public GameObject bloodParticlesBIG;
+    public GameObject bloodParticlesSMALL;
+
     //TEMPORALES
     float jumpTemp = 0;
 
@@ -527,6 +532,9 @@ public class PlayerController2D : MonoBehaviour
         {
             Debug.Log("ThrowCollision()");
 
+            //particles
+            Instantiate(bloodParticlesBIG, new Vector3(collision.transform.position.x, collision.transform.position.y, 0), Quaternion.identity);
+
             //animator.SetTrigger(DamagedID);
             GameObject head = Instantiate(HeadFallPrefab, new Vector3(transform.position.x, transform.position.y + 0.3f, 0), Quaternion.identity);
             animator.SetTrigger(LoseHeadID);
@@ -762,7 +770,12 @@ public class PlayerController2D : MonoBehaviour
             int whichWeapon = animator.GetInteger(whichWeaponID);
 
             //LOSE ARM
-            if (Arms > 0) { DropArm(collision.gameObject); SoundManager.instance.Play("FallWeapon"); }
+            if (Arms > 0) {
+                DropArm(collision.gameObject); SoundManager.instance.Play("FallWeapon");
+
+                //particles
+                Instantiate(bloodParticlesSMALL, new Vector3(collision.transform.position.x, collision.transform.position.y, 0), Quaternion.identity);
+            }
 
             //DROP WEAPON
             if (isWeaponed == true)
@@ -844,6 +857,10 @@ public class PlayerController2D : MonoBehaviour
         {
             Debug.Log("Touch Sierra [DEATH " + controller + "]");
             SoundManager.instance.Play("Death");
+
+            //particles
+            Instantiate(bloodParticlesBIG, new Vector3(transform.position.x, transform.position.y + 0.3f, 0), Quaternion.identity);
+
             //RETURN PARASITE
             if (Parasited == true)
             {

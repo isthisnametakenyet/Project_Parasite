@@ -397,7 +397,7 @@ MonoBehaviour:
   maxWeaponCharge: 2
   throwWeaponSpeed: 8
   headThrowCharge: 2
-  forgetWeaponChargeRange: 0.4
+  forgetWeaponChargeRange: 0
   forgetHeadThrowRange: 0.4
   pickDelay: 0.2
   Parasitable: 0
@@ -407,6 +407,10 @@ MonoBehaviour:
   Bow: {fileID: 6967214711028334208}
   CrossBow: {fileID: 0}
   Boomerang: {fileID: 0}
+  bloodParticlesBIG: {fileID: 111590445379883211, guid: 01faabc25cb3fde42856ea391a242622,
+    type: 3}
+  bloodParticlesSMALL: {fileID: 3059530789251270789, guid: cda8d2a19b859704b9c05d19299bc7c2,
+    type: 3}
   facingright: 1
   isWeaponed: 0
 --- !u!114 &7037919095303476864
