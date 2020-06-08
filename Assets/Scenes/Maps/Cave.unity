@@ -125,7 +125,7 @@ GameObject:
   - component: {fileID: 3934210}
   - component: {fileID: 3934208}
   - component: {fileID: 3934207}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: limiter-R
   m_TagString: Floor
   m_Icon: {fileID: 0}
@@ -2848,7 +2848,7 @@ GameObject:
   - component: {fileID: 1436666382}
   - component: {fileID: 1436666380}
   - component: {fileID: 1436666383}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: limiter-L
   m_TagString: Floor
   m_Icon: {fileID: 0}
@@ -3560,7 +3560,7 @@ GameObject:
   - component: {fileID: 1883754466}
   - component: {fileID: 1883754469}
   - component: {fileID: 1883754468}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: sail
   m_TagString: Floor
   m_Icon: {fileID: 0}
