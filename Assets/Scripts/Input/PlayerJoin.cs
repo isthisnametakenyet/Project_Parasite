@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using Rewired;
+using TMPro;
 
 public class PlayerJoin : MonoBehaviour
 {
@@ -168,9 +169,9 @@ public class PlayerJoin : MonoBehaviour
         SpriteRenderer playerColor = icon.GetComponent<SpriteRenderer>();
         playerColor.color = colorChange;
 
-        Text actualTxt = playerTxt.GetComponent<Text>();
+        TextMeshProUGUI actualTxt = playerTxt.GetComponent<TextMeshProUGUI>();
         playerNumString = numPlayer.ToString();
-        //actualTxt.text = "PLAYER   CONNECTED"; //TEXTMESH PRO NOT TEXT
+        actualTxt.text = "PLAYER   CONNECTED"; //TEXTMESH PRO NOT TEXT
 
         switch (numPlayer)
         {
@@ -194,9 +195,9 @@ public class PlayerJoin : MonoBehaviour
         SpriteRenderer playerColor = icon.GetComponent<SpriteRenderer>();
         playerColor.color = colorChange;
 
-        Text actualTxt = playerTxt.GetComponent<Text>();
+        TextMeshProUGUI actualTxt = playerTxt.GetComponent<TextMeshProUGUI>();
         playerNumString = numPlayer.ToString();
-        //actualTxt.text = "PLAYER DISCONNECTED"; //TEXTMESH PRO NOT TEXT
+        actualTxt.text = "PLAYER DISCONNECTED"; //TEXTMESH PRO
 
         switch (numPlayer)
         {
@@ -270,7 +271,8 @@ public class PlayerJoin : MonoBehaviour
     //PressToJoin Animation
     void PressAnim()
     {
-        Text actualTxt = PressToJoin.GetComponent<Text>();
+        TextMeshProUGUI actualTxt = PressToJoin.GetComponent<TextMeshProUGUI>();
+
         switch (colorAnim)
         {
             case 1:
@@ -289,7 +291,7 @@ public class PlayerJoin : MonoBehaviour
     }
     void AllConnected()
     {
-        Text actualTxt = PressToJoin.GetComponent<Text>();
+        TextMeshProUGUI actualTxt = PressToJoin.GetComponent<TextMeshProUGUI>();
         actualTxt.text = "";
         TutorialButton.transform.gameObject.SetActive(true);
         PlayButton.transform.gameObject.SetActive(true);
