@@ -49,7 +49,7 @@ public class PlayerController2D : MonoBehaviour
     public float maxWeaponCharge = 1.5f;
     public float throwWeaponSpeed = 10f;
     public float headThrowCharge = 2f;
-    public float forgetWeaponChargeRange = 0.3f;
+    public float WeaponThrowDelay = 0.3f;
     public float forgetHeadThrowRange = 0.4f;
     public float pickDelay = 0.2f;
 
@@ -77,8 +77,12 @@ public class PlayerController2D : MonoBehaviour
     float jumpTemp = 0;
 
     [HideInInspector] public bool facingright = true;
+
     float headCharge = 0f;
+
+    float tmpChargeDelay = 0f;
     float weaponCharge = 0f;
+
     [HideInInspector] public bool isWeaponed = false;
 
     bool picking = false;
@@ -189,7 +193,7 @@ public class PlayerController2D : MonoBehaviour
                 }
 
                 //CHARGED
-                if (player.GetButton("Charge") && isHeading == false && isDucking == false && isWeaponed == true)
+                if (player.GetButton("Charge") && isHeading == false && isDucking == false && isWeaponed == true && tmpChargeDelay > WeaponThrowDelay)
                 {
                     animator.SetBool(ChargingID, true);
                     if (weaponCharge < maxWeaponCharge)
@@ -197,13 +201,12 @@ public class PlayerController2D : MonoBehaviour
                         weaponCharge += Time.deltaTime;
                         //Debug.Log(weaponCharge);
                     }
-                    else if (weaponCharge >= maxWeaponCharge)
-                    {
-                        Debug.Log("MaxCharge");
-                    }
+                    //else if (weaponCharge >= maxWeaponCharge)
+                    //{
+                    //    Debug.Log("MaxCharge");
+                    //}
                 }
-                else if (weaponCharge < forgetWeaponChargeRange) { weaponCharge = 0; animator.SetBool(ChargingID, false); }
-                else if (weaponCharge > forgetWeaponChargeRange)
+                else if (player.GetButtonUp("Charge") && isWeaponed == true && tmpChargeDelay > WeaponThrowDelay)
                 {
                     animator.SetInteger(whichWeaponID, 0);
                     animator.SetBool(ChargingID, false);
@@ -284,7 +287,11 @@ public class PlayerController2D : MonoBehaviour
         if (pickDelay <= pickTemp && picking == true) { picking = false; pickTemp = 0; }
         else if (picking == true) { pickTemp += Time.deltaTime; }
 
+        ///temp jump, no infinite jump
         if (jumpTemp <= jumpCooldown) { jumpTemp += Time.deltaTime; }
+
+        ///temp delay pickup -> throw transition
+        if (tmpChargeDelay < WeaponThrowDelay) { tmpChargeDelay += Time.deltaTime; }
     }
 
 
@@ -624,7 +631,7 @@ public class PlayerController2D : MonoBehaviour
         //PICK WEAPON
         if (collision.gameObject.tag == "PickUp" && player.GetButtonDown("Pickup") && isWeaponed == false && picking == false)
         {
-            
+            tmpChargeDelay = 0f;
             pickUpScript = collision.GetComponent<PickUpScript>();
             switch (pickUpScript.picktype)
             {

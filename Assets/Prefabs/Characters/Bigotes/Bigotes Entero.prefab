@@ -397,7 +397,7 @@ MonoBehaviour:
   maxWeaponCharge: 2
   throwWeaponSpeed: 8
   headThrowCharge: 2
-  forgetWeaponChargeRange: 0
+  WeaponThrowDelay: 0.3
   forgetHeadThrowRange: 0.4
   pickDelay: 0.2
   Parasitable: 0
@@ -928,6 +928,11 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 9052482460327404893, guid: d6e177ea75a80044fbc522d1eb771177,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2011683790475668864, guid: d6e177ea75a80044fbc522d1eb771177,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1007,11 +1012,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsTrigger
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9052482460327404893, guid: d6e177ea75a80044fbc522d1eb771177,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d6e177ea75a80044fbc522d1eb771177, type: 3}
