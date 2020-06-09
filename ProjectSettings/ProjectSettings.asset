@@ -118,7 +118,7 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  bundleVersion: 0.1.0
+  bundleVersion: 0.1.1
   preloadedAssets: []
   metroInputSource: 0
   wsaTransparentSwapchain: 0
@@ -587,10 +587,10 @@ PlayerSettings:
   facebookXfbml: 0
   facebookFrictionlessRequests: 1
   apiCompatibilityLevel: 6
-  cloudProjectId: 67854755-386e-4e68-886b-278d60b596ee
+  cloudProjectId: 9cf8f67f-18ab-4612-915c-0ff23af6109a
   framebufferDepthMemorylessMode: 0
-  projectName: Proyecto Prasite
-  organizationId: casidi7
+  projectName: PARASIT (1)
+  organizationId: sccterrassa
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0
