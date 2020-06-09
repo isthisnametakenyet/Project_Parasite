@@ -399,7 +399,7 @@ MonoBehaviour:
   pickDelay: 0.2
   headReturnWait: 2
   headThrowCharge: 2
-  HeadThrowDelay: 0.5
+  HeadThrowDelay: 2
   Parasitable: 0
   Sword: {fileID: 7646740427913938385}
   Axe: {fileID: 5059232016660044565}

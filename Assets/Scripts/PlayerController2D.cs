@@ -222,7 +222,7 @@ public class PlayerController2D : MonoBehaviour
                 if (Parasited == false)
                 {
                     //HEAD THROW
-                    if (player.GetButton("HeadThrow&Return") && isCharging == false && isDucking == false)
+                    if (player.GetButton("HeadThrow&Return") && isCharging == false && isDucking == false && tmpHeadDelay > HeadThrowDelay)
                     {
                         {
                             animator.SetBool(HeadingID, true);
@@ -237,7 +237,7 @@ public class PlayerController2D : MonoBehaviour
                             //}
                         }
                     }
-                    else if (player.GetButtonUp("HeadThrow&Return") && isCharging == false && isDucking == false) //THROW
+                    else if (player.GetButtonUp("HeadThrow&Return") && isCharging == false && isDucking == false && tmpHeadDelay > HeadThrowDelay) //THROW
                     {
                         Debug.Log("headthrow");
                         animator.SetBool(HeadingID, false);

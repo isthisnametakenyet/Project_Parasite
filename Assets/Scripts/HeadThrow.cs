@@ -93,7 +93,7 @@ public class HeadThrow : MonoBehaviour
 
 
         //GOBACK
-        if (player.GetButtonUp("HeadThrow&Return") && canReturn == true)
+        if (player.GetButtonDown("HeadThrow&Return") && canReturn == true)
         {
             GoBack();
         }
