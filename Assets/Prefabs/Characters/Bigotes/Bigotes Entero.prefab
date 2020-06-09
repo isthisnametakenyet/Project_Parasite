@@ -393,13 +393,13 @@ MonoBehaviour:
   runSpeed: 5
   jumpCooldown: 1.1
   jumpStrengh: 10
-  headReturnDelay: 2
   maxWeaponCharge: 2
   throwWeaponSpeed: 8
-  headThrowCharge: 2
   WeaponThrowDelay: 0.3
-  forgetHeadThrowRange: 0.4
   pickDelay: 0.2
+  headReturnWait: 2
+  headThrowCharge: 2
+  HeadThrowDelay: 0.5
   Parasitable: 0
   Sword: {fileID: 7646740427913938385}
   Axe: {fileID: 5059232016660044565}
@@ -931,7 +931,7 @@ PrefabInstance:
     - target: {fileID: 9052482460327404893, guid: d6e177ea75a80044fbc522d1eb771177,
         type: 3}
       propertyPath: m_SortingOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2011683790475668864, guid: d6e177ea75a80044fbc522d1eb771177,
         type: 3}
@@ -1222,6 +1222,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3732700748390138132, guid: 8f26e96b997c49141884053b57b9867d,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8f26e96b997c49141884053b57b9867d, type: 3}

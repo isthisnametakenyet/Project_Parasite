@@ -42,6 +42,9 @@ public class HeadThrow : MonoBehaviour
 
     void Start()
     {
+        canReturn = false; //important
+
+        //SETTERS
         thisspriteRenderer = GetComponent<SpriteRenderer>();
         thisbody2D = GetComponent<Rigidbody2D>();
         thiscollider2D = GetComponent<CircleCollider2D>();
@@ -66,10 +69,12 @@ public class HeadThrow : MonoBehaviour
         }
 
         playerScript = OriginalBody.GetComponent<PlayerController2D>();
+
     }
 
     private void FixedUpdate()
     {
+        Debug.Log("canReturn: " + canReturn);
         if (OriginalBody == null) //PLAYER IS DEAD
         {
             Debug.Log("Player" + ParasiterController + "is Dead");
@@ -88,7 +93,7 @@ public class HeadThrow : MonoBehaviour
 
 
         //GOBACK
-        if (player.GetAxis("HeadThrow&Return") > 0 && canReturn == true)
+        if (player.GetButtonUp("HeadThrow&Return") && canReturn == true)
         {
             GoBack();
         }

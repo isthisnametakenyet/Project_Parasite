@@ -338,7 +338,7 @@ MonoBehaviour:
       _categoryId: 0
     - _id: 9
       _name: HeadThrow&Return
-      _type: 0
+      _type: 1
       _descriptiveName: HeadThrow&Return
       _positiveDescriptiveName: Throw&Return
       _negativeDescriptiveName: 

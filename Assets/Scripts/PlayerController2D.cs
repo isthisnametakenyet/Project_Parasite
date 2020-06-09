@@ -42,16 +42,19 @@ public class PlayerController2D : MonoBehaviour
     //VARIABLES
     [Header("Variables")]
     public int Arms = 2;
+
     public float runSpeed = 2f;
     public float jumpCooldown = 2f;
     public float jumpStrengh = 6.5f;
-    public float headReturnDelay = 2f;
+
     public float maxWeaponCharge = 1.5f;
     public float throwWeaponSpeed = 10f;
-    public float headThrowCharge = 2f;
     public float WeaponThrowDelay = 0.3f;
-    public float forgetHeadThrowRange = 0.4f;
     public float pickDelay = 0.2f;
+
+    public float headReturnWait = 2f;
+    public float headThrowCharge = 2f;
+    public float HeadThrowDelay = 0.3f;
 
     [HideInInspector] public bool Parasitable = false;
     private bool Parasited = false;
@@ -78,6 +81,7 @@ public class PlayerController2D : MonoBehaviour
 
     [HideInInspector] public bool facingright = true;
 
+    float tmpHeadDelay = 0f;
     float headCharge = 0f;
 
     float tmpChargeDelay = 0f;
@@ -218,7 +222,7 @@ public class PlayerController2D : MonoBehaviour
                 if (Parasited == false)
                 {
                     //HEAD THROW
-                    if (player.GetAxis("HeadThrow&Return") > 0 && isCharging == false && isDucking == false)
+                    if (player.GetButton("HeadThrow&Return") && isCharging == false && isDucking == false)
                     {
                         {
                             animator.SetBool(HeadingID, true);
@@ -227,15 +231,15 @@ public class PlayerController2D : MonoBehaviour
                                 headCharge += Time.deltaTime;
                                 //Debug.Log(headCharge);
                             }
-                            else if (headCharge >= headThrowCharge)
-                            {
-                                Debug.Log("MaxCharge");
-                            }
+                            //else if (headCharge >= headThrowCharge)
+                            //{
+                            //    Debug.Log("MaxCharge");
+                            //}
                         }
                     }
-                    else if (headCharge < forgetHeadThrowRange) { headCharge = 0; animator.SetBool(HeadingID, false); }
-                    else if (headCharge > forgetHeadThrowRange) //THROW
+                    else if (player.GetButtonUp("HeadThrow&Return") && isCharging == false && isDucking == false) //THROW
                     {
+                        Debug.Log("headthrow");
                         animator.SetBool(HeadingID, false);
                         animator.SetBool(StaticID, true);
                         animator.SetTrigger(LoseHeadID);
@@ -292,6 +296,9 @@ public class PlayerController2D : MonoBehaviour
 
         ///temp delay pickup -> throw transition
         if (tmpChargeDelay < WeaponThrowDelay) { tmpChargeDelay += Time.deltaTime; }
+
+        ///temp delay head throw -> throw transition
+        if (tmpHeadDelay < HeadThrowDelay) { tmpHeadDelay += Time.deltaTime; }
     }
 
 
@@ -528,6 +535,7 @@ public class PlayerController2D : MonoBehaviour
                 break;
         }
 
+        tmpHeadDelay = 0;
     }
 
 
