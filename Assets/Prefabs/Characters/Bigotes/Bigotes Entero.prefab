@@ -411,8 +411,13 @@ MonoBehaviour:
     type: 3}
   bloodParticlesSMALL: {fileID: 3059530789251270789, guid: cda8d2a19b859704b9c05d19299bc7c2,
     type: 3}
+  redOutline: {fileID: 2100000, guid: 2c63fad5f46269f43b41788a12ce8573, type: 2}
+  purpleOutline: {fileID: 2100000, guid: de477e30a7258f64aa24345bc873bc61, type: 2}
+  yellowOutline: {fileID: 2100000, guid: 3226154473988da41a053d96546f6f6b, type: 2}
+  greenOutline: {fileID: 2100000, guid: c9a8e52f5c71c8e4397e6de1a60ce97e, type: 2}
   facingright: 1
   isWeaponed: 0
+  Headrenderer: {fileID: 8734133263655522930}
 --- !u!114 &7037919095303476864
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1018,6 +1023,12 @@ PrefabInstance:
 --- !u!4 &2269762018375244463 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2011683790475668864, guid: d6e177ea75a80044fbc522d1eb771177,
+    type: 3}
+  m_PrefabInstance: {fileID: 330239659283625775}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &8734133263655522930 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 9052482460327404893, guid: d6e177ea75a80044fbc522d1eb771177,
     type: 3}
   m_PrefabInstance: {fileID: 330239659283625775}
   m_PrefabAsset: {fileID: 0}

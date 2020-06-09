@@ -76,6 +76,14 @@ public class PlayerController2D : MonoBehaviour
     public GameObject bloodParticlesBIG;
     public GameObject bloodParticlesSMALL;
 
+    //OUTLINE
+    [Header("Outlines")]
+    public Material redOutline;
+    public Material purpleOutline;
+    public Material yellowOutline;
+    public Material greenOutline;
+    Material thisOutline;
+
     //TEMPORALES
     float jumpTemp = 0;
 
@@ -115,12 +123,16 @@ public class PlayerController2D : MonoBehaviour
     Rigidbody2D thisbody2D;
     BoxCollider2D box2D;
     CircleCollider2D circle2D;
+    SpriteRenderer renderer;
+    [Space(7)]
+    public SpriteRenderer Headrenderer;
 
     void Start()
     {
         //SETTERS
         animator = GetComponent<Animator>();
         thisbody2D = GetComponent<Rigidbody2D>();
+        renderer = GetComponent<SpriteRenderer>();
 
         //PAUSE
         pauseBehavior = GameObject.Find("Must").GetComponent<PauseBehavior>();
@@ -129,23 +141,34 @@ public class PlayerController2D : MonoBehaviour
         switch (controller)
         {
             case Controller.PLAYER0:
-                if (PlayerManager.Instance.Player1ON == true) { playerReady = true; player = ReInput.players.GetPlayer(0); PlayerManager.Instance.isAlivePlayer1 = true; }
+                if (PlayerManager.Instance.Player1ON == true) { playerReady = true; player = ReInput.players.GetPlayer(0); PlayerManager.Instance.isAlivePlayer1 = true;
+                    thisOutline = redOutline;
+                }
                 break;
 
             case Controller.PLAYER1:
-                if (PlayerManager.Instance.Player2ON == true) { playerReady = true; player = ReInput.players.GetPlayer(1); PlayerManager.Instance.isAlivePlayer2 = true; }
+                if (PlayerManager.Instance.Player2ON == true) { playerReady = true; player = ReInput.players.GetPlayer(1); PlayerManager.Instance.isAlivePlayer2 = true;
+                    thisOutline = purpleOutline;
+                }
                 break;
 
             case Controller.PLAYER2:
-                if (PlayerManager.Instance.Player2ON == true) { playerReady = true; player = ReInput.players.GetPlayer(2); PlayerManager.Instance.isAlivePlayer3 = true; }
+                if (PlayerManager.Instance.Player2ON == true) { playerReady = true; player = ReInput.players.GetPlayer(2); PlayerManager.Instance.isAlivePlayer3 = true;
+                    thisOutline = yellowOutline;
+                }
                 break;
 
             case Controller.PLAYER3:
-                if (PlayerManager.Instance.Player2ON == true) { playerReady = true; player = ReInput.players.GetPlayer(3); PlayerManager.Instance.isAlivePlayer4 = true; }
+                if (PlayerManager.Instance.Player2ON == true) { playerReady = true; player = ReInput.players.GetPlayer(3); PlayerManager.Instance.isAlivePlayer4 = true;
+                    thisOutline = greenOutline;
+                }
                 break;
         }
 
-        //CONDITIONS
+        renderer.material = thisOutline;
+        Headrenderer.material = thisOutline;
+
+       //CONDITIONS
         GroundingID =   Animator.StringToHash("Grounding");
         MovingID =      Animator.StringToHash("Moving");
         JumpedID =      Animator.StringToHash("Jumped");
