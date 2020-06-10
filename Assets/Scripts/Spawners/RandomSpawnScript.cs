@@ -67,7 +67,7 @@ public class RandomSpawnScript : MonoBehaviour
 
                 //SPAWN
                 GameObject pick = Instantiate(PickUp, spawnPoints[whereToSpawn].transform.position, Quaternion.identity);
-                Debug.Log(spawnPoints[whereToSpawn].transform.position);
+                //Debug.Log(spawnPoints[whereToSpawn].transform.position);
                 if (whatToSpawn == 1)
                 {
                     PickObject = pick.GetComponentInChildren<PickUpScript>();
