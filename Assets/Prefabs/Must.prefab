@@ -1116,7 +1116,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a456346a984c7ff4f9262a335d2280a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PickUp: {fileID: 2503348166692240421, guid: c0ebb2942ef3a574bb401d5c06434664, type: 3}
+  PickUp: {fileID: 5188301152013790019, guid: e761e304eaefb1c40baddad5a478dbfa, type: 3}
   spawnMaxRate: 12
   spawnMinRate: 6
   numSpawned: 0

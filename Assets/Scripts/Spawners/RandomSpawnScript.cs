@@ -67,39 +67,40 @@ public class RandomSpawnScript : MonoBehaviour
 
                 //SPAWN
                 GameObject pick = Instantiate(PickUp, spawnPoints[whereToSpawn].transform.position, Quaternion.identity);
+                Debug.Log(spawnPoints[whereToSpawn].transform.position);
                 if (whatToSpawn == 1)
                 {
-                    PickObject = pick.GetComponent<PickUpScript>();
+                    PickObject = pick.GetComponentInChildren<PickUpScript>();
                     PickObject.picktype = PickTypes.Sword;
                     PickObject.RadomSpawner = this.gameObject;
                 }
                 else if (whatToSpawn == 2)
                 {
-                    PickObject = pick.GetComponent<PickUpScript>();
+                    PickObject = pick.GetComponentInChildren<PickUpScript>();
                     PickObject.picktype = PickTypes.Axe;
                     PickObject.RadomSpawner = this.gameObject;
                 }
                 else if (whatToSpawn == 3)
                 {
-                    PickObject = pick.GetComponent<PickUpScript>();
+                    PickObject = pick.GetComponentInChildren<PickUpScript>();
                     PickObject.picktype = PickTypes.Spear;
                     PickObject.RadomSpawner = this.gameObject;
                 }
                 else if (whatToSpawn == 4)
                 {
-                    PickObject = pick.GetComponent<PickUpScript>();
+                    PickObject = pick.GetComponentInChildren<PickUpScript>();
                     PickObject.picktype = PickTypes.Bow;
                     PickObject.RadomSpawner = this.gameObject;
                 }
                 else if (whatToSpawn == 5)
                 {
-                    PickObject = pick.GetComponent<PickUpScript>();
+                    PickObject = pick.GetComponentInChildren<PickUpScript>();
                     PickObject.picktype = PickTypes.CrossBow;
                     PickObject.RadomSpawner = this.gameObject;
                 }
                 else if (whatToSpawn == 6)
                 {
-                    PickObject = pick.GetComponent<PickUpScript>();
+                    PickObject = pick.GetComponentInChildren<PickUpScript>();
                     PickObject.picktype = PickTypes.Boomerang;
                     PickObject.RadomSpawner = this.gameObject;
                 }
