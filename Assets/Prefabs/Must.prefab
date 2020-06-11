@@ -1140,8 +1140,7 @@ MonoBehaviour:
     type: 3}
   spawnSkin3: {fileID: 5911291850111384200, guid: 5676ccb59b1a02143afbb837e408980b,
     type: 3}
-  scoreScript: {fileID: 2663445264601094970}
-  scoreDelay: 3
+  spawnPointsFolder: {fileID: 0}
   spawnPoints: []
 --- !u!1 &2663445264027376775
 GameObject:
@@ -2994,6 +2993,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7160152818585227074}
   - component: {fileID: 230529379364592708}
+  - component: {fileID: 6575358262386001522}
   m_Layer: 0
   m_Name: Must
   m_TagString: Untagged
@@ -3033,6 +3033,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PauseMenu: {fileID: 4185726691272724947}
   PauseMenuAnimator: {fileID: 8240862180777816769}
+--- !u!114 &6575358262386001522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3848289835169263460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51ffcccd6f14e844cbf0f68176c683e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreScript: {fileID: 2663445264601094970}
+  playerGenerator: {fileID: 2663445263931596960}
+  scoreDelay: 5
 --- !u!1 &4185726691272724947
 GameObject:
   m_ObjectHideFlags: 0

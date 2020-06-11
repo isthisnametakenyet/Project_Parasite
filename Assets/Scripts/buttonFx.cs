@@ -20,7 +20,7 @@ public class buttonFx : MonoBehaviour
         textChild = textChild2;
     }
 
-    public void ChangeMTPColor(string SelectedColor/*, Text textChild*/)
+    public void ChangeMTPColor(string SelectedColor)
     {
         Color selectColor;
         ColorUtility.TryParseHtmlString(SelectedColor, out selectColor);

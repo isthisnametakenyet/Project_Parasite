@@ -87,6 +87,11 @@ public class PlayerManager : Singleton <PlayerManager>
         Debug.Log("PManager: EndGame();");
         WinGame = true;
         gameON = false;
+
+        //isAlivePlayer1 = false;
+        //isAlivePlayer2 = false;
+        //isAlivePlayer3 = false;
+        //isAlivePlayer4 = false;
     }
 
     public void SetSkin (int temp) { tempskin = temp; }

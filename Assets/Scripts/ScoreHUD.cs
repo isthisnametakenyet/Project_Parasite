@@ -339,6 +339,7 @@ public class ScoreHUD : MonoBehaviour
                 switch (PlayerManager.Instance.ScorePlayer2)
                 {
                     case 1:
+                        Debug.Log("ScoreHUD: 2_1, but animation on 1_1, why???");
                         animP2_1.SetBool(WinID, true);
                         break;
                     case 2:

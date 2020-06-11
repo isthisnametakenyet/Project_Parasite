@@ -137,6 +137,7 @@ public class PlayerController2D : MonoBehaviour
         //PAUSE
         pauseBehavior = GameObject.Find("Must").GetComponent<PauseBehavior>();
 
+        Debug.Log("Pcon: " + controller);
         //CONTROLLER
         switch (controller)
         {
