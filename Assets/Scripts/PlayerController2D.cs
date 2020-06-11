@@ -83,6 +83,7 @@ public class PlayerController2D : MonoBehaviour
     public Material yellowOutline;
     public Material greenOutline;
     Material thisOutline;
+    [HideInInspector] public Material parasiteOutline;
 
     //TEMPORALES
     float jumpTemp = 0;
@@ -273,6 +274,8 @@ public class PlayerController2D : MonoBehaviour
                         headThrow.ParasiterController = this.controller;
                         //headThrow.skin = this.skin;
                         headThrow.OriginalBody = this.gameObject; //REFERENCE THIS IN HEAD THROW TO KNOW ORIGIN
+
+                        headThrow.parasiteOutline = thisOutline; ///set parasite outline, using this body outline
 
                         Rigidbody2D headRigid;
                         headRigid = head.GetComponent<Rigidbody2D>(); //GET HEAD RIGIDBODY
@@ -484,6 +487,9 @@ public class PlayerController2D : MonoBehaviour
 
             circle2D = Parasiter.GetComponent<CircleCollider2D>();
             circle2D.isTrigger = true;
+
+            parasiteOutline = headThrow.parasiteOutline;
+            Headrenderer.material = parasiteOutline;
         }
     }
 
@@ -559,12 +565,13 @@ public class PlayerController2D : MonoBehaviour
                 break;
         }
 
+        Headrenderer.material = thisOutline; ///outline back to normal
         tmpHeadDelay = 0;
     }
 
 
     //COLLISION THROW
-    /// Function executed when Throw Weapon collides with player
+    /// Function executed when Throw Weapon collides with player (and beheads them)
     public void ThrowCollision(GameObject collision)
     {
         if (Parasitable != true && Parasited == false)

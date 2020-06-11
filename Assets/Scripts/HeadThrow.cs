@@ -28,26 +28,29 @@ public class HeadThrow : MonoBehaviour
 
     public float expulsedStrengh = 3f;
 
+    //hidden
     [HideInInspector] public bool Parasiting = false;
 
     private bool BadThrow = false;
     [HideInInspector] public bool Expulsed = false;
     [HideInInspector] public bool canReturn = false;
+
+    [HideInInspector] public Material parasiteOutline;
     #endregion
 
     //COMPONENTS
-    SpriteRenderer thisspriteRenderer;
-    Rigidbody2D thisbody2D;
-    CircleCollider2D thiscollider2D;
+    SpriteRenderer renderer;
+    Rigidbody2D body2D;
+    CircleCollider2D col2D;
 
     void Start()
     {
         canReturn = false; //important
 
         //SETTERS
-        thisspriteRenderer = GetComponent<SpriteRenderer>();
-        thisbody2D = GetComponent<Rigidbody2D>();
-        thiscollider2D = GetComponent<CircleCollider2D>();
+        renderer = GetComponent<SpriteRenderer>();
+        body2D = GetComponent<Rigidbody2D>();
+        col2D = GetComponent<CircleCollider2D>();
 
         switch (ParasiterController)
         {
@@ -70,6 +73,7 @@ public class HeadThrow : MonoBehaviour
 
         playerScript = OriginalBody.GetComponent<PlayerController2D>();
 
+        renderer.material = parasiteOutline;
     }
 
     private void FixedUpdate()
@@ -109,16 +113,16 @@ public class HeadThrow : MonoBehaviour
         Debug.Log("Head Expulsed");
         actualStun = 0;
 
-        thisspriteRenderer.enabled = true;
-        thiscollider2D.enabled = true;
+        renderer.enabled = true;
+        col2D.enabled = true;
 
         if (playerScript.facingright == true) //THROW HEAD with headCharge as force
         {
-            thisbody2D.velocity = new Vector2(expulsedStrengh * 4f, 3f);
+            body2D.velocity = new Vector2(expulsedStrengh * 4f, 3f);
         }
         else if (playerScript.facingright == false)
         {
-            thisbody2D.velocity = new Vector2(-expulsedStrengh * 4f, 3f);
+            body2D.velocity = new Vector2(-expulsedStrengh * 4f, 3f);
         }
     }
 
@@ -147,7 +151,7 @@ public class HeadThrow : MonoBehaviour
         if (collision.gameObject.tag == "Floor" && Parasiting == false)
         {
             BadThrow = true;
-            thiscollider2D.isTrigger = false;
+            col2D.isTrigger = false;
             Debug.Log("Head Thrown Hits Ground");
         }
 
@@ -163,8 +167,8 @@ public class HeadThrow : MonoBehaviour
                 Parasiting = true;
 
                 ///Pause unnecesary components
-                thisspriteRenderer.enabled = false;
-                thiscollider2D.enabled = false;
+                renderer.enabled = false;
+                col2D.enabled = false;
             }
         }
     }
