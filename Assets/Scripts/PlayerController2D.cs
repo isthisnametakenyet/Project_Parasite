@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using Rewired;
+using UnityEngine.UI;
 
 public enum Controller { NONE, PLAYER0, PLAYER1, PLAYER2, PLAYER3 };
 
@@ -85,6 +86,14 @@ public class PlayerController2D : MonoBehaviour
     Material thisOutline;
     [HideInInspector] public Material parasiteOutline;
 
+    [Space(6)]
+    public SpriteRenderer Headrenderer;
+
+    //CHARGE BAR
+    [Header("ChargeBar")]
+    public Canvas CanvasBar;
+    public Image Bar;
+
     //TEMPORALES
     float jumpTemp = 0;
 
@@ -125,8 +134,6 @@ public class PlayerController2D : MonoBehaviour
     BoxCollider2D box2D;
     CircleCollider2D circle2D;
     SpriteRenderer renderer;
-    [Space(7)]
-    public SpriteRenderer Headrenderer;
 
     void Start()
     {
@@ -137,6 +144,10 @@ public class PlayerController2D : MonoBehaviour
 
         //PAUSE
         pauseBehavior = GameObject.Find("Must").GetComponent<PauseBehavior>();
+
+        //BAR
+        CanvasBar.enabled = false;
+        Bar.fillAmount = 0;
 
         Debug.Log("Pcon: " + controller);
         //CONTROLLER
@@ -224,6 +235,9 @@ public class PlayerController2D : MonoBehaviour
                 //CHARGED
                 if (player.GetButton("Charge") && isHeading == false && isDucking == false && isWeaponed == true && tmpChargeDelay > WeaponThrowDelay)
                 {
+                    CanvasBar.enabled = true;
+                    Bar.fillAmount = headCharge;
+
                     animator.SetBool(ChargingID, true);
                     if (weaponCharge < maxWeaponCharge)
                     {
@@ -242,6 +256,10 @@ public class PlayerController2D : MonoBehaviour
                     SoundManager.instance.Play("Throw");
                     weaponCharge = 0;
                     isWeaponed = false;
+
+                    //BAR
+                    CanvasBar.enabled = false;
+                    Bar.fillAmount = 0;
                 }
 
                 if (Parasited == false)
@@ -249,18 +267,20 @@ public class PlayerController2D : MonoBehaviour
                     //HEAD THROW
                     if (player.GetButton("HeadThrow&Return") && isCharging == false && isDucking == false && tmpHeadDelay > HeadThrowDelay)
                     {
+                        CanvasBar.enabled = true;
+                        Bar.fillAmount = headCharge;
+
+                        animator.SetBool(HeadingID, true);
+                        if (headCharge <= headThrowCharge)
                         {
-                            animator.SetBool(HeadingID, true);
-                            if (headCharge <= headThrowCharge)
-                            {
-                                headCharge += Time.deltaTime;
-                                //Debug.Log(headCharge);
-                            }
-                            //else if (headCharge >= headThrowCharge)
-                            //{
-                            //    Debug.Log("MaxCharge");
-                            //}
+                            headCharge += Time.deltaTime;
+                            //Debug.Log(headCharge);
                         }
+
+                        //else if (headCharge >= headThrowCharge)
+                        //{
+                        //    Debug.Log("MaxCharge");
+                        //}
                     }
                     else if (player.GetButtonUp("HeadThrow&Return") && isCharging == false && isDucking == false && tmpHeadDelay > HeadThrowDelay) //THROW
                     {
@@ -275,7 +295,12 @@ public class PlayerController2D : MonoBehaviour
                         //headThrow.skin = this.skin;
                         headThrow.OriginalBody = this.gameObject; //REFERENCE THIS IN HEAD THROW TO KNOW ORIGIN
 
+                        //OUTLINE
                         headThrow.parasiteOutline = thisOutline; ///set parasite outline, using this body outline
+
+                        //BAR
+                        CanvasBar.enabled = false;
+                        Bar.fillAmount = 0;
 
                         Rigidbody2D headRigid;
                         headRigid = head.GetComponent<Rigidbody2D>(); //GET HEAD RIGIDBODY
