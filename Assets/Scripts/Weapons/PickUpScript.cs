@@ -4,17 +4,18 @@ using UnityEngine;
 
 public class PickUpScript : MonoBehaviour
 {
-    public PickTypes picktype;
+    [HideInInspector] public PickTypes picktype;
 
-    public GameObject RadomSpawner;
+    [HideInInspector] public GameObject RadomSpawner;
     private RandomSpawnScript RadomSpawnerscript;
+    [HideInInspector] public int numFilled;
 
     private PlayerController2D playerAllScript;
 
     public Sprite swordSprite, axeSprite, lanceSprite, bowSprite, crossbowSprite, boomerangSprite;
     SpriteRenderer spriteRenderer;
 
-    public bool picked;
+    [HideInInspector] public bool picked;
 
     void Start()
     {
@@ -45,11 +46,12 @@ public class PickUpScript : MonoBehaviour
 
     void FixedUpdate()
     {
-        if(picked == true)
+        if (picked == true)
         {
             RadomSpawnerscript = RadomSpawner.GetComponent<RandomSpawnScript>();
-            RadomSpawnerscript.numSpawned--;
-            Destroy(gameObject); //AUTODESTRUCCION
+            RadomSpawnerscript.filledPoints[numFilled] = false;
+            if (RadomSpawnerscript.allFilled == true) { RadomSpawnerscript.allFilled = false; RadomSpawnerscript.RecalculateNext(); }
+            Destroy(transform.parent.gameObject); //AUTODESTRUCCION
         }
     }
 }

@@ -7,6 +7,7 @@ public class InGameManager : MonoBehaviour
     [Header("Setters")]
     public ScoreHUD scoreScript;
     public PlayerGenerator playerGenerator;
+    public RandomSpawnScript weaponGenerator;
 
     [Header("Delay")]
     public float scoreDelay;
@@ -40,6 +41,7 @@ public class InGameManager : MonoBehaviour
         PlayerManager.Instance.DeleteProps = false;
         PlayerManager.Instance.WinRound = false;
         playerGenerator.Spawn();
+        weaponGenerator.RestartFilledArray();
     }
 
     public void ResetNBackToMenu()

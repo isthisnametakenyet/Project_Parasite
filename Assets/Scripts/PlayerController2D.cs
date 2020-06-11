@@ -721,8 +721,6 @@ public class PlayerController2D : MonoBehaviour
 
             pickUpScript.picked = true;
             isWeaponed = true;
-
-            Destroy(collision.gameObject);
         }
 
         //PICK STUCK

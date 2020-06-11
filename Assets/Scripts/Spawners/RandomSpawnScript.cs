@@ -14,8 +14,10 @@ public class RandomSpawnScript : MonoBehaviour
     public float spawnMaxRate = 15f;
     public float spawnMinRate = 7f;
 
-    public int numSpawned = 0;
-    public int maxNumSpawned;
+    [Space(5)]
+    public bool OnePerSpawnPoint;
+    public bool[] filledPoints;
+    public bool allFilled = false;
 
     [Space(10)]
     public GameObject[] spawnPoints;
@@ -38,6 +40,13 @@ public class RandomSpawnScript : MonoBehaviour
 
     private void Start()
     {
+        filledPoints = new bool [spawnPoints.Length];
+
+        for (int i = 0; i < filledPoints.Length; i++)
+        {
+            filledPoints[i] = false;
+        }
+
         for (int i = 0; i < spawnPoints.Length; i++)
         {
             spawnPoints[i].SetActive(false);
@@ -45,64 +54,103 @@ public class RandomSpawnScript : MonoBehaviour
     }
 
 
-    void Update()
+    void FixedUpdate()
     {
-        if (numSpawned < maxNumSpawned)
+        if (Time.time > nextSpawn) 
         {
-            if (Time.time > nextSpawn) 
+            if (OnePerSpawnPoint == true && allFilled == true) { return; } ///if all spawnpoints filled, no need to continue
+
+            else if (OnePerSpawnPoint == true && allFilled == false)
             {
-                whatToSpawn = Random.Range(1, 3); 
-
-                whereToSpawn = Random.Range(0, spawnPoints.Length); 
-
-                whenToSpawn = Random.Range(spawnMinRate, spawnMaxRate); 
-
-                while (whatToSpawn == lastSpawned)
+                bool tmp = false;
+                while (tmp == false)
                 {
-                    whatToSpawn = Random.Range(1, 3);
-                }
-                lastSpawned = whatToSpawn;
+                    whereToSpawn = Random.Range(0, spawnPoints.Length);
+                    if (filledPoints[whereToSpawn] == false)
+                    {
+                        tmp = true;
+                        filledPoints[whereToSpawn] = true;
 
-                numSpawned++;
-
-                //SPAWN
-                GameObject pick = Instantiate(PickUp, spawnPoints[whereToSpawn].transform.position, Quaternion.identity);
-                //Debug.Log(spawnPoints[whereToSpawn].transform.position);
-
-                ///getter script from instantiated pickup
-                 PickObject = pick.GetComponentInChildren<PickUpScript>();
-
-                if (whatToSpawn == 1)
-                {
-                    PickObject.picktype = PickTypes.Sword;
+                        ///test if all spawnpoints are filled, so that it doesnt spawn anymore
+                        bool tmp2 = true;
+                        for (int i = 0; i < filledPoints.Length; i++)
+                        {
+                            if (filledPoints[i] == false) { tmp2 = false; }
+                        }
+                        if (tmp2 == true) { allFilled = true; }
+                    }
                 }
-                else if (whatToSpawn == 2)
-                {
-                    PickObject.picktype = PickTypes.Axe;
-                }
-                else if (whatToSpawn == 3)
-                {
-                    PickObject.picktype = PickTypes.Spear;
-                }
-                else if (whatToSpawn == 4)
-                {
-                    PickObject.picktype = PickTypes.Bow;
-                }
-                else if (whatToSpawn == 5)
-                {
-                    PickObject.picktype = PickTypes.CrossBow;
-                }
-                else if (whatToSpawn == 6)
-                {
-                    PickObject.picktype = PickTypes.Boomerang;
-                }
-
-                ///setter this object in the RandomSpawner variable
-                PickObject.RadomSpawner = this.gameObject;
-
-                /// set next spawn time
-                nextSpawn = Time.time + whenToSpawn;
             }
+            else if (OnePerSpawnPoint == false)
+            {
+                whereToSpawn = Random.Range(0, spawnPoints.Length);
+            }
+
+
+            whatToSpawn = Random.Range(1, 3);
+
+            whenToSpawn = Random.Range(spawnMinRate, spawnMaxRate); 
+
+            while (whatToSpawn == lastSpawned)
+            {
+                whatToSpawn = Random.Range(1, 3);
+            }
+            lastSpawned = whatToSpawn;
+
+            //SPAWN
+            GameObject pick = Instantiate(PickUp, spawnPoints[whereToSpawn].transform.position, Quaternion.identity);
+            //Debug.Log(spawnPoints[whereToSpawn].transform.position);
+
+            ///getter script from instantiated pickup
+            PickObject = pick.GetComponentInChildren<PickUpScript>();
+
+            if (whatToSpawn == 1)
+            {
+                PickObject.picktype = PickTypes.Sword;
+            }
+            else if (whatToSpawn == 2)
+            {
+                PickObject.picktype = PickTypes.Axe;
+            }
+            else if (whatToSpawn == 3)
+            {
+                PickObject.picktype = PickTypes.Spear;
+            }
+            else if (whatToSpawn == 4)
+            {
+                PickObject.picktype = PickTypes.Bow;
+            }
+            else if (whatToSpawn == 5)
+            {
+                PickObject.picktype = PickTypes.CrossBow;
+            }
+            else if (whatToSpawn == 6)
+            {
+                PickObject.picktype = PickTypes.Boomerang;
+            }
+
+            ///set this object in the RandomSpawner variable
+            PickObject.RadomSpawner = this.gameObject;
+
+            ///set array filledPoints actual pos, so that when it is picked it sets the pos as true
+            PickObject.numFilled = whereToSpawn;
+
+            /// set next spawn time
+            nextSpawn = Time.time + whenToSpawn;
         }
+    }
+
+    public void RestartFilledArray()
+    {
+        for (int i = 0; i < filledPoints.Length; i++)
+        {
+            filledPoints[i] = false;
+        }           
+        allFilled = false;
+    }
+
+    public void RecalculateNext()
+    {
+        nextSpawn = Time.time + whenToSpawn;
     }
 }

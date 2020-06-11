@@ -1119,8 +1119,9 @@ MonoBehaviour:
   PickUp: {fileID: 5188301152013790019, guid: e761e304eaefb1c40baddad5a478dbfa, type: 3}
   spawnMaxRate: 12
   spawnMinRate: 6
-  numSpawned: 0
-  maxNumSpawned: 999
+  OnePerSpawnPoint: 0
+  filledPoints: 
+  allFilled: 0
   spawnPoints: []
 --- !u!114 &2663445263931596960
 MonoBehaviour:
@@ -3047,6 +3048,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreScript: {fileID: 2663445264601094970}
   playerGenerator: {fileID: 2663445263931596960}
+  weaponGenerator: {fileID: 2663445263931596961}
   scoreDelay: 5
 --- !u!1 &4185726691272724947
 GameObject:
