@@ -236,7 +236,7 @@ public class PlayerController2D : MonoBehaviour
                 if (player.GetButton("Charge") && isHeading == false && isDucking == false && isWeaponed == true && tmpChargeDelay > WeaponThrowDelay)
                 {
                     CanvasBar.enabled = true;
-                    Bar.fillAmount = headCharge;
+                    Bar.fillAmount = weaponCharge;
 
                     animator.SetBool(ChargingID, true);
                     if (weaponCharge < maxWeaponCharge)
