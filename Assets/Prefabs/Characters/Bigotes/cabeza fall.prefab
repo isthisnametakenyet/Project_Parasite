@@ -98,9 +98,9 @@ MonoBehaviour:
   controller: 0
   OriginalBody: {fileID: 0}
   redBlink: {r: 1, g: 0, b: 0, a: 1}
-  purpleBlink: {r: 0.679965, g: 0, b: 1, a: 1}
-  yellowBlink: {r: 1, g: 0.89133024, b: 0, a: 1}
-  greenBlink: {r: 0, g: 1, b: 0.1510973, a: 1}
+  purpleBlink: {r: 0.46666667, g: 0, b: 0.90588236, a: 1}
+  yellowBlink: {r: 1, g: 1, b: 0, a: 1}
+  greenBlink: {r: 0, g: 1, b: 0, a: 1}
   MaxStun: 2
   Stunned: 0
   isDead: 0
