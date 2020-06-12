@@ -893,7 +893,7 @@ MonoBehaviour:
   m_firstVisibleCharacter: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0.85282403, z: 35.414604, w: 0}
+  m_margin: {x: 0, y: 9.177612, z: 35.414604, w: 0}
   m_textInfo:
     textComponent: {fileID: 373265741}
     characterCount: 8
@@ -1383,7 +1383,7 @@ MonoBehaviour:
   m_firstVisibleCharacter: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 39.883537, w: 0}
+  m_margin: {x: 0, y: 5.787499, z: 39.883537, w: 0}
   m_textInfo:
     textComponent: {fileID: 808963094}
     characterCount: 4
@@ -1787,7 +1787,7 @@ MonoBehaviour:
   m_firstVisibleCharacter: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0.0000051646048, z: 40.250263, w: 0}
+  m_margin: {x: 0, y: 7.575155, z: 40.250263, w: 0}
   m_textInfo:
     textComponent: {fileID: 1240800782}
     characterCount: 8
@@ -2306,7 +2306,7 @@ MonoBehaviour:
   m_firstVisibleCharacter: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0.4049233, z: 31.503262, w: 0}
+  m_margin: {x: 0, y: 6.807967, z: 31.503262, w: 0}
   m_textInfo:
     textComponent: {fileID: 1463172303}
     characterCount: 4
@@ -2464,7 +2464,7 @@ MonoBehaviour:
   m_firstVisibleCharacter: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0.379356, z: 27.423887, w: 0}
+  m_margin: {x: 0, y: 7.9375577, z: 43.497944, w: 0}
   m_textInfo:
     textComponent: {fileID: 1738901517}
     characterCount: 7
