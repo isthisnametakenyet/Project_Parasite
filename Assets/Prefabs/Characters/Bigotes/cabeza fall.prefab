@@ -101,7 +101,7 @@ MonoBehaviour:
   purpleBlink: {r: 0.46666667, g: 0, b: 0.90588236, a: 1}
   yellowBlink: {r: 1, g: 1, b: 0, a: 1}
   greenBlink: {r: 0, g: 1, b: 0, a: 1}
-  MaxStun: 2
+  MaxStun: 4
   Stunned: 0
   isDead: 0
 --- !u!50 &6405456081518844668
