@@ -17,23 +17,24 @@ public class PlayerJoin : MonoBehaviour
 
     //COLORS
     [Header("Colors")]
-    public string SelectedRed;
-    public string UnselectedRed;
-    public string SelectedPurple;
-    public string UnselectedPurple;
-    public string SelectedYellow;
-    public string UnselectedYellow;
-    public string SelectedGreen;
-    public string UnselectedGreen;
+    public Color SelectedRed;
+    public Color UnselectedRed;
+    public Color SelectedPurple;
+    public Color UnselectedPurple;
+    public Color SelectedYellow;
+    public Color UnselectedYellow;
+    public Color SelectedGreen;
+    public Color UnselectedGreen;
 
-    Color selectRed;
-    Color disconectRed;
-    Color selectPurple;
-    Color disconectPurple;
-    Color selectYellow;
-    Color disconectYellow;
-    Color selectGreen;
-    Color disconectGreen;
+    //Hexadecimal Colors:
+    //Red ON: FF0000
+    //Red Off 8C0000
+    //Purple ON: 7700E7
+    //Purple Off: 4E0098
+    //Yellow ON: FFFF00
+    //Yellow Off: 828200
+    //Green ON: 00FF00
+    //Green Off: 006A00
 
     //GAMEOBJECTS
     [Header("GameObjects")]
@@ -75,30 +76,13 @@ public class PlayerJoin : MonoBehaviour
 
     void Start()
     {
-        //Hexadecimal Colors:
-        //Red ON: FF0000
-        //Red Off 8C0000
-        //Purple ON: 7700E7
-        //Purple Off: 4E0098
-        //Yellow ON: FFFF00
-        //Yellow Off: 828200
-        //Green ON: 00FF00
-        //Green Off: 006A00
+        
 
         assignementScript = this.gameObject.GetComponent<MenuAsignemet>();
         Player1Asigner = Player1.GetComponent<AsignerController>();
         Player2Asigner = Player2.GetComponent<AsignerController>();
         Player3Asigner = Player3.GetComponent<AsignerController>();
         Player4Asigner = Player4.GetComponent<AsignerController>();
-
-        ColorUtility.TryParseHtmlString(SelectedRed, out selectRed);
-        ColorUtility.TryParseHtmlString(UnselectedRed, out disconectRed);
-        ColorUtility.TryParseHtmlString(SelectedPurple, out selectPurple);
-        ColorUtility.TryParseHtmlString(UnselectedPurple, out disconectPurple);
-        ColorUtility.TryParseHtmlString(SelectedYellow, out selectYellow);
-        ColorUtility.TryParseHtmlString(UnselectedYellow, out disconectYellow);
-        ColorUtility.TryParseHtmlString(SelectedGreen, out selectGreen);
-        ColorUtility.TryParseHtmlString(UnselectedGreen, out disconectGreen);
     }
 
     void Update()
@@ -112,42 +96,42 @@ public class PlayerJoin : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (Player1Asigner.asignerReady == true) { PlayerConnect(Player1, selectRed, Player1Text, 1);
+        if (Player1Asigner.asignerReady == true) { PlayerConnect(Player1, SelectedRed, Player1Text, 1);
             Player1Skin1.transform.gameObject.SetActive(true);
             Player1Skin2.transform.gameObject.SetActive(true);
             Player1Skin3.transform.gameObject.SetActive(true);
         }
-        else { PlayerDisconnect(Player1, disconectRed, Player1Text, 1);
+        else { PlayerDisconnect(Player1, UnselectedRed, Player1Text, 1);
             Player1Skin1.transform.gameObject.SetActive(false);
             Player1Skin2.transform.gameObject.SetActive(false);
             Player1Skin3.transform.gameObject.SetActive(false);
         }
-        if (Player2Asigner.asignerReady == true) { PlayerConnect(Player2, selectPurple, Player2Text, 2);
+        if (Player2Asigner.asignerReady == true) { PlayerConnect(Player2, SelectedPurple, Player2Text, 2);
             Player2Skin1.transform.gameObject.SetActive(true);
             Player2Skin2.transform.gameObject.SetActive(true);
             Player2Skin3.transform.gameObject.SetActive(true);
         }
-        else { PlayerDisconnect(Player2, disconectPurple, Player2Text, 2);
+        else { PlayerDisconnect(Player2, UnselectedPurple, Player2Text, 2);
             Player2Skin1.transform.gameObject.SetActive(false);
             Player2Skin2.transform.gameObject.SetActive(false);
             Player2Skin3.transform.gameObject.SetActive(false);
         }
-        if (Player3Asigner.asignerReady == true) { PlayerConnect(Player3, selectYellow, Player3Text, 3);
+        if (Player3Asigner.asignerReady == true) { PlayerConnect(Player3, SelectedYellow, Player3Text, 3);
             Player3Skin1.transform.gameObject.SetActive(true);
             Player3Skin2.transform.gameObject.SetActive(true);
             Player3Skin3.transform.gameObject.SetActive(true);
         }
-        else { PlayerDisconnect(Player3, disconectYellow, Player3Text, 3);
+        else { PlayerDisconnect(Player3, UnselectedYellow, Player3Text, 3);
             Player3Skin1.transform.gameObject.SetActive(false);
             Player3Skin2.transform.gameObject.SetActive(false);
             Player3Skin3.transform.gameObject.SetActive(false);
         }
-        if (Player4Asigner.asignerReady == true) { PlayerConnect(Player4, selectGreen, Player4Text, 4);
+        if (Player4Asigner.asignerReady == true) { PlayerConnect(Player4, SelectedGreen, Player4Text, 4);
             Player4Skin1.transform.gameObject.SetActive(true);
             Player4Skin2.transform.gameObject.SetActive(true);
             Player4Skin3.transform.gameObject.SetActive(true);
         }
-        else { PlayerDisconnect(Player4, disconectGreen, Player4Text, 4);
+        else { PlayerDisconnect(Player4, UnselectedGreen, Player4Text, 4);
             Player4Skin1.transform.gameObject.SetActive(false);
             Player4Skin2.transform.gameObject.SetActive(false);
             Player4Skin3.transform.gameObject.SetActive(false);
@@ -276,16 +260,16 @@ public class PlayerJoin : MonoBehaviour
         switch (colorAnim)
         {
             case 1:
-                actualTxt.color = selectRed;
+                actualTxt.color = SelectedRed;
                 break;
             case 2:
-                actualTxt.color = selectPurple;
+                actualTxt.color = SelectedPurple;
                 break;
             case 3:
-                actualTxt.color = selectYellow;
+                actualTxt.color = SelectedYellow;
                 break;
             case 4:
-                actualTxt.color = selectGreen;
+                actualTxt.color = SelectedGreen;
                 break;
         }
     }
