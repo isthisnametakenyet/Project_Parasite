@@ -52,7 +52,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: b44acef85fee20b4a8e700acb411d1bb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -97,6 +97,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: 0
   OriginalBody: {fileID: 0}
+  redBlink: {r: 1, g: 0, b: 0, a: 1}
+  purpleBlink: {r: 0.679965, g: 0, b: 1, a: 1}
+  yellowBlink: {r: 1, g: 0.89133024, b: 0, a: 1}
+  greenBlink: {r: 0, g: 1, b: 0.1510973, a: 1}
   MaxStun: 2
   Stunned: 0
   isDead: 0
