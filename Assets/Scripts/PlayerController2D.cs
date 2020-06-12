@@ -325,6 +325,10 @@ public class PlayerController2D : MonoBehaviour
                 //IF PARASITED == TRUE, LO HACE EL HEAD THROW JUNTO CON LA FUNCION HeadReturn()
             }
         }
+        else if (PlayerManager.Instance.Paused == true && player.GetButtonDown("Pause"))
+        {
+            pauseBehavior.DesactivatePause();
+        }
     }
 
     private void FixedUpdate(){

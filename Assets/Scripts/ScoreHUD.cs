@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class ScoreHUD : MonoBehaviour
 {
+    #region InstanceVariables
     [Header("Variables")]
     public float delayEnd;
 
@@ -71,7 +72,8 @@ public class ScoreHUD : MonoBehaviour
     private Animator animP4_2;
     private Animator animP4_3;
     private Animator animP4_4;
-    private Animator animP4_5; 
+    private Animator animP4_5;
+    #endregion
 
     //CONDITIONS
     private int OldID;

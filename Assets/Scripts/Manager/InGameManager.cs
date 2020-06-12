@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class InGameManager : MonoBehaviour
 {
@@ -32,29 +33,23 @@ public class InGameManager : MonoBehaviour
         }
     }
 
-    IEnumerator DelayHUD()
+    IEnumerator DelayHUD() ///When this is executed, the next round starts
     {
         yield return new WaitForSeconds(scoreDelay);
         //Debug.Log("PGenerator: End DelayHUD()");
         once = false;
         scoreScript.Desactivate();
+
         PlayerManager.Instance.DeleteProps = false;
         PlayerManager.Instance.WinRound = false;
+        PlayerManager.Instance.RoundTimer = 0;
+
         playerGenerator.Spawn();
         weaponGenerator.RestartFilledArray();
     }
 
     public void ResetNBackToMenu()
     {
-        PlayerManager.Instance.gameON = false;
-        PlayerManager.Instance.WinRound = false;
-        PlayerManager.Instance.WinGame = false;
-
-        PlayerManager.Instance.isAlivePlayer1 = false;
-        PlayerManager.Instance.isAlivePlayer2 = false;
-        PlayerManager.Instance.isAlivePlayer3 = false;
-        PlayerManager.Instance.isAlivePlayer4 = false;
-
-        PlayerManager.Instance.Paused = false;
+        PlayerManager.Instance.ResetNBackToMenu();
     }
 }

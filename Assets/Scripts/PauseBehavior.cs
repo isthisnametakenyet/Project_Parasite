@@ -9,6 +9,8 @@ public class PauseBehavior : MonoBehaviour
 
     private int ActiveMenuID;
 
+    bool finishedAnim = true;
+
 
     void Start()
     {
@@ -20,9 +22,14 @@ public class PauseBehavior : MonoBehaviour
     public void ActivatePause()
     {
         //ESENTIAL
-        PauseMenu.active = true;
-        PlayerManager.Instance.Paused = true;
-        PauseMenuAnimator.SetBool(ActiveMenuID, true);
+        if (finishedAnim == true)
+        {
+            PauseMenu.active = true;
+            PlayerManager.Instance.Paused = true;
+            PauseMenuAnimator.SetBool(ActiveMenuID, true);
+            finishedAnim = false;
+            StartCoroutine("AnimFinished");
+        }
 
         //EXTRA
 
@@ -31,10 +38,29 @@ public class PauseBehavior : MonoBehaviour
     public void DesactivatePause()
     {
         //ESENTIAL
-        PlayerManager.Instance.Paused = false;
-        PauseMenuAnimator.SetBool(ActiveMenuID, false);
+        if (finishedAnim == true)
+        {
+            PauseMenuAnimator.SetBool(ActiveMenuID, false);
+            StartCoroutine("MinimizeMenu");
+            StartCoroutine("AnimFinished");
+            finishedAnim = false;
+        }
+        
 
         //EXTRA
 
+    }
+
+    IEnumerator MinimizeMenu()
+    {
+        yield return new WaitForSeconds(1);
+        PlayerManager.Instance.Paused = false;
+        PauseMenu.active = false;
+    }
+
+    IEnumerator AnimFinished()
+    {
+        yield return new WaitForSeconds(1);
+        finishedAnim = true;
     }
 }
