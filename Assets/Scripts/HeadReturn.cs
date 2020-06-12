@@ -92,7 +92,20 @@ public class HeadReturn : MonoBehaviour
             this.enabled = false;
         }
 
-        if (Stunned == true && Wait < MaxStun) { Wait += Time.deltaTime * 1f; }
+        if (Stunned == true && Wait < MaxStun)
+        {
+
+            Wait += Time.deltaTime * 1f;
+            if (renderer.material.GetFloat("_FlashAmount") < 0.6f)
+            {
+                renderer.material.SetFloat("_FlashAmount", renderer.material.GetFloat("_FlashAmount") + 0.05f);
+            }
+            else
+            {
+                renderer.material.SetFloat("_FlashAmount", 0f);
+            }
+        }
+                
         else { Stunned = false; }
 
         if (player.GetAxis("HeadThrow&Return") > 0 && Stunned == false)
