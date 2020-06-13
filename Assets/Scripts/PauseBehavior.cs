@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class PauseBehavior : MonoBehaviour
 {
+    //SETTERS
     public GameObject PauseMenu;
     public Animator PauseMenuAnimator;
+    private InGameManager inGameManager;
 
     //BOOLS
     bool finishedAnim = true;
-
-    bool ScoreOn = false;
 
     //ANIAMTOR
     private int ActiveMenuID;
@@ -18,7 +18,10 @@ public class PauseBehavior : MonoBehaviour
     void Start()
     {
         PauseMenu.active = false;
+
         PauseMenuAnimator = PauseMenu.GetComponent<Animator>();
+        inGameManager = GetComponent<InGameManager>();
+
         ActiveMenuID = Animator.StringToHash("Active");
     }
 
@@ -32,10 +35,10 @@ public class PauseBehavior : MonoBehaviour
             PauseMenuAnimator.SetBool(ActiveMenuID, true);
             finishedAnim = false;
             StartCoroutine("AnimFinished");
+
+            //EXTRA
+
         }
-
-        //EXTRA
-
     }
 
     public void DesactivatePause()
@@ -47,24 +50,14 @@ public class PauseBehavior : MonoBehaviour
             StartCoroutine("MinimizeMenu");
             StartCoroutine("AnimFinished");
             finishedAnim = false;
-        }
-        
 
-        //EXTRA
 
-    }
-
-    public void ToggleScore()
-    {
-        if (ScoreOn)
-        {
-
-        }
-        else
-        {
-
+            //EXTRA
+            inGameManager.ScoreOFF();
         }
     }
+
+
 
     IEnumerator MinimizeMenu()
     {

@@ -13,7 +13,11 @@ public class InGameManager : MonoBehaviour
     [Header("Delay")]
     public float scoreDelay;
 
-    private bool once = false;
+    //BOOLS
+    bool once = false;
+
+    bool ScoreOn = false;
+
 
     void FixedUpdate()
     {
@@ -52,4 +56,24 @@ public class InGameManager : MonoBehaviour
     {
         PlayerManager.Instance.ResetNBackToMenu();
     }
+
+    public void ToggleScore()
+    {
+        if (ScoreOn) ///if active, desactivate. if desactive, activate
+        {
+            ScoreOFF();
+        }
+        else
+        {
+            scoreScript.Activate();
+            ScoreOn = true;
+        }
+    }
+
+    public void ScoreOFF() ///por si quitan el menu de pause sin haberle dado a ToggleScore
+    {
+        scoreScript.Desactivate();
+        ScoreOn = false;
+    }
+
 }

@@ -3583,7 +3583,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 230529379364592708}
+      - m_Target: {fileID: 6575358262386001522}
         m_MethodName: ToggleScore
         m_Mode: 1
         m_Arguments:
