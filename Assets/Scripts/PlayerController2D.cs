@@ -646,7 +646,7 @@ public class PlayerController2D : MonoBehaviour
 
     //DROP ARM
     /// Function used every time player loses an arm, instantiate FreeArm & hides player arm
-    public void DropArm(GameObject collision)
+    public void DropArm(GameObject collision, int push=0)
     {
         Arms--;
         animator.SetTrigger(LoseArmID);
@@ -657,11 +657,11 @@ public class PlayerController2D : MonoBehaviour
 
         if (transform.position.x > collision.transform.position.x) //RIGHT
         {
-            armRigid.velocity = new Vector2(headCharge, 2f);
+            armRigid.velocity = new Vector2(push, 2f);
         }
         else if (transform.position.x < collision.transform.position.x) //LEFT
         {
-            armRigid.velocity = new Vector2(-headCharge, 2f);
+            armRigid.velocity = new Vector2(-push, 2f);
         }
     }
 
@@ -943,8 +943,8 @@ public class PlayerController2D : MonoBehaviour
             }
 
             //LOSE ARMS
-            if (Arms > 0) { DropArm(collision.gameObject); }
-            if (Arms > 0) { DropArm(collision.gameObject); }
+            if (Arms > 1) { DropArm(collision.gameObject, 3); }
+            if (Arms > 0) { DropArm(collision.gameObject, 3); }
 
 
             //LOSE ROUND
