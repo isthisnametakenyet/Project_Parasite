@@ -7,10 +7,13 @@ public class PauseBehavior : MonoBehaviour
     public GameObject PauseMenu;
     public Animator PauseMenuAnimator;
 
-    private int ActiveMenuID;
-
+    //BOOLS
     bool finishedAnim = true;
 
+    bool ScoreOn = false;
+
+    //ANIAMTOR
+    private int ActiveMenuID;
 
     void Start()
     {
@@ -49,6 +52,18 @@ public class PauseBehavior : MonoBehaviour
 
         //EXTRA
 
+    }
+
+    public void ToggleScore()
+    {
+        if (ScoreOn)
+        {
+
+        }
+        else
+        {
+
+        }
     }
 
     IEnumerator MinimizeMenu()
