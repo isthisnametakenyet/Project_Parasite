@@ -8,9 +8,11 @@ public class PauseBehavior : MonoBehaviour
     public GameObject PauseMenu;
     public Animator PauseMenuAnimator;
     private InGameManager inGameManager;
+    public GameObject Controls;
 
     //BOOLS
     bool finishedAnim = true;
+    bool ControlsON = false;
 
     //ANIAMTOR
     private int ActiveMenuID;
@@ -70,5 +72,18 @@ public class PauseBehavior : MonoBehaviour
     {
         yield return new WaitForSeconds(1);
         finishedAnim = true;
+    }
+
+    public void ToggleControls()
+    {
+        if (ControlsON)
+        {
+            Controls.SetActive(false);
+            ControlsON = false;
+        }
+        else {
+            Controls.SetActive(true);
+            ControlsON = true;
+        }
     }
 }
