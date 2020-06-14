@@ -4,30 +4,41 @@ using UnityEngine;
 using System;
 using Rewired;
 
+public enum HeadFallEffect { NONE, ConstantBlinkTime, ColorIncrease, ProgresiveBlinkTime };
+
 public class HeadReturn : MonoBehaviour
 {
-    [Header("Origin")]
-    public Controller controller = Controller.NONE;
+    [HideInInspector] public Controller controller = Controller.NONE;
 
     private Player player;
 
     #region InstanceVariables
     //GAME OBJECTS
-    public GameObject OriginalBody;
+    [HideInInspector] public GameObject OriginalBody;
     private PlayerController2D playerAll;
 
-    [Header("Blink Colors")]
+    [Header("Blink")]
     public Color redBlink;
     public Color purpleBlink;
     public Color yellowBlink;
     public Color greenBlink;
 
-    //VARAIBLES
+    [Space(6)]
+    public HeadFallEffect headFallEffect;
+
+   //VARAIBLES
     [Header("Variables")]
     public float MaxStun = 2;
-    float Wait = 0;
+
     [HideInInspector] public bool Stunned = false;
     [HideInInspector] public bool isDead = false;
+
+    //TEMPORALES
+    float Wait = 0;
+    float blinkDelay = 0;
+    float blinkTmp = 0;
+    bool Blinked = false;
+    bool setted = false;
     #endregion
 
     //CONDITIONS
@@ -96,17 +107,52 @@ public class HeadReturn : MonoBehaviour
         {
 
             Wait += Time.deltaTime * 1f;
-            if (renderer.material.GetFloat("_FlashAmount") < 0.6f)
+
+            switch (headFallEffect)
             {
-                renderer.material.SetFloat("_FlashAmount", renderer.material.GetFloat("_FlashAmount") + 0.05f);
-            }
-            else
-            {
-                renderer.material.SetFloat("_FlashAmount", 0f);
+                case HeadFallEffect.NONE:
+                    break;
+                case HeadFallEffect.ConstantBlinkTime: ///slow constant blinks (regardles of stun time)
+                    if (renderer.material.GetFloat("_FlashAmount") < 0.6f) 
+                    {
+                        renderer.material.SetFloat("_FlashAmount", renderer.material.GetFloat("_FlashAmount") + 0.05f);
+                    }
+                    else
+                    {
+                        renderer.material.SetFloat("_FlashAmount", 0f);
+                    }
+                    break;
+                case HeadFallEffect.ColorIncrease: ///progresively increases color density depending on remaining stun time
+                    renderer.material.SetFloat("_FlashAmount", Wait / MaxStun); 
+                    break;
+                case HeadFallEffect.ProgresiveBlinkTime: ///progresively decreses delay for next blink depending on remaining stun time
+                    if (Blinked == false)
+                    {
+                        if (setted == false)
+                        {
+                            blinkDelay = 1 - (Wait / MaxStun);
+                            blinkTmp = 0;
+                            renderer.material.SetFloat("_FlashAmount", 0.7f);
+                            setted = true;
+                        }
+                        else
+                        {
+                            if (blinkTmp < 1 - (Wait / MaxStun)) {
+                                blinkTmp += Time.deltaTime;
+                                renderer.material.SetFloat("_FlashAmount", renderer.material.GetFloat("_FlashAmount") - 0.05f);
+                            }
+                            else { blinkTmp = 0; Blinked = true; renderer.material.SetFloat("_FlashAmount", 0f); }
+                        }
+                    }
+                    else if (blinkTmp < blinkDelay) { blinkTmp += Time.deltaTime; }
+                    else { Blinked = false; setted = false; }
+                    break;
+                default:
+                    break;
             }
         }
-                
-        else { Stunned = false; }
+
+        else { Stunned = false; renderer.material.SetFloat("_FlashAmount", 0.6f); }
 
         if (player.GetAxis("HeadThrow&Return") > 0 && Stunned == false)
         {

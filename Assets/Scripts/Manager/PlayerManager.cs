@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Rewired;
+using UnityEngine.SceneManagement;
 
 public class PlayerManager : Singleton <PlayerManager>
 {
@@ -16,6 +17,7 @@ public class PlayerManager : Singleton <PlayerManager>
     [HideInInspector] public bool WinRound = false;
     [HideInInspector] public int RoundWinner = 0;
     [HideInInspector] public bool DeleteProps = false;
+    [HideInInspector] public float RoundTimer = 0;
 
     //TEMPS
     [HideInInspector] public int tempskin;
@@ -60,6 +62,8 @@ public class PlayerManager : Singleton <PlayerManager>
         //Debug.Log("PManager: GameON? " + gameON);
         if (gameON == true && WinRound == false)
         {
+            RoundTimer += Time.deltaTime;
+
             tmpInt = 0;
             if(isAlivePlayer1 == true) { tmpInt++; }
             if(isAlivePlayer2 == true) { tmpInt++; }
@@ -78,6 +82,8 @@ public class PlayerManager : Singleton <PlayerManager>
         if (isAlivePlayer4 == true) { ScorePlayer4++; RoundWinner = 4; isAlivePlayer4 = false; }
         Debug.Log("PManager: RestartRound();");
         DeleteProps = true;
+
+        //RoundTimer = 0; InGameManager
 
         if (ScorePlayer1 == 5 || ScorePlayer2 == 5 || ScorePlayer3 == 5 || ScorePlayer4 == 5) { EndGame(); } //PLAYER WIN
     }
@@ -118,15 +124,36 @@ public class PlayerManager : Singleton <PlayerManager>
 
     public void StartGame() //GAME
     {
-        PlayerManager.Instance.ScorePlayer1 = 0;
-        PlayerManager.Instance.ScorePlayer2 = 0;
-        PlayerManager.Instance.ScorePlayer3 = 0;
-        PlayerManager.Instance.ScorePlayer4 = 0;
+        ScorePlayer1 = 0;
+        ScorePlayer2 = 0;
+        ScorePlayer3 = 0;
+        ScorePlayer4 = 0;
        
         DeleteProps = false;
         gameON = true;
         RoundWinner = 0;
 
         Debug.Log("PManager: Startgame();");
+    }
+
+    public void ResetNBackToMenu()
+    {
+        Instance.gameON = false;
+        Instance.WinRound = false;
+        Instance.WinGame = false;
+
+        Instance.isAlivePlayer1 = false;
+        Instance.isAlivePlayer2 = false;
+        Instance.isAlivePlayer3 = false;
+        Instance.isAlivePlayer4 = false;
+
+        StartCoroutine("unPause");
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    IEnumerator unPause()
+    {
+        yield return new WaitForSeconds(1);
+        Instance.Paused = false;
     }
 }
