@@ -72,6 +72,11 @@ public class PlayerController2D : MonoBehaviour
     ///boomerang
     public GameObject Boomerang;
 
+    //ARM
+    [Header("Arms")]
+    public ArmPush Arm1;
+    public ArmPush Arm2;
+
     //PARTICLES
     [Header("Particles")]
     public GameObject bloodParticlesBIG;
@@ -230,6 +235,12 @@ public class PlayerController2D : MonoBehaviour
                 {
                     animator.SetBool(AttackedID, true);
                     Debug.Log("Player: Attack");
+
+                    if (isWeaponed == false)
+                    {
+                        Arm1.PushAactivate();
+                        Arm2.PushAactivate();
+                    }
                 }
 
                 //CHARGED
