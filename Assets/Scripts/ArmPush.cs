@@ -47,7 +47,7 @@ public class ArmPush : MonoBehaviour
 
             if (transform.position.x > collision.transform.position.x) //RIGHT
             {
-                ColRig.velocity = new Vector2(ColRig.velocity.x - pushStrengh, 2f);
+                ColRig.velocity = new Vector2(ColRig.velocity.x - pushStrengh, 2f); ///axis X: teletransporta en lugar de empujar. axis Y: empuja bien... ????
                 //ColRig.AddForce(Vector3.left * pushStrengh, ForceMode2D.Impulse); ///teletransporta en lugar de empujar
             }
             else if (transform.position.x < collision.transform.position.x) //LEFT
